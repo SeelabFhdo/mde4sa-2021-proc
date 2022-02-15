@@ -1,0 +1,99 @@
+import datatypes from "domain.data" as Domain
+import microservices from "../Charging-Station-Management-Microservice-Command/chargingStationCommandManagement.services" as ChargingStationManagementServiceCommand
+import technology from "../Technology/technology/Spring.technology" as Spring
+import technology from "../Technology/technology/Java.technology" as Java
+import technology from "../Technology/technology/Kafka.technology" as Kafka
+import technology from "../Technology/technology/Cqrs.technology" as CQRS
+
+@technology(Java)
+@technology(Spring)
+@technology(Kafka)
+@technology(CQRS)
+@endpoints(Kafka::_protocols.kafka:"kafka-server1:9092";)
+@Kafka::_aspects.BootstrapAddress("kafka-server1:9092")
+@CQRS::_aspects.QuerySide("ChargingStationManagementMicroservice")
+@Spring::_aspects.Application(name="ChargingStationManagementMicroserviceQuery", port=8072)
+@Spring::_aspects.DatasourceConfiguration(databaseTechnology="MongoDB")
+@Spring::_aspects.EnableServiceDiscovery(discoveryTechnology="Eureka")
+functional microservice  de.fhdo.puls.chargingstationmanagementquery.ChargingStationManagementQuery {
+
+	required microservices {
+		ChargingStationManagementServiceCommand::de.fhdo.puls.chargingstationmanagementcommand.ChargingStationManagementCommand
+	}
+
+	@endpoints(Spring::_protocols.rest: "/resources/v1";)
+	interface ParkingSpaceQueries {
+
+		@endpoints(Spring::_protocols.rest: "/parkingSpace/id/{id}";)
+		@Spring::_aspects.GetMapping
+		public getParkingSpaceById(
+			@Spring::_aspects.PathVariable(value="id")
+			sync in id : string,
+			@Spring::_aspects.ResponseEntity
+			sync out parkingSpace : Domain::ChargingStationManagement.ParkingSpace
+		);
+
+		@endpoints(Spring::_protocols.rest: "/parkingSpace/ids";)
+		@Spring::_aspects.GetMapping
+		public getParkingSpacesByIds(
+			@Spring::_aspects.RequestBody
+			sync in ids : Domain::ChargingStationManagement.IDs,
+			@Spring::_aspects.ResponseEntity
+			sync out parkingSpaces : Domain::ChargingStationManagement.ParkingSpace
+		);
+
+		@endpoints(Spring::_protocols.rest: "/parkingSpaces";)
+		@Spring::_aspects.GetMapping
+		public getAllParkingSpaces(
+			@Spring::_aspects.ResponseEntity
+			sync out parkingSpaces : Domain::ChargingStationManagement.ParkingSpace
+		);
+
+		@Kafka::_aspects.Participant(
+			topic="parkingSpaceCreatedEvents",
+			consumerGroup="parkingSpaceCreatedEvents"
+		)
+		receiveParkingSpaceCreatedEvents(
+			async event : Domain::ChargingStationManagement.ParkingSpaceCreated
+		);
+	}
+
+
+
+	@endpoints(Spring::_protocols.rest: "/resources/v1";)
+	interface ElectrifiedParkingSpaceQueries {
+
+		@endpoints(Spring::_protocols.rest: "/electrifiedParkingSpace/id/{id}";)
+		@Spring::_aspects.GetMapping
+		public getElectrifiedParkingSpaceById(
+			@Spring::_aspects.PathVariable(value="id")
+			sync in id : string,
+			@Spring::_aspects.ResponseEntity
+			sync out electrifiedParkingSpace : Domain::ChargingStationManagement.ElectrifiedParkingSpace
+		);
+
+		@endpoints(Spring::_protocols.rest: "/electrifiedParkingSpace/ids";)
+		@Spring::_aspects.GetMapping
+		public getElectrifiedParkingSpacesByIds(
+			@Spring::_aspects.RequestBody
+			sync in ids : Domain::ChargingStationManagement.IDs,
+			@Spring::_aspects.ResponseEntity
+			sync out electrifiedParkingSpaces : Domain::ChargingStationManagement.ElectrifiedParkingSpace
+		);
+
+		@endpoints(Spring::_protocols.rest: "/electrifiedParkingSpaces";)
+		@Spring::_aspects.GetMapping
+		public getAllElectrifiedParkingSpaces(
+			@Spring::_aspects.ResponseEntity
+			sync out electrifiedParkingSpaces : Domain::ChargingStationManagement.ElectrifiedParkingSpace
+		);
+
+		@Kafka::_aspects.Participant(
+			topic="ElectrifiedParkingSpaceCreatedEvents",
+			consumerGroup="ElectrifiedParkingSpaceCreatedEvents"
+		)
+		receiveElectrifiedParkingSpaceCreatedEvents(
+			async event : Domain::ChargingStationManagement.ElectrifiedParkingSpaceCreated
+		);
+	}
+}

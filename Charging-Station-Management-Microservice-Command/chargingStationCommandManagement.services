@@ -1,0 +1,57 @@
+import datatypes from "domain.data" as Domain
+import technology from "../Technology/technology/Spring.technology" as Spring
+import technology from "../Technology/technology/Java.technology" as Java
+import technology from "../Technology/technology/Kafka.technology" as Kafka
+import technology from "../Technology/technology/Cqrs.technology" as CQRS
+import technology from "../Technology/technology/DomainEvents.technology" as DomainEvents
+
+@technology(Java)
+@technology(Spring)
+@technology(Kafka)
+@technology(CQRS)
+@technology(DomainEvents)
+@endpoints(Kafka::_protocols.kafka:"kafka-server1:9092";)
+@Kafka::_aspects.BootstrapAddress("kafka-server1:9092")
+@CQRS::_aspects.CommandSide("ChargingStationManagementMicroservice")
+@Spring::_aspects.Application(name="ChargingStationManagementMicroserviceCommand", port=8071)
+@Spring::_aspects.DatasourceConfiguration(databaseTechnology="MongoDB")
+@Spring::_aspects.EnableServiceDiscovery(discoveryTechnology="Eureka")
+functional microservice  de.fhdo.puls.chargingstationmanagementcommand.ChargingStationManagementCommand {
+
+	//Interface for COMMAND-Methods of ParkingSpaces
+	@endpoints(Spring::_protocols.rest: "/resources/v1";)
+	interface ParkingSpaceCommands {
+
+		@endpoints(Spring::_protocols.rest: "/parkingSpace";)
+		@Spring::_aspects.PutMapping
+		public createParkingSpace(
+			@Spring::_aspects.RequestBody
+			sync in command : Domain::ChargingStationManagement.CreateParkingSpaceCommand
+		);
+
+		@Kafka::_aspects.Participant(topic = "parkingSpaceCreatedEvents")
+		@DomainEvents::_aspects.Producer("ParkingSpaceProducerService")
+		public sendParkingSpaceCreatedEvent(
+			async out event : Domain::ChargingStationManagement.ParkingSpaceCreated
+		);
+	}
+
+
+	//Interface for COMMAND-Methods of ElectrifiedParkingSpaces
+	@endpoints(Spring::_protocols.rest: "/resources/v1";)
+	interface ElectrifiedParkingSpaceCommands {
+
+		@endpoints(Spring::_protocols.rest: "/electrifiedParkingSpace";)
+		@Spring::_aspects.PutMapping
+		public createElectrifiedParkingSpace(
+			@Spring::_aspects.RequestBody
+			sync in command : Domain::ChargingStationManagement.CreateElectrifiedParkingSpaceCommand
+		);
+
+		@Kafka::_aspects.Participant(topic = "electrifiedParkingSpaceCreatedEvents")
+		@DomainEvents::_aspects.Producer("ElectrifiedParkingSpaceProducerService")
+		public sendElectrifiedParkingSpaceCreatedEvent(
+			async out event : Domain::ChargingStationManagement.ElectrifiedParkingSpaceCreated
+		);
+	}
+}

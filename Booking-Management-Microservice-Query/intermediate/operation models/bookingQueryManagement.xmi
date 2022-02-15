@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="ASCII"?>
+<intermediate:IntermediateOperationModel xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:intermediate="http://www.fhdo.de/lemma/operation/intermediate" sourceModelUri="file://../../bookingQueryManagement.operation">
+  <imports name="BookingManagementServiceQuery" importUri="file://../../../../runtime-EclipseApplication/Booking-Management-Microservice-Query/intermediate/service models/bookingQueryManagement.xmi" importTypeName="MICROSERVICES"/>
+  <imports name="BookingManagementServiceCommand" importUri="file://../../../../runtime-EclipseApplication/Booking-Management-Microservice-Command/intermediate/service models/bookingCommandManagement.xmi" importTypeName="MICROSERVICES"/>
+  <imports name="container_base" importUri="file://../../../Technology/technology/container_base.technology" importTypeName="TECHNOLOGY"/>
+  <imports name="protocol" importUri="file://../../../Technology/technology/protocol.technology" importTypeName="TECHNOLOGY"/>
+  <imports name="ServiceDiscovery" importUri="file://../../../../runtime-EclipseApplication/Service-Oriented-Infrastructure-Components/intermediate/operation models/eureka.xmi" importTypeName="OPERATION_NODES"/>
+  <imports name="Database" importUri="file://../../../../runtime-EclipseApplication/Service-Oriented-Infrastructure-Components/intermediate/operation models/mariadbquery.xmi" importTypeName="OPERATION_NODES"/>
+  <containers name="BookingManagementQueryContainer" imports="//@imports.2 //@imports.3" operationEnvironment="//@containers.0/@technologyReference/@technology/@environment" qualifiedDeploymentTechnologyName="container_base.Kubernetes">
+    <deployedServices name="de.fhdo.puls.bookingmanagementquery.BookingManagementQuery" qualifiedName="de.fhdo.puls.bookingmanagementquery.BookingManagementQuery" imported="true" import="//@imports.0" effectivelyImplemented="true" microserviceType="FUNCTIONAL" visibility="ARCHITECTURE"/>
+    <endpoints communicationType="SYNCHRONOUS" protocol="rest" dataFormat="application/json" technology="//@containers.0/@endpoints.0/@endpointTechnology">
+      <addresses>http://localhost:6062/bookingService</addresses>
+      <endpointTechnology name="protocol" import="//@imports.3"/>
+    </endpoints>
+    <defaultValues value="BookingService" technologySpecificProperty="//@containers.0/@technologyReference/@technology/@properties.0"/>
+    <defaultValues value="6062" technologySpecificProperty="//@containers.0/@technologyReference/@technology/@properties.1"/>
+    <defaultValues value="jdbc:mariadb://mariadbquery:3306/" technologySpecificProperty="//@containers.0/@technologyReference/@technology/@properties.4"/>
+    <defaultValues value="root" technologySpecificProperty="//@containers.0/@technologyReference/@technology/@properties.2"/>
+    <defaultValues value="password" technologySpecificProperty="//@containers.0/@technologyReference/@technology/@properties.3"/>
+    <defaultValues value="https://auth.seelab.fh-dortmund.de/auth" technologySpecificProperty="//@containers.0/@technologyReference/@technology/@properties.15"/>
+    <defaultValues value="puls" technologySpecificProperty="//@containers.0/@technologyReference/@technology/@properties.16"/>
+    <defaultValues value="puls" technologySpecificProperty="//@containers.0/@technologyReference/@technology/@properties.17"/>
+    <defaultValues value="true" technologySpecificProperty="//@containers.0/@technologyReference/@technology/@properties.18"/>
+    <defaultValues value="http://discovery-service:8761/eureka" technologySpecificProperty="//@containers.0/@technologyReference/@technology/@properties.11"/>
+    <dependsOnNodes imported="true" name="Eureka" qualifiedTechnologyName="Eureka.Eureka" import="//@imports.4"/>
+    <dependsOnNodes imported="true" name="MariaDBQuery" qualifiedTechnologyName="MariaDB.MariaDB" import="//@imports.5"/>
+    <technologyReference import="//@imports.2">
+      <technology name="Kubernetes">
+        <environment environmentName="openjdk:17-alpine" default="true"/>
+        <properties name="springApplicationName" type="string"/>
+        <properties name="serverPort" type="int"/>
+        <properties name="springDatasourceUsername" type="string"/>
+        <properties name="springDatasourcePassword" type="string"/>
+        <properties name="springDatasourceUrl" type="string"/>
+        <properties name="springDataMongodbHost" type="string"/>
+        <properties name="springDataMongodbPort" type="int"/>
+        <properties name="springDataMongodbUri" type="string"/>
+        <properties name="springDataMongodbDatabase" type="string"/>
+        <properties name="springDataMongodbUsername" type="string"/>
+        <properties name="stringDataMongodbPassword" type="string"/>
+        <properties name="eurekaUri" type="string"/>
+        <properties name="kafkaBootstrapAddress" type="string"/>
+        <properties name="kafkaMessageTopicName" type="string"/>
+        <properties name="kafkaGroupId" type="string"/>
+        <properties name="keycloakAuthServerUrl" type="string"/>
+        <properties name="keycloakRealm" type="string"/>
+        <properties name="keycloakResource" type="string"/>
+        <properties name="keycloakBearerOnly" type="boolean"/>
+      </technology>
+    </technologyReference>
+  </containers>
+</intermediate:IntermediateOperationModel>

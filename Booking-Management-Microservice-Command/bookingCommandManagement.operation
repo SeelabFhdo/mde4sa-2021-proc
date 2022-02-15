@@ -1,0 +1,41 @@
+import microservices from "bookingCommandManagement.services" as BookingManagementService
+import technology from "../Technology/technology/container_base.technology" as container_base
+import technology from "../Technology/technology/protocol.technology" as ^protocol
+import nodes from "../Service-Oriented-Infrastructure-Components/infrastructure/eureka.operation" as ServiceDiscovery
+import nodes from "../Service-Oriented-Infrastructure-Components/infrastructure/mariadbcommand.operation" as Database
+
+@technology(container_base)
+@technology(^protocol)
+container BookingManagementCommandContainer
+	deployment technology container_base::_deployment.Kubernetes with operation environment "openjdk:17-alpine"
+	deploys BookingManagementService::de.fhdo.puls.bookingmanagementcommand.BookingManagementCommand
+	depends on nodes
+		ServiceDiscovery::Eureka,
+		Database::MariaDBCommand
+	{
+
+
+			default values {
+				//General Spring Boot configurations
+				springApplicationName="BookingServiceCommand"
+				serverPort=6061
+
+				//MariaDB database configuration
+				springDatasourceUrl="jdbc:mariadb://mariadbcommand:3306/booking_command"
+				springDatasourceUsername="root"
+				springDatasourcePassword="password"
+
+
+
+				//Keycloak configuration
+				keycloakAuthServerUrl="https://auth.seelab.fh-dortmund.de/auth"
+				keycloakRealm="puls"
+				keycloakResource="puls"
+				keycloakBearerOnly=true
+
+				//Eureka configuration
+				eurekaUri="http://discovery-service:8761/eureka"
+
+				basic endpoints {^protocol::_protocols.rest: "http://localhost:6061/bookingService";}
+			}
+	}

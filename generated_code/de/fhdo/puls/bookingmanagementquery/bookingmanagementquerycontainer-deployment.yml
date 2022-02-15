@@ -1,0 +1,43 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  creationTimestamp: null
+  labels:
+    app: bookingmanagementquerycontainer
+  name: bookingmanagementquerycontainer
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: bookingmanagementquerycontainer
+  strategy: {}
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        app: bookingmanagementquerycontainer
+    spec:
+      containers:
+      - image: bookingmanagementquerycontainer
+        imagePullPolicy: "Never"
+        name: bookingmanagementquerycontainer
+        resources: {}
+status: {}
+---
+apiVersion: v1
+kind: Service
+metadata:
+  creationTimestamp: null
+  labels:
+    app: bookingmanagementquerycontainer
+  name: bookingmanagementquerycontainer
+spec:
+  ports:
+  - name: "6061"
+    port: 6061
+    targetPort: 6061
+  selector:
+    app: bookingmanagementquerycontainer
+  type: ClusterIP
+status:
+  loadBalancer: {}

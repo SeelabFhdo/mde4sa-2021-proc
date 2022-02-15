@@ -1,0 +1,30 @@
+package de.fhdo.puls.chargingstationsharingquery.kafka.gen;
+
+import de.fhdo.puls.chargingstationsharingquery.domain.ChargingStationSharing.ElectrifiedParkingSpaceOffered;
+import de.fhdo.puls.chargingstationsharingquery.domain.ChargingStationSharing.OfferedElectrifiedParkingSpaceWithdrawed;
+import de.fhdo.puls.chargingstationsharingquery.domain.ChargingStationSharing.OfferedParkingSpaceWithdrawed;
+import de.fhdo.puls.chargingstationsharingquery.domain.ChargingStationSharing.ParkingSpaceOffered;
+import org.springframework.kafka.config.ConcurrentKafkaListenerContainerFactory;
+import org.springframework.kafka.core.ConsumerFactory;
+import org.springframework.kafka.core.KafkaAdmin;
+
+public interface KafkaConfigurationGen {
+
+    KafkaAdmin kafkaAdmin();
+
+    ConsumerFactory<String, ParkingSpaceOffered> parkingSpaceOfferedEventsParkingSpaceOfferedEventsConsumerFactory();
+
+    ConcurrentKafkaListenerContainerFactory<String, ParkingSpaceOffered> parkingSpaceOfferedEventsParkingSpaceOfferedEventsKafkaListenerContainerFactory();
+
+    ConsumerFactory<String, OfferedParkingSpaceWithdrawed> parkingSpaceWithdrawedEventsParkingSpaceWithdrawedEventsConsumerFactory();
+
+    ConcurrentKafkaListenerContainerFactory<String, OfferedParkingSpaceWithdrawed> parkingSpaceWithdrawedEventsParkingSpaceWithdrawedEventsKafkaListenerContainerFactory();
+
+    ConsumerFactory<String, ElectrifiedParkingSpaceOffered> electrifiedParkingSpaceOfferedEventsElectrifiedParkingSpaceOfferedEventsConsumerFactory();
+
+    ConcurrentKafkaListenerContainerFactory<String, ElectrifiedParkingSpaceOffered> electrifiedParkingSpaceOfferedEventsElectrifiedParkingSpaceOfferedEventsKafkaListenerContainerFactory();
+
+    ConsumerFactory<String, OfferedElectrifiedParkingSpaceWithdrawed> electrifiedParkingSpaceWithdrawedEventsElectrifiedParkingSpaceWithdrawedEventsConsumerFactory();
+
+    ConcurrentKafkaListenerContainerFactory<String, OfferedElectrifiedParkingSpaceWithdrawed> electrifiedParkingSpaceWithdrawedEventsElectrifiedParkingSpaceWithdrawedEventsKafkaListenerContainerFactory();
+}

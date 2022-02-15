@@ -1,0 +1,60 @@
+package de.fhdo.puls.bookingmanagementquery.kafka.gen;
+
+import de.fhdo.puls.bookingmanagementquery.domain.BookingManagement.ElectrifiedParkingSpaceOffered;
+import de.fhdo.puls.bookingmanagementquery.domain.BookingManagement.OfferedElectrifiedParkingSpaceWithdrawed;
+import de.fhdo.puls.bookingmanagementquery.domain.BookingManagement.OfferedParkingSpaceWithdrawed;
+import de.fhdo.puls.bookingmanagementquery.domain.BookingManagement.ParkAndChargeBookingCanceled;
+import de.fhdo.puls.bookingmanagementquery.domain.BookingManagement.ParkAndChargeBookingCreated;
+import de.fhdo.puls.bookingmanagementquery.domain.BookingManagement.ParkAndChargeBookingUpdated;
+import de.fhdo.puls.bookingmanagementquery.domain.BookingManagement.ParkBookingCanceled;
+import de.fhdo.puls.bookingmanagementquery.domain.BookingManagement.ParkBookingCreated;
+import de.fhdo.puls.bookingmanagementquery.domain.BookingManagement.ParkBookingUpdated;
+import de.fhdo.puls.bookingmanagementquery.domain.BookingManagement.ParkingSpaceOffered;
+import org.springframework.kafka.config.ConcurrentKafkaListenerContainerFactory;
+import org.springframework.kafka.core.ConsumerFactory;
+import org.springframework.kafka.core.KafkaAdmin;
+
+public interface KafkaConfigurationGen {
+
+    KafkaAdmin kafkaAdmin();
+
+    ConsumerFactory<String, ParkBookingCreated> parkBookingCreatedEventsParkBookingCreatedEventsConsumerFactory();
+
+    ConcurrentKafkaListenerContainerFactory<String, ParkBookingCreated> parkBookingCreatedEventsParkBookingCreatedEventsKafkaListenerContainerFactory();
+
+    ConsumerFactory<String, ParkBookingUpdated> parkBookingUpdatedEventsParkBookingUpdatedEventsConsumerFactory();
+
+    ConcurrentKafkaListenerContainerFactory<String, ParkBookingUpdated> parkBookingUpdatedEventsParkBookingUpdatedEventsKafkaListenerContainerFactory();
+
+    ConsumerFactory<String, ParkBookingCanceled> parkBookingCanceledEventsParkCanceledDeletedEventsConsumerFactory();
+
+    ConcurrentKafkaListenerContainerFactory<String, ParkBookingCanceled> parkBookingCanceledEventsParkCanceledDeletedEventsKafkaListenerContainerFactory();
+
+    ConsumerFactory<String, ParkingSpaceOffered> parkingSpaceOfferedEventsParkingSpaceOfferedEventsConsumerFactory();
+
+    ConcurrentKafkaListenerContainerFactory<String, ParkingSpaceOffered> parkingSpaceOfferedEventsParkingSpaceOfferedEventsKafkaListenerContainerFactory();
+
+    ConsumerFactory<String, OfferedParkingSpaceWithdrawed> parkingSpaceWithdrawedEventsParkingSpaceWithdrawedEventsConsumerFactory();
+
+    ConcurrentKafkaListenerContainerFactory<String, OfferedParkingSpaceWithdrawed> parkingSpaceWithdrawedEventsParkingSpaceWithdrawedEventsKafkaListenerContainerFactory();
+
+    ConsumerFactory<String, ParkAndChargeBookingCreated> parkAndChargeBookingCreatedEventsParkAndChargeCreatedEventsConsumerFactory();
+
+    ConcurrentKafkaListenerContainerFactory<String, ParkAndChargeBookingCreated> parkAndChargeBookingCreatedEventsParkAndChargeCreatedEventsKafkaListenerContainerFactory();
+
+    ConsumerFactory<String, ParkAndChargeBookingUpdated> parkAndChargeBookingUpdatedEventsParkAndChargeBookingUpdatedEventsConsumerFactory();
+
+    ConcurrentKafkaListenerContainerFactory<String, ParkAndChargeBookingUpdated> parkAndChargeBookingUpdatedEventsParkAndChargeBookingUpdatedEventsKafkaListenerContainerFactory();
+
+    ConsumerFactory<String, ParkAndChargeBookingCanceled> parkAndChargeBookingCanceledEventsParkAndChargeCanceledDeletedEventsConsumerFactory();
+
+    ConcurrentKafkaListenerContainerFactory<String, ParkAndChargeBookingCanceled> parkAndChargeBookingCanceledEventsParkAndChargeCanceledDeletedEventsKafkaListenerContainerFactory();
+
+    ConsumerFactory<String, ElectrifiedParkingSpaceOffered> electrifiedParkingSpaceOfferedEventsElectrifiedParkingSpaceOfferedEventsConsumerFactory();
+
+    ConcurrentKafkaListenerContainerFactory<String, ElectrifiedParkingSpaceOffered> electrifiedParkingSpaceOfferedEventsElectrifiedParkingSpaceOfferedEventsKafkaListenerContainerFactory();
+
+    ConsumerFactory<String, OfferedElectrifiedParkingSpaceWithdrawed> electrifiedParkingSpaceWithdrawedEventsElectrifiedParkingSpaceWithdrawedEventsConsumerFactory();
+
+    ConcurrentKafkaListenerContainerFactory<String, OfferedElectrifiedParkingSpaceWithdrawed> electrifiedParkingSpaceWithdrawedEventsElectrifiedParkingSpaceWithdrawedEventsKafkaListenerContainerFactory();
+}

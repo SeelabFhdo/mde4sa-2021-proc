@@ -1,0 +1,745 @@
+<?xml version="1.0" encoding="ASCII"?>
+<intermediate:IntermediateServiceModel xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:intermediate="http://www.fhdo.de/lemma/service/intermediate" xmlns:intermediate_1="http://www.fhdo.de/lemma/data/intermediate" sourceModelUri="file://../../bookingQueryManagement.services">
+  <imports name="Domain" importUri="file://../data models/domain.xmi" importTypeName="DATATYPES"/>
+  <imports name="BookingManagementCommand" importUri="file://../../../Booking-Management-Microservice-Command/intermediate/service models/bookingCommandManagement.xmi" importTypeName="MICROSERVICES"/>
+  <imports name="ChargingStationSharingCommand" importUri="file://../../../Charging-Station-Sharing-Microservice-Command/intermediate/service models/chargingStationSharingCommand.xmi" importTypeName="MICROSERVICES"/>
+  <imports name="Spring" importUri="file://../../../Technology/technology/Spring.technology" importTypeName="TECHNOLOGY"/>
+  <imports name="Java" importUri="file://../../../Technology/technology/Java.technology" importTypeName="TECHNOLOGY"/>
+  <imports name="CQRS" importUri="file://../../../Technology/technology/Cqrs.technology" importTypeName="TECHNOLOGY"/>
+  <imports name="Kafka" importUri="file://../../../Technology/technology/Kafka.technology" importTypeName="TECHNOLOGY"/>
+  <microservices sourceModelUri="file://../../bookingQueryManagement.services" name="de.fhdo.puls.bookingmanagementquery.BookingManagementQuery" qualifiedName="de.fhdo.puls.bookingmanagementquery.BookingManagementQuery" type="FUNCTIONAL" visibility="ARCHITECTURE" effectivelyImplemented="true">
+    <technologies name="Java" import="//@imports.4"/>
+    <technologies name="Spring" import="//@imports.3"/>
+    <technologies name="CQRS" import="//@imports.5"/>
+    <technologies name="Kafka" import="//@imports.6"/>
+    <endpoints communicationType="ASYNCHRONOUS" protocol="kafka" dataFormat="binary" technology="//@microservices.0/@technologies.3">
+      <addresses>kafka-server1:9092</addresses>
+    </endpoints>
+    <protocols communicationType="SYNCHRONOUS" protocol="rest" dataFormat="application/json"/>
+    <protocols communicationType="ASYNCHRONOUS" protocol="kafka" dataFormat="binary"/>
+    <requiredMicroservices name="de.fhdo.puls.bookingmanagementcommand.BookingManagementCommand" qualifiedName="de.fhdo.puls.bookingmanagementcommand.BookingManagementCommand" imported="true" import="//@imports.1"/>
+    <requiredMicroservices name="de.fhdo.puls.chargingstationsharingcommand.ChargingStationSharingCommand" qualifiedName="de.fhdo.puls.chargingstationsharingcommand.ChargingStationSharingCommand" imported="true" import="//@imports.2"/>
+    <interfaces name="ParkBookingQueryApi" qualifiedName="de.fhdo.puls.bookingmanagementquery.BookingManagementQuery.ParkBookingQueryApi" visibility="ARCHITECTURE" hasImplementedOperations="true">
+      <endpoints communicationType="SYNCHRONOUS" protocol="rest" dataFormat="application/json" technology="//@microservices.0/@technologies.1">
+        <addresses>/resources/v1</addresses>
+      </endpoints>
+      <protocols communicationType="SYNCHRONOUS" protocol="rest" dataFormat="application/json"/>
+      <protocols communicationType="ASYNCHRONOUS" protocol="kafka" dataFormat="binary"/>
+      <operations name="readParkBooking" qualifiedName="de.fhdo.puls.bookingmanagementquery.BookingManagementQuery.ParkBookingQueryApi.readParkBooking" visibility="OclUndefined">
+        <apiOperationComment comment="API endpoint for retrieving information about a single parking booking">
+          <parameterComments comment="Identifier of the park booking" required="true" parameter="//@microservices.0/@interfaces.0/@operations.0/@parameters.0"/>
+        </apiOperationComment>
+        <endpoints communicationType="SYNCHRONOUS" protocol="rest" dataFormat="application/json" technology="//@microservices.0/@technologies.1">
+          <addresses>/parkBooking/{bookingId}</addresses>
+        </endpoints>
+        <protocols communicationType="SYNCHRONOUS" protocol="rest" dataFormat="application/json"/>
+        <protocols communicationType="ASYNCHRONOUS" protocol="kafka" dataFormat="binary"/>
+        <aspects name="GetMapping" qualifiedName="Spring.GetMapping" import="//@imports.3">
+          <featureNames>SINGLE_VALUED</featureNames>
+        </aspects>
+        <parameters name="bookingId" qualifiedName="de.fhdo.puls.bookingmanagementquery.BookingManagementQuery.ParkBookingQueryApi.readParkBooking.bookingId" exchangePattern="IN" communicationType="SYNCHRONOUS">
+          <type xsi:type="intermediate_1:IntermediateImportedTechnologySpecificType" name="Long" origin="TECHNOLOGY" kind="PRIMITIVE" qualifiedName="java._types.Long" import="//@imports.4"/>
+          <originalType xsi:type="intermediate_1:IntermediatePrimitiveType" name="long" origin="BUILTIN" kind="PRIMITIVE" size="64"/>
+          <aspects name="PathVariable" qualifiedName="Spring.PathVariable" import="//@imports.3">
+            <featureNames>SINGLE_VALUED</featureNames>
+            <properties name="value" type="string"/>
+            <propertyValues value="bookingId" property="//@microservices.0/@interfaces.0/@operations.0/@parameters.0/@aspects.0/@properties.0"/>
+          </aspects>
+        </parameters>
+        <parameters name="parkBooking" qualifiedName="de.fhdo.puls.bookingmanagementquery.BookingManagementQuery.ParkBookingQueryApi.readParkBooking.parkBooking" exchangePattern="OUT" communicationType="SYNCHRONOUS">
+          <type xsi:type="intermediate_1:IntermediateImportedComplexType" name="ParkBookingVO" origin="DATA_MODEL" kind="STRUCTURE" qualifiedName="BookingManagement.ParkBookingVO" import="//@imports.0"/>
+          <originalType xsi:type="intermediate_1:IntermediateImportedComplexType" name="ParkBookingVO" origin="DATA_MODEL" kind="STRUCTURE" qualifiedName="BookingManagement.ParkBookingVO" import="//@imports.0"/>
+          <aspects name="ResponseEntity" qualifiedName="Spring.ResponseEntity" import="//@imports.3">
+            <featureNames>SINGLE_VALUED</featureNames>
+          </aspects>
+        </parameters>
+        <parameters name="bookingNotFound" qualifiedName="de.fhdo.puls.bookingmanagementquery.BookingManagementQuery.ParkBookingQueryApi.readParkBooking.bookingNotFound" exchangePattern="OUT" communicationType="SYNCHRONOUS" communicatesFault="true">
+          <type xsi:type="intermediate_1:IntermediateImportedTechnologySpecificType" name="String" origin="TECHNOLOGY" kind="PRIMITIVE" qualifiedName="java._types.String" import="//@imports.4"/>
+          <originalType xsi:type="intermediate_1:IntermediatePrimitiveType" name="string" origin="BUILTIN" kind="PRIMITIVE"/>
+          <aspects name="ResponseStatus" qualifiedName="Spring.ResponseStatus" import="//@imports.3">
+            <properties name="status" type="string">
+              <featureNames>MANDATORY</featureNames>
+            </properties>
+            <propertyValues value="NOT_FOUND" property="//@microservices.0/@interfaces.0/@operations.0/@parameters.2/@aspects.0/@properties.0"/>
+          </aspects>
+        </parameters>
+      </operations>
+      <operations name="readAllParkBookings" qualifiedName="de.fhdo.puls.bookingmanagementquery.BookingManagementQuery.ParkBookingQueryApi.readAllParkBookings" visibility="OclUndefined">
+        <apiOperationComment comment="API endpoint for all park bookings"/>
+        <endpoints communicationType="SYNCHRONOUS" protocol="rest" dataFormat="application/json" technology="//@microservices.0/@technologies.1">
+          <addresses>/parkBookings</addresses>
+        </endpoints>
+        <protocols communicationType="SYNCHRONOUS" protocol="rest" dataFormat="application/json"/>
+        <protocols communicationType="ASYNCHRONOUS" protocol="kafka" dataFormat="binary"/>
+        <aspects name="GetMapping" qualifiedName="Spring.GetMapping" import="//@imports.3">
+          <featureNames>SINGLE_VALUED</featureNames>
+        </aspects>
+        <parameters name="parkBookings" qualifiedName="de.fhdo.puls.bookingmanagementquery.BookingManagementQuery.ParkBookingQueryApi.readAllParkBookings.parkBookings" exchangePattern="OUT" communicationType="SYNCHRONOUS">
+          <type xsi:type="intermediate_1:IntermediateImportedComplexType" name="ParkBookingList" origin="DATA_MODEL" kind="LIST" qualifiedName="BookingManagement.ParkBookingList" import="//@imports.0"/>
+          <originalType xsi:type="intermediate_1:IntermediateImportedComplexType" name="ParkBookingList" origin="DATA_MODEL" kind="LIST" qualifiedName="BookingManagement.ParkBookingList" import="//@imports.0"/>
+          <aspects name="ResponseEntity" qualifiedName="Spring.ResponseEntity" import="//@imports.3">
+            <featureNames>SINGLE_VALUED</featureNames>
+          </aspects>
+        </parameters>
+      </operations>
+      <operations name="readParkBookingBlockchainData" qualifiedName="de.fhdo.puls.bookingmanagementquery.BookingManagementQuery.ParkBookingQueryApi.readParkBookingBlockchainData" visibility="OclUndefined">
+        <apiOperationComment comment="API endpoint for blockchain booking data call">
+          <parameterComments comment="Identifier of the park booking" required="true" parameter="//@microservices.0/@interfaces.0/@operations.2/@parameters.0"/>
+        </apiOperationComment>
+        <endpoints communicationType="SYNCHRONOUS" protocol="rest" dataFormat="application/json" technology="//@microservices.0/@technologies.1">
+          <addresses>/parkBooking/blockchainQuery/{bookingId}</addresses>
+        </endpoints>
+        <protocols communicationType="SYNCHRONOUS" protocol="rest" dataFormat="application/json"/>
+        <protocols communicationType="ASYNCHRONOUS" protocol="kafka" dataFormat="binary"/>
+        <aspects name="GetMapping" qualifiedName="Spring.GetMapping" import="//@imports.3">
+          <featureNames>SINGLE_VALUED</featureNames>
+        </aspects>
+        <parameters name="bookingId" qualifiedName="de.fhdo.puls.bookingmanagementquery.BookingManagementQuery.ParkBookingQueryApi.readParkBookingBlockchainData.bookingId" exchangePattern="IN" communicationType="SYNCHRONOUS">
+          <type xsi:type="intermediate_1:IntermediateImportedTechnologySpecificType" name="Long" origin="TECHNOLOGY" kind="PRIMITIVE" qualifiedName="java._types.Long" import="//@imports.4"/>
+          <originalType xsi:type="intermediate_1:IntermediatePrimitiveType" name="long" origin="BUILTIN" kind="PRIMITIVE" size="64"/>
+          <aspects name="PathVariable" qualifiedName="Spring.PathVariable" import="//@imports.3">
+            <featureNames>SINGLE_VALUED</featureNames>
+            <properties name="value" type="string"/>
+            <propertyValues value="bookingId" property="//@microservices.0/@interfaces.0/@operations.2/@parameters.0/@aspects.0/@properties.0"/>
+          </aspects>
+          <aspects name="Valid" qualifiedName="Spring.Valid" import="//@imports.3"/>
+        </parameters>
+        <parameters name="blockchainDataParkBooking" qualifiedName="de.fhdo.puls.bookingmanagementquery.BookingManagementQuery.ParkBookingQueryApi.readParkBookingBlockchainData.blockchainDataParkBooking" exchangePattern="OUT" communicationType="SYNCHRONOUS">
+          <type xsi:type="intermediate_1:IntermediateImportedComplexType" name="BlockchainDataParkBooking" origin="DATA_MODEL" kind="STRUCTURE" qualifiedName="BookingManagement.BlockchainDataParkBooking" import="//@imports.0"/>
+          <originalType xsi:type="intermediate_1:IntermediateImportedComplexType" name="BlockchainDataParkBooking" origin="DATA_MODEL" kind="STRUCTURE" qualifiedName="BookingManagement.BlockchainDataParkBooking" import="//@imports.0"/>
+          <aspects name="ResponseEntity" qualifiedName="Spring.ResponseEntity" import="//@imports.3">
+            <featureNames>SINGLE_VALUED</featureNames>
+          </aspects>
+        </parameters>
+        <parameters name="contractBytecodeMismatch" qualifiedName="de.fhdo.puls.bookingmanagementquery.BookingManagementQuery.ParkBookingQueryApi.readParkBookingBlockchainData.contractBytecodeMismatch" exchangePattern="OUT" communicationType="SYNCHRONOUS" communicatesFault="true">
+          <type xsi:type="intermediate_1:IntermediateImportedTechnologySpecificType" name="String" origin="TECHNOLOGY" kind="PRIMITIVE" qualifiedName="java._types.String" import="//@imports.4"/>
+          <originalType xsi:type="intermediate_1:IntermediatePrimitiveType" name="string" origin="BUILTIN" kind="PRIMITIVE"/>
+          <aspects name="ResponseStatus" qualifiedName="Spring.ResponseStatus" import="//@imports.3">
+            <properties name="status" type="string">
+              <featureNames>MANDATORY</featureNames>
+            </properties>
+            <propertyValues value="INTERNAL_SERVER_ERROR" property="//@microservices.0/@interfaces.0/@operations.2/@parameters.2/@aspects.0/@properties.0"/>
+          </aspects>
+        </parameters>
+        <parameters name="exception" qualifiedName="de.fhdo.puls.bookingmanagementquery.BookingManagementQuery.ParkBookingQueryApi.readParkBookingBlockchainData.exception" exchangePattern="OUT" communicationType="SYNCHRONOUS" communicatesFault="true">
+          <type xsi:type="intermediate_1:IntermediateImportedTechnologySpecificType" name="String" origin="TECHNOLOGY" kind="PRIMITIVE" qualifiedName="java._types.String" import="//@imports.4"/>
+          <originalType xsi:type="intermediate_1:IntermediatePrimitiveType" name="string" origin="BUILTIN" kind="PRIMITIVE"/>
+          <aspects name="ResponseStatus" qualifiedName="Spring.ResponseStatus" import="//@imports.3">
+            <properties name="status" type="string">
+              <featureNames>MANDATORY</featureNames>
+            </properties>
+            <propertyValues value="INTERNAL_SERVER_ERROR" property="//@microservices.0/@interfaces.0/@operations.2/@parameters.3/@aspects.0/@properties.0"/>
+          </aspects>
+        </parameters>
+      </operations>
+      <operations name="readCurrentParkBookingsOfParkingSpace" qualifiedName="de.fhdo.puls.bookingmanagementquery.BookingManagementQuery.ParkBookingQueryApi.readCurrentParkBookingsOfParkingSpace" visibility="OclUndefined">
+        <apiOperationComment comment="API endpoint for reading all current park bookings of a given parking space">
+          <parameterComments comment="Identifier of the parking space" required="true" parameter="//@microservices.0/@interfaces.0/@operations.3/@parameters.0"/>
+        </apiOperationComment>
+        <endpoints communicationType="SYNCHRONOUS" protocol="rest" dataFormat="application/json" technology="//@microservices.0/@technologies.1">
+          <addresses>/currentParkBookings/parkingSpace/{parkingSpaceId}</addresses>
+        </endpoints>
+        <protocols communicationType="SYNCHRONOUS" protocol="rest" dataFormat="application/json"/>
+        <protocols communicationType="ASYNCHRONOUS" protocol="kafka" dataFormat="binary"/>
+        <aspects name="GetMapping" qualifiedName="Spring.GetMapping" import="//@imports.3">
+          <featureNames>SINGLE_VALUED</featureNames>
+        </aspects>
+        <parameters name="parkingSpaceId" qualifiedName="de.fhdo.puls.bookingmanagementquery.BookingManagementQuery.ParkBookingQueryApi.readCurrentParkBookingsOfParkingSpace.parkingSpaceId" exchangePattern="IN" communicationType="SYNCHRONOUS">
+          <type xsi:type="intermediate_1:IntermediateImportedTechnologySpecificType" name="Long" origin="TECHNOLOGY" kind="PRIMITIVE" qualifiedName="java._types.Long" import="//@imports.4"/>
+          <originalType xsi:type="intermediate_1:IntermediatePrimitiveType" name="long" origin="BUILTIN" kind="PRIMITIVE" size="64"/>
+          <aspects name="PathVariable" qualifiedName="Spring.PathVariable" import="//@imports.3">
+            <featureNames>SINGLE_VALUED</featureNames>
+            <properties name="value" type="string"/>
+            <propertyValues value="parkingSpaceId" property="//@microservices.0/@interfaces.0/@operations.3/@parameters.0/@aspects.0/@properties.0"/>
+          </aspects>
+          <aspects name="Valid" qualifiedName="Spring.Valid" import="//@imports.3"/>
+        </parameters>
+        <parameters name="parkBookings" qualifiedName="de.fhdo.puls.bookingmanagementquery.BookingManagementQuery.ParkBookingQueryApi.readCurrentParkBookingsOfParkingSpace.parkBookings" exchangePattern="OUT" communicationType="SYNCHRONOUS">
+          <type xsi:type="intermediate_1:IntermediateImportedComplexType" name="ParkBookingList" origin="DATA_MODEL" kind="LIST" qualifiedName="BookingManagement.ParkBookingList" import="//@imports.0"/>
+          <originalType xsi:type="intermediate_1:IntermediateImportedComplexType" name="ParkBookingList" origin="DATA_MODEL" kind="LIST" qualifiedName="BookingManagement.ParkBookingList" import="//@imports.0"/>
+          <aspects name="ResponseEntity" qualifiedName="Spring.ResponseEntity" import="//@imports.3">
+            <featureNames>SINGLE_VALUED</featureNames>
+          </aspects>
+        </parameters>
+      </operations>
+      <operations name="readCanceledParkBookingsOfParkingSpace" qualifiedName="de.fhdo.puls.bookingmanagementquery.BookingManagementQuery.ParkBookingQueryApi.readCanceledParkBookingsOfParkingSpace" visibility="OclUndefined">
+        <apiOperationComment comment="API endpoint for reading all canceled park bookings of a given parking space">
+          <parameterComments comment="Identifier of the parking space" required="true" parameter="//@microservices.0/@interfaces.0/@operations.4/@parameters.0"/>
+        </apiOperationComment>
+        <endpoints communicationType="SYNCHRONOUS" protocol="rest" dataFormat="application/json" technology="//@microservices.0/@technologies.1">
+          <addresses>/canceledParkBookings/parkingSpace/{parkingSpaceId}</addresses>
+        </endpoints>
+        <protocols communicationType="SYNCHRONOUS" protocol="rest" dataFormat="application/json"/>
+        <protocols communicationType="ASYNCHRONOUS" protocol="kafka" dataFormat="binary"/>
+        <aspects name="GetMapping" qualifiedName="Spring.GetMapping" import="//@imports.3">
+          <featureNames>SINGLE_VALUED</featureNames>
+        </aspects>
+        <parameters name="parkingSpaceId" qualifiedName="de.fhdo.puls.bookingmanagementquery.BookingManagementQuery.ParkBookingQueryApi.readCanceledParkBookingsOfParkingSpace.parkingSpaceId" exchangePattern="IN" communicationType="SYNCHRONOUS">
+          <type xsi:type="intermediate_1:IntermediateImportedTechnologySpecificType" name="Long" origin="TECHNOLOGY" kind="PRIMITIVE" qualifiedName="java._types.Long" import="//@imports.4"/>
+          <originalType xsi:type="intermediate_1:IntermediatePrimitiveType" name="long" origin="BUILTIN" kind="PRIMITIVE" size="64"/>
+          <aspects name="PathVariable" qualifiedName="Spring.PathVariable" import="//@imports.3">
+            <featureNames>SINGLE_VALUED</featureNames>
+            <properties name="value" type="string"/>
+            <propertyValues value="parkingSpaceId" property="//@microservices.0/@interfaces.0/@operations.4/@parameters.0/@aspects.0/@properties.0"/>
+          </aspects>
+          <aspects name="Valid" qualifiedName="Spring.Valid" import="//@imports.3"/>
+        </parameters>
+        <parameters name="parkBookings" qualifiedName="de.fhdo.puls.bookingmanagementquery.BookingManagementQuery.ParkBookingQueryApi.readCanceledParkBookingsOfParkingSpace.parkBookings" exchangePattern="OUT" communicationType="SYNCHRONOUS">
+          <type xsi:type="intermediate_1:IntermediateImportedComplexType" name="ParkBookingList" origin="DATA_MODEL" kind="LIST" qualifiedName="BookingManagement.ParkBookingList" import="//@imports.0"/>
+          <originalType xsi:type="intermediate_1:IntermediateImportedComplexType" name="ParkBookingList" origin="DATA_MODEL" kind="LIST" qualifiedName="BookingManagement.ParkBookingList" import="//@imports.0"/>
+          <aspects name="ResponseEntity" qualifiedName="Spring.ResponseEntity" import="//@imports.3">
+            <featureNames>SINGLE_VALUED</featureNames>
+          </aspects>
+        </parameters>
+      </operations>
+      <operations name="readParkBookingsFromBooker" qualifiedName="de.fhdo.puls.bookingmanagementquery.BookingManagementQuery.ParkBookingQueryApi.readParkBookingsFromBooker" visibility="OclUndefined">
+        <apiOperationComment comment="API endpoint for reading all park bookings of a given booker">
+          <parameterComments comment="Identifier of the booker" required="true" parameter="//@microservices.0/@interfaces.0/@operations.5/@parameters.0"/>
+        </apiOperationComment>
+        <endpoints communicationType="SYNCHRONOUS" protocol="rest" dataFormat="application/json" technology="//@microservices.0/@technologies.1">
+          <addresses>/parkBookings/booker/{bookerId}</addresses>
+        </endpoints>
+        <protocols communicationType="SYNCHRONOUS" protocol="rest" dataFormat="application/json"/>
+        <protocols communicationType="ASYNCHRONOUS" protocol="kafka" dataFormat="binary"/>
+        <aspects name="GetMapping" qualifiedName="Spring.GetMapping" import="//@imports.3">
+          <featureNames>SINGLE_VALUED</featureNames>
+        </aspects>
+        <parameters name="bookerId" qualifiedName="de.fhdo.puls.bookingmanagementquery.BookingManagementQuery.ParkBookingQueryApi.readParkBookingsFromBooker.bookerId" exchangePattern="IN" communicationType="SYNCHRONOUS">
+          <type xsi:type="intermediate_1:IntermediateImportedTechnologySpecificType" name="Long" origin="TECHNOLOGY" kind="PRIMITIVE" qualifiedName="java._types.Long" import="//@imports.4"/>
+          <originalType xsi:type="intermediate_1:IntermediatePrimitiveType" name="long" origin="BUILTIN" kind="PRIMITIVE" size="64"/>
+          <aspects name="PathVariable" qualifiedName="Spring.PathVariable" import="//@imports.3">
+            <featureNames>SINGLE_VALUED</featureNames>
+            <properties name="value" type="string"/>
+            <propertyValues value="bookerId" property="//@microservices.0/@interfaces.0/@operations.5/@parameters.0/@aspects.0/@properties.0"/>
+          </aspects>
+          <aspects name="Valid" qualifiedName="Spring.Valid" import="//@imports.3"/>
+        </parameters>
+        <parameters name="parkBookings" qualifiedName="de.fhdo.puls.bookingmanagementquery.BookingManagementQuery.ParkBookingQueryApi.readParkBookingsFromBooker.parkBookings" exchangePattern="OUT" communicationType="SYNCHRONOUS">
+          <type xsi:type="intermediate_1:IntermediateImportedComplexType" name="ParkBookingList" origin="DATA_MODEL" kind="LIST" qualifiedName="BookingManagement.ParkBookingList" import="//@imports.0"/>
+          <originalType xsi:type="intermediate_1:IntermediateImportedComplexType" name="ParkBookingList" origin="DATA_MODEL" kind="LIST" qualifiedName="BookingManagement.ParkBookingList" import="//@imports.0"/>
+          <aspects name="ResponseEntity" qualifiedName="Spring.ResponseEntity" import="//@imports.3">
+            <featureNames>SINGLE_VALUED</featureNames>
+          </aspects>
+        </parameters>
+      </operations>
+      <operations name="readCurrentParkBookingsFromBooker" qualifiedName="de.fhdo.puls.bookingmanagementquery.BookingManagementQuery.ParkBookingQueryApi.readCurrentParkBookingsFromBooker" visibility="OclUndefined">
+        <apiOperationComment comment="API endpoint for reading all current park bookings of a given booker">
+          <parameterComments comment="Identifier of the booker" required="true" parameter="//@microservices.0/@interfaces.0/@operations.6/@parameters.0"/>
+        </apiOperationComment>
+        <endpoints communicationType="SYNCHRONOUS" protocol="rest" dataFormat="application/json" technology="//@microservices.0/@technologies.1">
+          <addresses>/currentParkBookings/booker/{bookerId}</addresses>
+        </endpoints>
+        <protocols communicationType="SYNCHRONOUS" protocol="rest" dataFormat="application/json"/>
+        <protocols communicationType="ASYNCHRONOUS" protocol="kafka" dataFormat="binary"/>
+        <aspects name="GetMapping" qualifiedName="Spring.GetMapping" import="//@imports.3">
+          <featureNames>SINGLE_VALUED</featureNames>
+        </aspects>
+        <parameters name="bookerId" qualifiedName="de.fhdo.puls.bookingmanagementquery.BookingManagementQuery.ParkBookingQueryApi.readCurrentParkBookingsFromBooker.bookerId" exchangePattern="IN" communicationType="SYNCHRONOUS">
+          <type xsi:type="intermediate_1:IntermediateImportedTechnologySpecificType" name="Long" origin="TECHNOLOGY" kind="PRIMITIVE" qualifiedName="java._types.Long" import="//@imports.4"/>
+          <originalType xsi:type="intermediate_1:IntermediatePrimitiveType" name="long" origin="BUILTIN" kind="PRIMITIVE" size="64"/>
+          <aspects name="PathVariable" qualifiedName="Spring.PathVariable" import="//@imports.3">
+            <featureNames>SINGLE_VALUED</featureNames>
+            <properties name="value" type="string"/>
+            <propertyValues value="bookerId" property="//@microservices.0/@interfaces.0/@operations.6/@parameters.0/@aspects.0/@properties.0"/>
+          </aspects>
+          <aspects name="Valid" qualifiedName="Spring.Valid" import="//@imports.3"/>
+        </parameters>
+        <parameters name="parkBookings" qualifiedName="de.fhdo.puls.bookingmanagementquery.BookingManagementQuery.ParkBookingQueryApi.readCurrentParkBookingsFromBooker.parkBookings" exchangePattern="OUT" communicationType="SYNCHRONOUS">
+          <type xsi:type="intermediate_1:IntermediateImportedComplexType" name="ParkBookingList" origin="DATA_MODEL" kind="LIST" qualifiedName="BookingManagement.ParkBookingList" import="//@imports.0"/>
+          <originalType xsi:type="intermediate_1:IntermediateImportedComplexType" name="ParkBookingList" origin="DATA_MODEL" kind="LIST" qualifiedName="BookingManagement.ParkBookingList" import="//@imports.0"/>
+          <aspects name="ResponseEntity" qualifiedName="Spring.ResponseEntity" import="//@imports.3">
+            <featureNames>SINGLE_VALUED</featureNames>
+          </aspects>
+        </parameters>
+      </operations>
+      <operations name="readCanceledParkBookingsFromBooker" qualifiedName="de.fhdo.puls.bookingmanagementquery.BookingManagementQuery.ParkBookingQueryApi.readCanceledParkBookingsFromBooker" visibility="OclUndefined">
+        <apiOperationComment comment="API endpoint for reading all canceled park bookings of a given booker">
+          <parameterComments comment="Identifier of the booker" required="true" parameter="//@microservices.0/@interfaces.0/@operations.7/@parameters.0"/>
+        </apiOperationComment>
+        <endpoints communicationType="SYNCHRONOUS" protocol="rest" dataFormat="application/json" technology="//@microservices.0/@technologies.1">
+          <addresses>/canceledParkBookings/booker/{bookerId}</addresses>
+        </endpoints>
+        <protocols communicationType="SYNCHRONOUS" protocol="rest" dataFormat="application/json"/>
+        <protocols communicationType="ASYNCHRONOUS" protocol="kafka" dataFormat="binary"/>
+        <aspects name="GetMapping" qualifiedName="Spring.GetMapping" import="//@imports.3">
+          <featureNames>SINGLE_VALUED</featureNames>
+        </aspects>
+        <parameters name="bookerId" qualifiedName="de.fhdo.puls.bookingmanagementquery.BookingManagementQuery.ParkBookingQueryApi.readCanceledParkBookingsFromBooker.bookerId" exchangePattern="IN" communicationType="SYNCHRONOUS">
+          <type xsi:type="intermediate_1:IntermediateImportedTechnologySpecificType" name="Long" origin="TECHNOLOGY" kind="PRIMITIVE" qualifiedName="java._types.Long" import="//@imports.4"/>
+          <originalType xsi:type="intermediate_1:IntermediatePrimitiveType" name="long" origin="BUILTIN" kind="PRIMITIVE" size="64"/>
+          <aspects name="PathVariable" qualifiedName="Spring.PathVariable" import="//@imports.3">
+            <featureNames>SINGLE_VALUED</featureNames>
+            <properties name="value" type="string"/>
+            <propertyValues value="bookerId" property="//@microservices.0/@interfaces.0/@operations.7/@parameters.0/@aspects.0/@properties.0"/>
+          </aspects>
+          <aspects name="Valid" qualifiedName="Spring.Valid" import="//@imports.3"/>
+        </parameters>
+        <parameters name="parkBookings" qualifiedName="de.fhdo.puls.bookingmanagementquery.BookingManagementQuery.ParkBookingQueryApi.readCanceledParkBookingsFromBooker.parkBookings" exchangePattern="OUT" communicationType="SYNCHRONOUS">
+          <type xsi:type="intermediate_1:IntermediateImportedComplexType" name="ParkBookingList" origin="DATA_MODEL" kind="LIST" qualifiedName="BookingManagement.ParkBookingList" import="//@imports.0"/>
+          <originalType xsi:type="intermediate_1:IntermediateImportedComplexType" name="ParkBookingList" origin="DATA_MODEL" kind="LIST" qualifiedName="BookingManagement.ParkBookingList" import="//@imports.0"/>
+          <aspects name="ResponseEntity" qualifiedName="Spring.ResponseEntity" import="//@imports.3">
+            <featureNames>SINGLE_VALUED</featureNames>
+          </aspects>
+        </parameters>
+      </operations>
+      <operations name="receiveParkBookingCreatedEvents" qualifiedName="de.fhdo.puls.bookingmanagementquery.BookingManagementQuery.ParkBookingQueryApi.receiveParkBookingCreatedEvents" visibility="ARCHITECTURE">
+        <protocols communicationType="SYNCHRONOUS" protocol="rest" dataFormat="application/json"/>
+        <protocols communicationType="ASYNCHRONOUS" protocol="kafka" dataFormat="binary"/>
+        <aspects name="Participant" qualifiedName="Kafka.Participant" import="//@imports.6">
+          <properties name="topic" type="string">
+            <featureNames>MANDATORY</featureNames>
+          </properties>
+          <properties name="consumerGroup" type="string"/>
+          <propertyValues value="parkBookingCreatedEvents" property="//@microservices.0/@interfaces.0/@operations.8/@aspects.0/@properties.0"/>
+          <propertyValues value="parkBookingCreatedEvents" property="//@microservices.0/@interfaces.0/@operations.8/@aspects.0/@properties.1"/>
+        </aspects>
+        <parameters name="event" qualifiedName="de.fhdo.puls.bookingmanagementquery.BookingManagementQuery.ParkBookingQueryApi.receiveParkBookingCreatedEvents.event" exchangePattern="IN" communicationType="ASYNCHRONOUS">
+          <type xsi:type="intermediate_1:IntermediateImportedComplexType" name="ParkBookingCreated" origin="DATA_MODEL" kind="STRUCTURE" qualifiedName="BookingManagement.ParkBookingCreated" import="//@imports.0"/>
+          <originalType xsi:type="intermediate_1:IntermediateImportedComplexType" name="ParkBookingCreated" origin="DATA_MODEL" kind="STRUCTURE" qualifiedName="BookingManagement.ParkBookingCreated" import="//@imports.0"/>
+        </parameters>
+      </operations>
+      <operations name="receiveParkBookingUpdatedEvents" qualifiedName="de.fhdo.puls.bookingmanagementquery.BookingManagementQuery.ParkBookingQueryApi.receiveParkBookingUpdatedEvents" visibility="ARCHITECTURE">
+        <protocols communicationType="SYNCHRONOUS" protocol="rest" dataFormat="application/json"/>
+        <protocols communicationType="ASYNCHRONOUS" protocol="kafka" dataFormat="binary"/>
+        <aspects name="Participant" qualifiedName="Kafka.Participant" import="//@imports.6">
+          <properties name="topic" type="string">
+            <featureNames>MANDATORY</featureNames>
+          </properties>
+          <properties name="consumerGroup" type="string"/>
+          <propertyValues value="parkBookingUpdatedEvents" property="//@microservices.0/@interfaces.0/@operations.9/@aspects.0/@properties.0"/>
+          <propertyValues value="parkBookingUpdatedEvents" property="//@microservices.0/@interfaces.0/@operations.9/@aspects.0/@properties.1"/>
+        </aspects>
+        <parameters name="event" qualifiedName="de.fhdo.puls.bookingmanagementquery.BookingManagementQuery.ParkBookingQueryApi.receiveParkBookingUpdatedEvents.event" exchangePattern="IN" communicationType="ASYNCHRONOUS">
+          <type xsi:type="intermediate_1:IntermediateImportedComplexType" name="ParkBookingUpdated" origin="DATA_MODEL" kind="STRUCTURE" qualifiedName="BookingManagement.ParkBookingUpdated" import="//@imports.0"/>
+          <originalType xsi:type="intermediate_1:IntermediateImportedComplexType" name="ParkBookingUpdated" origin="DATA_MODEL" kind="STRUCTURE" qualifiedName="BookingManagement.ParkBookingUpdated" import="//@imports.0"/>
+        </parameters>
+      </operations>
+      <operations name="receiveParkBookingDeletedEvents" qualifiedName="de.fhdo.puls.bookingmanagementquery.BookingManagementQuery.ParkBookingQueryApi.receiveParkBookingDeletedEvents" visibility="ARCHITECTURE">
+        <protocols communicationType="SYNCHRONOUS" protocol="rest" dataFormat="application/json"/>
+        <protocols communicationType="ASYNCHRONOUS" protocol="kafka" dataFormat="binary"/>
+        <aspects name="Participant" qualifiedName="Kafka.Participant" import="//@imports.6">
+          <properties name="topic" type="string">
+            <featureNames>MANDATORY</featureNames>
+          </properties>
+          <properties name="consumerGroup" type="string"/>
+          <propertyValues value="parkBookingCanceledEvents" property="//@microservices.0/@interfaces.0/@operations.10/@aspects.0/@properties.0"/>
+          <propertyValues value="parkCanceledDeletedEvents" property="//@microservices.0/@interfaces.0/@operations.10/@aspects.0/@properties.1"/>
+        </aspects>
+        <parameters name="event" qualifiedName="de.fhdo.puls.bookingmanagementquery.BookingManagementQuery.ParkBookingQueryApi.receiveParkBookingDeletedEvents.event" exchangePattern="IN" communicationType="ASYNCHRONOUS">
+          <type xsi:type="intermediate_1:IntermediateImportedComplexType" name="ParkBookingCanceled" origin="DATA_MODEL" kind="STRUCTURE" qualifiedName="BookingManagement.ParkBookingCanceled" import="//@imports.0"/>
+          <originalType xsi:type="intermediate_1:IntermediateImportedComplexType" name="ParkBookingCanceled" origin="DATA_MODEL" kind="STRUCTURE" qualifiedName="BookingManagement.ParkBookingCanceled" import="//@imports.0"/>
+        </parameters>
+      </operations>
+      <operations name="receiveParkingSpaceOfferedEvents" qualifiedName="de.fhdo.puls.bookingmanagementquery.BookingManagementQuery.ParkBookingQueryApi.receiveParkingSpaceOfferedEvents" visibility="ARCHITECTURE">
+        <protocols communicationType="SYNCHRONOUS" protocol="rest" dataFormat="application/json"/>
+        <protocols communicationType="ASYNCHRONOUS" protocol="kafka" dataFormat="binary"/>
+        <aspects name="Participant" qualifiedName="Kafka.Participant" import="//@imports.6">
+          <properties name="topic" type="string">
+            <featureNames>MANDATORY</featureNames>
+          </properties>
+          <properties name="consumerGroup" type="string"/>
+          <propertyValues value="parkingSpaceOfferedEvents" property="//@microservices.0/@interfaces.0/@operations.11/@aspects.0/@properties.0"/>
+          <propertyValues value="parkingSpaceOfferedEvents" property="//@microservices.0/@interfaces.0/@operations.11/@aspects.0/@properties.1"/>
+        </aspects>
+        <parameters name="event" qualifiedName="de.fhdo.puls.bookingmanagementquery.BookingManagementQuery.ParkBookingQueryApi.receiveParkingSpaceOfferedEvents.event" exchangePattern="IN" communicationType="ASYNCHRONOUS">
+          <type xsi:type="intermediate_1:IntermediateImportedComplexType" name="ParkingSpaceOffered" origin="DATA_MODEL" kind="STRUCTURE" qualifiedName="BookingManagement.ParkingSpaceOffered" import="//@imports.0"/>
+          <originalType xsi:type="intermediate_1:IntermediateImportedComplexType" name="ParkingSpaceOffered" origin="DATA_MODEL" kind="STRUCTURE" qualifiedName="BookingManagement.ParkingSpaceOffered" import="//@imports.0"/>
+        </parameters>
+      </operations>
+      <operations name="receiveParkingSpaceWithdrawedEvents" qualifiedName="de.fhdo.puls.bookingmanagementquery.BookingManagementQuery.ParkBookingQueryApi.receiveParkingSpaceWithdrawedEvents" visibility="ARCHITECTURE">
+        <protocols communicationType="SYNCHRONOUS" protocol="rest" dataFormat="application/json"/>
+        <protocols communicationType="ASYNCHRONOUS" protocol="kafka" dataFormat="binary"/>
+        <aspects name="Participant" qualifiedName="Kafka.Participant" import="//@imports.6">
+          <properties name="topic" type="string">
+            <featureNames>MANDATORY</featureNames>
+          </properties>
+          <properties name="consumerGroup" type="string"/>
+          <propertyValues value="parkingSpaceWithdrawedEvents" property="//@microservices.0/@interfaces.0/@operations.12/@aspects.0/@properties.0"/>
+          <propertyValues value="parkingSpaceWithdrawedEvents" property="//@microservices.0/@interfaces.0/@operations.12/@aspects.0/@properties.1"/>
+        </aspects>
+        <parameters name="event" qualifiedName="de.fhdo.puls.bookingmanagementquery.BookingManagementQuery.ParkBookingQueryApi.receiveParkingSpaceWithdrawedEvents.event" exchangePattern="IN" communicationType="ASYNCHRONOUS">
+          <type xsi:type="intermediate_1:IntermediateImportedComplexType" name="OfferedParkingSpaceWithdrawed" origin="DATA_MODEL" kind="STRUCTURE" qualifiedName="BookingManagement.OfferedParkingSpaceWithdrawed" import="//@imports.0"/>
+          <originalType xsi:type="intermediate_1:IntermediateImportedComplexType" name="OfferedParkingSpaceWithdrawed" origin="DATA_MODEL" kind="STRUCTURE" qualifiedName="BookingManagement.OfferedParkingSpaceWithdrawed" import="//@imports.0"/>
+        </parameters>
+      </operations>
+    </interfaces>
+    <interfaces name="ParkAndChargeBookingQueryApi" qualifiedName="de.fhdo.puls.bookingmanagementquery.BookingManagementQuery.ParkAndChargeBookingQueryApi" visibility="ARCHITECTURE" hasImplementedOperations="true">
+      <endpoints communicationType="SYNCHRONOUS" protocol="rest" dataFormat="application/json" technology="//@microservices.0/@technologies.1">
+        <addresses>/resources/v1</addresses>
+      </endpoints>
+      <protocols communicationType="SYNCHRONOUS" protocol="rest" dataFormat="application/json"/>
+      <protocols communicationType="ASYNCHRONOUS" protocol="kafka" dataFormat="binary"/>
+      <operations name="readParkAndChargeBooking" qualifiedName="de.fhdo.puls.bookingmanagementquery.BookingManagementQuery.ParkAndChargeBookingQueryApi.readParkAndChargeBooking" visibility="OclUndefined">
+        <apiOperationComment comment="API endpoint for retrieving information about a single parking and charge booking">
+          <parameterComments comment="Identifier of the park and charge booking" required="true" parameter="//@microservices.0/@interfaces.1/@operations.0/@parameters.0"/>
+        </apiOperationComment>
+        <endpoints communicationType="SYNCHRONOUS" protocol="rest" dataFormat="application/json" technology="//@microservices.0/@technologies.1">
+          <addresses>/parkAndChargeBooking/{bookingId}</addresses>
+        </endpoints>
+        <protocols communicationType="SYNCHRONOUS" protocol="rest" dataFormat="application/json"/>
+        <protocols communicationType="ASYNCHRONOUS" protocol="kafka" dataFormat="binary"/>
+        <aspects name="GetMapping" qualifiedName="Spring.GetMapping" import="//@imports.3">
+          <featureNames>SINGLE_VALUED</featureNames>
+        </aspects>
+        <parameters name="bookingId" qualifiedName="de.fhdo.puls.bookingmanagementquery.BookingManagementQuery.ParkAndChargeBookingQueryApi.readParkAndChargeBooking.bookingId" exchangePattern="IN" communicationType="SYNCHRONOUS">
+          <type xsi:type="intermediate_1:IntermediateImportedTechnologySpecificType" name="Long" origin="TECHNOLOGY" kind="PRIMITIVE" qualifiedName="java._types.Long" import="//@imports.4"/>
+          <originalType xsi:type="intermediate_1:IntermediatePrimitiveType" name="long" origin="BUILTIN" kind="PRIMITIVE" size="64"/>
+          <aspects name="PathVariable" qualifiedName="Spring.PathVariable" import="//@imports.3">
+            <featureNames>SINGLE_VALUED</featureNames>
+            <properties name="value" type="string"/>
+            <propertyValues value="bookingId" property="//@microservices.0/@interfaces.1/@operations.0/@parameters.0/@aspects.0/@properties.0"/>
+          </aspects>
+          <aspects name="Valid" qualifiedName="Spring.Valid" import="//@imports.3"/>
+        </parameters>
+        <parameters name="parkAndChargeBooking" qualifiedName="de.fhdo.puls.bookingmanagementquery.BookingManagementQuery.ParkAndChargeBookingQueryApi.readParkAndChargeBooking.parkAndChargeBooking" exchangePattern="OUT" communicationType="SYNCHRONOUS">
+          <type xsi:type="intermediate_1:IntermediateImportedComplexType" name="ParkAndChargeBooking" origin="DATA_MODEL" kind="STRUCTURE" qualifiedName="BookingManagement.ParkAndChargeBooking" import="//@imports.0"/>
+          <originalType xsi:type="intermediate_1:IntermediateImportedComplexType" name="ParkAndChargeBooking" origin="DATA_MODEL" kind="STRUCTURE" qualifiedName="BookingManagement.ParkAndChargeBooking" import="//@imports.0"/>
+          <aspects name="ResponseEntity" qualifiedName="Spring.ResponseEntity" import="//@imports.3">
+            <featureNames>SINGLE_VALUED</featureNames>
+          </aspects>
+        </parameters>
+        <parameters name="parkBookingNotFound" qualifiedName="de.fhdo.puls.bookingmanagementquery.BookingManagementQuery.ParkAndChargeBookingQueryApi.readParkAndChargeBooking.parkBookingNotFound" exchangePattern="OUT" communicationType="SYNCHRONOUS" communicatesFault="true">
+          <type xsi:type="intermediate_1:IntermediateImportedTechnologySpecificType" name="String" origin="TECHNOLOGY" kind="PRIMITIVE" qualifiedName="java._types.String" import="//@imports.4"/>
+          <originalType xsi:type="intermediate_1:IntermediatePrimitiveType" name="string" origin="BUILTIN" kind="PRIMITIVE"/>
+          <aspects name="ResponseStatus" qualifiedName="Spring.ResponseStatus" import="//@imports.3">
+            <properties name="status" type="string">
+              <featureNames>MANDATORY</featureNames>
+            </properties>
+            <propertyValues value="NOT_FOUND" property="//@microservices.0/@interfaces.1/@operations.0/@parameters.2/@aspects.0/@properties.0"/>
+          </aspects>
+        </parameters>
+      </operations>
+      <operations name="readAllParkAndChargeBookings" qualifiedName="de.fhdo.puls.bookingmanagementquery.BookingManagementQuery.ParkAndChargeBookingQueryApi.readAllParkAndChargeBookings" visibility="OclUndefined">
+        <apiOperationComment comment="API endpoint for all park and charge bookings"/>
+        <endpoints communicationType="SYNCHRONOUS" protocol="rest" dataFormat="application/json" technology="//@microservices.0/@technologies.1">
+          <addresses>/parkAndChargeBookings</addresses>
+        </endpoints>
+        <protocols communicationType="SYNCHRONOUS" protocol="rest" dataFormat="application/json"/>
+        <protocols communicationType="ASYNCHRONOUS" protocol="kafka" dataFormat="binary"/>
+        <aspects name="GetMapping" qualifiedName="Spring.GetMapping" import="//@imports.3">
+          <featureNames>SINGLE_VALUED</featureNames>
+        </aspects>
+        <parameters name="parkAndChargeBookings" qualifiedName="de.fhdo.puls.bookingmanagementquery.BookingManagementQuery.ParkAndChargeBookingQueryApi.readAllParkAndChargeBookings.parkAndChargeBookings" exchangePattern="OUT" communicationType="SYNCHRONOUS">
+          <type xsi:type="intermediate_1:IntermediateImportedComplexType" name="ParkAndChargeBookingList" origin="DATA_MODEL" kind="LIST" qualifiedName="BookingManagement.ParkAndChargeBookingList" import="//@imports.0"/>
+          <originalType xsi:type="intermediate_1:IntermediateImportedComplexType" name="ParkAndChargeBookingList" origin="DATA_MODEL" kind="LIST" qualifiedName="BookingManagement.ParkAndChargeBookingList" import="//@imports.0"/>
+          <aspects name="ResponseEntity" qualifiedName="Spring.ResponseEntity" import="//@imports.3">
+            <featureNames>SINGLE_VALUED</featureNames>
+          </aspects>
+        </parameters>
+      </operations>
+      <operations name="readParkAndParkBookingBlockchainData" qualifiedName="de.fhdo.puls.bookingmanagementquery.BookingManagementQuery.ParkAndChargeBookingQueryApi.readParkAndParkBookingBlockchainData" visibility="OclUndefined">
+        <apiOperationComment comment="API endpoint for blockchain booking data call">
+          <parameterComments comment="Identifier of the park and charge booking" required="true" parameter="//@microservices.0/@interfaces.1/@operations.2/@parameters.0"/>
+        </apiOperationComment>
+        <endpoints communicationType="SYNCHRONOUS" protocol="rest" dataFormat="application/json" technology="//@microservices.0/@technologies.1">
+          <addresses>/parkAndChargeBooking/blockchainQuery/{bookingId}</addresses>
+        </endpoints>
+        <protocols communicationType="SYNCHRONOUS" protocol="rest" dataFormat="application/json"/>
+        <protocols communicationType="ASYNCHRONOUS" protocol="kafka" dataFormat="binary"/>
+        <aspects name="GetMapping" qualifiedName="Spring.GetMapping" import="//@imports.3">
+          <featureNames>SINGLE_VALUED</featureNames>
+        </aspects>
+        <parameters name="bookingId" qualifiedName="de.fhdo.puls.bookingmanagementquery.BookingManagementQuery.ParkAndChargeBookingQueryApi.readParkAndParkBookingBlockchainData.bookingId" exchangePattern="IN" communicationType="SYNCHRONOUS">
+          <type xsi:type="intermediate_1:IntermediateImportedTechnologySpecificType" name="Long" origin="TECHNOLOGY" kind="PRIMITIVE" qualifiedName="java._types.Long" import="//@imports.4"/>
+          <originalType xsi:type="intermediate_1:IntermediatePrimitiveType" name="long" origin="BUILTIN" kind="PRIMITIVE" size="64"/>
+          <aspects name="PathVariable" qualifiedName="Spring.PathVariable" import="//@imports.3">
+            <featureNames>SINGLE_VALUED</featureNames>
+            <properties name="value" type="string"/>
+            <propertyValues value="bookingId" property="//@microservices.0/@interfaces.1/@operations.2/@parameters.0/@aspects.0/@properties.0"/>
+          </aspects>
+          <aspects name="Valid" qualifiedName="Spring.Valid" import="//@imports.3"/>
+        </parameters>
+        <parameters name="blockchainDataParkAndChargeBooking" qualifiedName="de.fhdo.puls.bookingmanagementquery.BookingManagementQuery.ParkAndChargeBookingQueryApi.readParkAndParkBookingBlockchainData.blockchainDataParkAndChargeBooking" exchangePattern="OUT" communicationType="SYNCHRONOUS">
+          <type xsi:type="intermediate_1:IntermediateImportedComplexType" name="BlockchainDataParkAndChargeBooking" origin="DATA_MODEL" kind="STRUCTURE" qualifiedName="BookingManagement.BlockchainDataParkAndChargeBooking" import="//@imports.0"/>
+          <originalType xsi:type="intermediate_1:IntermediateImportedComplexType" name="BlockchainDataParkAndChargeBooking" origin="DATA_MODEL" kind="STRUCTURE" qualifiedName="BookingManagement.BlockchainDataParkAndChargeBooking" import="//@imports.0"/>
+          <aspects name="ResponseEntity" qualifiedName="Spring.ResponseEntity" import="//@imports.3">
+            <featureNames>SINGLE_VALUED</featureNames>
+          </aspects>
+        </parameters>
+        <parameters name="contractBytecodeMismatch" qualifiedName="de.fhdo.puls.bookingmanagementquery.BookingManagementQuery.ParkAndChargeBookingQueryApi.readParkAndParkBookingBlockchainData.contractBytecodeMismatch" exchangePattern="OUT" communicationType="SYNCHRONOUS" communicatesFault="true">
+          <type xsi:type="intermediate_1:IntermediateImportedTechnologySpecificType" name="String" origin="TECHNOLOGY" kind="PRIMITIVE" qualifiedName="java._types.String" import="//@imports.4"/>
+          <originalType xsi:type="intermediate_1:IntermediatePrimitiveType" name="string" origin="BUILTIN" kind="PRIMITIVE"/>
+          <aspects name="ResponseStatus" qualifiedName="Spring.ResponseStatus" import="//@imports.3">
+            <properties name="status" type="string">
+              <featureNames>MANDATORY</featureNames>
+            </properties>
+            <propertyValues value="INTERNAL_SERVER_ERROR" property="//@microservices.0/@interfaces.1/@operations.2/@parameters.2/@aspects.0/@properties.0"/>
+          </aspects>
+        </parameters>
+        <parameters name="exception" qualifiedName="de.fhdo.puls.bookingmanagementquery.BookingManagementQuery.ParkAndChargeBookingQueryApi.readParkAndParkBookingBlockchainData.exception" exchangePattern="OUT" communicationType="SYNCHRONOUS" communicatesFault="true">
+          <type xsi:type="intermediate_1:IntermediateImportedTechnologySpecificType" name="String" origin="TECHNOLOGY" kind="PRIMITIVE" qualifiedName="java._types.String" import="//@imports.4"/>
+          <originalType xsi:type="intermediate_1:IntermediatePrimitiveType" name="string" origin="BUILTIN" kind="PRIMITIVE"/>
+          <aspects name="ResponseStatus" qualifiedName="Spring.ResponseStatus" import="//@imports.3">
+            <properties name="status" type="string">
+              <featureNames>MANDATORY</featureNames>
+            </properties>
+            <propertyValues value="INTERNAL_SERVER_ERROR" property="//@microservices.0/@interfaces.1/@operations.2/@parameters.3/@aspects.0/@properties.0"/>
+          </aspects>
+        </parameters>
+      </operations>
+      <operations name="readCurrentBookingsOfParkingSpace" qualifiedName="de.fhdo.puls.bookingmanagementquery.BookingManagementQuery.ParkAndChargeBookingQueryApi.readCurrentBookingsOfParkingSpace" visibility="OclUndefined">
+        <apiOperationComment comment="API endpoint for reading all current park and charge bookings of a given parking space">
+          <parameterComments comment="Identifier of the parking space" required="true" parameter="//@microservices.0/@interfaces.1/@operations.3/@parameters.0"/>
+        </apiOperationComment>
+        <endpoints communicationType="SYNCHRONOUS" protocol="rest" dataFormat="application/json" technology="//@microservices.0/@technologies.1">
+          <addresses>/currentParkAndChargeBookings/parkingSpace/{parkingSpaceId}</addresses>
+        </endpoints>
+        <protocols communicationType="SYNCHRONOUS" protocol="rest" dataFormat="application/json"/>
+        <protocols communicationType="ASYNCHRONOUS" protocol="kafka" dataFormat="binary"/>
+        <aspects name="GetMapping" qualifiedName="Spring.GetMapping" import="//@imports.3">
+          <featureNames>SINGLE_VALUED</featureNames>
+        </aspects>
+        <parameters name="parkingSpaceId" qualifiedName="de.fhdo.puls.bookingmanagementquery.BookingManagementQuery.ParkAndChargeBookingQueryApi.readCurrentBookingsOfParkingSpace.parkingSpaceId" exchangePattern="IN" communicationType="SYNCHRONOUS">
+          <type xsi:type="intermediate_1:IntermediateImportedTechnologySpecificType" name="Long" origin="TECHNOLOGY" kind="PRIMITIVE" qualifiedName="java._types.Long" import="//@imports.4"/>
+          <originalType xsi:type="intermediate_1:IntermediatePrimitiveType" name="long" origin="BUILTIN" kind="PRIMITIVE" size="64"/>
+          <aspects name="PathVariable" qualifiedName="Spring.PathVariable" import="//@imports.3">
+            <featureNames>SINGLE_VALUED</featureNames>
+            <properties name="value" type="string"/>
+            <propertyValues value="parkingSpaceId" property="//@microservices.0/@interfaces.1/@operations.3/@parameters.0/@aspects.0/@properties.0"/>
+          </aspects>
+          <aspects name="Valid" qualifiedName="Spring.Valid" import="//@imports.3"/>
+        </parameters>
+        <parameters name="parkAndChargeBookings" qualifiedName="de.fhdo.puls.bookingmanagementquery.BookingManagementQuery.ParkAndChargeBookingQueryApi.readCurrentBookingsOfParkingSpace.parkAndChargeBookings" exchangePattern="OUT" communicationType="SYNCHRONOUS">
+          <type xsi:type="intermediate_1:IntermediateImportedComplexType" name="ParkAndChargeBookingList" origin="DATA_MODEL" kind="LIST" qualifiedName="BookingManagement.ParkAndChargeBookingList" import="//@imports.0"/>
+          <originalType xsi:type="intermediate_1:IntermediateImportedComplexType" name="ParkAndChargeBookingList" origin="DATA_MODEL" kind="LIST" qualifiedName="BookingManagement.ParkAndChargeBookingList" import="//@imports.0"/>
+          <aspects name="ResponseEntity" qualifiedName="Spring.ResponseEntity" import="//@imports.3">
+            <featureNames>SINGLE_VALUED</featureNames>
+          </aspects>
+        </parameters>
+      </operations>
+      <operations name="readCanceledBookingsOfParkingSpace" qualifiedName="de.fhdo.puls.bookingmanagementquery.BookingManagementQuery.ParkAndChargeBookingQueryApi.readCanceledBookingsOfParkingSpace" visibility="OclUndefined">
+        <apiOperationComment comment="API endpoint for reading all canceled park and charge bookings of a given parking space">
+          <parameterComments comment="Identifier of the parking space" required="true" parameter="//@microservices.0/@interfaces.1/@operations.4/@parameters.0"/>
+        </apiOperationComment>
+        <endpoints communicationType="SYNCHRONOUS" protocol="rest" dataFormat="application/json" technology="//@microservices.0/@technologies.1">
+          <addresses>/canceledParkAndChargeBookings/parkingSpace/{parkingSpaceId}</addresses>
+        </endpoints>
+        <protocols communicationType="SYNCHRONOUS" protocol="rest" dataFormat="application/json"/>
+        <protocols communicationType="ASYNCHRONOUS" protocol="kafka" dataFormat="binary"/>
+        <aspects name="GetMapping" qualifiedName="Spring.GetMapping" import="//@imports.3">
+          <featureNames>SINGLE_VALUED</featureNames>
+        </aspects>
+        <parameters name="parkingSpaceId" qualifiedName="de.fhdo.puls.bookingmanagementquery.BookingManagementQuery.ParkAndChargeBookingQueryApi.readCanceledBookingsOfParkingSpace.parkingSpaceId" exchangePattern="IN" communicationType="SYNCHRONOUS">
+          <type xsi:type="intermediate_1:IntermediateImportedTechnologySpecificType" name="Long" origin="TECHNOLOGY" kind="PRIMITIVE" qualifiedName="java._types.Long" import="//@imports.4"/>
+          <originalType xsi:type="intermediate_1:IntermediatePrimitiveType" name="long" origin="BUILTIN" kind="PRIMITIVE" size="64"/>
+          <aspects name="PathVariable" qualifiedName="Spring.PathVariable" import="//@imports.3">
+            <featureNames>SINGLE_VALUED</featureNames>
+            <properties name="value" type="string"/>
+            <propertyValues value="parkingSpaceId" property="//@microservices.0/@interfaces.1/@operations.4/@parameters.0/@aspects.0/@properties.0"/>
+          </aspects>
+          <aspects name="Valid" qualifiedName="Spring.Valid" import="//@imports.3"/>
+        </parameters>
+        <parameters name="parkAndChargeBookings" qualifiedName="de.fhdo.puls.bookingmanagementquery.BookingManagementQuery.ParkAndChargeBookingQueryApi.readCanceledBookingsOfParkingSpace.parkAndChargeBookings" exchangePattern="OUT" communicationType="SYNCHRONOUS">
+          <type xsi:type="intermediate_1:IntermediateImportedComplexType" name="ParkAndChargeBookingList" origin="DATA_MODEL" kind="LIST" qualifiedName="BookingManagement.ParkAndChargeBookingList" import="//@imports.0"/>
+          <originalType xsi:type="intermediate_1:IntermediateImportedComplexType" name="ParkAndChargeBookingList" origin="DATA_MODEL" kind="LIST" qualifiedName="BookingManagement.ParkAndChargeBookingList" import="//@imports.0"/>
+          <aspects name="ResponseEntity" qualifiedName="Spring.ResponseEntity" import="//@imports.3">
+            <featureNames>SINGLE_VALUED</featureNames>
+          </aspects>
+        </parameters>
+      </operations>
+      <operations name="readParkAndChargeBookingsFromBooker" qualifiedName="de.fhdo.puls.bookingmanagementquery.BookingManagementQuery.ParkAndChargeBookingQueryApi.readParkAndChargeBookingsFromBooker" visibility="OclUndefined">
+        <apiOperationComment comment="API endpoint for reading all park and charge bookings of a given booker">
+          <parameterComments comment="Identifier of the booker" required="true" parameter="//@microservices.0/@interfaces.1/@operations.5/@parameters.0"/>
+        </apiOperationComment>
+        <endpoints communicationType="SYNCHRONOUS" protocol="rest" dataFormat="application/json" technology="//@microservices.0/@technologies.1">
+          <addresses>/parkAndChargeBookings/booker/{bookerId}</addresses>
+        </endpoints>
+        <protocols communicationType="SYNCHRONOUS" protocol="rest" dataFormat="application/json"/>
+        <protocols communicationType="ASYNCHRONOUS" protocol="kafka" dataFormat="binary"/>
+        <aspects name="GetMapping" qualifiedName="Spring.GetMapping" import="//@imports.3">
+          <featureNames>SINGLE_VALUED</featureNames>
+        </aspects>
+        <parameters name="bookerId" qualifiedName="de.fhdo.puls.bookingmanagementquery.BookingManagementQuery.ParkAndChargeBookingQueryApi.readParkAndChargeBookingsFromBooker.bookerId" exchangePattern="IN" communicationType="SYNCHRONOUS">
+          <type xsi:type="intermediate_1:IntermediateImportedTechnologySpecificType" name="Long" origin="TECHNOLOGY" kind="PRIMITIVE" qualifiedName="java._types.Long" import="//@imports.4"/>
+          <originalType xsi:type="intermediate_1:IntermediatePrimitiveType" name="long" origin="BUILTIN" kind="PRIMITIVE" size="64"/>
+          <aspects name="PathVariable" qualifiedName="Spring.PathVariable" import="//@imports.3">
+            <featureNames>SINGLE_VALUED</featureNames>
+            <properties name="value" type="string"/>
+            <propertyValues value="bookerId" property="//@microservices.0/@interfaces.1/@operations.5/@parameters.0/@aspects.0/@properties.0"/>
+          </aspects>
+          <aspects name="Valid" qualifiedName="Spring.Valid" import="//@imports.3"/>
+        </parameters>
+        <parameters name="parkAndChargeBookings" qualifiedName="de.fhdo.puls.bookingmanagementquery.BookingManagementQuery.ParkAndChargeBookingQueryApi.readParkAndChargeBookingsFromBooker.parkAndChargeBookings" exchangePattern="OUT" communicationType="SYNCHRONOUS">
+          <type xsi:type="intermediate_1:IntermediateImportedComplexType" name="ParkAndChargeBookingList" origin="DATA_MODEL" kind="LIST" qualifiedName="BookingManagement.ParkAndChargeBookingList" import="//@imports.0"/>
+          <originalType xsi:type="intermediate_1:IntermediateImportedComplexType" name="ParkAndChargeBookingList" origin="DATA_MODEL" kind="LIST" qualifiedName="BookingManagement.ParkAndChargeBookingList" import="//@imports.0"/>
+          <aspects name="ResponseEntity" qualifiedName="Spring.ResponseEntity" import="//@imports.3">
+            <featureNames>SINGLE_VALUED</featureNames>
+          </aspects>
+        </parameters>
+      </operations>
+      <operations name="readCurrentParkAndChargeBookingsFromBooker" qualifiedName="de.fhdo.puls.bookingmanagementquery.BookingManagementQuery.ParkAndChargeBookingQueryApi.readCurrentParkAndChargeBookingsFromBooker" visibility="OclUndefined">
+        <apiOperationComment comment="API endpoint for reading all current park and charge bookings of a given booker">
+          <parameterComments comment="Identifier of the booker" required="true" parameter="//@microservices.0/@interfaces.1/@operations.6/@parameters.0"/>
+        </apiOperationComment>
+        <endpoints communicationType="SYNCHRONOUS" protocol="rest" dataFormat="application/json" technology="//@microservices.0/@technologies.1">
+          <addresses>/currentParkAndChargeBookings/booker/{bookerId}</addresses>
+        </endpoints>
+        <protocols communicationType="SYNCHRONOUS" protocol="rest" dataFormat="application/json"/>
+        <protocols communicationType="ASYNCHRONOUS" protocol="kafka" dataFormat="binary"/>
+        <aspects name="GetMapping" qualifiedName="Spring.GetMapping" import="//@imports.3">
+          <featureNames>SINGLE_VALUED</featureNames>
+        </aspects>
+        <parameters name="bookerId" qualifiedName="de.fhdo.puls.bookingmanagementquery.BookingManagementQuery.ParkAndChargeBookingQueryApi.readCurrentParkAndChargeBookingsFromBooker.bookerId" exchangePattern="IN" communicationType="SYNCHRONOUS">
+          <type xsi:type="intermediate_1:IntermediateImportedTechnologySpecificType" name="Long" origin="TECHNOLOGY" kind="PRIMITIVE" qualifiedName="java._types.Long" import="//@imports.4"/>
+          <originalType xsi:type="intermediate_1:IntermediatePrimitiveType" name="long" origin="BUILTIN" kind="PRIMITIVE" size="64"/>
+          <aspects name="PathVariable" qualifiedName="Spring.PathVariable" import="//@imports.3">
+            <featureNames>SINGLE_VALUED</featureNames>
+            <properties name="value" type="string"/>
+            <propertyValues value="bookerId" property="//@microservices.0/@interfaces.1/@operations.6/@parameters.0/@aspects.0/@properties.0"/>
+          </aspects>
+          <aspects name="Valid" qualifiedName="Spring.Valid" import="//@imports.3"/>
+        </parameters>
+        <parameters name="parkAndChargeBookings" qualifiedName="de.fhdo.puls.bookingmanagementquery.BookingManagementQuery.ParkAndChargeBookingQueryApi.readCurrentParkAndChargeBookingsFromBooker.parkAndChargeBookings" exchangePattern="OUT" communicationType="SYNCHRONOUS">
+          <type xsi:type="intermediate_1:IntermediateImportedComplexType" name="ParkAndChargeBookingList" origin="DATA_MODEL" kind="LIST" qualifiedName="BookingManagement.ParkAndChargeBookingList" import="//@imports.0"/>
+          <originalType xsi:type="intermediate_1:IntermediateImportedComplexType" name="ParkAndChargeBookingList" origin="DATA_MODEL" kind="LIST" qualifiedName="BookingManagement.ParkAndChargeBookingList" import="//@imports.0"/>
+          <aspects name="ResponseEntity" qualifiedName="Spring.ResponseEntity" import="//@imports.3">
+            <featureNames>SINGLE_VALUED</featureNames>
+          </aspects>
+        </parameters>
+      </operations>
+      <operations name="readCanceledParkAndChargeBookingsFromBooker" qualifiedName="de.fhdo.puls.bookingmanagementquery.BookingManagementQuery.ParkAndChargeBookingQueryApi.readCanceledParkAndChargeBookingsFromBooker" visibility="OclUndefined">
+        <apiOperationComment comment="API endpoint for reading all canceled park and charge bookings of a given booker">
+          <parameterComments comment="Identifier of the booker" required="true" parameter="//@microservices.0/@interfaces.1/@operations.7/@parameters.0"/>
+        </apiOperationComment>
+        <endpoints communicationType="SYNCHRONOUS" protocol="rest" dataFormat="application/json" technology="//@microservices.0/@technologies.1">
+          <addresses>/canceledParkAndChargeBookings/booker/{bookerId}</addresses>
+        </endpoints>
+        <protocols communicationType="SYNCHRONOUS" protocol="rest" dataFormat="application/json"/>
+        <protocols communicationType="ASYNCHRONOUS" protocol="kafka" dataFormat="binary"/>
+        <aspects name="GetMapping" qualifiedName="Spring.GetMapping" import="//@imports.3">
+          <featureNames>SINGLE_VALUED</featureNames>
+        </aspects>
+        <parameters name="bookerId" qualifiedName="de.fhdo.puls.bookingmanagementquery.BookingManagementQuery.ParkAndChargeBookingQueryApi.readCanceledParkAndChargeBookingsFromBooker.bookerId" exchangePattern="IN" communicationType="SYNCHRONOUS">
+          <type xsi:type="intermediate_1:IntermediateImportedTechnologySpecificType" name="Long" origin="TECHNOLOGY" kind="PRIMITIVE" qualifiedName="java._types.Long" import="//@imports.4"/>
+          <originalType xsi:type="intermediate_1:IntermediatePrimitiveType" name="long" origin="BUILTIN" kind="PRIMITIVE" size="64"/>
+          <aspects name="PathVariable" qualifiedName="Spring.PathVariable" import="//@imports.3">
+            <featureNames>SINGLE_VALUED</featureNames>
+            <properties name="value" type="string"/>
+            <propertyValues value="bookerId" property="//@microservices.0/@interfaces.1/@operations.7/@parameters.0/@aspects.0/@properties.0"/>
+          </aspects>
+          <aspects name="Valid" qualifiedName="Spring.Valid" import="//@imports.3"/>
+        </parameters>
+        <parameters name="parkAndChargeBookings" qualifiedName="de.fhdo.puls.bookingmanagementquery.BookingManagementQuery.ParkAndChargeBookingQueryApi.readCanceledParkAndChargeBookingsFromBooker.parkAndChargeBookings" exchangePattern="OUT" communicationType="SYNCHRONOUS">
+          <type xsi:type="intermediate_1:IntermediateImportedComplexType" name="ParkAndChargeBookingList" origin="DATA_MODEL" kind="LIST" qualifiedName="BookingManagement.ParkAndChargeBookingList" import="//@imports.0"/>
+          <originalType xsi:type="intermediate_1:IntermediateImportedComplexType" name="ParkAndChargeBookingList" origin="DATA_MODEL" kind="LIST" qualifiedName="BookingManagement.ParkAndChargeBookingList" import="//@imports.0"/>
+          <aspects name="ResponseEntity" qualifiedName="Spring.ResponseEntity" import="//@imports.3">
+            <featureNames>SINGLE_VALUED</featureNames>
+          </aspects>
+        </parameters>
+      </operations>
+      <operations name="receiveParkBookingCreatedEvents" qualifiedName="de.fhdo.puls.bookingmanagementquery.BookingManagementQuery.ParkAndChargeBookingQueryApi.receiveParkBookingCreatedEvents" visibility="ARCHITECTURE">
+        <protocols communicationType="SYNCHRONOUS" protocol="rest" dataFormat="application/json"/>
+        <protocols communicationType="ASYNCHRONOUS" protocol="kafka" dataFormat="binary"/>
+        <aspects name="Participant" qualifiedName="Kafka.Participant" import="//@imports.6">
+          <properties name="topic" type="string">
+            <featureNames>MANDATORY</featureNames>
+          </properties>
+          <properties name="consumerGroup" type="string"/>
+          <propertyValues value="parkAndChargeBookingCreatedEvents" property="//@microservices.0/@interfaces.1/@operations.8/@aspects.0/@properties.0"/>
+          <propertyValues value="parkAndChargeCreatedEvents" property="//@microservices.0/@interfaces.1/@operations.8/@aspects.0/@properties.1"/>
+        </aspects>
+        <parameters name="event" qualifiedName="de.fhdo.puls.bookingmanagementquery.BookingManagementQuery.ParkAndChargeBookingQueryApi.receiveParkBookingCreatedEvents.event" exchangePattern="IN" communicationType="ASYNCHRONOUS">
+          <type xsi:type="intermediate_1:IntermediateImportedComplexType" name="ParkAndChargeBookingCreated" origin="DATA_MODEL" kind="STRUCTURE" qualifiedName="BookingManagement.ParkAndChargeBookingCreated" import="//@imports.0"/>
+          <originalType xsi:type="intermediate_1:IntermediateImportedComplexType" name="ParkAndChargeBookingCreated" origin="DATA_MODEL" kind="STRUCTURE" qualifiedName="BookingManagement.ParkAndChargeBookingCreated" import="//@imports.0"/>
+        </parameters>
+      </operations>
+      <operations name="receiveParkBookingUpdatedEvents" qualifiedName="de.fhdo.puls.bookingmanagementquery.BookingManagementQuery.ParkAndChargeBookingQueryApi.receiveParkBookingUpdatedEvents" visibility="ARCHITECTURE">
+        <protocols communicationType="SYNCHRONOUS" protocol="rest" dataFormat="application/json"/>
+        <protocols communicationType="ASYNCHRONOUS" protocol="kafka" dataFormat="binary"/>
+        <aspects name="Participant" qualifiedName="Kafka.Participant" import="//@imports.6">
+          <properties name="topic" type="string">
+            <featureNames>MANDATORY</featureNames>
+          </properties>
+          <properties name="consumerGroup" type="string"/>
+          <propertyValues value="parkAndChargeBookingUpdatedEvents" property="//@microservices.0/@interfaces.1/@operations.9/@aspects.0/@properties.0"/>
+          <propertyValues value="parkAndChargeBookingUpdatedEvents" property="//@microservices.0/@interfaces.1/@operations.9/@aspects.0/@properties.1"/>
+        </aspects>
+        <parameters name="event" qualifiedName="de.fhdo.puls.bookingmanagementquery.BookingManagementQuery.ParkAndChargeBookingQueryApi.receiveParkBookingUpdatedEvents.event" exchangePattern="IN" communicationType="ASYNCHRONOUS">
+          <type xsi:type="intermediate_1:IntermediateImportedComplexType" name="ParkAndChargeBookingUpdated" origin="DATA_MODEL" kind="STRUCTURE" qualifiedName="BookingManagement.ParkAndChargeBookingUpdated" import="//@imports.0"/>
+          <originalType xsi:type="intermediate_1:IntermediateImportedComplexType" name="ParkAndChargeBookingUpdated" origin="DATA_MODEL" kind="STRUCTURE" qualifiedName="BookingManagement.ParkAndChargeBookingUpdated" import="//@imports.0"/>
+        </parameters>
+      </operations>
+      <operations name="receiveParkBookingDeletedEvents" qualifiedName="de.fhdo.puls.bookingmanagementquery.BookingManagementQuery.ParkAndChargeBookingQueryApi.receiveParkBookingDeletedEvents" visibility="ARCHITECTURE">
+        <protocols communicationType="SYNCHRONOUS" protocol="rest" dataFormat="application/json"/>
+        <protocols communicationType="ASYNCHRONOUS" protocol="kafka" dataFormat="binary"/>
+        <aspects name="Participant" qualifiedName="Kafka.Participant" import="//@imports.6">
+          <properties name="topic" type="string">
+            <featureNames>MANDATORY</featureNames>
+          </properties>
+          <properties name="consumerGroup" type="string"/>
+          <propertyValues value="parkAndChargeBookingCanceledEvents" property="//@microservices.0/@interfaces.1/@operations.10/@aspects.0/@properties.0"/>
+          <propertyValues value="parkAndChargeCanceledDeletedEvents" property="//@microservices.0/@interfaces.1/@operations.10/@aspects.0/@properties.1"/>
+        </aspects>
+        <parameters name="event" qualifiedName="de.fhdo.puls.bookingmanagementquery.BookingManagementQuery.ParkAndChargeBookingQueryApi.receiveParkBookingDeletedEvents.event" exchangePattern="IN" communicationType="ASYNCHRONOUS">
+          <type xsi:type="intermediate_1:IntermediateImportedComplexType" name="ParkAndChargeBookingCanceled" origin="DATA_MODEL" kind="STRUCTURE" qualifiedName="BookingManagement.ParkAndChargeBookingCanceled" import="//@imports.0"/>
+          <originalType xsi:type="intermediate_1:IntermediateImportedComplexType" name="ParkAndChargeBookingCanceled" origin="DATA_MODEL" kind="STRUCTURE" qualifiedName="BookingManagement.ParkAndChargeBookingCanceled" import="//@imports.0"/>
+        </parameters>
+      </operations>
+      <operations name="receiveElectrifiedParkingSpaceOfferedEvents" qualifiedName="de.fhdo.puls.bookingmanagementquery.BookingManagementQuery.ParkAndChargeBookingQueryApi.receiveElectrifiedParkingSpaceOfferedEvents" visibility="ARCHITECTURE">
+        <protocols communicationType="SYNCHRONOUS" protocol="rest" dataFormat="application/json"/>
+        <protocols communicationType="ASYNCHRONOUS" protocol="kafka" dataFormat="binary"/>
+        <aspects name="Participant" qualifiedName="Kafka.Participant" import="//@imports.6">
+          <properties name="topic" type="string">
+            <featureNames>MANDATORY</featureNames>
+          </properties>
+          <properties name="consumerGroup" type="string"/>
+          <propertyValues value="electrifiedParkingSpaceOfferedEvents" property="//@microservices.0/@interfaces.1/@operations.11/@aspects.0/@properties.0"/>
+          <propertyValues value="electrifiedParkingSpaceOfferedEvents" property="//@microservices.0/@interfaces.1/@operations.11/@aspects.0/@properties.1"/>
+        </aspects>
+        <parameters name="event" qualifiedName="de.fhdo.puls.bookingmanagementquery.BookingManagementQuery.ParkAndChargeBookingQueryApi.receiveElectrifiedParkingSpaceOfferedEvents.event" exchangePattern="IN" communicationType="ASYNCHRONOUS">
+          <type xsi:type="intermediate_1:IntermediateImportedComplexType" name="ElectrifiedParkingSpaceOffered" origin="DATA_MODEL" kind="STRUCTURE" qualifiedName="BookingManagement.ElectrifiedParkingSpaceOffered" import="//@imports.0"/>
+          <originalType xsi:type="intermediate_1:IntermediateImportedComplexType" name="ElectrifiedParkingSpaceOffered" origin="DATA_MODEL" kind="STRUCTURE" qualifiedName="BookingManagement.ElectrifiedParkingSpaceOffered" import="//@imports.0"/>
+        </parameters>
+      </operations>
+      <operations name="receiveElectrifiedParkingSpaceWithdrawedEvents" qualifiedName="de.fhdo.puls.bookingmanagementquery.BookingManagementQuery.ParkAndChargeBookingQueryApi.receiveElectrifiedParkingSpaceWithdrawedEvents" visibility="ARCHITECTURE">
+        <protocols communicationType="SYNCHRONOUS" protocol="rest" dataFormat="application/json"/>
+        <protocols communicationType="ASYNCHRONOUS" protocol="kafka" dataFormat="binary"/>
+        <aspects name="Participant" qualifiedName="Kafka.Participant" import="//@imports.6">
+          <properties name="topic" type="string">
+            <featureNames>MANDATORY</featureNames>
+          </properties>
+          <properties name="consumerGroup" type="string"/>
+          <propertyValues value="electrifiedParkingSpaceWithdrawedEvents" property="//@microservices.0/@interfaces.1/@operations.12/@aspects.0/@properties.0"/>
+          <propertyValues value="electrifiedParkingSpaceWithdrawedEvents" property="//@microservices.0/@interfaces.1/@operations.12/@aspects.0/@properties.1"/>
+        </aspects>
+        <parameters name="event" qualifiedName="de.fhdo.puls.bookingmanagementquery.BookingManagementQuery.ParkAndChargeBookingQueryApi.receiveElectrifiedParkingSpaceWithdrawedEvents.event" exchangePattern="IN" communicationType="ASYNCHRONOUS">
+          <type xsi:type="intermediate_1:IntermediateImportedComplexType" name="OfferedElectrifiedParkingSpaceWithdrawed" origin="DATA_MODEL" kind="STRUCTURE" qualifiedName="BookingManagement.OfferedElectrifiedParkingSpaceWithdrawed" import="//@imports.0"/>
+          <originalType xsi:type="intermediate_1:IntermediateImportedComplexType" name="OfferedElectrifiedParkingSpaceWithdrawed" origin="DATA_MODEL" kind="STRUCTURE" qualifiedName="BookingManagement.OfferedElectrifiedParkingSpaceWithdrawed" import="//@imports.0"/>
+        </parameters>
+      </operations>
+    </interfaces>
+    <aspects name="BootstrapAddress" qualifiedName="Kafka.BootstrapAddress" import="//@imports.6">
+      <featureNames>SINGLE_VALUED</featureNames>
+      <properties name="address" type="string">
+        <featureNames>MANDATORY</featureNames>
+      </properties>
+      <propertyValues value="kafka-server1:9092" property="//@microservices.0/@aspects.0/@properties.0"/>
+    </aspects>
+    <aspects name="QuerySide" qualifiedName="CQRS.QuerySide" import="//@imports.5">
+      <properties name="logicalService" type="string"/>
+      <propertyValues value="BookingManagementMicroservice" property="//@microservices.0/@aspects.1/@properties.0"/>
+    </aspects>
+    <aspects name="Application" qualifiedName="Spring.Application" import="//@imports.3">
+      <featureNames>SINGLE_VALUED</featureNames>
+      <properties name="name" type="string"/>
+      <properties name="port" type="int"/>
+      <propertyValues value="BookingManagementMicroserviceQuery" property="//@microservices.0/@aspects.2/@properties.0"/>
+      <propertyValues value="8062" property="//@microservices.0/@aspects.2/@properties.1"/>
+    </aspects>
+    <aspects name="DatasourceConfiguration" qualifiedName="Spring.DatasourceConfiguration" import="//@imports.3">
+      <featureNames>SINGLE_VALUED</featureNames>
+      <properties name="url" type="string"/>
+      <properties name="username" type="string"/>
+      <properties name="password" type="string"/>
+      <properties name="databaseTechnology" type="string"/>
+      <propertyValues value="MariaDB" property="//@microservices.0/@aspects.3/@properties.3"/>
+    </aspects>
+    <aspects name="EnableServiceDiscovery" qualifiedName="Spring.EnableServiceDiscovery" import="//@imports.3">
+      <featureNames>SINGLE_VALUED</featureNames>
+      <properties name="discoveryTechnology" type="string">
+        <featureNames>MANDATORY</featureNames>
+      </properties>
+      <propertyValues value="Eureka" property="//@microservices.0/@aspects.4/@properties.0"/>
+    </aspects>
+  </microservices>
+</intermediate:IntermediateServiceModel>

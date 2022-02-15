@@ -1,0 +1,267 @@
+<?xml version="1.0" encoding="ASCII"?>
+<intermediate:IntermediateDataModel xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:intermediate="http://www.fhdo.de/lemma/data/intermediate" sourceModelUri="file://../../domain.data">
+  <contexts name="ChargingStationSharing" qualifiedName="ChargingStationSharing">
+    <complexTypes xsi:type="intermediate:IntermediateDataStructure" name="OfferedParkingSpace" origin="DATA_MODEL" kind="STRUCTURE" qualifiedName="ChargingStationSharing.OfferedParkingSpace">
+      <featureNames>ENTITY</featureNames>
+      <featureNames>AGGREGATE</featureNames>
+      <dataFields name="id" qualifiedName="ChargingStationSharing.OfferedParkingSpace.id">
+        <featureNames>IDENTIFIER</featureNames>
+        <type xsi:type="intermediate:IntermediatePrimitiveType" name="string" origin="BUILTIN" kind="PRIMITIVE"/>
+        <originalType xsi:type="intermediate:IntermediatePrimitiveType" name="string" origin="BUILTIN" kind="PRIMITIVE"/>
+      </dataFields>
+      <dataFields name="parkingSpaceId" qualifiedName="ChargingStationSharing.OfferedParkingSpace.parkingSpaceId">
+        <type xsi:type="intermediate:IntermediatePrimitiveType" name="string" origin="BUILTIN" kind="PRIMITIVE"/>
+        <originalType xsi:type="intermediate:IntermediatePrimitiveType" name="string" origin="BUILTIN" kind="PRIMITIVE"/>
+      </dataFields>
+      <dataFields name="name" qualifiedName="ChargingStationSharing.OfferedParkingSpace.name">
+        <type xsi:type="intermediate:IntermediatePrimitiveType" name="string" origin="BUILTIN" kind="PRIMITIVE"/>
+        <originalType xsi:type="intermediate:IntermediatePrimitiveType" name="string" origin="BUILTIN" kind="PRIMITIVE"/>
+      </dataFields>
+      <dataFields name="description" qualifiedName="ChargingStationSharing.OfferedParkingSpace.description">
+        <type xsi:type="intermediate:IntermediatePrimitiveType" name="string" origin="BUILTIN" kind="PRIMITIVE"/>
+        <originalType xsi:type="intermediate:IntermediatePrimitiveType" name="string" origin="BUILTIN" kind="PRIMITIVE"/>
+      </dataFields>
+      <dataFields name="ownerId" qualifiedName="ChargingStationSharing.OfferedParkingSpace.ownerId">
+        <type xsi:type="intermediate:IntermediatePrimitiveType" name="long" origin="BUILTIN" kind="PRIMITIVE" size="64"/>
+        <originalType xsi:type="intermediate:IntermediatePrimitiveType" name="long" origin="BUILTIN" kind="PRIMITIVE" size="64"/>
+      </dataFields>
+      <dataFields name="parkingPricePerHour" qualifiedName="ChargingStationSharing.OfferedParkingSpace.parkingPricePerHour">
+        <type xsi:type="intermediate:IntermediatePrimitiveType" name="float" origin="BUILTIN" kind="PRIMITIVE" size="32"/>
+        <originalType xsi:type="intermediate:IntermediatePrimitiveType" name="float" origin="BUILTIN" kind="PRIMITIVE" size="32"/>
+      </dataFields>
+      <dataFields name="location" qualifiedName="ChargingStationSharing.OfferedParkingSpace.location">
+        <featureNames>PART</featureNames>
+        <type xsi:type="intermediate:IntermediateComplexType" name="Location" origin="DATA_MODEL" kind="STRUCTURE" qualifiedName="ChargingStationSharing.Location"/>
+        <originalType xsi:type="intermediate:IntermediateComplexType" name="Location" origin="DATA_MODEL" kind="STRUCTURE" qualifiedName="ChargingStationSharing.Location"/>
+      </dataFields>
+      <dataFields name="availabilityPeriods" qualifiedName="ChargingStationSharing.OfferedParkingSpace.availabilityPeriods">
+        <featureNames>PART</featureNames>
+        <type xsi:type="intermediate:IntermediateComplexType" name="TimePeriods" origin="DATA_MODEL" kind="LIST" qualifiedName="ChargingStationSharing.TimePeriods"/>
+        <originalType xsi:type="intermediate:IntermediateComplexType" name="TimePeriods" origin="DATA_MODEL" kind="LIST" qualifiedName="ChargingStationSharing.TimePeriods"/>
+      </dataFields>
+      <dataFields name="parkingSpaceSize" qualifiedName="ChargingStationSharing.OfferedParkingSpace.parkingSpaceSize">
+        <featureNames>PART</featureNames>
+        <type xsi:type="intermediate:IntermediateComplexType" name="ParkingSpaceSize" origin="DATA_MODEL" kind="ENUMERATION" qualifiedName="ChargingStationSharing.ParkingSpaceSize"/>
+        <originalType xsi:type="intermediate:IntermediateComplexType" name="ParkingSpaceSize" origin="DATA_MODEL" kind="ENUMERATION" qualifiedName="ChargingStationSharing.ParkingSpaceSize"/>
+      </dataFields>
+    </complexTypes>
+    <complexTypes xsi:type="intermediate:IntermediateDataStructure" name="OfferedElectrifiedParkingSpace" origin="DATA_MODEL" kind="STRUCTURE" qualifiedName="ChargingStationSharing.OfferedElectrifiedParkingSpace">
+      <featureNames>ENTITY</featureNames>
+      <featureNames>AGGREGATE</featureNames>
+      <dataFields name="id" qualifiedName="ChargingStationSharing.OfferedElectrifiedParkingSpace.id">
+        <featureNames>IDENTIFIER</featureNames>
+        <type xsi:type="intermediate:IntermediatePrimitiveType" name="string" origin="BUILTIN" kind="PRIMITIVE"/>
+        <originalType xsi:type="intermediate:IntermediatePrimitiveType" name="string" origin="BUILTIN" kind="PRIMITIVE"/>
+      </dataFields>
+      <dataFields name="parkingSpaceId" qualifiedName="ChargingStationSharing.OfferedElectrifiedParkingSpace.parkingSpaceId">
+        <type xsi:type="intermediate:IntermediatePrimitiveType" name="string" origin="BUILTIN" kind="PRIMITIVE"/>
+        <originalType xsi:type="intermediate:IntermediatePrimitiveType" name="string" origin="BUILTIN" kind="PRIMITIVE"/>
+      </dataFields>
+      <dataFields name="name" qualifiedName="ChargingStationSharing.OfferedElectrifiedParkingSpace.name">
+        <type xsi:type="intermediate:IntermediatePrimitiveType" name="string" origin="BUILTIN" kind="PRIMITIVE"/>
+        <originalType xsi:type="intermediate:IntermediatePrimitiveType" name="string" origin="BUILTIN" kind="PRIMITIVE"/>
+      </dataFields>
+      <dataFields name="description" qualifiedName="ChargingStationSharing.OfferedElectrifiedParkingSpace.description">
+        <type xsi:type="intermediate:IntermediatePrimitiveType" name="string" origin="BUILTIN" kind="PRIMITIVE"/>
+        <originalType xsi:type="intermediate:IntermediatePrimitiveType" name="string" origin="BUILTIN" kind="PRIMITIVE"/>
+      </dataFields>
+      <dataFields name="ownerId" qualifiedName="ChargingStationSharing.OfferedElectrifiedParkingSpace.ownerId">
+        <type xsi:type="intermediate:IntermediatePrimitiveType" name="long" origin="BUILTIN" kind="PRIMITIVE" size="64"/>
+        <originalType xsi:type="intermediate:IntermediatePrimitiveType" name="long" origin="BUILTIN" kind="PRIMITIVE" size="64"/>
+      </dataFields>
+      <dataFields name="parkingPricePerHour" qualifiedName="ChargingStationSharing.OfferedElectrifiedParkingSpace.parkingPricePerHour">
+        <type xsi:type="intermediate:IntermediatePrimitiveType" name="float" origin="BUILTIN" kind="PRIMITIVE" size="32"/>
+        <originalType xsi:type="intermediate:IntermediatePrimitiveType" name="float" origin="BUILTIN" kind="PRIMITIVE" size="32"/>
+      </dataFields>
+      <dataFields name="chargingPricePerKWH" qualifiedName="ChargingStationSharing.OfferedElectrifiedParkingSpace.chargingPricePerKWH">
+        <type xsi:type="intermediate:IntermediatePrimitiveType" name="float" origin="BUILTIN" kind="PRIMITIVE" size="32"/>
+        <originalType xsi:type="intermediate:IntermediatePrimitiveType" name="float" origin="BUILTIN" kind="PRIMITIVE" size="32"/>
+      </dataFields>
+      <dataFields name="location" qualifiedName="ChargingStationSharing.OfferedElectrifiedParkingSpace.location">
+        <featureNames>PART</featureNames>
+        <type xsi:type="intermediate:IntermediateComplexType" name="Location" origin="DATA_MODEL" kind="STRUCTURE" qualifiedName="ChargingStationSharing.Location"/>
+        <originalType xsi:type="intermediate:IntermediateComplexType" name="Location" origin="DATA_MODEL" kind="STRUCTURE" qualifiedName="ChargingStationSharing.Location"/>
+      </dataFields>
+      <dataFields name="availabilityPeriods" qualifiedName="ChargingStationSharing.OfferedElectrifiedParkingSpace.availabilityPeriods">
+        <featureNames>PART</featureNames>
+        <type xsi:type="intermediate:IntermediateComplexType" name="TimePeriods" origin="DATA_MODEL" kind="LIST" qualifiedName="ChargingStationSharing.TimePeriods"/>
+        <originalType xsi:type="intermediate:IntermediateComplexType" name="TimePeriods" origin="DATA_MODEL" kind="LIST" qualifiedName="ChargingStationSharing.TimePeriods"/>
+      </dataFields>
+      <dataFields name="parkingSpaceSize" qualifiedName="ChargingStationSharing.OfferedElectrifiedParkingSpace.parkingSpaceSize">
+        <featureNames>PART</featureNames>
+        <type xsi:type="intermediate:IntermediateComplexType" name="ParkingSpaceSize" origin="DATA_MODEL" kind="ENUMERATION" qualifiedName="ChargingStationSharing.ParkingSpaceSize"/>
+        <originalType xsi:type="intermediate:IntermediateComplexType" name="ParkingSpaceSize" origin="DATA_MODEL" kind="ENUMERATION" qualifiedName="ChargingStationSharing.ParkingSpaceSize"/>
+      </dataFields>
+      <dataFields name="chargingType" qualifiedName="ChargingStationSharing.OfferedElectrifiedParkingSpace.chargingType">
+        <featureNames>PART</featureNames>
+        <type xsi:type="intermediate:IntermediateComplexType" name="ChargingType" origin="DATA_MODEL" kind="ENUMERATION" qualifiedName="ChargingStationSharing.ChargingType"/>
+        <originalType xsi:type="intermediate:IntermediateComplexType" name="ChargingType" origin="DATA_MODEL" kind="ENUMERATION" qualifiedName="ChargingStationSharing.ChargingType"/>
+      </dataFields>
+      <dataFields name="pluginType" qualifiedName="ChargingStationSharing.OfferedElectrifiedParkingSpace.pluginType">
+        <type xsi:type="intermediate:IntermediatePrimitiveType" name="string" origin="BUILTIN" kind="PRIMITIVE"/>
+        <originalType xsi:type="intermediate:IntermediatePrimitiveType" name="string" origin="BUILTIN" kind="PRIMITIVE"/>
+      </dataFields>
+    </complexTypes>
+    <complexTypes xsi:type="intermediate:IntermediateDataStructure" name="Location" origin="DATA_MODEL" kind="STRUCTURE" qualifiedName="ChargingStationSharing.Location">
+      <featureNames>VALUE_OBJECT</featureNames>
+      <dataFields name="longitude" qualifiedName="ChargingStationSharing.Location.longitude">
+        <type xsi:type="intermediate:IntermediatePrimitiveType" name="string" origin="BUILTIN" kind="PRIMITIVE"/>
+        <originalType xsi:type="intermediate:IntermediatePrimitiveType" name="string" origin="BUILTIN" kind="PRIMITIVE"/>
+      </dataFields>
+      <dataFields name="latitude" qualifiedName="ChargingStationSharing.Location.latitude">
+        <type xsi:type="intermediate:IntermediatePrimitiveType" name="string" origin="BUILTIN" kind="PRIMITIVE"/>
+        <originalType xsi:type="intermediate:IntermediatePrimitiveType" name="string" origin="BUILTIN" kind="PRIMITIVE"/>
+      </dataFields>
+    </complexTypes>
+    <complexTypes xsi:type="intermediate:IntermediateDataStructure" name="TimePeriod" origin="DATA_MODEL" kind="STRUCTURE" qualifiedName="ChargingStationSharing.TimePeriod">
+      <featureNames>VALUE_OBJECT</featureNames>
+      <dataFields name="start" qualifiedName="ChargingStationSharing.TimePeriod.start">
+        <type xsi:type="intermediate:IntermediatePrimitiveType" name="date" origin="BUILTIN" kind="PRIMITIVE"/>
+        <originalType xsi:type="intermediate:IntermediatePrimitiveType" name="date" origin="BUILTIN" kind="PRIMITIVE"/>
+      </dataFields>
+      <dataFields name="end" qualifiedName="ChargingStationSharing.TimePeriod.end">
+        <type xsi:type="intermediate:IntermediatePrimitiveType" name="date" origin="BUILTIN" kind="PRIMITIVE"/>
+        <originalType xsi:type="intermediate:IntermediatePrimitiveType" name="date" origin="BUILTIN" kind="PRIMITIVE"/>
+      </dataFields>
+    </complexTypes>
+    <complexTypes xsi:type="intermediate:IntermediateDataStructure" name="ParkingSpaceOffered" origin="DATA_MODEL" kind="STRUCTURE" qualifiedName="ChargingStationSharing.ParkingSpaceOffered">
+      <dataFields name="parkingSpaceId" qualifiedName="ChargingStationSharing.ParkingSpaceOffered.parkingSpaceId" immutable="true">
+        <type xsi:type="intermediate:IntermediatePrimitiveType" name="string" origin="BUILTIN" kind="PRIMITIVE"/>
+        <originalType xsi:type="intermediate:IntermediatePrimitiveType" name="string" origin="BUILTIN" kind="PRIMITIVE"/>
+      </dataFields>
+      <dataFields name="name" qualifiedName="ChargingStationSharing.ParkingSpaceOffered.name" immutable="true">
+        <type xsi:type="intermediate:IntermediatePrimitiveType" name="string" origin="BUILTIN" kind="PRIMITIVE"/>
+        <originalType xsi:type="intermediate:IntermediatePrimitiveType" name="string" origin="BUILTIN" kind="PRIMITIVE"/>
+      </dataFields>
+      <dataFields name="description" qualifiedName="ChargingStationSharing.ParkingSpaceOffered.description" immutable="true">
+        <type xsi:type="intermediate:IntermediatePrimitiveType" name="string" origin="BUILTIN" kind="PRIMITIVE"/>
+        <originalType xsi:type="intermediate:IntermediatePrimitiveType" name="string" origin="BUILTIN" kind="PRIMITIVE"/>
+      </dataFields>
+      <dataFields name="ownerId" qualifiedName="ChargingStationSharing.ParkingSpaceOffered.ownerId" immutable="true">
+        <type xsi:type="intermediate:IntermediatePrimitiveType" name="long" origin="BUILTIN" kind="PRIMITIVE" size="64"/>
+        <originalType xsi:type="intermediate:IntermediatePrimitiveType" name="long" origin="BUILTIN" kind="PRIMITIVE" size="64"/>
+      </dataFields>
+      <dataFields name="parkingPricePerHour" qualifiedName="ChargingStationSharing.ParkingSpaceOffered.parkingPricePerHour" immutable="true">
+        <type xsi:type="intermediate:IntermediatePrimitiveType" name="float" origin="BUILTIN" kind="PRIMITIVE" size="32"/>
+        <originalType xsi:type="intermediate:IntermediatePrimitiveType" name="float" origin="BUILTIN" kind="PRIMITIVE" size="32"/>
+      </dataFields>
+      <dataFields name="location" qualifiedName="ChargingStationSharing.ParkingSpaceOffered.location" immutable="true">
+        <type xsi:type="intermediate:IntermediateComplexType" name="Location" origin="DATA_MODEL" kind="STRUCTURE" qualifiedName="ChargingStationSharing.Location"/>
+        <originalType xsi:type="intermediate:IntermediateComplexType" name="Location" origin="DATA_MODEL" kind="STRUCTURE" qualifiedName="ChargingStationSharing.Location"/>
+      </dataFields>
+      <dataFields name="availabilityPeriods" qualifiedName="ChargingStationSharing.ParkingSpaceOffered.availabilityPeriods" immutable="true">
+        <type xsi:type="intermediate:IntermediateComplexType" name="TimePeriods" origin="DATA_MODEL" kind="LIST" qualifiedName="ChargingStationSharing.TimePeriods"/>
+        <originalType xsi:type="intermediate:IntermediateComplexType" name="TimePeriods" origin="DATA_MODEL" kind="LIST" qualifiedName="ChargingStationSharing.TimePeriods"/>
+      </dataFields>
+      <dataFields name="parkingSpaceSize" qualifiedName="ChargingStationSharing.ParkingSpaceOffered.parkingSpaceSize" immutable="true">
+        <type xsi:type="intermediate:IntermediateComplexType" name="ParkingSpaceSize" origin="DATA_MODEL" kind="ENUMERATION" qualifiedName="ChargingStationSharing.ParkingSpaceSize"/>
+        <originalType xsi:type="intermediate:IntermediateComplexType" name="ParkingSpaceSize" origin="DATA_MODEL" kind="ENUMERATION" qualifiedName="ChargingStationSharing.ParkingSpaceSize"/>
+      </dataFields>
+    </complexTypes>
+    <complexTypes xsi:type="intermediate:IntermediateDataStructure" name="ElectrifiedParkingSpaceOffered" origin="DATA_MODEL" kind="STRUCTURE" qualifiedName="ChargingStationSharing.ElectrifiedParkingSpaceOffered">
+      <dataFields name="parkingSpaceId" qualifiedName="ChargingStationSharing.ElectrifiedParkingSpaceOffered.parkingSpaceId" immutable="true">
+        <type xsi:type="intermediate:IntermediatePrimitiveType" name="string" origin="BUILTIN" kind="PRIMITIVE"/>
+        <originalType xsi:type="intermediate:IntermediatePrimitiveType" name="string" origin="BUILTIN" kind="PRIMITIVE"/>
+      </dataFields>
+      <dataFields name="name" qualifiedName="ChargingStationSharing.ElectrifiedParkingSpaceOffered.name" immutable="true">
+        <type xsi:type="intermediate:IntermediatePrimitiveType" name="string" origin="BUILTIN" kind="PRIMITIVE"/>
+        <originalType xsi:type="intermediate:IntermediatePrimitiveType" name="string" origin="BUILTIN" kind="PRIMITIVE"/>
+      </dataFields>
+      <dataFields name="description" qualifiedName="ChargingStationSharing.ElectrifiedParkingSpaceOffered.description" immutable="true">
+        <type xsi:type="intermediate:IntermediatePrimitiveType" name="string" origin="BUILTIN" kind="PRIMITIVE"/>
+        <originalType xsi:type="intermediate:IntermediatePrimitiveType" name="string" origin="BUILTIN" kind="PRIMITIVE"/>
+      </dataFields>
+      <dataFields name="ownerId" qualifiedName="ChargingStationSharing.ElectrifiedParkingSpaceOffered.ownerId" immutable="true">
+        <type xsi:type="intermediate:IntermediatePrimitiveType" name="long" origin="BUILTIN" kind="PRIMITIVE" size="64"/>
+        <originalType xsi:type="intermediate:IntermediatePrimitiveType" name="long" origin="BUILTIN" kind="PRIMITIVE" size="64"/>
+      </dataFields>
+      <dataFields name="parkingPricePerHour" qualifiedName="ChargingStationSharing.ElectrifiedParkingSpaceOffered.parkingPricePerHour" immutable="true">
+        <type xsi:type="intermediate:IntermediatePrimitiveType" name="float" origin="BUILTIN" kind="PRIMITIVE" size="32"/>
+        <originalType xsi:type="intermediate:IntermediatePrimitiveType" name="float" origin="BUILTIN" kind="PRIMITIVE" size="32"/>
+      </dataFields>
+      <dataFields name="chargingPricePerKWH" qualifiedName="ChargingStationSharing.ElectrifiedParkingSpaceOffered.chargingPricePerKWH" immutable="true">
+        <type xsi:type="intermediate:IntermediatePrimitiveType" name="float" origin="BUILTIN" kind="PRIMITIVE" size="32"/>
+        <originalType xsi:type="intermediate:IntermediatePrimitiveType" name="float" origin="BUILTIN" kind="PRIMITIVE" size="32"/>
+      </dataFields>
+      <dataFields name="location" qualifiedName="ChargingStationSharing.ElectrifiedParkingSpaceOffered.location" immutable="true">
+        <type xsi:type="intermediate:IntermediateComplexType" name="Location" origin="DATA_MODEL" kind="STRUCTURE" qualifiedName="ChargingStationSharing.Location"/>
+        <originalType xsi:type="intermediate:IntermediateComplexType" name="Location" origin="DATA_MODEL" kind="STRUCTURE" qualifiedName="ChargingStationSharing.Location"/>
+      </dataFields>
+      <dataFields name="availabilityPeriods" qualifiedName="ChargingStationSharing.ElectrifiedParkingSpaceOffered.availabilityPeriods" immutable="true">
+        <type xsi:type="intermediate:IntermediateComplexType" name="TimePeriods" origin="DATA_MODEL" kind="LIST" qualifiedName="ChargingStationSharing.TimePeriods"/>
+        <originalType xsi:type="intermediate:IntermediateComplexType" name="TimePeriods" origin="DATA_MODEL" kind="LIST" qualifiedName="ChargingStationSharing.TimePeriods"/>
+      </dataFields>
+      <dataFields name="parkingSpaceSize" qualifiedName="ChargingStationSharing.ElectrifiedParkingSpaceOffered.parkingSpaceSize" immutable="true">
+        <type xsi:type="intermediate:IntermediateComplexType" name="ParkingSpaceSize" origin="DATA_MODEL" kind="ENUMERATION" qualifiedName="ChargingStationSharing.ParkingSpaceSize"/>
+        <originalType xsi:type="intermediate:IntermediateComplexType" name="ParkingSpaceSize" origin="DATA_MODEL" kind="ENUMERATION" qualifiedName="ChargingStationSharing.ParkingSpaceSize"/>
+      </dataFields>
+      <dataFields name="chargingType" qualifiedName="ChargingStationSharing.ElectrifiedParkingSpaceOffered.chargingType" immutable="true">
+        <type xsi:type="intermediate:IntermediateComplexType" name="ChargingType" origin="DATA_MODEL" kind="ENUMERATION" qualifiedName="ChargingStationSharing.ChargingType"/>
+        <originalType xsi:type="intermediate:IntermediateComplexType" name="ChargingType" origin="DATA_MODEL" kind="ENUMERATION" qualifiedName="ChargingStationSharing.ChargingType"/>
+      </dataFields>
+      <dataFields name="pluginType" qualifiedName="ChargingStationSharing.ElectrifiedParkingSpaceOffered.pluginType" immutable="true">
+        <type xsi:type="intermediate:IntermediatePrimitiveType" name="string" origin="BUILTIN" kind="PRIMITIVE"/>
+        <originalType xsi:type="intermediate:IntermediatePrimitiveType" name="string" origin="BUILTIN" kind="PRIMITIVE"/>
+      </dataFields>
+    </complexTypes>
+    <complexTypes xsi:type="intermediate:IntermediateDataStructure" name="OfferedParkingSpaceWithdrawed" origin="DATA_MODEL" kind="STRUCTURE" qualifiedName="ChargingStationSharing.OfferedParkingSpaceWithdrawed">
+      <dataFields name="parkingSpaceId" qualifiedName="ChargingStationSharing.OfferedParkingSpaceWithdrawed.parkingSpaceId" immutable="true">
+        <type xsi:type="intermediate:IntermediatePrimitiveType" name="string" origin="BUILTIN" kind="PRIMITIVE"/>
+        <originalType xsi:type="intermediate:IntermediatePrimitiveType" name="string" origin="BUILTIN" kind="PRIMITIVE"/>
+      </dataFields>
+      <dataFields name="name" qualifiedName="ChargingStationSharing.OfferedParkingSpaceWithdrawed.name" immutable="true">
+        <type xsi:type="intermediate:IntermediatePrimitiveType" name="string" origin="BUILTIN" kind="PRIMITIVE"/>
+        <originalType xsi:type="intermediate:IntermediatePrimitiveType" name="string" origin="BUILTIN" kind="PRIMITIVE"/>
+      </dataFields>
+      <dataFields name="description" qualifiedName="ChargingStationSharing.OfferedParkingSpaceWithdrawed.description" immutable="true">
+        <type xsi:type="intermediate:IntermediatePrimitiveType" name="string" origin="BUILTIN" kind="PRIMITIVE"/>
+        <originalType xsi:type="intermediate:IntermediatePrimitiveType" name="string" origin="BUILTIN" kind="PRIMITIVE"/>
+      </dataFields>
+      <dataFields name="ownerId" qualifiedName="ChargingStationSharing.OfferedParkingSpaceWithdrawed.ownerId" immutable="true">
+        <type xsi:type="intermediate:IntermediatePrimitiveType" name="long" origin="BUILTIN" kind="PRIMITIVE" size="64"/>
+        <originalType xsi:type="intermediate:IntermediatePrimitiveType" name="long" origin="BUILTIN" kind="PRIMITIVE" size="64"/>
+      </dataFields>
+      <dataFields name="location" qualifiedName="ChargingStationSharing.OfferedParkingSpaceWithdrawed.location" immutable="true">
+        <type xsi:type="intermediate:IntermediateComplexType" name="Location" origin="DATA_MODEL" kind="STRUCTURE" qualifiedName="ChargingStationSharing.Location"/>
+        <originalType xsi:type="intermediate:IntermediateComplexType" name="Location" origin="DATA_MODEL" kind="STRUCTURE" qualifiedName="ChargingStationSharing.Location"/>
+      </dataFields>
+    </complexTypes>
+    <complexTypes xsi:type="intermediate:IntermediateDataStructure" name="OfferedElectrifiedParkingSpaceWithdrawed" origin="DATA_MODEL" kind="STRUCTURE" qualifiedName="ChargingStationSharing.OfferedElectrifiedParkingSpaceWithdrawed">
+      <dataFields name="parkingSpaceId" qualifiedName="ChargingStationSharing.OfferedElectrifiedParkingSpaceWithdrawed.parkingSpaceId" immutable="true">
+        <type xsi:type="intermediate:IntermediatePrimitiveType" name="string" origin="BUILTIN" kind="PRIMITIVE"/>
+        <originalType xsi:type="intermediate:IntermediatePrimitiveType" name="string" origin="BUILTIN" kind="PRIMITIVE"/>
+      </dataFields>
+      <dataFields name="name" qualifiedName="ChargingStationSharing.OfferedElectrifiedParkingSpaceWithdrawed.name" immutable="true">
+        <type xsi:type="intermediate:IntermediatePrimitiveType" name="string" origin="BUILTIN" kind="PRIMITIVE"/>
+        <originalType xsi:type="intermediate:IntermediatePrimitiveType" name="string" origin="BUILTIN" kind="PRIMITIVE"/>
+      </dataFields>
+      <dataFields name="description" qualifiedName="ChargingStationSharing.OfferedElectrifiedParkingSpaceWithdrawed.description" immutable="true">
+        <type xsi:type="intermediate:IntermediatePrimitiveType" name="string" origin="BUILTIN" kind="PRIMITIVE"/>
+        <originalType xsi:type="intermediate:IntermediatePrimitiveType" name="string" origin="BUILTIN" kind="PRIMITIVE"/>
+      </dataFields>
+      <dataFields name="ownerId" qualifiedName="ChargingStationSharing.OfferedElectrifiedParkingSpaceWithdrawed.ownerId" immutable="true">
+        <type xsi:type="intermediate:IntermediatePrimitiveType" name="long" origin="BUILTIN" kind="PRIMITIVE" size="64"/>
+        <originalType xsi:type="intermediate:IntermediatePrimitiveType" name="long" origin="BUILTIN" kind="PRIMITIVE" size="64"/>
+      </dataFields>
+      <dataFields name="location" qualifiedName="ChargingStationSharing.OfferedElectrifiedParkingSpaceWithdrawed.location" immutable="true">
+        <type xsi:type="intermediate:IntermediateComplexType" name="Location" origin="DATA_MODEL" kind="STRUCTURE" qualifiedName="ChargingStationSharing.Location"/>
+        <originalType xsi:type="intermediate:IntermediateComplexType" name="Location" origin="DATA_MODEL" kind="STRUCTURE" qualifiedName="ChargingStationSharing.Location"/>
+      </dataFields>
+    </complexTypes>
+    <complexTypes xsi:type="intermediate:IntermediateListType" name="TimePeriods" origin="DATA_MODEL" kind="LIST" qualifiedName="ChargingStationSharing.TimePeriods" structuredList="true">
+      <dataFields name="tp" qualifiedName="ChargingStationSharing.TimePeriods.tp">
+        <type xsi:type="intermediate:IntermediateComplexType" name="TimePeriod" origin="DATA_MODEL" kind="STRUCTURE" qualifiedName="ChargingStationSharing.TimePeriod"/>
+        <originalType xsi:type="intermediate:IntermediateComplexType" name="TimePeriod" origin="DATA_MODEL" kind="STRUCTURE" qualifiedName="ChargingStationSharing.TimePeriod"/>
+      </dataFields>
+    </complexTypes>
+    <complexTypes xsi:type="intermediate:IntermediateEnumeration" name="ParkingSpaceSize" origin="DATA_MODEL" kind="ENUMERATION" qualifiedName="ChargingStationSharing.ParkingSpaceSize">
+      <fields name="SMALL" qualifiedName="ChargingStationSharing.ParkingSpaceSize.SMALL"/>
+      <fields name="MEDIUM" qualifiedName="ChargingStationSharing.ParkingSpaceSize.MEDIUM"/>
+      <fields name="LARGE" qualifiedName="ChargingStationSharing.ParkingSpaceSize.LARGE"/>
+    </complexTypes>
+    <complexTypes xsi:type="intermediate:IntermediateEnumeration" name="ChargingType" origin="DATA_MODEL" kind="ENUMERATION" qualifiedName="ChargingStationSharing.ChargingType">
+      <fields name="FAST" qualifiedName="ChargingStationSharing.ChargingType.FAST"/>
+      <fields name="NORMAL" qualifiedName="ChargingStationSharing.ChargingType.NORMAL"/>
+    </complexTypes>
+  </contexts>
+</intermediate:IntermediateDataModel>

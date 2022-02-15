@@ -1,0 +1,498 @@
+<?xml version="1.0" encoding="ASCII"?>
+<intermediate:IntermediateServiceModel xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:intermediate="http://www.fhdo.de/lemma/service/intermediate" xmlns:intermediate_1="http://www.fhdo.de/lemma/data/intermediate" sourceModelUri="file://../../chargingStationSearch.services">
+  <imports name="Domain" importUri="file://../data models/domain.xmi" importTypeName="DATATYPES"/>
+  <imports name="ChargingStationSharingCommand" importUri="file://../../../Charging-Station-Sharing-Microservice-Command/intermediate/service models/chargingStationSharingCommand.xmi" importTypeName="MICROSERVICES"/>
+  <imports name="Spring" importUri="file://../../../Technology/technology/Spring.technology" importTypeName="TECHNOLOGY"/>
+  <imports name="Java" importUri="file://../../../Technology/technology/Java.technology" importTypeName="TECHNOLOGY"/>
+  <imports name="CQRS" importUri="file://../../../Technology/technology/Cqrs.technology" importTypeName="TECHNOLOGY"/>
+  <imports name="Kafka" importUri="file://../../../Technology/technology/Kafka.technology" importTypeName="TECHNOLOGY"/>
+  <microservices sourceModelUri="file://../../chargingStationSearch.services" name="de.fhdo.puls.chargingstationsearchmanagement.ChargingStationSearchManagement" qualifiedName="de.fhdo.puls.chargingstationsearchmanagement.ChargingStationSearchManagement" type="FUNCTIONAL" visibility="ARCHITECTURE" effectivelyImplemented="true">
+    <technologies name="Java" import="//@imports.3"/>
+    <technologies name="Spring" import="//@imports.2"/>
+    <technologies name="CQRS" import="//@imports.4"/>
+    <technologies name="Kafka" import="//@imports.5"/>
+    <endpoints communicationType="ASYNCHRONOUS" protocol="kafka" dataFormat="binary" technology="//@microservices.0/@technologies.3">
+      <addresses>kafka-server1:9092</addresses>
+    </endpoints>
+    <protocols communicationType="SYNCHRONOUS" protocol="rest" dataFormat="application/json"/>
+    <protocols communicationType="ASYNCHRONOUS" protocol="kafka" dataFormat="binary"/>
+    <requiredMicroservices name="de.fhdo.puls.chargingstationsharingcommand.ChargingStationSharingCommand" qualifiedName="de.fhdo.puls.chargingstationsharingcommand.ChargingStationSharingCommand" imported="true" import="//@imports.1"/>
+    <interfaces name="MapSearchController" qualifiedName="de.fhdo.puls.chargingstationsearchmanagement.ChargingStationSearchManagement.MapSearchController" visibility="ARCHITECTURE" hasImplementedOperations="true">
+      <endpoints communicationType="SYNCHRONOUS" protocol="rest" dataFormat="application/json" technology="//@microservices.0/@technologies.1">
+        <addresses>/resources/v1</addresses>
+      </endpoints>
+      <protocols communicationType="SYNCHRONOUS" protocol="rest" dataFormat="application/json"/>
+      <protocols communicationType="ASYNCHRONOUS" protocol="kafka" dataFormat="binary"/>
+      <operations name="savePatientData" qualifiedName="de.fhdo.puls.chargingstationsearchmanagement.ChargingStationSearchManagement.MapSearchController.savePatientData" visibility="OclUndefined">
+        <endpoints communicationType="SYNCHRONOUS" protocol="rest" dataFormat="application/json" technology="//@microservices.0/@technologies.1">
+          <addresses>/locationData</addresses>
+        </endpoints>
+        <protocols communicationType="SYNCHRONOUS" protocol="rest" dataFormat="application/json"/>
+        <protocols communicationType="ASYNCHRONOUS" protocol="kafka" dataFormat="binary"/>
+        <aspects name="PutMapping" qualifiedName="Spring.PutMapping" import="//@imports.2">
+          <featureNames>SINGLE_VALUED</featureNames>
+        </aspects>
+        <parameters name="locationDataDto" qualifiedName="de.fhdo.puls.chargingstationsearchmanagement.ChargingStationSearchManagement.MapSearchController.savePatientData.locationDataDto" exchangePattern="IN" communicationType="SYNCHRONOUS">
+          <type xsi:type="intermediate_1:IntermediateImportedComplexType" name="LocationDataDto" origin="DATA_MODEL" kind="STRUCTURE" qualifiedName="ChargingStationSearch.LocationDataDto" import="//@imports.0"/>
+          <originalType xsi:type="intermediate_1:IntermediateImportedComplexType" name="LocationDataDto" origin="DATA_MODEL" kind="STRUCTURE" qualifiedName="ChargingStationSearch.LocationDataDto" import="//@imports.0"/>
+          <aspects name="RequestBody" qualifiedName="Spring.RequestBody" import="//@imports.2"/>
+        </parameters>
+        <parameters name="locationDataDtoResponse" qualifiedName="de.fhdo.puls.chargingstationsearchmanagement.ChargingStationSearchManagement.MapSearchController.savePatientData.locationDataDtoResponse" exchangePattern="OUT" communicationType="SYNCHRONOUS">
+          <type xsi:type="intermediate_1:IntermediateImportedComplexType" name="LocationDataDto" origin="DATA_MODEL" kind="STRUCTURE" qualifiedName="ChargingStationSearch.LocationDataDto" import="//@imports.0"/>
+          <originalType xsi:type="intermediate_1:IntermediateImportedComplexType" name="LocationDataDto" origin="DATA_MODEL" kind="STRUCTURE" qualifiedName="ChargingStationSearch.LocationDataDto" import="//@imports.0"/>
+          <aspects name="ResponseEntity" qualifiedName="Spring.ResponseEntity" import="//@imports.2">
+            <featureNames>SINGLE_VALUED</featureNames>
+          </aspects>
+        </parameters>
+      </operations>
+      <operations name="updateQuestionnaireData" qualifiedName="de.fhdo.puls.chargingstationsearchmanagement.ChargingStationSearchManagement.MapSearchController.updateQuestionnaireData" visibility="OclUndefined">
+        <endpoints communicationType="SYNCHRONOUS" protocol="rest" dataFormat="application/json" technology="//@microservices.0/@technologies.1">
+          <addresses>/locationData</addresses>
+        </endpoints>
+        <protocols communicationType="SYNCHRONOUS" protocol="rest" dataFormat="application/json"/>
+        <protocols communicationType="ASYNCHRONOUS" protocol="kafka" dataFormat="binary"/>
+        <aspects name="PostMapping" qualifiedName="Spring.PostMapping" import="//@imports.2">
+          <featureNames>SINGLE_VALUED</featureNames>
+        </aspects>
+        <parameters name="locationDataDto" qualifiedName="de.fhdo.puls.chargingstationsearchmanagement.ChargingStationSearchManagement.MapSearchController.updateQuestionnaireData.locationDataDto" exchangePattern="IN" communicationType="SYNCHRONOUS">
+          <type xsi:type="intermediate_1:IntermediateImportedComplexType" name="LocationDataDto" origin="DATA_MODEL" kind="STRUCTURE" qualifiedName="ChargingStationSearch.LocationDataDto" import="//@imports.0"/>
+          <originalType xsi:type="intermediate_1:IntermediateImportedComplexType" name="LocationDataDto" origin="DATA_MODEL" kind="STRUCTURE" qualifiedName="ChargingStationSearch.LocationDataDto" import="//@imports.0"/>
+          <aspects name="RequestBody" qualifiedName="Spring.RequestBody" import="//@imports.2"/>
+        </parameters>
+        <parameters name="locationDataDtoResponse" qualifiedName="de.fhdo.puls.chargingstationsearchmanagement.ChargingStationSearchManagement.MapSearchController.updateQuestionnaireData.locationDataDtoResponse" exchangePattern="OUT" communicationType="SYNCHRONOUS">
+          <type xsi:type="intermediate_1:IntermediateImportedComplexType" name="LocationDataDto" origin="DATA_MODEL" kind="STRUCTURE" qualifiedName="ChargingStationSearch.LocationDataDto" import="//@imports.0"/>
+          <originalType xsi:type="intermediate_1:IntermediateImportedComplexType" name="LocationDataDto" origin="DATA_MODEL" kind="STRUCTURE" qualifiedName="ChargingStationSearch.LocationDataDto" import="//@imports.0"/>
+          <aspects name="ResponseEntity" qualifiedName="Spring.ResponseEntity" import="//@imports.2">
+            <featureNames>SINGLE_VALUED</featureNames>
+          </aspects>
+        </parameters>
+      </operations>
+      <operations name="getLocationData" qualifiedName="de.fhdo.puls.chargingstationsearchmanagement.ChargingStationSearchManagement.MapSearchController.getLocationData" visibility="OclUndefined">
+        <endpoints communicationType="SYNCHRONOUS" protocol="rest" dataFormat="application/json" technology="//@microservices.0/@technologies.1">
+          <addresses>/locationData/{locationDataId}</addresses>
+        </endpoints>
+        <protocols communicationType="SYNCHRONOUS" protocol="rest" dataFormat="application/json"/>
+        <protocols communicationType="ASYNCHRONOUS" protocol="kafka" dataFormat="binary"/>
+        <aspects name="GetMapping" qualifiedName="Spring.GetMapping" import="//@imports.2">
+          <featureNames>SINGLE_VALUED</featureNames>
+        </aspects>
+        <parameters name="locationDataId" qualifiedName="de.fhdo.puls.chargingstationsearchmanagement.ChargingStationSearchManagement.MapSearchController.getLocationData.locationDataId" exchangePattern="IN" communicationType="SYNCHRONOUS">
+          <type xsi:type="intermediate_1:IntermediateImportedTechnologySpecificType" name="String" origin="TECHNOLOGY" kind="PRIMITIVE" qualifiedName="java._types.String" import="//@imports.3"/>
+          <originalType xsi:type="intermediate_1:IntermediatePrimitiveType" name="string" origin="BUILTIN" kind="PRIMITIVE"/>
+          <aspects name="PathVariable" qualifiedName="Spring.PathVariable" import="//@imports.2">
+            <featureNames>SINGLE_VALUED</featureNames>
+            <properties name="value" type="string"/>
+          </aspects>
+        </parameters>
+        <parameters name="locationDataDtoResponse" qualifiedName="de.fhdo.puls.chargingstationsearchmanagement.ChargingStationSearchManagement.MapSearchController.getLocationData.locationDataDtoResponse" exchangePattern="OUT" communicationType="SYNCHRONOUS">
+          <type xsi:type="intermediate_1:IntermediateImportedComplexType" name="LocationDataDto" origin="DATA_MODEL" kind="STRUCTURE" qualifiedName="ChargingStationSearch.LocationDataDto" import="//@imports.0"/>
+          <originalType xsi:type="intermediate_1:IntermediateImportedComplexType" name="LocationDataDto" origin="DATA_MODEL" kind="STRUCTURE" qualifiedName="ChargingStationSearch.LocationDataDto" import="//@imports.0"/>
+          <aspects name="ResponseEntity" qualifiedName="Spring.ResponseEntity" import="//@imports.2">
+            <featureNames>SINGLE_VALUED</featureNames>
+          </aspects>
+        </parameters>
+      </operations>
+      <operations name="getAllLocationData" qualifiedName="de.fhdo.puls.chargingstationsearchmanagement.ChargingStationSearchManagement.MapSearchController.getAllLocationData" visibility="OclUndefined">
+        <endpoints communicationType="SYNCHRONOUS" protocol="rest" dataFormat="application/json" technology="//@microservices.0/@technologies.1">
+          <addresses>/locationData</addresses>
+        </endpoints>
+        <protocols communicationType="SYNCHRONOUS" protocol="rest" dataFormat="application/json"/>
+        <protocols communicationType="ASYNCHRONOUS" protocol="kafka" dataFormat="binary"/>
+        <aspects name="GetMapping" qualifiedName="Spring.GetMapping" import="//@imports.2">
+          <featureNames>SINGLE_VALUED</featureNames>
+        </aspects>
+        <parameters name="locationDataDtos" qualifiedName="de.fhdo.puls.chargingstationsearchmanagement.ChargingStationSearchManagement.MapSearchController.getAllLocationData.locationDataDtos" exchangePattern="OUT" communicationType="SYNCHRONOUS">
+          <type xsi:type="intermediate_1:IntermediateImportedComplexType" name="LocationDataDtos" origin="DATA_MODEL" kind="LIST" qualifiedName="ChargingStationSearch.LocationDataDtos" import="//@imports.0"/>
+          <originalType xsi:type="intermediate_1:IntermediateImportedComplexType" name="LocationDataDtos" origin="DATA_MODEL" kind="LIST" qualifiedName="ChargingStationSearch.LocationDataDtos" import="//@imports.0"/>
+          <aspects name="ResponseEntity" qualifiedName="Spring.ResponseEntity" import="//@imports.2">
+            <featureNames>SINGLE_VALUED</featureNames>
+          </aspects>
+        </parameters>
+      </operations>
+      <operations name="getAllLocationDataByAddressLike" qualifiedName="de.fhdo.puls.chargingstationsearchmanagement.ChargingStationSearchManagement.MapSearchController.getAllLocationDataByAddressLike" visibility="OclUndefined">
+        <endpoints communicationType="SYNCHRONOUS" protocol="rest" dataFormat="application/json" technology="//@microservices.0/@technologies.1">
+          <addresses>/locationData/findByAddress</addresses>
+        </endpoints>
+        <protocols communicationType="SYNCHRONOUS" protocol="rest" dataFormat="application/json"/>
+        <protocols communicationType="ASYNCHRONOUS" protocol="kafka" dataFormat="binary"/>
+        <aspects name="GetMapping" qualifiedName="Spring.GetMapping" import="//@imports.2">
+          <featureNames>SINGLE_VALUED</featureNames>
+        </aspects>
+        <parameters name="addressSearchString" qualifiedName="de.fhdo.puls.chargingstationsearchmanagement.ChargingStationSearchManagement.MapSearchController.getAllLocationDataByAddressLike.addressSearchString" exchangePattern="IN" communicationType="SYNCHRONOUS">
+          <type xsi:type="intermediate_1:IntermediateImportedTechnologySpecificType" name="String" origin="TECHNOLOGY" kind="PRIMITIVE" qualifiedName="java._types.String" import="//@imports.3"/>
+          <originalType xsi:type="intermediate_1:IntermediatePrimitiveType" name="string" origin="BUILTIN" kind="PRIMITIVE"/>
+          <aspects name="RequestParam" qualifiedName="Spring.RequestParam" import="//@imports.2">
+            <properties name="value" type="string"/>
+            <properties name="required" type="boolean" defaultValue="false"/>
+            <properties name="defaultValue" type="string" defaultValue=""/>
+            <propertyValues value="q" property="//@microservices.0/@interfaces.0/@operations.4/@parameters.0/@aspects.0/@properties.0"/>
+          </aspects>
+        </parameters>
+        <parameters name="locationDataDtos" qualifiedName="de.fhdo.puls.chargingstationsearchmanagement.ChargingStationSearchManagement.MapSearchController.getAllLocationDataByAddressLike.locationDataDtos" exchangePattern="OUT" communicationType="SYNCHRONOUS">
+          <type xsi:type="intermediate_1:IntermediateImportedComplexType" name="LocationDataDtos" origin="DATA_MODEL" kind="LIST" qualifiedName="ChargingStationSearch.LocationDataDtos" import="//@imports.0"/>
+          <originalType xsi:type="intermediate_1:IntermediateImportedComplexType" name="LocationDataDtos" origin="DATA_MODEL" kind="LIST" qualifiedName="ChargingStationSearch.LocationDataDtos" import="//@imports.0"/>
+          <aspects name="ResponseEntity" qualifiedName="Spring.ResponseEntity" import="//@imports.2">
+            <featureNames>SINGLE_VALUED</featureNames>
+          </aspects>
+        </parameters>
+      </operations>
+      <operations name="getAllLocationDataByAddressLikeAndExtFilterLike" qualifiedName="de.fhdo.puls.chargingstationsearchmanagement.ChargingStationSearchManagement.MapSearchController.getAllLocationDataByAddressLikeAndExtFilterLike" visibility="OclUndefined">
+        <endpoints communicationType="SYNCHRONOUS" protocol="rest" dataFormat="application/json" technology="//@microservices.0/@technologies.1">
+          <addresses>/locationData/findByAddressFiltered</addresses>
+        </endpoints>
+        <protocols communicationType="SYNCHRONOUS" protocol="rest" dataFormat="application/json"/>
+        <protocols communicationType="ASYNCHRONOUS" protocol="kafka" dataFormat="binary"/>
+        <aspects name="GetMapping" qualifiedName="Spring.GetMapping" import="//@imports.2">
+          <featureNames>SINGLE_VALUED</featureNames>
+        </aspects>
+        <parameters name="addressSearchString" qualifiedName="de.fhdo.puls.chargingstationsearchmanagement.ChargingStationSearchManagement.MapSearchController.getAllLocationDataByAddressLikeAndExtFilterLike.addressSearchString" exchangePattern="IN" communicationType="SYNCHRONOUS">
+          <type xsi:type="intermediate_1:IntermediateImportedTechnologySpecificType" name="String" origin="TECHNOLOGY" kind="PRIMITIVE" qualifiedName="java._types.String" import="//@imports.3"/>
+          <originalType xsi:type="intermediate_1:IntermediatePrimitiveType" name="string" origin="BUILTIN" kind="PRIMITIVE"/>
+          <aspects name="RequestParam" qualifiedName="Spring.RequestParam" import="//@imports.2">
+            <properties name="value" type="string"/>
+            <properties name="required" type="boolean" defaultValue="false"/>
+            <properties name="defaultValue" type="string" defaultValue=""/>
+            <propertyValues value="q" property="//@microservices.0/@interfaces.0/@operations.5/@parameters.0/@aspects.0/@properties.0"/>
+          </aspects>
+        </parameters>
+        <parameters name="filter" qualifiedName="de.fhdo.puls.chargingstationsearchmanagement.ChargingStationSearchManagement.MapSearchController.getAllLocationDataByAddressLikeAndExtFilterLike.filter" exchangePattern="IN" communicationType="SYNCHRONOUS">
+          <type xsi:type="intermediate_1:IntermediateImportedTechnologySpecificType" name="String" origin="TECHNOLOGY" kind="PRIMITIVE" qualifiedName="java._types.String" import="//@imports.3"/>
+          <originalType xsi:type="intermediate_1:IntermediatePrimitiveType" name="string" origin="BUILTIN" kind="PRIMITIVE"/>
+          <aspects name="RequestParam" qualifiedName="Spring.RequestParam" import="//@imports.2">
+            <properties name="value" type="string"/>
+            <properties name="required" type="boolean" defaultValue="false"/>
+            <properties name="defaultValue" type="string" defaultValue=""/>
+            <propertyValues value="filter" property="//@microservices.0/@interfaces.0/@operations.5/@parameters.1/@aspects.0/@properties.0"/>
+          </aspects>
+        </parameters>
+        <parameters name="locationDataDtos" qualifiedName="de.fhdo.puls.chargingstationsearchmanagement.ChargingStationSearchManagement.MapSearchController.getAllLocationDataByAddressLikeAndExtFilterLike.locationDataDtos" exchangePattern="OUT" communicationType="SYNCHRONOUS">
+          <type xsi:type="intermediate_1:IntermediateImportedComplexType" name="LocationDataDtos" origin="DATA_MODEL" kind="LIST" qualifiedName="ChargingStationSearch.LocationDataDtos" import="//@imports.0"/>
+          <originalType xsi:type="intermediate_1:IntermediateImportedComplexType" name="LocationDataDtos" origin="DATA_MODEL" kind="LIST" qualifiedName="ChargingStationSearch.LocationDataDtos" import="//@imports.0"/>
+          <aspects name="ResponseEntity" qualifiedName="Spring.ResponseEntity" import="//@imports.2">
+            <featureNames>SINGLE_VALUED</featureNames>
+          </aspects>
+        </parameters>
+      </operations>
+      <operations name="getAllLocationDataWithin" qualifiedName="de.fhdo.puls.chargingstationsearchmanagement.ChargingStationSearchManagement.MapSearchController.getAllLocationDataWithin" visibility="OclUndefined">
+        <endpoints communicationType="SYNCHRONOUS" protocol="rest" dataFormat="application/json" technology="//@microservices.0/@technologies.1">
+          <addresses>/locationData/findWithin</addresses>
+        </endpoints>
+        <protocols communicationType="SYNCHRONOUS" protocol="rest" dataFormat="application/json"/>
+        <protocols communicationType="ASYNCHRONOUS" protocol="kafka" dataFormat="binary"/>
+        <aspects name="GetMapping" qualifiedName="Spring.GetMapping" import="//@imports.2">
+          <featureNames>SINGLE_VALUED</featureNames>
+        </aspects>
+        <parameters name="lat" qualifiedName="de.fhdo.puls.chargingstationsearchmanagement.ChargingStationSearchManagement.MapSearchController.getAllLocationDataWithin.lat" exchangePattern="IN" communicationType="SYNCHRONOUS">
+          <type xsi:type="intermediate_1:IntermediateImportedTechnologySpecificType" name="String" origin="TECHNOLOGY" kind="PRIMITIVE" qualifiedName="java._types.String" import="//@imports.3"/>
+          <originalType xsi:type="intermediate_1:IntermediatePrimitiveType" name="string" origin="BUILTIN" kind="PRIMITIVE"/>
+          <aspects name="RequestParam" qualifiedName="Spring.RequestParam" import="//@imports.2">
+            <properties name="value" type="string"/>
+            <properties name="required" type="boolean" defaultValue="false"/>
+            <properties name="defaultValue" type="string" defaultValue=""/>
+            <propertyValues value="lat" property="//@microservices.0/@interfaces.0/@operations.6/@parameters.0/@aspects.0/@properties.0"/>
+          </aspects>
+        </parameters>
+        <parameters name="lng" qualifiedName="de.fhdo.puls.chargingstationsearchmanagement.ChargingStationSearchManagement.MapSearchController.getAllLocationDataWithin.lng" exchangePattern="IN" communicationType="SYNCHRONOUS">
+          <type xsi:type="intermediate_1:IntermediateImportedTechnologySpecificType" name="String" origin="TECHNOLOGY" kind="PRIMITIVE" qualifiedName="java._types.String" import="//@imports.3"/>
+          <originalType xsi:type="intermediate_1:IntermediatePrimitiveType" name="string" origin="BUILTIN" kind="PRIMITIVE"/>
+          <aspects name="RequestParam" qualifiedName="Spring.RequestParam" import="//@imports.2">
+            <properties name="value" type="string"/>
+            <properties name="required" type="boolean" defaultValue="false"/>
+            <properties name="defaultValue" type="string" defaultValue=""/>
+            <propertyValues value="lng" property="//@microservices.0/@interfaces.0/@operations.6/@parameters.1/@aspects.0/@properties.0"/>
+          </aspects>
+        </parameters>
+        <parameters name="radius" qualifiedName="de.fhdo.puls.chargingstationsearchmanagement.ChargingStationSearchManagement.MapSearchController.getAllLocationDataWithin.radius" exchangePattern="IN" communicationType="SYNCHRONOUS">
+          <type xsi:type="intermediate_1:IntermediateImportedTechnologySpecificType" name="Double" origin="TECHNOLOGY" kind="PRIMITIVE" qualifiedName="java._types.Double" import="//@imports.3"/>
+          <originalType xsi:type="intermediate_1:IntermediatePrimitiveType" name="double" origin="BUILTIN" kind="PRIMITIVE" size="64"/>
+          <aspects name="RequestParam" qualifiedName="Spring.RequestParam" import="//@imports.2">
+            <properties name="value" type="string"/>
+            <properties name="required" type="boolean" defaultValue="false"/>
+            <properties name="defaultValue" type="string" defaultValue=""/>
+            <propertyValues value="radius" property="//@microservices.0/@interfaces.0/@operations.6/@parameters.2/@aspects.0/@properties.0"/>
+          </aspects>
+        </parameters>
+        <parameters name="metric" qualifiedName="de.fhdo.puls.chargingstationsearchmanagement.ChargingStationSearchManagement.MapSearchController.getAllLocationDataWithin.metric" exchangePattern="IN" communicationType="SYNCHRONOUS">
+          <type xsi:type="intermediate_1:IntermediateImportedTechnologySpecificType" name="String" origin="TECHNOLOGY" kind="PRIMITIVE" qualifiedName="java._types.String" import="//@imports.3"/>
+          <originalType xsi:type="intermediate_1:IntermediatePrimitiveType" name="string" origin="BUILTIN" kind="PRIMITIVE"/>
+          <aspects name="RequestParam" qualifiedName="Spring.RequestParam" import="//@imports.2">
+            <properties name="value" type="string"/>
+            <properties name="required" type="boolean" defaultValue="false"/>
+            <properties name="defaultValue" type="string" defaultValue=""/>
+            <propertyValues value="metric" property="//@microservices.0/@interfaces.0/@operations.6/@parameters.3/@aspects.0/@properties.0"/>
+          </aspects>
+        </parameters>
+        <parameters name="locationDataDtos" qualifiedName="de.fhdo.puls.chargingstationsearchmanagement.ChargingStationSearchManagement.MapSearchController.getAllLocationDataWithin.locationDataDtos" exchangePattern="OUT" communicationType="SYNCHRONOUS">
+          <type xsi:type="intermediate_1:IntermediateImportedComplexType" name="LocationDataDtos" origin="DATA_MODEL" kind="LIST" qualifiedName="ChargingStationSearch.LocationDataDtos" import="//@imports.0"/>
+          <originalType xsi:type="intermediate_1:IntermediateImportedComplexType" name="LocationDataDtos" origin="DATA_MODEL" kind="LIST" qualifiedName="ChargingStationSearch.LocationDataDtos" import="//@imports.0"/>
+          <aspects name="ResponseEntity" qualifiedName="Spring.ResponseEntity" import="//@imports.2">
+            <featureNames>SINGLE_VALUED</featureNames>
+          </aspects>
+        </parameters>
+      </operations>
+      <operations name="getAllLocationDataNear" qualifiedName="de.fhdo.puls.chargingstationsearchmanagement.ChargingStationSearchManagement.MapSearchController.getAllLocationDataNear" visibility="OclUndefined">
+        <endpoints communicationType="SYNCHRONOUS" protocol="rest" dataFormat="application/json" technology="//@microservices.0/@technologies.1">
+          <addresses>/locationData/findNear</addresses>
+        </endpoints>
+        <protocols communicationType="SYNCHRONOUS" protocol="rest" dataFormat="application/json"/>
+        <protocols communicationType="ASYNCHRONOUS" protocol="kafka" dataFormat="binary"/>
+        <aspects name="GetMapping" qualifiedName="Spring.GetMapping" import="//@imports.2">
+          <featureNames>SINGLE_VALUED</featureNames>
+        </aspects>
+        <parameters name="lat" qualifiedName="de.fhdo.puls.chargingstationsearchmanagement.ChargingStationSearchManagement.MapSearchController.getAllLocationDataNear.lat" exchangePattern="IN" communicationType="SYNCHRONOUS">
+          <type xsi:type="intermediate_1:IntermediateImportedTechnologySpecificType" name="String" origin="TECHNOLOGY" kind="PRIMITIVE" qualifiedName="java._types.String" import="//@imports.3"/>
+          <originalType xsi:type="intermediate_1:IntermediatePrimitiveType" name="string" origin="BUILTIN" kind="PRIMITIVE"/>
+          <aspects name="RequestParam" qualifiedName="Spring.RequestParam" import="//@imports.2">
+            <properties name="value" type="string"/>
+            <properties name="required" type="boolean" defaultValue="false"/>
+            <properties name="defaultValue" type="string" defaultValue=""/>
+            <propertyValues value="lat" property="//@microservices.0/@interfaces.0/@operations.7/@parameters.0/@aspects.0/@properties.0"/>
+          </aspects>
+        </parameters>
+        <parameters name="lng" qualifiedName="de.fhdo.puls.chargingstationsearchmanagement.ChargingStationSearchManagement.MapSearchController.getAllLocationDataNear.lng" exchangePattern="IN" communicationType="SYNCHRONOUS">
+          <type xsi:type="intermediate_1:IntermediateImportedTechnologySpecificType" name="String" origin="TECHNOLOGY" kind="PRIMITIVE" qualifiedName="java._types.String" import="//@imports.3"/>
+          <originalType xsi:type="intermediate_1:IntermediatePrimitiveType" name="string" origin="BUILTIN" kind="PRIMITIVE"/>
+          <aspects name="RequestParam" qualifiedName="Spring.RequestParam" import="//@imports.2">
+            <properties name="value" type="string"/>
+            <properties name="required" type="boolean" defaultValue="false"/>
+            <properties name="defaultValue" type="string" defaultValue=""/>
+            <propertyValues value="lng" property="//@microservices.0/@interfaces.0/@operations.7/@parameters.1/@aspects.0/@properties.0"/>
+          </aspects>
+        </parameters>
+        <parameters name="radius" qualifiedName="de.fhdo.puls.chargingstationsearchmanagement.ChargingStationSearchManagement.MapSearchController.getAllLocationDataNear.radius" exchangePattern="IN" communicationType="SYNCHRONOUS">
+          <type xsi:type="intermediate_1:IntermediateImportedTechnologySpecificType" name="Double" origin="TECHNOLOGY" kind="PRIMITIVE" qualifiedName="java._types.Double" import="//@imports.3"/>
+          <originalType xsi:type="intermediate_1:IntermediatePrimitiveType" name="double" origin="BUILTIN" kind="PRIMITIVE" size="64"/>
+          <aspects name="RequestParam" qualifiedName="Spring.RequestParam" import="//@imports.2">
+            <properties name="value" type="string"/>
+            <properties name="required" type="boolean" defaultValue="false"/>
+            <properties name="defaultValue" type="string" defaultValue=""/>
+            <propertyValues value="radius" property="//@microservices.0/@interfaces.0/@operations.7/@parameters.2/@aspects.0/@properties.0"/>
+          </aspects>
+        </parameters>
+        <parameters name="metric" qualifiedName="de.fhdo.puls.chargingstationsearchmanagement.ChargingStationSearchManagement.MapSearchController.getAllLocationDataNear.metric" exchangePattern="IN" communicationType="SYNCHRONOUS">
+          <type xsi:type="intermediate_1:IntermediateImportedTechnologySpecificType" name="String" origin="TECHNOLOGY" kind="PRIMITIVE" qualifiedName="java._types.String" import="//@imports.3"/>
+          <originalType xsi:type="intermediate_1:IntermediatePrimitiveType" name="string" origin="BUILTIN" kind="PRIMITIVE"/>
+          <aspects name="RequestParam" qualifiedName="Spring.RequestParam" import="//@imports.2">
+            <properties name="value" type="string"/>
+            <properties name="required" type="boolean" defaultValue="false"/>
+            <properties name="defaultValue" type="string" defaultValue=""/>
+            <propertyValues value="metric" property="//@microservices.0/@interfaces.0/@operations.7/@parameters.3/@aspects.0/@properties.0"/>
+          </aspects>
+        </parameters>
+        <parameters name="locationDataDtos" qualifiedName="de.fhdo.puls.chargingstationsearchmanagement.ChargingStationSearchManagement.MapSearchController.getAllLocationDataNear.locationDataDtos" exchangePattern="OUT" communicationType="SYNCHRONOUS">
+          <type xsi:type="intermediate_1:IntermediateImportedComplexType" name="LocationDataDtos" origin="DATA_MODEL" kind="LIST" qualifiedName="ChargingStationSearch.LocationDataDtos" import="//@imports.0"/>
+          <originalType xsi:type="intermediate_1:IntermediateImportedComplexType" name="LocationDataDtos" origin="DATA_MODEL" kind="LIST" qualifiedName="ChargingStationSearch.LocationDataDtos" import="//@imports.0"/>
+          <aspects name="ResponseEntity" qualifiedName="Spring.ResponseEntity" import="//@imports.2">
+            <featureNames>SINGLE_VALUED</featureNames>
+          </aspects>
+        </parameters>
+      </operations>
+      <operations name="getAllLocationDataNearAndExtFilter" qualifiedName="de.fhdo.puls.chargingstationsearchmanagement.ChargingStationSearchManagement.MapSearchController.getAllLocationDataNearAndExtFilter" visibility="OclUndefined">
+        <endpoints communicationType="SYNCHRONOUS" protocol="rest" dataFormat="application/json" technology="//@microservices.0/@technologies.1">
+          <addresses>/locationData/findNearFiltered</addresses>
+        </endpoints>
+        <protocols communicationType="SYNCHRONOUS" protocol="rest" dataFormat="application/json"/>
+        <protocols communicationType="ASYNCHRONOUS" protocol="kafka" dataFormat="binary"/>
+        <aspects name="GetMapping" qualifiedName="Spring.GetMapping" import="//@imports.2">
+          <featureNames>SINGLE_VALUED</featureNames>
+        </aspects>
+        <parameters name="lat" qualifiedName="de.fhdo.puls.chargingstationsearchmanagement.ChargingStationSearchManagement.MapSearchController.getAllLocationDataNearAndExtFilter.lat" exchangePattern="IN" communicationType="SYNCHRONOUS">
+          <type xsi:type="intermediate_1:IntermediateImportedTechnologySpecificType" name="String" origin="TECHNOLOGY" kind="PRIMITIVE" qualifiedName="java._types.String" import="//@imports.3"/>
+          <originalType xsi:type="intermediate_1:IntermediatePrimitiveType" name="string" origin="BUILTIN" kind="PRIMITIVE"/>
+          <aspects name="RequestParam" qualifiedName="Spring.RequestParam" import="//@imports.2">
+            <properties name="value" type="string"/>
+            <properties name="required" type="boolean" defaultValue="false"/>
+            <properties name="defaultValue" type="string" defaultValue=""/>
+            <propertyValues value="lat" property="//@microservices.0/@interfaces.0/@operations.8/@parameters.0/@aspects.0/@properties.0"/>
+          </aspects>
+        </parameters>
+        <parameters name="lng" qualifiedName="de.fhdo.puls.chargingstationsearchmanagement.ChargingStationSearchManagement.MapSearchController.getAllLocationDataNearAndExtFilter.lng" exchangePattern="IN" communicationType="SYNCHRONOUS">
+          <type xsi:type="intermediate_1:IntermediateImportedTechnologySpecificType" name="String" origin="TECHNOLOGY" kind="PRIMITIVE" qualifiedName="java._types.String" import="//@imports.3"/>
+          <originalType xsi:type="intermediate_1:IntermediatePrimitiveType" name="string" origin="BUILTIN" kind="PRIMITIVE"/>
+          <aspects name="RequestParam" qualifiedName="Spring.RequestParam" import="//@imports.2">
+            <properties name="value" type="string"/>
+            <properties name="required" type="boolean" defaultValue="false"/>
+            <properties name="defaultValue" type="string" defaultValue=""/>
+            <propertyValues value="lng" property="//@microservices.0/@interfaces.0/@operations.8/@parameters.1/@aspects.0/@properties.0"/>
+          </aspects>
+        </parameters>
+        <parameters name="radius" qualifiedName="de.fhdo.puls.chargingstationsearchmanagement.ChargingStationSearchManagement.MapSearchController.getAllLocationDataNearAndExtFilter.radius" exchangePattern="IN" communicationType="SYNCHRONOUS">
+          <type xsi:type="intermediate_1:IntermediateImportedTechnologySpecificType" name="Double" origin="TECHNOLOGY" kind="PRIMITIVE" qualifiedName="java._types.Double" import="//@imports.3"/>
+          <originalType xsi:type="intermediate_1:IntermediatePrimitiveType" name="double" origin="BUILTIN" kind="PRIMITIVE" size="64"/>
+          <aspects name="RequestParam" qualifiedName="Spring.RequestParam" import="//@imports.2">
+            <properties name="value" type="string"/>
+            <properties name="required" type="boolean" defaultValue="false"/>
+            <properties name="defaultValue" type="string" defaultValue=""/>
+            <propertyValues value="radius" property="//@microservices.0/@interfaces.0/@operations.8/@parameters.2/@aspects.0/@properties.0"/>
+          </aspects>
+        </parameters>
+        <parameters name="metric" qualifiedName="de.fhdo.puls.chargingstationsearchmanagement.ChargingStationSearchManagement.MapSearchController.getAllLocationDataNearAndExtFilter.metric" exchangePattern="IN" communicationType="SYNCHRONOUS">
+          <type xsi:type="intermediate_1:IntermediateImportedTechnologySpecificType" name="String" origin="TECHNOLOGY" kind="PRIMITIVE" qualifiedName="java._types.String" import="//@imports.3"/>
+          <originalType xsi:type="intermediate_1:IntermediatePrimitiveType" name="string" origin="BUILTIN" kind="PRIMITIVE"/>
+          <aspects name="RequestParam" qualifiedName="Spring.RequestParam" import="//@imports.2">
+            <properties name="value" type="string"/>
+            <properties name="required" type="boolean" defaultValue="false"/>
+            <properties name="defaultValue" type="string" defaultValue=""/>
+            <propertyValues value="metric" property="//@microservices.0/@interfaces.0/@operations.8/@parameters.3/@aspects.0/@properties.0"/>
+          </aspects>
+        </parameters>
+        <parameters name="filter" qualifiedName="de.fhdo.puls.chargingstationsearchmanagement.ChargingStationSearchManagement.MapSearchController.getAllLocationDataNearAndExtFilter.filter" exchangePattern="IN" communicationType="SYNCHRONOUS">
+          <type xsi:type="intermediate_1:IntermediateImportedTechnologySpecificType" name="String" origin="TECHNOLOGY" kind="PRIMITIVE" qualifiedName="java._types.String" import="//@imports.3"/>
+          <originalType xsi:type="intermediate_1:IntermediatePrimitiveType" name="string" origin="BUILTIN" kind="PRIMITIVE"/>
+          <aspects name="RequestParam" qualifiedName="Spring.RequestParam" import="//@imports.2">
+            <properties name="value" type="string"/>
+            <properties name="required" type="boolean" defaultValue="false"/>
+            <properties name="defaultValue" type="string" defaultValue=""/>
+            <propertyValues value="filter" property="//@microservices.0/@interfaces.0/@operations.8/@parameters.4/@aspects.0/@properties.0"/>
+          </aspects>
+        </parameters>
+        <parameters name="locationDataDtos" qualifiedName="de.fhdo.puls.chargingstationsearchmanagement.ChargingStationSearchManagement.MapSearchController.getAllLocationDataNearAndExtFilter.locationDataDtos" exchangePattern="OUT" communicationType="SYNCHRONOUS">
+          <type xsi:type="intermediate_1:IntermediateImportedComplexType" name="LocationDataDtos" origin="DATA_MODEL" kind="LIST" qualifiedName="ChargingStationSearch.LocationDataDtos" import="//@imports.0"/>
+          <originalType xsi:type="intermediate_1:IntermediateImportedComplexType" name="LocationDataDtos" origin="DATA_MODEL" kind="LIST" qualifiedName="ChargingStationSearch.LocationDataDtos" import="//@imports.0"/>
+          <aspects name="ResponseEntity" qualifiedName="Spring.ResponseEntity" import="//@imports.2">
+            <featureNames>SINGLE_VALUED</featureNames>
+          </aspects>
+        </parameters>
+      </operations>
+      <operations name="existsPatientData" qualifiedName="de.fhdo.puls.chargingstationsearchmanagement.ChargingStationSearchManagement.MapSearchController.existsPatientData" visibility="OclUndefined">
+        <endpoints communicationType="SYNCHRONOUS" protocol="rest" dataFormat="application/json" technology="//@microservices.0/@technologies.1">
+          <addresses>/locationData/exists/{locationDataId}</addresses>
+        </endpoints>
+        <protocols communicationType="SYNCHRONOUS" protocol="rest" dataFormat="application/json"/>
+        <protocols communicationType="ASYNCHRONOUS" protocol="kafka" dataFormat="binary"/>
+        <aspects name="GetMapping" qualifiedName="Spring.GetMapping" import="//@imports.2">
+          <featureNames>SINGLE_VALUED</featureNames>
+        </aspects>
+        <parameters name="locationDataId" qualifiedName="de.fhdo.puls.chargingstationsearchmanagement.ChargingStationSearchManagement.MapSearchController.existsPatientData.locationDataId" exchangePattern="IN" communicationType="SYNCHRONOUS">
+          <type xsi:type="intermediate_1:IntermediateImportedTechnologySpecificType" name="String" origin="TECHNOLOGY" kind="PRIMITIVE" qualifiedName="java._types.String" import="//@imports.3"/>
+          <originalType xsi:type="intermediate_1:IntermediatePrimitiveType" name="string" origin="BUILTIN" kind="PRIMITIVE"/>
+          <aspects name="PathVariable" qualifiedName="Spring.PathVariable" import="//@imports.2">
+            <featureNames>SINGLE_VALUED</featureNames>
+            <properties name="value" type="string"/>
+            <propertyValues value="locationDataId" property="//@microservices.0/@interfaces.0/@operations.9/@parameters.0/@aspects.0/@properties.0"/>
+          </aspects>
+        </parameters>
+        <parameters name="exists" qualifiedName="de.fhdo.puls.chargingstationsearchmanagement.ChargingStationSearchManagement.MapSearchController.existsPatientData.exists" exchangePattern="OUT" communicationType="SYNCHRONOUS">
+          <type xsi:type="intermediate_1:IntermediateImportedTechnologySpecificType" name="Boolean" origin="TECHNOLOGY" kind="PRIMITIVE" qualifiedName="java._types.Boolean" import="//@imports.3"/>
+          <originalType xsi:type="intermediate_1:IntermediatePrimitiveType" name="boolean" origin="BUILTIN" kind="PRIMITIVE" size="1"/>
+        </parameters>
+      </operations>
+      <operations name="deletePatientData" qualifiedName="de.fhdo.puls.chargingstationsearchmanagement.ChargingStationSearchManagement.MapSearchController.deletePatientData" visibility="OclUndefined">
+        <endpoints communicationType="SYNCHRONOUS" protocol="rest" dataFormat="application/json" technology="//@microservices.0/@technologies.1">
+          <addresses>/locationData/{locationDataId}</addresses>
+        </endpoints>
+        <protocols communicationType="SYNCHRONOUS" protocol="rest" dataFormat="application/json"/>
+        <protocols communicationType="ASYNCHRONOUS" protocol="kafka" dataFormat="binary"/>
+        <aspects name="DeleteMapping" qualifiedName="Spring.DeleteMapping" import="//@imports.2">
+          <featureNames>SINGLE_VALUED</featureNames>
+        </aspects>
+        <parameters name="locationDataId" qualifiedName="de.fhdo.puls.chargingstationsearchmanagement.ChargingStationSearchManagement.MapSearchController.deletePatientData.locationDataId" exchangePattern="IN" communicationType="SYNCHRONOUS">
+          <type xsi:type="intermediate_1:IntermediateImportedTechnologySpecificType" name="String" origin="TECHNOLOGY" kind="PRIMITIVE" qualifiedName="java._types.String" import="//@imports.3"/>
+          <originalType xsi:type="intermediate_1:IntermediatePrimitiveType" name="string" origin="BUILTIN" kind="PRIMITIVE"/>
+          <aspects name="PathVariable" qualifiedName="Spring.PathVariable" import="//@imports.2">
+            <featureNames>SINGLE_VALUED</featureNames>
+            <properties name="value" type="string"/>
+            <propertyValues value="locationDataId" property="//@microservices.0/@interfaces.0/@operations.10/@parameters.0/@aspects.0/@properties.0"/>
+          </aspects>
+        </parameters>
+      </operations>
+      <operations name="receiveParkingSpaceOfferedEvents" qualifiedName="de.fhdo.puls.chargingstationsearchmanagement.ChargingStationSearchManagement.MapSearchController.receiveParkingSpaceOfferedEvents" visibility="ARCHITECTURE">
+        <protocols communicationType="SYNCHRONOUS" protocol="rest" dataFormat="application/json"/>
+        <protocols communicationType="ASYNCHRONOUS" protocol="kafka" dataFormat="binary"/>
+        <aspects name="Participant" qualifiedName="Kafka.Participant" import="//@imports.5">
+          <properties name="topic" type="string">
+            <featureNames>MANDATORY</featureNames>
+          </properties>
+          <properties name="consumerGroup" type="string"/>
+          <propertyValues value="parkingSpaceOfferedEvents" property="//@microservices.0/@interfaces.0/@operations.11/@aspects.0/@properties.0"/>
+          <propertyValues value="parkingSpaceOfferedEvents" property="//@microservices.0/@interfaces.0/@operations.11/@aspects.0/@properties.1"/>
+        </aspects>
+        <parameters name="event" qualifiedName="de.fhdo.puls.chargingstationsearchmanagement.ChargingStationSearchManagement.MapSearchController.receiveParkingSpaceOfferedEvents.event" exchangePattern="IN" communicationType="ASYNCHRONOUS">
+          <type xsi:type="intermediate_1:IntermediateImportedComplexType" name="ParkingSpaceOffered" origin="DATA_MODEL" kind="STRUCTURE" qualifiedName="ChargingStationSearch.ParkingSpaceOffered" import="//@imports.0"/>
+          <originalType xsi:type="intermediate_1:IntermediateImportedComplexType" name="ParkingSpaceOffered" origin="DATA_MODEL" kind="STRUCTURE" qualifiedName="ChargingStationSearch.ParkingSpaceOffered" import="//@imports.0"/>
+        </parameters>
+      </operations>
+      <operations name="receiveParkingSpaceWithdrawedEvents" qualifiedName="de.fhdo.puls.chargingstationsearchmanagement.ChargingStationSearchManagement.MapSearchController.receiveParkingSpaceWithdrawedEvents" visibility="ARCHITECTURE">
+        <protocols communicationType="SYNCHRONOUS" protocol="rest" dataFormat="application/json"/>
+        <protocols communicationType="ASYNCHRONOUS" protocol="kafka" dataFormat="binary"/>
+        <aspects name="Participant" qualifiedName="Kafka.Participant" import="//@imports.5">
+          <properties name="topic" type="string">
+            <featureNames>MANDATORY</featureNames>
+          </properties>
+          <properties name="consumerGroup" type="string"/>
+          <propertyValues value="parkingSpaceWithdrawedEvents" property="//@microservices.0/@interfaces.0/@operations.12/@aspects.0/@properties.0"/>
+          <propertyValues value="parkingSpaceWithdrawedEvents" property="//@microservices.0/@interfaces.0/@operations.12/@aspects.0/@properties.1"/>
+        </aspects>
+        <parameters name="event" qualifiedName="de.fhdo.puls.chargingstationsearchmanagement.ChargingStationSearchManagement.MapSearchController.receiveParkingSpaceWithdrawedEvents.event" exchangePattern="IN" communicationType="ASYNCHRONOUS">
+          <type xsi:type="intermediate_1:IntermediateImportedComplexType" name="OfferedParkingSpaceWithdrawed" origin="DATA_MODEL" kind="STRUCTURE" qualifiedName="ChargingStationSearch.OfferedParkingSpaceWithdrawed" import="//@imports.0"/>
+          <originalType xsi:type="intermediate_1:IntermediateImportedComplexType" name="OfferedParkingSpaceWithdrawed" origin="DATA_MODEL" kind="STRUCTURE" qualifiedName="ChargingStationSearch.OfferedParkingSpaceWithdrawed" import="//@imports.0"/>
+        </parameters>
+      </operations>
+      <operations name="receiveElectrifiedParkingSpaceOfferedEvents" qualifiedName="de.fhdo.puls.chargingstationsearchmanagement.ChargingStationSearchManagement.MapSearchController.receiveElectrifiedParkingSpaceOfferedEvents" visibility="ARCHITECTURE">
+        <protocols communicationType="SYNCHRONOUS" protocol="rest" dataFormat="application/json"/>
+        <protocols communicationType="ASYNCHRONOUS" protocol="kafka" dataFormat="binary"/>
+        <aspects name="Participant" qualifiedName="Kafka.Participant" import="//@imports.5">
+          <properties name="topic" type="string">
+            <featureNames>MANDATORY</featureNames>
+          </properties>
+          <properties name="consumerGroup" type="string"/>
+          <propertyValues value="electrifiedParkingSpaceOfferedEvents" property="//@microservices.0/@interfaces.0/@operations.13/@aspects.0/@properties.0"/>
+          <propertyValues value="electrifiedParkingSpaceOfferedEvents" property="//@microservices.0/@interfaces.0/@operations.13/@aspects.0/@properties.1"/>
+        </aspects>
+        <parameters name="event" qualifiedName="de.fhdo.puls.chargingstationsearchmanagement.ChargingStationSearchManagement.MapSearchController.receiveElectrifiedParkingSpaceOfferedEvents.event" exchangePattern="IN" communicationType="ASYNCHRONOUS">
+          <type xsi:type="intermediate_1:IntermediateImportedComplexType" name="ElectrifiedParkingSpaceOffered" origin="DATA_MODEL" kind="STRUCTURE" qualifiedName="ChargingStationSearch.ElectrifiedParkingSpaceOffered" import="//@imports.0"/>
+          <originalType xsi:type="intermediate_1:IntermediateImportedComplexType" name="ElectrifiedParkingSpaceOffered" origin="DATA_MODEL" kind="STRUCTURE" qualifiedName="ChargingStationSearch.ElectrifiedParkingSpaceOffered" import="//@imports.0"/>
+        </parameters>
+      </operations>
+      <operations name="receiveElectrifiedParkingSpaceWithdrawedEvents" qualifiedName="de.fhdo.puls.chargingstationsearchmanagement.ChargingStationSearchManagement.MapSearchController.receiveElectrifiedParkingSpaceWithdrawedEvents" visibility="ARCHITECTURE">
+        <protocols communicationType="SYNCHRONOUS" protocol="rest" dataFormat="application/json"/>
+        <protocols communicationType="ASYNCHRONOUS" protocol="kafka" dataFormat="binary"/>
+        <aspects name="Participant" qualifiedName="Kafka.Participant" import="//@imports.5">
+          <properties name="topic" type="string">
+            <featureNames>MANDATORY</featureNames>
+          </properties>
+          <properties name="consumerGroup" type="string"/>
+          <propertyValues value="electrifiedParkingSpaceWithdrawedEvents" property="//@microservices.0/@interfaces.0/@operations.14/@aspects.0/@properties.0"/>
+          <propertyValues value="electrifiedParkingSpaceWithdrawedEvents" property="//@microservices.0/@interfaces.0/@operations.14/@aspects.0/@properties.1"/>
+        </aspects>
+        <parameters name="event" qualifiedName="de.fhdo.puls.chargingstationsearchmanagement.ChargingStationSearchManagement.MapSearchController.receiveElectrifiedParkingSpaceWithdrawedEvents.event" exchangePattern="IN" communicationType="ASYNCHRONOUS">
+          <type xsi:type="intermediate_1:IntermediateImportedComplexType" name="OfferedElectrifiedParkingSpaceWithdrawed" origin="DATA_MODEL" kind="STRUCTURE" qualifiedName="ChargingStationSearch.OfferedElectrifiedParkingSpaceWithdrawed" import="//@imports.0"/>
+          <originalType xsi:type="intermediate_1:IntermediateImportedComplexType" name="OfferedElectrifiedParkingSpaceWithdrawed" origin="DATA_MODEL" kind="STRUCTURE" qualifiedName="ChargingStationSearch.OfferedElectrifiedParkingSpaceWithdrawed" import="//@imports.0"/>
+        </parameters>
+      </operations>
+    </interfaces>
+    <aspects name="BootstrapAddress" qualifiedName="Kafka.BootstrapAddress" import="//@imports.5">
+      <featureNames>SINGLE_VALUED</featureNames>
+      <properties name="address" type="string">
+        <featureNames>MANDATORY</featureNames>
+      </properties>
+      <propertyValues value="kafka-server1:9092" property="//@microservices.0/@aspects.0/@properties.0"/>
+    </aspects>
+    <aspects name="QuerySide" qualifiedName="CQRS.QuerySide" import="//@imports.4">
+      <properties name="logicalService" type="string"/>
+      <propertyValues value="ChargingStationSearchMicroservice" property="//@microservices.0/@aspects.1/@properties.0"/>
+    </aspects>
+    <aspects name="Application" qualifiedName="Spring.Application" import="//@imports.2">
+      <featureNames>SINGLE_VALUED</featureNames>
+      <properties name="name" type="string"/>
+      <properties name="port" type="int"/>
+      <propertyValues value="ChargingStationSearchMicroservice" property="//@microservices.0/@aspects.2/@properties.0"/>
+      <propertyValues value="8051" property="//@microservices.0/@aspects.2/@properties.1"/>
+    </aspects>
+    <aspects name="DatasourceConfiguration" qualifiedName="Spring.DatasourceConfiguration" import="//@imports.2">
+      <featureNames>SINGLE_VALUED</featureNames>
+      <properties name="url" type="string"/>
+      <properties name="username" type="string"/>
+      <properties name="password" type="string"/>
+      <properties name="databaseTechnology" type="string"/>
+      <propertyValues value="MongoDB" property="//@microservices.0/@aspects.3/@properties.3"/>
+    </aspects>
+    <aspects name="EnableServiceDiscovery" qualifiedName="Spring.EnableServiceDiscovery" import="//@imports.2">
+      <featureNames>SINGLE_VALUED</featureNames>
+      <properties name="discoveryTechnology" type="string">
+        <featureNames>MANDATORY</featureNames>
+      </properties>
+      <propertyValues value="Eureka" property="//@microservices.0/@aspects.4/@properties.0"/>
+    </aspects>
+  </microservices>
+</intermediate:IntermediateServiceModel>

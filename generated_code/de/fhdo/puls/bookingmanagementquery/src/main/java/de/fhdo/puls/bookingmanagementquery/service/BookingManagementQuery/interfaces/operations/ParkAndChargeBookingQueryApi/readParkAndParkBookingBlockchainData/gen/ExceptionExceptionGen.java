@@ -1,0 +1,4 @@
+package de.fhdo.puls.bookingmanagementquery.service.BookingManagementQuery.interfaces.operations.ParkAndChargeBookingQueryApi.readParkAndParkBookingBlockchainData.gen;
+
+public interface ExceptionExceptionGen {
+}

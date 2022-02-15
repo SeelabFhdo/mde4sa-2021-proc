@@ -1,0 +1,23 @@
+technology MariaDB {
+	protocols {
+		sync jdbc data formats "jdbc" default with format "jdbc";
+	}
+    service aspects {
+    	aspect MariaDBConfiguration<singleval> for microservices;
+    }
+
+    infrastructure technologies {
+        MariaDB {
+            operation environments = "docker/mariadb:latest";
+            service properties {
+                string userName;
+                string rootPassword<mandatory>;
+                string userPassword;
+                string hostName<mandatory>;
+                string port<mandatory>;
+                string imageType<mandatory>;
+                string dataBase<mandatory>;
+            }
+        }
+    }
+}

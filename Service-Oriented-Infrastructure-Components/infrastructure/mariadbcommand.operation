@@ -1,0 +1,24 @@
+import technology from "../../Technology/technology/container_base.technology" as container_base
+import technology from "../../Technology/technology/mariadb.technology" as mariadb
+import nodes from "../../Booking-Management-Microservice-Command/bookingCommandManagement.operation" as BookingManagementCommandSide
+
+@technology(container_base)
+@technology(mariadb)
+MariaDBCommand is mariadb::_infrastructure.MariaDB
+	with operation environment "docker/mariadb:latest"
+	used by nodes
+		BookingManagementCommandSide::BookingManagementCommandContainer
+	{
+	        default values {
+	            userName="admin"
+	            hostName="mariadb"
+	            userPassword="admin"
+	            rootPassword="password"
+	            imageType="dockerhub"
+	            port="3306"
+	            dataBase="booking_command"
+	        }
+	        endpoints {
+	        	mariadb::_protocols.jdbc: "mariadbcommand:3306";
+	        }
+	}

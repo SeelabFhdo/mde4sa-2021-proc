@@ -1,0 +1,270 @@
+context BookingManagement{
+ 		 
+	//ParkBookingConcept
+	structure ParkBooking<entity, aggregate>{
+		long bookingId<identifier>,
+		Booker booker <part>,
+		ParkingSpace parkingSpace <part>,
+		TimeSlot bookinTimeSlot <part>,
+		float bookingPriceTotal,
+		boolean isCanceled
+	}
+		
+		
+	//Repository for ParkBookings
+	structure ParkBookingRepository<repository>{
+		long bookingId,
+		ParkBooking parkBookingAggregate 
+	}
+		
+	/* Entity object of a ParkBooking smart contract for storing its 
+	 * contract address / memory address which is necessary for later use after its deployment. */
+	structure ParkContract<entity>{
+		long smartContractId<identifier>,
+		string contractAddress
+	}
+	
+	//Repository for deployed ParkBooking smart contracts
+	structure ParkContractRepository<repository>{
+		string smartContractAddress,
+		ParkContract parkContractAggregate
+	}
+		
+	//ParkAndChargeBookingConcept
+	structure ParkAndChargeBooking<entity,aggregate>{
+		long bookingId<identifier>,
+		Booker booker <part>,
+		ElectrifiedParkingSpace electifiedParkingSpace<part>, 
+		TimeSlot bookingTimeSlot<part>,
+		float bookingPriceTotal,
+		boolean isCanceled,
+		int verifyCode
+	}
+	
+	//Repository for ParkAndChargeBookings
+	structure ParkAndChargeBookingRepository<repository>{
+		long bookingId,
+		ParkAndChargeBooking parkBookingAggregate
+	}
+		
+	/* Entity object of a ParkAndChargeBooking smart contract for storing its 
+	 * contract address / memory address which is necessary for later use after its deployment. */
+	structure ParkAndChargeContractAggregate<entity, aggregate>{
+		long smartContractId<identifier>,
+		string contractAddress
+	}
+		
+	//Repository for deployed ParkAndCharfBooking smart contracts
+	structure ParkAndChargeContractRepository<repository>{
+		ParkAndChargeContractAggregate parkAndChargeContractAggregate,
+		string smartContractAddress
+	}
+		
+		
+	structure ParkBookingVO<valueObject>{
+		long bookingId,
+		Booker booker,
+		ParkingSpace parkingSpace,
+		TimeSlot timeSlot,
+		float bookingPriceTotal,
+		boolean bookingCanceled
+	}
+	
+	list ParkBookingList {ParkBooking parkBooking}
+	
+	structure ParkAndChargeBookingVO<valueObject>{
+		long bookingId,
+		Booker booker,
+		ElectrifiedParkingSpace eParkingSpace,
+		TimeSlot timeSlot,
+		float bookingPriceTotal,
+		int verifyCode,
+		boolean bookingCanceled
+	}
+	
+	list ParkAndChargeBookingList {ParkAndChargeBooking parkAndChargeBooking}
+	
+	/*This structure containing all park booking attributes that can 
+	  be stored and read within the Ethereum blockchain.*/
+	structure BlockchainDataParkBooking<valueObject>{
+		long bookingId,
+		long bookerId,
+		string parkingSpaceId,
+		string startOfBooking,
+		string endOfBooking,
+		float bookingPriceTotal,
+		boolean bookingCanceled,
+		string bookingCreatedTimeStamp
+	}
+
+		
+	/*This structure containing all park and charge booking attributes that can 
+	 * be stored and read within the Ethereum blockchain.*/
+	structure BlockchainDataParkAndChargeBooking<valueObject>{
+		long bookingId,
+		long bookerId,
+		string parkingSpaceId,
+		string startOfBooking,
+		string endOfBooking,
+		float bookingPriceTotal,
+		int verifyCode,
+		boolean bookingCanceled,
+		string bookingCreatedTimeStamp
+		
+	}
+		
+	//Booker of a ParkBooking
+	structure Booker<valueObject>{
+		immutable long bookerId,
+		immutable string firstName,
+		immutable string lastName
+	}
+		
+	//ParkingSpace of a ParkBooking
+	structure ParkingSpace<valueObject>{
+		immutable string parkingSpaceId,
+		immutable string city,
+		immutable int postcode,
+		immutable string street,
+		immutable string streetNumber,
+		immutable float bookingPricePerHour
+	}
+		
+	//ElectrifiedParkingSpace of a ParkBooking
+	structure ElectrifiedParkingSpace<valueObject>{
+		immutable string parkingSpaceId,
+		immutable string city,
+		immutable int postcode,
+		immutable string street,
+		immutable string streetNumber,
+		immutable float bookingPricePerHour,
+		immutable float chargingPricePerKwh
+	}
+		
+	//TimeSlot of a ParkBooking
+	structure TimeSlot<valueObject>{
+		immutable date startOfBooking,
+		immutable date endOfBooking
+	}
+	
+	structure ParkBookingCreated<valueObject,domainEvent> {
+		immutable long bookingId,
+		immutable Booker booker,
+		immutable ParkingSpace parkingSpace,
+		immutable TimeSlot timeSlot,
+		immutable date bookingCreatedDate,
+		immutable date lastModifiedDate,
+		immutable float bookingPricePerHour,
+		immutable float bookingPriceTotal
+	}
+		
+		
+	structure ParkBookingUpdated<valueObject,domainEvent> {
+		immutable long bookingId,
+		immutable date bookingCreatedDate,
+		immutable date lastModifiedDate,
+		immutable TimeSlot timeSlot,
+		immutable float bookingPriceTotal
+	}
+		
+		
+	structure ParkBookingCanceled<valueObject,domainEvent> {
+		immutable long bookingId,
+		immutable boolean bookingCanceled
+	}
+		
+		
+		
+		
+	structure ParkAndChargeBookingCreated<valueObject,domainEvent> {
+		immutable long bookingId,
+		immutable Booker booker,
+		immutable ParkingSpace parkingSpace,
+		immutable TimeSlot timeSlot,
+		immutable date bookingCreatedDate,
+		immutable date lastModifiedDate,
+		immutable float bookingPricePerHour,
+		immutable float bookingPriceTotal,
+		immutable int verifycode
+	}
+		
+	structure ParkAndChargeBookingUpdated<valueObject,domainEvent> {
+		immutable long bookingId,
+		immutable date bookingCreatedDate,
+		immutable date lastModifiedDate,
+		immutable TimeSlot timeSlot,
+		immutable float bookingPriceTotal
+	}
+		
+		
+	structure ParkAndChargeBookingCanceled<valueObject,domainEvent> {
+		immutable long bookingId,
+		immutable boolean bookingCanceled
+	}
+	
+	//Domain concepts for parking space sharing events
+	structure Location<valueObject> {
+		string longitude,
+       	string latitude
+	}
+	
+	structure TimePeriod<valueObject> {
+			date start,
+			date end	
+		}
+		
+	list TimePeriods {TimePeriod tp}
+		
+	enum ParkingSpaceSize {
+		SMALL,
+		MEDIUM,
+		LARGE
+	}
+		
+	enum ChargingType{
+		FAST,
+		NORMAL
+	}
+	
+	// ===== PRKINGSPACE SHARING EVENTS ===== //
+	structure ParkingSpaceOffered {
+		immutable string parkingSpaceId,
+		immutable string name,
+		immutable string description,
+		immutable long ownerId,
+		immutable float parkingPricePerHour,
+		immutable Location location,
+		immutable TimePeriods availabilityPeriods,
+		immutable ParkingSpaceSize parkingSpaceSize
+	}
+	
+	structure ElectrifiedParkingSpaceOffered {
+		immutable string parkingSpaceId,
+		immutable string name,
+		immutable string description,
+		immutable long ownerId,
+		immutable float parkingPricePerHour,
+		immutable float chargingPricePerKWH,
+		immutable Location location,
+		immutable TimePeriods availabilityPeriods,
+		immutable ParkingSpaceSize parkingSpaceSize,
+		immutable ChargingType chargingType,
+		immutable string pluginType
+	}
+	
+	structure OfferedParkingSpaceWithdrawed {
+		immutable string parkingSpaceId,
+		immutable string name,
+		immutable string description,
+		immutable long ownerId,
+		immutable Location location
+	}
+	
+	structure OfferedElectrifiedParkingSpaceWithdrawed {
+		immutable string parkingSpaceId,
+		immutable string name,
+		immutable string description,
+		immutable long ownerId,
+		immutable Location location
+	}
+}

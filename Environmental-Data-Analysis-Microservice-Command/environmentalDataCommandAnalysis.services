@@ -1,0 +1,38 @@
+import datatypes from "domain.data" as Domain
+import technology from "../Technology/technology/Java.technology" as Java
+import technology from "../Technology/technology/Spring.technology" as Spring
+import technology from "../Technology/technology/Kafka.technology" as Kafka
+import technology from "../Technology/technology/Cqrs.technology" as CQRS
+import technology from "../Technology/technology/DomainEvents.technology" as DomainEvents
+
+@technology(Java)
+@technology(Spring)
+@technology(Kafka)
+@technology(CQRS)
+@technology(DomainEvents)
+@endpoints(Kafka::_protocols.kafka:"kafka-server1:9092";)
+@Kafka::_aspects.BootstrapAddress("kafka-server1:9092")
+@CQRS::_aspects.CommandSide("EnvironmentalDataAnalysisMicroservice")
+@Spring::_aspects.Application(name="EnvironmentalDataAnalysisMicroserviceCommand", port=8091)
+@Spring::_aspects.DatasourceConfiguration(databaseTechnology="MongoDB")
+@Spring::_aspects.EnableServiceDiscovery(discoveryTechnology="Eureka")
+functional microservice de.fhdo.puls.environmentaldataanalysiscommand.EnvironmentalDataAnalysisCommand {
+
+	//Interface for Command-Methods of EnvironmentSensorUnits
+	@endpoints(Spring::_protocols.rest: "/resources/v1";)
+	interface EnvironmentSensorUnitCommands{
+
+		@endpoints(Spring::_protocols.rest: "/environmentSensorUnit";)
+		@Spring::_aspects.PostMapping
+		public createEnvironmentSensorUnit(
+			@Spring::_aspects.RequestBody
+			sync in command : Domain::EnvironmentalDataAnalysis.CreateEnvironmentSensorUnitCommand
+		);
+
+		@Kafka::_aspects.Participant(topic = "environmentSensorUnitCreatedEvents")
+		@DomainEvents::_aspects.Producer("EnvironmentSensorUnitProducerService")
+		public sendEnvironmentSensorUnitEvent(
+			async out event : Domain::EnvironmentalDataAnalysis.EnvironmentSensorUnitCreated
+		);
+	}
+}

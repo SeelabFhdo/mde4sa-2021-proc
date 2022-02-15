@@ -1,0 +1,82 @@
+import datatypes from "domain.data" as Domain
+import technology from "../Technology/technology/Spring.technology" as Spring
+import technology from "../Technology/technology/Java.technology" as Java
+import technology from "../Technology/technology/Kafka.technology" as Kafka
+import technology from "../Technology/technology/Cqrs.technology" as CQRS
+import technology from "../Technology/technology/DomainEvents.technology" as DomainEvents
+
+@technology(Java)
+@technology(Spring)
+@technology(Kafka)
+@technology(CQRS)
+@technology(DomainEvents)
+@endpoints(Kafka::_protocols.kafka:"kafka-server1:9092";)
+@Kafka::_aspects.BootstrapAddress("kafka-server1:9092")
+@CQRS::_aspects.CommandSide("ChargingStationSharingMicroservice")
+@Spring::_aspects.Application(name="ChargingStationSharingtMicroserviceCommand", port=8041)
+@Spring::_aspects.DatasourceConfiguration(databaseTechnology="MongoDB")
+@Spring::_aspects.EnableServiceDiscovery(discoveryTechnology="Eureka")
+functional microservice  de.fhdo.puls.chargingstationsharingcommand.ChargingStationSharingCommand {
+
+	//Interface for COMMAND-Methods of Parking Space Sharing
+	@endpoints(Spring::_protocols.rest: "/resources/v1";)
+	interface ParkingSpaceSharingCommands {
+
+		@endpoints(Spring::_protocols.rest: "/offerParkingSpace";)
+		@Spring::_aspects.PutMapping
+		public offerParkingSpace(
+			@Spring::_aspects.RequestBody
+			sync in command : Domain::ChargingStationSharing.OfferParkingSpaceCommand
+		);
+
+		@Kafka::_aspects.Participant(topic = "parkingSpaceOfferedEvents")
+		@DomainEvents::_aspects.Producer("ParkingSpaceSharingProducerService")
+		public sendParkingSpaceOfferedEvent(
+			async out event : Domain::ChargingStationSharing.ParkingSpaceOffered
+		);
+
+		@endpoints(Spring::_protocols.rest: "/withdrawParkingSpace";)
+		@Spring::_aspects.PutMapping
+		public withdrawParkingSpace(
+			@Spring::_aspects.RequestBody
+			sync in command : Domain::ChargingStationSharing.WithdrawParkingSpaceCommand
+		);
+
+		@Kafka::_aspects.Participant(topic = "parkingSpaceWithdrawedEvents")
+		@DomainEvents::_aspects.Producer("ParkingSpaceSharingProducerService")
+		public sendParkingSpaceWithdrawedEvent(
+			async out event : Domain::ChargingStationSharing.OfferedParkingSpaceWithdrawed
+		);
+	}
+
+	//Interface for COMMAND-Methods of Electrified Parking Space Sharing
+	@endpoints(Spring::_protocols.rest: "/resources/v1";)
+	interface ElectrifiedParkingSpaceSharingCommands {
+
+		@endpoints(Spring::_protocols.rest: "/offerElectrifiedParkingSpace";)
+		@Spring::_aspects.PutMapping
+		public offerElectrifiedParkingSpace(
+			@Spring::_aspects.RequestBody
+			sync in command : Domain::ChargingStationSharing.OfferElectrifiedParkingSpaceCommand
+		);
+
+		@Kafka::_aspects.Participant(topic = "electrifiedParkingSpaceOfferedEvents")
+		@DomainEvents::_aspects.Producer("ParkingSpaceSharingProducerService")
+		public sendElectrifiedParkingSpaceOfferedEvent(
+			async out event : Domain::ChargingStationSharing.ElectrifiedParkingSpaceOffered
+		);
+
+		@endpoints(Spring::_protocols.rest: "/withdrawElectrifiedParkingSpace";)
+		@Spring::_aspects.PutMapping
+		public withdrawElectrifiedParkingSpace(
+			@Spring::_aspects.RequestBody
+			sync in command : Domain::ChargingStationSharing.WithdrawElectrifiedParkingSpaceCommand
+		);
+
+		@Kafka::_aspects.Participant(topic = "electrifiedParkingSpaceWithdrawedEvents")
+		@DomainEvents::_aspects.Producer("ParkingSpaceSharingProducerService")
+		public sendElectrifiedParkingSpaceWithdrawedEvent(
+			async out event : Domain::ChargingStationSharing.OfferedElectrifiedParkingSpaceWithdrawed
+		);
+	}
+}

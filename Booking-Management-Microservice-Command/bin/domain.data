@@ -1,0 +1,189 @@
+context BookingManagement{		
+	//ParkBookingConcept
+	structure ParkBooking<entity, aggregate>{
+		long bookingId<identifier>,
+		Booker booker <part>,
+		ParkingSpace parkingSpace <part>,
+		TimeSlot bookinTimeSlot <part>,
+		float bookingPriceTotal,
+		boolean isCanceled
+	}
+		
+		
+	//Repository for ParkBookings
+	structure ParkBookingRepository<repository>{
+		long bookingId,
+		ParkBooking parkBookingAggregate 
+	}
+		
+	/* Entity object of a ParkBooking smart contract for storing its 
+	 * contract address / memory address which is necessary for later use after its deployment. */
+	structure ParkContract<entity>{
+		long smartContractId<identifier>,
+		string contractAddress
+	}
+	
+	//Repository for deployed ParkBooking smart contracts
+	structure ParkContractRepository<repository>{
+		string smartContractAddress,
+		ParkContract parkContractAggregate
+	}
+		
+	//ParkAndChargeBookingConcept
+	structure ParkAndChargeBooking<entity,aggregate>{
+		long bookingId<identifier>,
+		Booker booker <part>,
+		ElectrifiedParkingSpace electifiedParkingSpace<part>, 
+		TimeSlot bookingTimeSlot<part>,
+		float bookingPriceTotal,
+		boolean isCanceled,
+		int verifyCode
+	}
+	
+	//Repository for ParkAndChargeBookings
+	structure ParkAndChargeBookingRepository<repository>{
+		long bookingId,
+		ParkAndChargeBooking parkBookingAggregate
+	}
+		
+	/* Entity object of a ParkAndChargeBooking smart contract for storing its 
+	 * contract address / memory address which is necessary for later use after its deployment. */
+	structure ParkAndChargeContractAggregate<entity, aggregate>{
+		long smartContractId<identifier>,
+		string contractAddress
+	}
+		
+	//Repository for deployed ParkAndCharfBooking smart contracts
+	structure ParkAndChargeContractRepository<repository>{
+		ParkAndChargeContractAggregate parkAndChargeContractAggregate,
+		string smartContractAddress
+	}
+		
+		
+	//Booker of a ParkBooking
+	structure Booker<valueObject>{
+		long bookerId,
+		string firstName,
+		string lastName
+	}
+		
+	//ParkingSpace of a ParkBooking
+	structure ParkingSpace<valueObject>{
+		string parkingSpaceId,
+		string city,
+		int postcode,
+		string street,
+		string streetNumber,
+		float bookingPricePerHour
+	}
+		
+	//ElectrifiedParkingSpace of a ParkBooking
+	structure ElectrifiedParkingSpace<valueObject>{
+		string parkingSpaceId,
+		string city,
+		int postcode,
+		string street,
+		string streetNumber,
+		float bookingPricePerHour,
+		float chargingPricePerKwh
+	}
+		
+	//TimeSlot of a ParkBooking
+	structure TimeSlot<valueObject>{
+		date startOfBooking,
+		date endOfBooking
+	}
+	
+	// ===== BOOKING COMMANDS ===== //
+	structure CreateParkBookingCommand<valueObject> {
+		immutable Booker booker,
+		immutable ParkingSpace parkingSpace,
+		immutable TimeSlot timeSlot,
+		immutable float bookingPriceTotal 
+	}
+	
+	structure UpdateParkBookingCommand<valueObject> {
+		immutable long bookingId,
+		immutable TimeSlot timeSlot,
+		immutable float bookingPriceTotal 
+	}
+	
+	structure CancelParkBookingCommand<valueObject> {
+		immutable long bookingId
+	}
+	
+	structure CreateParkAndChargeBookingCommand<valueObject> {
+		immutable Booker booker,
+		immutable ElectrifiedParkingSpace electrifiedParkingSpace,
+		immutable TimeSlot timeSlot,
+		immutable float bookingPriceTotal 
+	}
+		
+		
+	structure UpdateParkAndChargeBookingCommand<valueObject> {
+		immutable long bookingId,
+		immutable TimeSlot timeSlot,
+		immutable float bookingPriceTotal 
+	}
+		
+		
+	structure CancelParkAndChargeBookingCommand<valueObject> {
+		immutable long bookingId
+	}
+	
+	// ===== BOOKING EVENTS ===== //
+	structure ParkBookingCreated<valueObject,domainEvent> {
+		immutable long bookingId,
+		immutable Booker booker,
+		immutable ParkingSpace parkingSpace,
+		immutable TimeSlot timeSlot,
+		immutable date bookingCreatedDate,
+		immutable date lastModifiedDate,
+		immutable float bookingPricePerHour,
+		immutable float bookingPriceTotal
+	}
+		
+		
+	structure ParkBookingUpdated<valueObject,domainEvent> {
+		immutable long bookingId,
+		immutable date bookingCreatedDate,
+		immutable date lastModifiedDate,
+		immutable TimeSlot timeSlot,
+		immutable float bookingPriceTotal
+	}
+		
+		
+	structure ParkBookingCanceled<valueObject,domainEvent> {
+		immutable long bookingId,
+		immutable boolean bookingCanceled
+	}
+		
+		
+		
+		
+	structure ParkAndChargeBookingCreated<valueObject,domainEvent> {
+		immutable long bookingId,
+		immutable Booker booker,
+		immutable ParkingSpace parkingSpace,
+		immutable TimeSlot timeSlot,
+		immutable date bookingCreatedDate,
+		immutable date lastModifiedDate,
+		immutable float bookingPricePerHour,
+		immutable float bookingPriceTotal,
+		immutable int verifycode
+	}
+		
+	structure ParkAndChargeBookingUpdated<valueObject,domainEvent> {
+		immutable long bookingId,
+		immutable date bookingCreatedDate,
+		immutable date lastModifiedDate,
+		immutable TimeSlot timeSlot,
+		immutable float bookingPriceTotal
+	}
+		
+		
+	structure ParkAndChargeBookingCanceled<valueObject,domainEvent> {
+		immutable long bookingId,
+		immutable boolean bookingCanceled
+	}
+}

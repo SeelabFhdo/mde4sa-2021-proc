@@ -1,0 +1,480 @@
+<?xml version="1.0" encoding="ASCII"?>
+<intermediate:IntermediateServiceModel xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:intermediate="http://www.fhdo.de/lemma/service/intermediate" xmlns:intermediate_1="http://www.fhdo.de/lemma/data/intermediate" sourceModelUri="file://../../bookingCommandManagement.services">
+  <imports name="Domain" importUri="file://../data models/domain.xmi" importTypeName="DATATYPES"/>
+  <imports name="Kafka" importUri="file://../../../Technology/technology/Kafka.technology" importTypeName="TECHNOLOGY"/>
+  <imports name="Spring" importUri="file://../../../Technology/technology/Spring.technology" importTypeName="TECHNOLOGY"/>
+  <imports name="Java" importUri="file://../../../Technology/technology/Java.technology" importTypeName="TECHNOLOGY"/>
+  <imports name="CQRS" importUri="file://../../../Technology/technology/Cqrs.technology" importTypeName="TECHNOLOGY"/>
+  <imports name="DomainEvents" importUri="file://../../../Technology/technology/DomainEvents.technology" importTypeName="TECHNOLOGY"/>
+  <microservices sourceModelUri="file://../../bookingCommandManagement.services" name="de.fhdo.puls.bookingmanagementcommand.BookingManagementCommand" qualifiedName="de.fhdo.puls.bookingmanagementcommand.BookingManagementCommand" type="FUNCTIONAL" visibility="ARCHITECTURE" effectivelyImplemented="true">
+    <technologies name="Java" import="//@imports.3"/>
+    <technologies name="Spring" import="//@imports.2"/>
+    <technologies name="Kafka" import="//@imports.1"/>
+    <technologies name="CQRS" import="//@imports.4"/>
+    <technologies name="DomainEvents" import="//@imports.5"/>
+    <endpoints communicationType="ASYNCHRONOUS" protocol="kafka" dataFormat="binary" technology="//@microservices.0/@technologies.2">
+      <addresses>kafka-server1:9092</addresses>
+    </endpoints>
+    <protocols communicationType="SYNCHRONOUS" protocol="rest" dataFormat="application/json"/>
+    <protocols communicationType="ASYNCHRONOUS" protocol="kafka" dataFormat="binary"/>
+    <interfaces name="ParkBookingCommands" qualifiedName="de.fhdo.puls.bookingmanagementcommand.BookingManagementCommand.ParkBookingCommands" visibility="ARCHITECTURE" hasImplementedOperations="true">
+      <endpoints communicationType="SYNCHRONOUS" protocol="rest" dataFormat="application/json" technology="//@microservices.0/@technologies.1">
+        <addresses>/resources/v1</addresses>
+      </endpoints>
+      <protocols communicationType="SYNCHRONOUS" protocol="rest" dataFormat="application/json"/>
+      <protocols communicationType="ASYNCHRONOUS" protocol="kafka" dataFormat="binary"/>
+      <operations name="createParkBooking" qualifiedName="de.fhdo.puls.bookingmanagementcommand.BookingManagementCommand.ParkBookingCommands.createParkBooking" visibility="OclUndefined">
+        <apiOperationComment comment="API endpoint for creating a new park booking.">
+          <parameterComments comment="the command that includes all required booking data for generate an aggregate-object" required="true" parameter="//@microservices.0/@interfaces.0/@operations.0/@parameters.0"/>
+        </apiOperationComment>
+        <endpoints communicationType="SYNCHRONOUS" protocol="rest" dataFormat="application/json" technology="//@microservices.0/@technologies.1">
+          <addresses>/parkBooking</addresses>
+        </endpoints>
+        <protocols communicationType="SYNCHRONOUS" protocol="rest" dataFormat="application/json"/>
+        <protocols communicationType="ASYNCHRONOUS" protocol="kafka" dataFormat="binary"/>
+        <aspects name="PutMapping" qualifiedName="Spring.PutMapping" import="//@imports.2">
+          <featureNames>SINGLE_VALUED</featureNames>
+        </aspects>
+        <parameters name="createBookingCommand" qualifiedName="de.fhdo.puls.bookingmanagementcommand.BookingManagementCommand.ParkBookingCommands.createParkBooking.createBookingCommand" exchangePattern="IN" communicationType="SYNCHRONOUS">
+          <type xsi:type="intermediate_1:IntermediateImportedComplexType" name="CreateParkBookingCommand" origin="DATA_MODEL" kind="STRUCTURE" qualifiedName="BookingManagement.CreateParkBookingCommand" import="//@imports.0"/>
+          <originalType xsi:type="intermediate_1:IntermediateImportedComplexType" name="CreateParkBookingCommand" origin="DATA_MODEL" kind="STRUCTURE" qualifiedName="BookingManagement.CreateParkBookingCommand" import="//@imports.0"/>
+          <aspects name="RequestBody" qualifiedName="Spring.RequestBody" import="//@imports.2"/>
+          <aspects name="Valid" qualifiedName="Spring.Valid" import="//@imports.2"/>
+        </parameters>
+        <parameters name="contractBytecodeMismatch" qualifiedName="de.fhdo.puls.bookingmanagementcommand.BookingManagementCommand.ParkBookingCommands.createParkBooking.contractBytecodeMismatch" exchangePattern="OUT" communicationType="SYNCHRONOUS" communicatesFault="true">
+          <type xsi:type="intermediate_1:IntermediateImportedTechnologySpecificType" name="String" origin="TECHNOLOGY" kind="PRIMITIVE" qualifiedName="java._types.String" import="//@imports.3"/>
+          <originalType xsi:type="intermediate_1:IntermediatePrimitiveType" name="string" origin="BUILTIN" kind="PRIMITIVE"/>
+          <aspects name="ResponseStatus" qualifiedName="Spring.ResponseStatus" import="//@imports.2">
+            <properties name="status" type="string">
+              <featureNames>MANDATORY</featureNames>
+            </properties>
+            <propertyValues value="INTERNAL_SERVER_ERROR" property="//@microservices.0/@interfaces.0/@operations.0/@parameters.1/@aspects.0/@properties.0"/>
+          </aspects>
+        </parameters>
+        <parameters name="exception" qualifiedName="de.fhdo.puls.bookingmanagementcommand.BookingManagementCommand.ParkBookingCommands.createParkBooking.exception" exchangePattern="OUT" communicationType="SYNCHRONOUS" communicatesFault="true">
+          <type xsi:type="intermediate_1:IntermediateImportedTechnologySpecificType" name="String" origin="TECHNOLOGY" kind="PRIMITIVE" qualifiedName="java._types.String" import="//@imports.3"/>
+          <originalType xsi:type="intermediate_1:IntermediatePrimitiveType" name="string" origin="BUILTIN" kind="PRIMITIVE"/>
+          <aspects name="ResponseStatus" qualifiedName="Spring.ResponseStatus" import="//@imports.2">
+            <properties name="status" type="string">
+              <featureNames>MANDATORY</featureNames>
+            </properties>
+            <propertyValues value="INTERNAL_SERVER_ERROR" property="//@microservices.0/@interfaces.0/@operations.0/@parameters.2/@aspects.0/@properties.0"/>
+          </aspects>
+        </parameters>
+      </operations>
+      <operations name="sendParkBookingCreatedEvent" qualifiedName="de.fhdo.puls.bookingmanagementcommand.BookingManagementCommand.ParkBookingCommands.sendParkBookingCreatedEvent" visibility="OclUndefined">
+        <apiOperationComment comment="Send a ParkBookingCreated event for asynchronous microservice interaction"/>
+        <protocols communicationType="SYNCHRONOUS" protocol="rest" dataFormat="application/json"/>
+        <protocols communicationType="ASYNCHRONOUS" protocol="kafka" dataFormat="binary"/>
+        <aspects name="Participant" qualifiedName="Kafka.Participant" import="//@imports.1">
+          <properties name="topic" type="string">
+            <featureNames>MANDATORY</featureNames>
+          </properties>
+          <properties name="consumerGroup" type="string"/>
+          <propertyValues value="parkBookingCreatedEvent" property="//@microservices.0/@interfaces.0/@operations.1/@aspects.0/@properties.0"/>
+        </aspects>
+        <aspects name="Producer" qualifiedName="DomainEvents.Producer" import="//@imports.5">
+          <featureNames>SINGLE_VALUED</featureNames>
+          <properties name="handlerName" type="string">
+            <featureNames>MANDATORY</featureNames>
+          </properties>
+          <propertyValues value="BookingProducerService" property="//@microservices.0/@interfaces.0/@operations.1/@aspects.1/@properties.0"/>
+        </aspects>
+        <parameters name="event" qualifiedName="de.fhdo.puls.bookingmanagementcommand.BookingManagementCommand.ParkBookingCommands.sendParkBookingCreatedEvent.event" exchangePattern="OUT" communicationType="ASYNCHRONOUS">
+          <type xsi:type="intermediate_1:IntermediateImportedComplexType" name="ParkBookingCreated" origin="DATA_MODEL" kind="STRUCTURE" qualifiedName="BookingManagement.ParkBookingCreated" import="//@imports.0"/>
+          <originalType xsi:type="intermediate_1:IntermediateImportedComplexType" name="ParkBookingCreated" origin="DATA_MODEL" kind="STRUCTURE" qualifiedName="BookingManagement.ParkBookingCreated" import="//@imports.0"/>
+        </parameters>
+      </operations>
+      <operations name="updateParkBooking" qualifiedName="de.fhdo.puls.bookingmanagementcommand.BookingManagementCommand.ParkBookingCommands.updateParkBooking" visibility="OclUndefined">
+        <apiOperationComment comment="API endpoint for updating an existing park booking.">
+          <parameterComments comment="the command that presents all changed booking data" required="true" parameter="//@microservices.0/@interfaces.0/@operations.2/@parameters.0"/>
+        </apiOperationComment>
+        <endpoints communicationType="SYNCHRONOUS" protocol="rest" dataFormat="application/json" technology="//@microservices.0/@technologies.1">
+          <addresses>/parkBooking</addresses>
+        </endpoints>
+        <protocols communicationType="SYNCHRONOUS" protocol="rest" dataFormat="application/json"/>
+        <protocols communicationType="ASYNCHRONOUS" protocol="kafka" dataFormat="binary"/>
+        <aspects name="PostMapping" qualifiedName="Spring.PostMapping" import="//@imports.2">
+          <featureNames>SINGLE_VALUED</featureNames>
+        </aspects>
+        <parameters name="updateBookingCommand" qualifiedName="de.fhdo.puls.bookingmanagementcommand.BookingManagementCommand.ParkBookingCommands.updateParkBooking.updateBookingCommand" exchangePattern="IN" communicationType="SYNCHRONOUS">
+          <type xsi:type="intermediate_1:IntermediateImportedComplexType" name="UpdateParkBookingCommand" origin="DATA_MODEL" kind="STRUCTURE" qualifiedName="BookingManagement.UpdateParkBookingCommand" import="//@imports.0"/>
+          <originalType xsi:type="intermediate_1:IntermediateImportedComplexType" name="UpdateParkBookingCommand" origin="DATA_MODEL" kind="STRUCTURE" qualifiedName="BookingManagement.UpdateParkBookingCommand" import="//@imports.0"/>
+          <aspects name="RequestBody" qualifiedName="Spring.RequestBody" import="//@imports.2"/>
+          <aspects name="Valid" qualifiedName="Spring.Valid" import="//@imports.2"/>
+        </parameters>
+        <parameters name="contractBytecodeMismatch" qualifiedName="de.fhdo.puls.bookingmanagementcommand.BookingManagementCommand.ParkBookingCommands.updateParkBooking.contractBytecodeMismatch" exchangePattern="OUT" communicationType="SYNCHRONOUS" communicatesFault="true">
+          <type xsi:type="intermediate_1:IntermediateImportedTechnologySpecificType" name="String" origin="TECHNOLOGY" kind="PRIMITIVE" qualifiedName="java._types.String" import="//@imports.3"/>
+          <originalType xsi:type="intermediate_1:IntermediatePrimitiveType" name="string" origin="BUILTIN" kind="PRIMITIVE"/>
+          <aspects name="ResponseStatus" qualifiedName="Spring.ResponseStatus" import="//@imports.2">
+            <properties name="status" type="string">
+              <featureNames>MANDATORY</featureNames>
+            </properties>
+            <propertyValues value="INTERNAL_SERVER_ERROR" property="//@microservices.0/@interfaces.0/@operations.2/@parameters.1/@aspects.0/@properties.0"/>
+          </aspects>
+        </parameters>
+        <parameters name="bookingNotFound" qualifiedName="de.fhdo.puls.bookingmanagementcommand.BookingManagementCommand.ParkBookingCommands.updateParkBooking.bookingNotFound" exchangePattern="OUT" communicationType="SYNCHRONOUS" communicatesFault="true">
+          <type xsi:type="intermediate_1:IntermediateImportedTechnologySpecificType" name="String" origin="TECHNOLOGY" kind="PRIMITIVE" qualifiedName="java._types.String" import="//@imports.3"/>
+          <originalType xsi:type="intermediate_1:IntermediatePrimitiveType" name="string" origin="BUILTIN" kind="PRIMITIVE"/>
+          <aspects name="ResponseStatus" qualifiedName="Spring.ResponseStatus" import="//@imports.2">
+            <properties name="status" type="string">
+              <featureNames>MANDATORY</featureNames>
+            </properties>
+            <propertyValues value="NOT_FOUND" property="//@microservices.0/@interfaces.0/@operations.2/@parameters.2/@aspects.0/@properties.0"/>
+          </aspects>
+        </parameters>
+        <parameters name="exception" qualifiedName="de.fhdo.puls.bookingmanagementcommand.BookingManagementCommand.ParkBookingCommands.updateParkBooking.exception" exchangePattern="OUT" communicationType="SYNCHRONOUS" communicatesFault="true">
+          <type xsi:type="intermediate_1:IntermediateImportedTechnologySpecificType" name="String" origin="TECHNOLOGY" kind="PRIMITIVE" qualifiedName="java._types.String" import="//@imports.3"/>
+          <originalType xsi:type="intermediate_1:IntermediatePrimitiveType" name="string" origin="BUILTIN" kind="PRIMITIVE"/>
+          <aspects name="ResponseStatus" qualifiedName="Spring.ResponseStatus" import="//@imports.2">
+            <properties name="status" type="string">
+              <featureNames>MANDATORY</featureNames>
+            </properties>
+            <propertyValues value="INTERNAL_SERVER_ERROR" property="//@microservices.0/@interfaces.0/@operations.2/@parameters.3/@aspects.0/@properties.0"/>
+          </aspects>
+        </parameters>
+      </operations>
+      <operations name="sendParkBookingUpdatedEvent" qualifiedName="de.fhdo.puls.bookingmanagementcommand.BookingManagementCommand.ParkBookingCommands.sendParkBookingUpdatedEvent" visibility="OclUndefined">
+        <apiOperationComment comment="Send a ParkBookingUpdated event for asynchronous microservice interaction"/>
+        <protocols communicationType="SYNCHRONOUS" protocol="rest" dataFormat="application/json"/>
+        <protocols communicationType="ASYNCHRONOUS" protocol="kafka" dataFormat="binary"/>
+        <aspects name="Participant" qualifiedName="Kafka.Participant" import="//@imports.1">
+          <properties name="topic" type="string">
+            <featureNames>MANDATORY</featureNames>
+          </properties>
+          <properties name="consumerGroup" type="string"/>
+          <propertyValues value="parkBookingUpdatedEvent" property="//@microservices.0/@interfaces.0/@operations.3/@aspects.0/@properties.0"/>
+        </aspects>
+        <aspects name="Producer" qualifiedName="DomainEvents.Producer" import="//@imports.5">
+          <featureNames>SINGLE_VALUED</featureNames>
+          <properties name="handlerName" type="string">
+            <featureNames>MANDATORY</featureNames>
+          </properties>
+          <propertyValues value="BookingProducerService" property="//@microservices.0/@interfaces.0/@operations.3/@aspects.1/@properties.0"/>
+        </aspects>
+        <parameters name="event" qualifiedName="de.fhdo.puls.bookingmanagementcommand.BookingManagementCommand.ParkBookingCommands.sendParkBookingUpdatedEvent.event" exchangePattern="OUT" communicationType="ASYNCHRONOUS">
+          <type xsi:type="intermediate_1:IntermediateImportedComplexType" name="ParkBookingUpdated" origin="DATA_MODEL" kind="STRUCTURE" qualifiedName="BookingManagement.ParkBookingUpdated" import="//@imports.0"/>
+          <originalType xsi:type="intermediate_1:IntermediateImportedComplexType" name="ParkBookingUpdated" origin="DATA_MODEL" kind="STRUCTURE" qualifiedName="BookingManagement.ParkBookingUpdated" import="//@imports.0"/>
+        </parameters>
+      </operations>
+      <operations name="cancelParkBooking" qualifiedName="de.fhdo.puls.bookingmanagementcommand.BookingManagementCommand.ParkBookingCommands.cancelParkBooking" visibility="OclUndefined">
+        <apiOperationComment comment="API endpoint for deleting / canceling an existing park booking.">
+          <parameterComments comment="the command that includes the bookingId of booking to be canceled." required="true" parameter="//@microservices.0/@interfaces.0/@operations.4/@parameters.0"/>
+        </apiOperationComment>
+        <endpoints communicationType="SYNCHRONOUS" protocol="rest" dataFormat="application/json" technology="//@microservices.0/@technologies.1">
+          <addresses>/parkBooking</addresses>
+        </endpoints>
+        <protocols communicationType="SYNCHRONOUS" protocol="rest" dataFormat="application/json"/>
+        <protocols communicationType="ASYNCHRONOUS" protocol="kafka" dataFormat="binary"/>
+        <aspects name="DeleteMapping" qualifiedName="Spring.DeleteMapping" import="//@imports.2">
+          <featureNames>SINGLE_VALUED</featureNames>
+        </aspects>
+        <parameters name="cancelBookingCommand" qualifiedName="de.fhdo.puls.bookingmanagementcommand.BookingManagementCommand.ParkBookingCommands.cancelParkBooking.cancelBookingCommand" exchangePattern="IN" communicationType="SYNCHRONOUS">
+          <type xsi:type="intermediate_1:IntermediateImportedComplexType" name="CancelParkBookingCommand" origin="DATA_MODEL" kind="STRUCTURE" qualifiedName="BookingManagement.CancelParkBookingCommand" import="//@imports.0"/>
+          <originalType xsi:type="intermediate_1:IntermediateImportedComplexType" name="CancelParkBookingCommand" origin="DATA_MODEL" kind="STRUCTURE" qualifiedName="BookingManagement.CancelParkBookingCommand" import="//@imports.0"/>
+          <aspects name="RequestBody" qualifiedName="Spring.RequestBody" import="//@imports.2"/>
+          <aspects name="Valid" qualifiedName="Spring.Valid" import="//@imports.2"/>
+        </parameters>
+        <parameters name="contractBytecodeMismatch" qualifiedName="de.fhdo.puls.bookingmanagementcommand.BookingManagementCommand.ParkBookingCommands.cancelParkBooking.contractBytecodeMismatch" exchangePattern="OUT" communicationType="SYNCHRONOUS" communicatesFault="true">
+          <type xsi:type="intermediate_1:IntermediateImportedTechnologySpecificType" name="String" origin="TECHNOLOGY" kind="PRIMITIVE" qualifiedName="java._types.String" import="//@imports.3"/>
+          <originalType xsi:type="intermediate_1:IntermediatePrimitiveType" name="string" origin="BUILTIN" kind="PRIMITIVE"/>
+          <aspects name="ResponseStatus" qualifiedName="Spring.ResponseStatus" import="//@imports.2">
+            <properties name="status" type="string">
+              <featureNames>MANDATORY</featureNames>
+            </properties>
+            <propertyValues value="INTERNAL_SERVER_ERROR" property="//@microservices.0/@interfaces.0/@operations.4/@parameters.1/@aspects.0/@properties.0"/>
+          </aspects>
+        </parameters>
+        <parameters name="bookingNotFound" qualifiedName="de.fhdo.puls.bookingmanagementcommand.BookingManagementCommand.ParkBookingCommands.cancelParkBooking.bookingNotFound" exchangePattern="OUT" communicationType="SYNCHRONOUS" communicatesFault="true">
+          <type xsi:type="intermediate_1:IntermediateImportedTechnologySpecificType" name="String" origin="TECHNOLOGY" kind="PRIMITIVE" qualifiedName="java._types.String" import="//@imports.3"/>
+          <originalType xsi:type="intermediate_1:IntermediatePrimitiveType" name="string" origin="BUILTIN" kind="PRIMITIVE"/>
+          <aspects name="ResponseStatus" qualifiedName="Spring.ResponseStatus" import="//@imports.2">
+            <properties name="status" type="string">
+              <featureNames>MANDATORY</featureNames>
+            </properties>
+            <propertyValues value="NOT_FOUND" property="//@microservices.0/@interfaces.0/@operations.4/@parameters.2/@aspects.0/@properties.0"/>
+          </aspects>
+        </parameters>
+        <parameters name="exception" qualifiedName="de.fhdo.puls.bookingmanagementcommand.BookingManagementCommand.ParkBookingCommands.cancelParkBooking.exception" exchangePattern="OUT" communicationType="SYNCHRONOUS" communicatesFault="true">
+          <type xsi:type="intermediate_1:IntermediateImportedTechnologySpecificType" name="String" origin="TECHNOLOGY" kind="PRIMITIVE" qualifiedName="java._types.String" import="//@imports.3"/>
+          <originalType xsi:type="intermediate_1:IntermediatePrimitiveType" name="string" origin="BUILTIN" kind="PRIMITIVE"/>
+          <aspects name="ResponseStatus" qualifiedName="Spring.ResponseStatus" import="//@imports.2">
+            <properties name="status" type="string">
+              <featureNames>MANDATORY</featureNames>
+            </properties>
+            <propertyValues value="INTERNAL_SERVER_ERROR" property="//@microservices.0/@interfaces.0/@operations.4/@parameters.3/@aspects.0/@properties.0"/>
+          </aspects>
+        </parameters>
+      </operations>
+      <operations name="sendParkBookingCanceledEvent" qualifiedName="de.fhdo.puls.bookingmanagementcommand.BookingManagementCommand.ParkBookingCommands.sendParkBookingCanceledEvent" visibility="OclUndefined">
+        <apiOperationComment comment="Send a ParkBookingCanceled event for asynchronous microservice interaction"/>
+        <protocols communicationType="SYNCHRONOUS" protocol="rest" dataFormat="application/json"/>
+        <protocols communicationType="ASYNCHRONOUS" protocol="kafka" dataFormat="binary"/>
+        <aspects name="Participant" qualifiedName="Kafka.Participant" import="//@imports.1">
+          <properties name="topic" type="string">
+            <featureNames>MANDATORY</featureNames>
+          </properties>
+          <properties name="consumerGroup" type="string"/>
+          <propertyValues value="parkBookingCanceledEvent" property="//@microservices.0/@interfaces.0/@operations.5/@aspects.0/@properties.0"/>
+        </aspects>
+        <aspects name="Producer" qualifiedName="DomainEvents.Producer" import="//@imports.5">
+          <featureNames>SINGLE_VALUED</featureNames>
+          <properties name="handlerName" type="string">
+            <featureNames>MANDATORY</featureNames>
+          </properties>
+          <propertyValues value="BookingProducerService" property="//@microservices.0/@interfaces.0/@operations.5/@aspects.1/@properties.0"/>
+        </aspects>
+        <parameters name="event" qualifiedName="de.fhdo.puls.bookingmanagementcommand.BookingManagementCommand.ParkBookingCommands.sendParkBookingCanceledEvent.event" exchangePattern="OUT" communicationType="ASYNCHRONOUS">
+          <type xsi:type="intermediate_1:IntermediateImportedComplexType" name="ParkBookingCanceled" origin="DATA_MODEL" kind="STRUCTURE" qualifiedName="BookingManagement.ParkBookingCanceled" import="//@imports.0"/>
+          <originalType xsi:type="intermediate_1:IntermediateImportedComplexType" name="ParkBookingCanceled" origin="DATA_MODEL" kind="STRUCTURE" qualifiedName="BookingManagement.ParkBookingCanceled" import="//@imports.0"/>
+        </parameters>
+      </operations>
+    </interfaces>
+    <interfaces name="ParkAndChargeBookingCommands" qualifiedName="de.fhdo.puls.bookingmanagementcommand.BookingManagementCommand.ParkAndChargeBookingCommands" visibility="ARCHITECTURE" hasImplementedOperations="true">
+      <endpoints communicationType="SYNCHRONOUS" protocol="rest" dataFormat="application/json" technology="//@microservices.0/@technologies.1">
+        <addresses>/resources/v1</addresses>
+      </endpoints>
+      <protocols communicationType="SYNCHRONOUS" protocol="rest" dataFormat="application/json"/>
+      <protocols communicationType="ASYNCHRONOUS" protocol="kafka" dataFormat="binary"/>
+      <operations name="createParkAndChargeBooking" qualifiedName="de.fhdo.puls.bookingmanagementcommand.BookingManagementCommand.ParkAndChargeBookingCommands.createParkAndChargeBooking" visibility="OclUndefined">
+        <apiOperationComment comment="API endpoint for creating a new park and charge booking.">
+          <parameterComments comment="the command that includes all required booking data for generate an aggregate-object" required="true" parameter="//@microservices.0/@interfaces.1/@operations.0/@parameters.0"/>
+        </apiOperationComment>
+        <endpoints communicationType="SYNCHRONOUS" protocol="rest" dataFormat="application/json" technology="//@microservices.0/@technologies.1">
+          <addresses>/parkAndChargeBooking</addresses>
+        </endpoints>
+        <protocols communicationType="SYNCHRONOUS" protocol="rest" dataFormat="application/json"/>
+        <protocols communicationType="ASYNCHRONOUS" protocol="kafka" dataFormat="binary"/>
+        <aspects name="PutMapping" qualifiedName="Spring.PutMapping" import="//@imports.2">
+          <featureNames>SINGLE_VALUED</featureNames>
+        </aspects>
+        <parameters name="createBookingCommand" qualifiedName="de.fhdo.puls.bookingmanagementcommand.BookingManagementCommand.ParkAndChargeBookingCommands.createParkAndChargeBooking.createBookingCommand" exchangePattern="IN" communicationType="SYNCHRONOUS">
+          <type xsi:type="intermediate_1:IntermediateImportedComplexType" name="CreateParkAndChargeBookingCommand" origin="DATA_MODEL" kind="STRUCTURE" qualifiedName="BookingManagement.CreateParkAndChargeBookingCommand" import="//@imports.0"/>
+          <originalType xsi:type="intermediate_1:IntermediateImportedComplexType" name="CreateParkAndChargeBookingCommand" origin="DATA_MODEL" kind="STRUCTURE" qualifiedName="BookingManagement.CreateParkAndChargeBookingCommand" import="//@imports.0"/>
+          <aspects name="RequestBody" qualifiedName="Spring.RequestBody" import="//@imports.2"/>
+          <aspects name="Valid" qualifiedName="Spring.Valid" import="//@imports.2"/>
+        </parameters>
+        <parameters name="contractBytecodeMismatch" qualifiedName="de.fhdo.puls.bookingmanagementcommand.BookingManagementCommand.ParkAndChargeBookingCommands.createParkAndChargeBooking.contractBytecodeMismatch" exchangePattern="OUT" communicationType="SYNCHRONOUS" communicatesFault="true">
+          <type xsi:type="intermediate_1:IntermediateImportedTechnologySpecificType" name="String" origin="TECHNOLOGY" kind="PRIMITIVE" qualifiedName="java._types.String" import="//@imports.3"/>
+          <originalType xsi:type="intermediate_1:IntermediatePrimitiveType" name="string" origin="BUILTIN" kind="PRIMITIVE"/>
+          <aspects name="ResponseStatus" qualifiedName="Spring.ResponseStatus" import="//@imports.2">
+            <properties name="status" type="string">
+              <featureNames>MANDATORY</featureNames>
+            </properties>
+            <propertyValues value="INTERNAL_SERVER_ERROR" property="//@microservices.0/@interfaces.1/@operations.0/@parameters.1/@aspects.0/@properties.0"/>
+          </aspects>
+        </parameters>
+        <parameters name="exception" qualifiedName="de.fhdo.puls.bookingmanagementcommand.BookingManagementCommand.ParkAndChargeBookingCommands.createParkAndChargeBooking.exception" exchangePattern="OUT" communicationType="SYNCHRONOUS" communicatesFault="true">
+          <type xsi:type="intermediate_1:IntermediateImportedTechnologySpecificType" name="String" origin="TECHNOLOGY" kind="PRIMITIVE" qualifiedName="java._types.String" import="//@imports.3"/>
+          <originalType xsi:type="intermediate_1:IntermediatePrimitiveType" name="string" origin="BUILTIN" kind="PRIMITIVE"/>
+          <aspects name="ResponseStatus" qualifiedName="Spring.ResponseStatus" import="//@imports.2">
+            <properties name="status" type="string">
+              <featureNames>MANDATORY</featureNames>
+            </properties>
+            <propertyValues value="INTERNAL_SERVER_ERROR" property="//@microservices.0/@interfaces.1/@operations.0/@parameters.2/@aspects.0/@properties.0"/>
+          </aspects>
+        </parameters>
+      </operations>
+      <operations name="sendParkAndChargeBookingCreatedEvent" qualifiedName="de.fhdo.puls.bookingmanagementcommand.BookingManagementCommand.ParkAndChargeBookingCommands.sendParkAndChargeBookingCreatedEvent" visibility="OclUndefined">
+        <apiOperationComment comment="Send a ParkAndChargeBookingCreated event for asynchronous microservice interaction"/>
+        <protocols communicationType="SYNCHRONOUS" protocol="rest" dataFormat="application/json"/>
+        <protocols communicationType="ASYNCHRONOUS" protocol="kafka" dataFormat="binary"/>
+        <aspects name="Participant" qualifiedName="Kafka.Participant" import="//@imports.1">
+          <properties name="topic" type="string">
+            <featureNames>MANDATORY</featureNames>
+          </properties>
+          <properties name="consumerGroup" type="string"/>
+          <propertyValues value="parkAndChargeBookingCreatedEvent" property="//@microservices.0/@interfaces.1/@operations.1/@aspects.0/@properties.0"/>
+        </aspects>
+        <aspects name="Producer" qualifiedName="DomainEvents.Producer" import="//@imports.5">
+          <featureNames>SINGLE_VALUED</featureNames>
+          <properties name="handlerName" type="string">
+            <featureNames>MANDATORY</featureNames>
+          </properties>
+          <propertyValues value="BookingProducerService" property="//@microservices.0/@interfaces.1/@operations.1/@aspects.1/@properties.0"/>
+        </aspects>
+        <parameters name="event" qualifiedName="de.fhdo.puls.bookingmanagementcommand.BookingManagementCommand.ParkAndChargeBookingCommands.sendParkAndChargeBookingCreatedEvent.event" exchangePattern="OUT" communicationType="ASYNCHRONOUS">
+          <type xsi:type="intermediate_1:IntermediateImportedComplexType" name="ParkAndChargeBookingCreated" origin="DATA_MODEL" kind="STRUCTURE" qualifiedName="BookingManagement.ParkAndChargeBookingCreated" import="//@imports.0"/>
+          <originalType xsi:type="intermediate_1:IntermediateImportedComplexType" name="ParkAndChargeBookingCreated" origin="DATA_MODEL" kind="STRUCTURE" qualifiedName="BookingManagement.ParkAndChargeBookingCreated" import="//@imports.0"/>
+        </parameters>
+      </operations>
+      <operations name="updateParkAndChargeBooking" qualifiedName="de.fhdo.puls.bookingmanagementcommand.BookingManagementCommand.ParkAndChargeBookingCommands.updateParkAndChargeBooking" visibility="OclUndefined">
+        <apiOperationComment comment="API endpoint for updating an existing park and charge booking.">
+          <parameterComments comment="the command that presents all changed booking data" required="true" parameter="//@microservices.0/@interfaces.1/@operations.2/@parameters.0"/>
+        </apiOperationComment>
+        <endpoints communicationType="SYNCHRONOUS" protocol="rest" dataFormat="application/json" technology="//@microservices.0/@technologies.1">
+          <addresses>/parkAndChargeBooking</addresses>
+        </endpoints>
+        <protocols communicationType="SYNCHRONOUS" protocol="rest" dataFormat="application/json"/>
+        <protocols communicationType="ASYNCHRONOUS" protocol="kafka" dataFormat="binary"/>
+        <aspects name="PostMapping" qualifiedName="Spring.PostMapping" import="//@imports.2">
+          <featureNames>SINGLE_VALUED</featureNames>
+        </aspects>
+        <parameters name="updateBookingCommand" qualifiedName="de.fhdo.puls.bookingmanagementcommand.BookingManagementCommand.ParkAndChargeBookingCommands.updateParkAndChargeBooking.updateBookingCommand" exchangePattern="IN" communicationType="SYNCHRONOUS">
+          <type xsi:type="intermediate_1:IntermediateImportedComplexType" name="UpdateParkAndChargeBookingCommand" origin="DATA_MODEL" kind="STRUCTURE" qualifiedName="BookingManagement.UpdateParkAndChargeBookingCommand" import="//@imports.0"/>
+          <originalType xsi:type="intermediate_1:IntermediateImportedComplexType" name="UpdateParkAndChargeBookingCommand" origin="DATA_MODEL" kind="STRUCTURE" qualifiedName="BookingManagement.UpdateParkAndChargeBookingCommand" import="//@imports.0"/>
+          <aspects name="RequestBody" qualifiedName="Spring.RequestBody" import="//@imports.2"/>
+          <aspects name="Valid" qualifiedName="Spring.Valid" import="//@imports.2"/>
+        </parameters>
+        <parameters name="contractBytecodeMismatch" qualifiedName="de.fhdo.puls.bookingmanagementcommand.BookingManagementCommand.ParkAndChargeBookingCommands.updateParkAndChargeBooking.contractBytecodeMismatch" exchangePattern="OUT" communicationType="SYNCHRONOUS" communicatesFault="true">
+          <type xsi:type="intermediate_1:IntermediateImportedTechnologySpecificType" name="String" origin="TECHNOLOGY" kind="PRIMITIVE" qualifiedName="java._types.String" import="//@imports.3"/>
+          <originalType xsi:type="intermediate_1:IntermediatePrimitiveType" name="string" origin="BUILTIN" kind="PRIMITIVE"/>
+          <aspects name="ResponseStatus" qualifiedName="Spring.ResponseStatus" import="//@imports.2">
+            <properties name="status" type="string">
+              <featureNames>MANDATORY</featureNames>
+            </properties>
+            <propertyValues value="INTERNAL_SERVER_ERROR" property="//@microservices.0/@interfaces.1/@operations.2/@parameters.1/@aspects.0/@properties.0"/>
+          </aspects>
+        </parameters>
+        <parameters name="bookingNotFound" qualifiedName="de.fhdo.puls.bookingmanagementcommand.BookingManagementCommand.ParkAndChargeBookingCommands.updateParkAndChargeBooking.bookingNotFound" exchangePattern="OUT" communicationType="SYNCHRONOUS" communicatesFault="true">
+          <type xsi:type="intermediate_1:IntermediateImportedTechnologySpecificType" name="String" origin="TECHNOLOGY" kind="PRIMITIVE" qualifiedName="java._types.String" import="//@imports.3"/>
+          <originalType xsi:type="intermediate_1:IntermediatePrimitiveType" name="string" origin="BUILTIN" kind="PRIMITIVE"/>
+          <aspects name="ResponseStatus" qualifiedName="Spring.ResponseStatus" import="//@imports.2">
+            <properties name="status" type="string">
+              <featureNames>MANDATORY</featureNames>
+            </properties>
+            <propertyValues value="NOT_FOUND" property="//@microservices.0/@interfaces.1/@operations.2/@parameters.2/@aspects.0/@properties.0"/>
+          </aspects>
+        </parameters>
+        <parameters name="exception" qualifiedName="de.fhdo.puls.bookingmanagementcommand.BookingManagementCommand.ParkAndChargeBookingCommands.updateParkAndChargeBooking.exception" exchangePattern="OUT" communicationType="SYNCHRONOUS" communicatesFault="true">
+          <type xsi:type="intermediate_1:IntermediateImportedTechnologySpecificType" name="String" origin="TECHNOLOGY" kind="PRIMITIVE" qualifiedName="java._types.String" import="//@imports.3"/>
+          <originalType xsi:type="intermediate_1:IntermediatePrimitiveType" name="string" origin="BUILTIN" kind="PRIMITIVE"/>
+          <aspects name="ResponseStatus" qualifiedName="Spring.ResponseStatus" import="//@imports.2">
+            <properties name="status" type="string">
+              <featureNames>MANDATORY</featureNames>
+            </properties>
+            <propertyValues value="INTERNAL_SERVER_ERROR" property="//@microservices.0/@interfaces.1/@operations.2/@parameters.3/@aspects.0/@properties.0"/>
+          </aspects>
+        </parameters>
+      </operations>
+      <operations name="sendParkAndChargeBookingUpdatedEvent" qualifiedName="de.fhdo.puls.bookingmanagementcommand.BookingManagementCommand.ParkAndChargeBookingCommands.sendParkAndChargeBookingUpdatedEvent" visibility="OclUndefined">
+        <apiOperationComment comment="Send a ParkAndChargeBookingUpdated event for asynchronous microservice interaction"/>
+        <protocols communicationType="SYNCHRONOUS" protocol="rest" dataFormat="application/json"/>
+        <protocols communicationType="ASYNCHRONOUS" protocol="kafka" dataFormat="binary"/>
+        <aspects name="Participant" qualifiedName="Kafka.Participant" import="//@imports.1">
+          <properties name="topic" type="string">
+            <featureNames>MANDATORY</featureNames>
+          </properties>
+          <properties name="consumerGroup" type="string"/>
+          <propertyValues value="parkAndChargeBookingUpdatedEvent" property="//@microservices.0/@interfaces.1/@operations.3/@aspects.0/@properties.0"/>
+        </aspects>
+        <aspects name="Producer" qualifiedName="DomainEvents.Producer" import="//@imports.5">
+          <featureNames>SINGLE_VALUED</featureNames>
+          <properties name="handlerName" type="string">
+            <featureNames>MANDATORY</featureNames>
+          </properties>
+          <propertyValues value="BookingProducerService" property="//@microservices.0/@interfaces.1/@operations.3/@aspects.1/@properties.0"/>
+        </aspects>
+        <parameters name="event" qualifiedName="de.fhdo.puls.bookingmanagementcommand.BookingManagementCommand.ParkAndChargeBookingCommands.sendParkAndChargeBookingUpdatedEvent.event" exchangePattern="OUT" communicationType="ASYNCHRONOUS">
+          <type xsi:type="intermediate_1:IntermediateImportedComplexType" name="ParkAndChargeBookingUpdated" origin="DATA_MODEL" kind="STRUCTURE" qualifiedName="BookingManagement.ParkAndChargeBookingUpdated" import="//@imports.0"/>
+          <originalType xsi:type="intermediate_1:IntermediateImportedComplexType" name="ParkAndChargeBookingUpdated" origin="DATA_MODEL" kind="STRUCTURE" qualifiedName="BookingManagement.ParkAndChargeBookingUpdated" import="//@imports.0"/>
+        </parameters>
+      </operations>
+      <operations name="deletParkAndChargeBooking" qualifiedName="de.fhdo.puls.bookingmanagementcommand.BookingManagementCommand.ParkAndChargeBookingCommands.deletParkAndChargeBooking" visibility="OclUndefined">
+        <apiOperationComment comment="API endpoint for deleting / canceling an existing park and charge booking.">
+          <parameterComments comment="the command that includes the bookingId of booking to be canceled." required="true" parameter="//@microservices.0/@interfaces.1/@operations.4/@parameters.0"/>
+        </apiOperationComment>
+        <endpoints communicationType="SYNCHRONOUS" protocol="rest" dataFormat="application/json" technology="//@microservices.0/@technologies.1">
+          <addresses>/parkAndChargeBooking</addresses>
+        </endpoints>
+        <protocols communicationType="SYNCHRONOUS" protocol="rest" dataFormat="application/json"/>
+        <protocols communicationType="ASYNCHRONOUS" protocol="kafka" dataFormat="binary"/>
+        <aspects name="DeleteMapping" qualifiedName="Spring.DeleteMapping" import="//@imports.2">
+          <featureNames>SINGLE_VALUED</featureNames>
+        </aspects>
+        <parameters name="cancelBookingCommand" qualifiedName="de.fhdo.puls.bookingmanagementcommand.BookingManagementCommand.ParkAndChargeBookingCommands.deletParkAndChargeBooking.cancelBookingCommand" exchangePattern="IN" communicationType="SYNCHRONOUS">
+          <type xsi:type="intermediate_1:IntermediateImportedComplexType" name="CancelParkAndChargeBookingCommand" origin="DATA_MODEL" kind="STRUCTURE" qualifiedName="BookingManagement.CancelParkAndChargeBookingCommand" import="//@imports.0"/>
+          <originalType xsi:type="intermediate_1:IntermediateImportedComplexType" name="CancelParkAndChargeBookingCommand" origin="DATA_MODEL" kind="STRUCTURE" qualifiedName="BookingManagement.CancelParkAndChargeBookingCommand" import="//@imports.0"/>
+          <aspects name="RequestBody" qualifiedName="Spring.RequestBody" import="//@imports.2"/>
+          <aspects name="Valid" qualifiedName="Spring.Valid" import="//@imports.2"/>
+        </parameters>
+        <parameters name="contractBytecodeMismatch" qualifiedName="de.fhdo.puls.bookingmanagementcommand.BookingManagementCommand.ParkAndChargeBookingCommands.deletParkAndChargeBooking.contractBytecodeMismatch" exchangePattern="OUT" communicationType="SYNCHRONOUS" communicatesFault="true">
+          <type xsi:type="intermediate_1:IntermediateImportedTechnologySpecificType" name="String" origin="TECHNOLOGY" kind="PRIMITIVE" qualifiedName="java._types.String" import="//@imports.3"/>
+          <originalType xsi:type="intermediate_1:IntermediatePrimitiveType" name="string" origin="BUILTIN" kind="PRIMITIVE"/>
+          <aspects name="ResponseStatus" qualifiedName="Spring.ResponseStatus" import="//@imports.2">
+            <properties name="status" type="string">
+              <featureNames>MANDATORY</featureNames>
+            </properties>
+            <propertyValues value="INTERNAL_SERVER_ERROR" property="//@microservices.0/@interfaces.1/@operations.4/@parameters.1/@aspects.0/@properties.0"/>
+          </aspects>
+        </parameters>
+        <parameters name="bookingNotFound" qualifiedName="de.fhdo.puls.bookingmanagementcommand.BookingManagementCommand.ParkAndChargeBookingCommands.deletParkAndChargeBooking.bookingNotFound" exchangePattern="OUT" communicationType="SYNCHRONOUS" communicatesFault="true">
+          <type xsi:type="intermediate_1:IntermediateImportedTechnologySpecificType" name="String" origin="TECHNOLOGY" kind="PRIMITIVE" qualifiedName="java._types.String" import="//@imports.3"/>
+          <originalType xsi:type="intermediate_1:IntermediatePrimitiveType" name="string" origin="BUILTIN" kind="PRIMITIVE"/>
+          <aspects name="ResponseStatus" qualifiedName="Spring.ResponseStatus" import="//@imports.2">
+            <properties name="status" type="string">
+              <featureNames>MANDATORY</featureNames>
+            </properties>
+            <propertyValues value="NOT_FOUND" property="//@microservices.0/@interfaces.1/@operations.4/@parameters.2/@aspects.0/@properties.0"/>
+          </aspects>
+        </parameters>
+        <parameters name="exception" qualifiedName="de.fhdo.puls.bookingmanagementcommand.BookingManagementCommand.ParkAndChargeBookingCommands.deletParkAndChargeBooking.exception" exchangePattern="OUT" communicationType="SYNCHRONOUS" communicatesFault="true">
+          <type xsi:type="intermediate_1:IntermediateImportedTechnologySpecificType" name="String" origin="TECHNOLOGY" kind="PRIMITIVE" qualifiedName="java._types.String" import="//@imports.3"/>
+          <originalType xsi:type="intermediate_1:IntermediatePrimitiveType" name="string" origin="BUILTIN" kind="PRIMITIVE"/>
+          <aspects name="ResponseStatus" qualifiedName="Spring.ResponseStatus" import="//@imports.2">
+            <properties name="status" type="string">
+              <featureNames>MANDATORY</featureNames>
+            </properties>
+            <propertyValues value="INTERNAL_SERVER_ERROR" property="//@microservices.0/@interfaces.1/@operations.4/@parameters.3/@aspects.0/@properties.0"/>
+          </aspects>
+        </parameters>
+      </operations>
+      <operations name="sendParkAndChargeBookingCanceledEvent" qualifiedName="de.fhdo.puls.bookingmanagementcommand.BookingManagementCommand.ParkAndChargeBookingCommands.sendParkAndChargeBookingCanceledEvent" visibility="OclUndefined">
+        <apiOperationComment comment="Send a ParkAndChargeBookingCanceled event for asynchronous microservice interaction"/>
+        <protocols communicationType="SYNCHRONOUS" protocol="rest" dataFormat="application/json"/>
+        <protocols communicationType="ASYNCHRONOUS" protocol="kafka" dataFormat="binary"/>
+        <aspects name="Participant" qualifiedName="Kafka.Participant" import="//@imports.1">
+          <properties name="topic" type="string">
+            <featureNames>MANDATORY</featureNames>
+          </properties>
+          <properties name="consumerGroup" type="string"/>
+          <propertyValues value="parkAndChargeBookingCanceledEvent" property="//@microservices.0/@interfaces.1/@operations.5/@aspects.0/@properties.0"/>
+        </aspects>
+        <aspects name="Producer" qualifiedName="DomainEvents.Producer" import="//@imports.5">
+          <featureNames>SINGLE_VALUED</featureNames>
+          <properties name="handlerName" type="string">
+            <featureNames>MANDATORY</featureNames>
+          </properties>
+          <propertyValues value="BookingProducerService" property="//@microservices.0/@interfaces.1/@operations.5/@aspects.1/@properties.0"/>
+        </aspects>
+        <parameters name="event" qualifiedName="de.fhdo.puls.bookingmanagementcommand.BookingManagementCommand.ParkAndChargeBookingCommands.sendParkAndChargeBookingCanceledEvent.event" exchangePattern="OUT" communicationType="ASYNCHRONOUS">
+          <type xsi:type="intermediate_1:IntermediateImportedComplexType" name="ParkAndChargeBookingCanceled" origin="DATA_MODEL" kind="STRUCTURE" qualifiedName="BookingManagement.ParkAndChargeBookingCanceled" import="//@imports.0"/>
+          <originalType xsi:type="intermediate_1:IntermediateImportedComplexType" name="ParkAndChargeBookingCanceled" origin="DATA_MODEL" kind="STRUCTURE" qualifiedName="BookingManagement.ParkAndChargeBookingCanceled" import="//@imports.0"/>
+        </parameters>
+      </operations>
+    </interfaces>
+    <aspects name="BootstrapAddress" qualifiedName="Kafka.BootstrapAddress" import="//@imports.1">
+      <featureNames>SINGLE_VALUED</featureNames>
+      <properties name="address" type="string">
+        <featureNames>MANDATORY</featureNames>
+      </properties>
+      <propertyValues value="kafka-server1:9092" property="//@microservices.0/@aspects.0/@properties.0"/>
+    </aspects>
+    <aspects name="CommandSide" qualifiedName="CQRS.CommandSide" import="//@imports.4">
+      <properties name="logicalService" type="string"/>
+      <propertyValues value="BookingManagementMicroservice" property="//@microservices.0/@aspects.1/@properties.0"/>
+    </aspects>
+    <aspects name="Application" qualifiedName="Spring.Application" import="//@imports.2">
+      <featureNames>SINGLE_VALUED</featureNames>
+      <properties name="name" type="string"/>
+      <properties name="port" type="int"/>
+      <propertyValues value="BookingManagementMicroserviceCommand" property="//@microservices.0/@aspects.2/@properties.0"/>
+      <propertyValues value="8061" property="//@microservices.0/@aspects.2/@properties.1"/>
+    </aspects>
+    <aspects name="DatasourceConfiguration" qualifiedName="Spring.DatasourceConfiguration" import="//@imports.2">
+      <featureNames>SINGLE_VALUED</featureNames>
+      <properties name="url" type="string"/>
+      <properties name="username" type="string"/>
+      <properties name="password" type="string"/>
+      <properties name="databaseTechnology" type="string"/>
+      <propertyValues value="MariaDB" property="//@microservices.0/@aspects.3/@properties.3"/>
+    </aspects>
+    <aspects name="EnableServiceDiscovery" qualifiedName="Spring.EnableServiceDiscovery" import="//@imports.2">
+      <featureNames>SINGLE_VALUED</featureNames>
+      <properties name="discoveryTechnology" type="string">
+        <featureNames>MANDATORY</featureNames>
+      </properties>
+      <propertyValues value="eureka" property="//@microservices.0/@aspects.4/@properties.0"/>
+    </aspects>
+  </microservices>
+</intermediate:IntermediateServiceModel>

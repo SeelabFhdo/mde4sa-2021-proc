@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="ASCII"?>
+<intermediate:IntermediateOperationModel xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:intermediate="http://www.fhdo.de/lemma/operation/intermediate" sourceModelUri="file://../../infrastructure/eureka.operation">
+  <imports name="container_base" importUri="file://../../../Technology/technology/container_base.technology" importTypeName="TECHNOLOGY"/>
+  <imports name="Eureka" importUri="file://../../../Technology/technology/eureka.technology" importTypeName="TECHNOLOGY"/>
+  <imports name="BookingManagementCommandSide" importUri="file://../../../../runtime-EclipseApplication/Booking-Management-Microservice-Command/intermediate/operation models/bookingCommandManagement.xmi" importTypeName="OPERATION_NODES"/>
+  <imports name="BookingManagementQuerySide" importUri="file://../../../../runtime-EclipseApplication/Booking-Management-Microservice-Query/intermediate/operation models/bookingQueryManagement.xmi" importTypeName="OPERATION_NODES"/>
+  <imports name="CSMMCommandSide" importUri="file://../../../../runtime-EclipseApplication/Charging-Station-Management-Microservice-Command/intermediate/operation models/chargingStationCommandManagement.xmi" importTypeName="OPERATION_NODES"/>
+  <imports name="CSMMQuerySide" importUri="file://../../../../runtime-EclipseApplication/Charging-Station-Management-Microservice-Query/intermediate/operation models/chargingStationQueryManagement.xmi" importTypeName="OPERATION_NODES"/>
+  <imports name="ChargingStationSearchService" importUri="file://../../../../runtime-EclipseApplication/Charging-Station-Search-Microservice/intermediate/operation models/chargingStationSearch.xmi" importTypeName="OPERATION_NODES"/>
+  <imports name="CSSMCommandSide" importUri="file://../../../../runtime-EclipseApplication/Charging-Station-Sharing-Microservice-Command/intermediate/operation models/chargingStationSharingCommand.xmi" importTypeName="OPERATION_NODES"/>
+  <imports name="CSSMQuerySide" importUri="file://../../../../runtime-EclipseApplication/Charging-Station-Sharing-Microservice-Query/intermediate/operation models/chargingStationSharingQuery.xmi" importTypeName="OPERATION_NODES"/>
+  <imports name="EDAMCommandSide" importUri="file://../../../../runtime-EclipseApplication/Environmental-Data-Analysis-Microservice-Command/intermediate/operation models/environmentalDataCommandAnalysis.xmi" importTypeName="OPERATION_NODES"/>
+  <imports name="EDAMQuerySide" importUri="file://../../../../runtime-EclipseApplication/Environmental-Data-Analysis-Microservice-Query/intermediate/operation models/environmentalDataQueryAnalysis.xmi" importTypeName="OPERATION_NODES"/>
+  <infrastructureNodes name="Eureka" imports="//@imports.0 //@imports.1" operationEnvironment="//@infrastructureNodes.0/@reference/@technology/@environment" qualifiedInfrastructureTechnologyName="Eureka.Eureka">
+    <endpoints communicationType="SYNCHRONOUS" protocol="http" dataFormat="http" technology="//@infrastructureNodes.0/@endpoints.0/@endpointTechnology">
+      <addresses>eureka:8761</addresses>
+      <endpointTechnology name="Eureka" import="//@imports.1"/>
+    </endpoints>
+    <defaultValues value="eureka" technologySpecificProperty="//@infrastructureNodes.0/@reference/@technology/@properties.0"/>
+    <defaultValues value="8761" technologySpecificProperty="//@infrastructureNodes.0/@reference/@technology/@properties.1"/>
+    <defaultValues value="SpringComponent" technologySpecificProperty="//@infrastructureNodes.0/@reference/@technology/@properties.2"/>
+    <defaultValues value="Eureka" technologySpecificProperty="//@infrastructureNodes.0/@reference/@technology/@properties.4"/>
+    <defaultValues value="de.fhdo.puls.service.eureka" technologySpecificProperty="//@infrastructureNodes.0/@reference/@technology/@properties.3"/>
+    <defaultValues value="0.0.1-SNAPSHOT" technologySpecificProperty="//@infrastructureNodes.0/@reference/@technology/@properties.5"/>
+    <defaultValues value="eureka" technologySpecificProperty="//@infrastructureNodes.0/@reference/@technology/@properties.6"/>
+    <defaultValues value="Java" technologySpecificProperty="//@infrastructureNodes.0/@reference/@technology/@properties.7"/>
+    <usedByNodes imported="true" name="BookingManagementCommandContainer" qualifiedTechnologyName="container_base.Kubernetes" import="//@imports.2"/>
+    <usedByNodes imported="true" name="BookingManagementQueryContainer" qualifiedTechnologyName="container_base.Kubernetes" import="//@imports.3"/>
+    <usedByNodes imported="true" name="ChargingStationManagementCommandContainer" qualifiedTechnologyName="container_base.Kubernetes" import="//@imports.4"/>
+    <usedByNodes imported="true" name="ChargingStationManagementQueryContainer" qualifiedTechnologyName="container_base.Kubernetes" import="//@imports.5"/>
+    <usedByNodes imported="true" name="ChargingStationSearchContainer" qualifiedTechnologyName="container_base.Kubernetes" import="//@imports.6"/>
+    <usedByNodes imported="true" name="ChargingStationSharingCommandContainer" qualifiedTechnologyName="container_base.Kubernetes" import="//@imports.7"/>
+    <usedByNodes imported="true" name="ChargingStationSharingQueryContainer" qualifiedTechnologyName="container_base.Kubernetes" import="//@imports.8"/>
+    <usedByNodes imported="true" name="EnvironmentalDataAnalysisCommandContainer" qualifiedTechnologyName="container_base.Kubernetes" import="//@imports.9"/>
+    <usedByNodes imported="true" name="EnvironmentalDataAnalysisQueryContainer" qualifiedTechnologyName="container_base.Kubernetes" import="//@imports.10"/>
+    <reference import="//@imports.1">
+      <technology name="Eureka">
+        <environment environmentName="openjdk:11-jdk-slim"/>
+        <properties name="hostname" type="string">
+          <featureNames>MANDATORY</featureNames>
+        </properties>
+        <properties name="port" type="int">
+          <featureNames>MANDATORY</featureNames>
+        </properties>
+        <properties name="imageType" type="string">
+          <featureNames>MANDATORY</featureNames>
+        </properties>
+        <properties name="mavenGroupId" type="string">
+          <featureNames>MANDATORY</featureNames>
+        </properties>
+        <properties name="mavenArtifactId" type="string">
+          <featureNames>MANDATORY</featureNames>
+        </properties>
+        <properties name="mavenVersion" type="string">
+          <featureNames>MANDATORY</featureNames>
+        </properties>
+        <properties name="mavenName" type="string">
+          <featureNames>MANDATORY</featureNames>
+        </properties>
+        <properties name="programmingLanguage" type="string">
+          <featureNames>MANDATORY</featureNames>
+        </properties>
+      </technology>
+    </reference>
+  </infrastructureNodes>
+</intermediate:IntermediateOperationModel>

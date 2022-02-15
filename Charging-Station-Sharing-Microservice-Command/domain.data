@@ -1,0 +1,117 @@
+context ChargingStationSharing {
+	
+	structure OfferedParkingSpace<entity,aggregate> {
+		string id<identifier>,
+		string parkingSpaceId,
+		string name,
+		string description,
+		long ownerId,
+		float parkingPricePerHour,
+		Location location<part>,
+		TimePeriods availabilityPeriods<part>,
+		ParkingSpaceSize parkingSpaceSize<part>
+	}
+	
+	structure OfferedElectrifiedParkingSpace<entity,aggregate> {
+		string id<identifier>,
+		string parkingSpaceId,
+		string name,
+		string description,
+		long ownerId,
+		float parkingPricePerHour,
+		float chargingPricePerKWH,
+		Location location<part>,
+		TimePeriods availabilityPeriods<part>,
+		ParkingSpaceSize parkingSpaceSize<part>,
+		ChargingType chargingType<part>,
+		string pluginType
+	}
+	
+	
+	
+	structure Location<valueObject> {
+		string longitude,
+       	string latitude
+	}
+	
+	structure TimePeriod<valueObject> {
+			date start,
+			date end	
+		}
+		
+	list TimePeriods {TimePeriod tp}
+		
+	enum ParkingSpaceSize {
+		SMALL,
+		MEDIUM,
+		LARGE
+	}
+		
+	enum ChargingType{
+		FAST,
+		NORMAL
+	}
+	
+	// ===== PRKINGSPACE SHARING COMMANDS ===== //
+	structure OfferParkingSpaceCommand {
+		immutable string parkingSpaceId,
+		immutable long ownerId
+	}
+	
+	structure OfferElectrifiedParkingSpaceCommand {
+		immutable string parkingSpaceId,
+		immutable long ownerId
+	}
+	
+	structure WithdrawParkingSpaceCommand {
+		immutable string parkingSpaceId,
+		immutable long ownerId
+	}
+	
+	structure WithdrawElectrifiedParkingSpaceCommand {
+		immutable string parkingSpaceId,
+		immutable long ownerId
+	}
+	
+	// ===== PRKINGSPACE SHARING EVENTS ===== //
+	structure ParkingSpaceOffered {
+		immutable string parkingSpaceId,
+		immutable string name,
+		immutable string description,
+		immutable long ownerId,
+		immutable float parkingPricePerHour,
+		immutable Location location,
+		immutable TimePeriods availabilityPeriods,
+		immutable ParkingSpaceSize parkingSpaceSize
+	}
+	
+	structure ElectrifiedParkingSpaceOffered {
+		immutable string parkingSpaceId,
+		immutable string name,
+		immutable string description,
+		immutable long ownerId,
+		immutable float parkingPricePerHour,
+		immutable float chargingPricePerKWH,
+		immutable Location location,
+		immutable TimePeriods availabilityPeriods,
+		immutable ParkingSpaceSize parkingSpaceSize,
+		immutable ChargingType chargingType,
+		immutable string pluginType
+	}
+	
+	structure OfferedParkingSpaceWithdrawed {
+		immutable string parkingSpaceId,
+		immutable string name,
+		immutable string description,
+		immutable long ownerId,
+		immutable Location location
+	}
+	
+	structure OfferedElectrifiedParkingSpaceWithdrawed {
+		immutable string parkingSpaceId,
+		immutable string name,
+		immutable string description,
+		immutable long ownerId,
+		immutable Location location
+	}
+}

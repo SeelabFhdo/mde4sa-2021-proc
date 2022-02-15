@@ -1,0 +1,43 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+creationTimestamp: null
+labels:
+	app: mariadbcommand
+name: mariadbcommand
+spec:
+replicas: 1
+selector:
+	matchLabels:
+	app: mariadbcommand
+strategy: {}
+template:
+	metadata:
+	creationTimestamp: null
+	labels:
+		app: mariadbcommand
+	spec:
+	containers:
+	- image: mariadbcommand
+		imagePullPolicy: "Never"
+		name: mariadbcommand
+		resources: {}
+status: {}
+---
+apiVersion: v1
+kind: Service
+metadata:
+creationTimestamp: null
+labels:
+	app: mariadbcommand
+name: mariadbcommand
+spec:
+ports:
+- name: "3306"
+	port: 3306
+	targetPort: 3306
+selector:
+	app: mariadbcommand
+type: ClusterIP
+status:
+loadBalancer: {}

@@ -1,0 +1,132 @@
+context EnvironmentalDataAnalysis{
+		
+	structure EnvironmentSensorUnit<entity, aggregate> {
+		string id<identifier>,
+		string name,
+		long sensorBoxId,
+		string description,
+		SensorUnitStatus status<part>,
+		Location location<part>,
+		date createdDate,
+		date lastModifiedDate,
+		SensorType sensorType<part>
+	}
+		
+	structure EnvironmentSensorUnitRepository<repository>{
+		EnvironmentSensorUnit environmentSensorUnitAggregate,
+		string id
+	}
+		
+	structure Location<valueObject>{
+		immutable float longitude,
+       	immutable float latitude
+	}
+	
+	structure ReceivedDataSet<valueObject>{
+		immutable string sensorId,
+		immutable date receivedTimeStamp,
+		immutable float particulate2,
+		immutable float particulate10,
+		immutable int light,
+		immutable float temperature,
+		immutable float humidity
+	}
+	
+	structure SensorInformationSet<entity>{
+		string id<identifier>,
+		string name,
+		long sensorBoxId,
+		RecivedDataSetList receivedDataSetList
+	}
+		
+	structure SensorInformationSetRepository<repository>{
+		SensorInformationSet sensorInformationSet,
+		string id
+	}
+		
+	list RecivedDataSetList{ReceivedDataSet receivedDataSet}
+		
+	enum SensorType {
+		PHYSICAL,
+		VIRTUAL
+	}
+		
+	enum SensorUnitStatus {
+		ACTIVE,
+		DEACIVATED
+	}
+		
+	structure SensorValue<valueObject>{
+		string value,
+		date timestamp
+	}
+		
+	list SensorValueList {SensorValue v}
+		
+	structure EnvironmentInformation<entity,aggregate>{
+		string id<identifier>,
+		long sensorBoxId,
+		SensorValueList particulate2Data<part>,
+		SensorValueList particulate10Data<part>,
+		SensorValueList lightData<part>,
+		SensorValueList temperaturData<part>,
+		SensorValueList humidityData<part>
+	}
+	
+	structure EnvironmentInformationRepository <repository>{
+		EnvironmentInformation environmentInformationAggregate,
+		string id
+	}
+	
+	structure EnvironmentSensorUnitVO<valueObject> {
+		immutable string id,
+		immutable string name,
+		immutable long sensorBoxId,
+		immutable string description,
+		immutable SensorUnitStatus status,
+		immutable Location location,
+		immutable SensorType sensorType
+	}
+	
+	structure EnvironmentInformationVO<valueObject>{
+		immutable string id,
+		immutable long sensorBoxId,
+		immutable SensorValueList particulate2Data,
+		immutable SensorValueList particulate10Data,
+		immutable SensorValueList lightData,
+		immutable SensorValueList temperaturData,
+		immutable SensorValueList humidityData
+	}
+	
+	// ===== ENVIRONMENTAL DATA ANALYSIS EVENTS ===== //
+	structure EnvironmentDataReceived<valueObject,domainEvent> {
+		immutable string sensorUnitId,
+        immutable SensorValue particulates2,
+        immutable SensorValue particulates10,
+        immutable SensorValue light,
+        immutable SensorValue temperature,
+        immutable SensorValue humidity
+	}
+	
+	structure EnvironmentSensorUnitCreated<valueObject,domainEvent> {
+		immutable string sensorUnitId,
+        immutable string name,
+        immutable long sensorBoxId,
+        immutable string description,
+        immutable string status,
+        immutable float longitude,
+        immutable float latitude,
+        immutable string sensorTyp
+	}
+	
+	structure EnvironmentSensorUnitUpdated<valueObject,domainEvent> {
+		immutable string sensorUnitId,
+        immutable string name,
+        immutable string description,
+        immutable string status,
+        immutable float longitude,
+        immutable float latitude,
+        immutable date lastModifiedDate,
+        immutable string sensorTyp
+	}
+}	

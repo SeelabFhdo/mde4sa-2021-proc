@@ -1,0 +1,230 @@
+<?xml version="1.0" encoding="ASCII"?>
+<intermediate:IntermediateServiceModel xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:intermediate="http://www.fhdo.de/lemma/service/intermediate" xmlns:intermediate_1="http://www.fhdo.de/lemma/data/intermediate" sourceModelUri="file://../../chargingStationQueryManagement.services">
+  <imports name="Domain" importUri="file://../data models/domain.xmi" importTypeName="DATATYPES"/>
+  <imports name="ChargingStationManagementServiceCommand" importUri="file://../../../Charging-Station-Management-Microservice-Command/intermediate/service models/chargingStationCommandManagement.xmi" importTypeName="MICROSERVICES"/>
+  <imports name="Spring" importUri="file://../../../Technology/technology/Spring.technology" importTypeName="TECHNOLOGY"/>
+  <imports name="Java" importUri="file://../../../Technology/technology/Java.technology" importTypeName="TECHNOLOGY"/>
+  <imports name="Kafka" importUri="file://../../../Technology/technology/Kafka.technology" importTypeName="TECHNOLOGY"/>
+  <imports name="CQRS" importUri="file://../../../Technology/technology/Cqrs.technology" importTypeName="TECHNOLOGY"/>
+  <microservices sourceModelUri="file://../../chargingStationQueryManagement.services" name="de.fhdo.puls.chargingstationmanagementquery.ChargingStationManagementQuery" qualifiedName="de.fhdo.puls.chargingstationmanagementquery.ChargingStationManagementQuery" type="FUNCTIONAL" visibility="ARCHITECTURE" effectivelyImplemented="true">
+    <technologies name="Java" import="//@imports.3"/>
+    <technologies name="Spring" import="//@imports.2"/>
+    <technologies name="Kafka" import="//@imports.4"/>
+    <technologies name="CQRS" import="//@imports.5"/>
+    <endpoints communicationType="ASYNCHRONOUS" protocol="kafka" dataFormat="binary" technology="//@microservices.0/@technologies.2">
+      <addresses>kafka-server1:9092</addresses>
+    </endpoints>
+    <protocols communicationType="SYNCHRONOUS" protocol="rest" dataFormat="application/json"/>
+    <protocols communicationType="ASYNCHRONOUS" protocol="kafka" dataFormat="binary"/>
+    <requiredMicroservices name="de.fhdo.puls.chargingstationmanagementcommand.ChargingStationManagementCommand" qualifiedName="de.fhdo.puls.chargingstationmanagementcommand.ChargingStationManagementCommand" imported="true" import="//@imports.1"/>
+    <interfaces name="ParkingSpaceQueries" qualifiedName="de.fhdo.puls.chargingstationmanagementquery.ChargingStationManagementQuery.ParkingSpaceQueries" visibility="ARCHITECTURE" hasImplementedOperations="true">
+      <endpoints communicationType="SYNCHRONOUS" protocol="rest" dataFormat="application/json" technology="//@microservices.0/@technologies.1">
+        <addresses>/resources/v1</addresses>
+      </endpoints>
+      <protocols communicationType="SYNCHRONOUS" protocol="rest" dataFormat="application/json"/>
+      <protocols communicationType="ASYNCHRONOUS" protocol="kafka" dataFormat="binary"/>
+      <operations name="getParkingSpaceById" qualifiedName="de.fhdo.puls.chargingstationmanagementquery.ChargingStationManagementQuery.ParkingSpaceQueries.getParkingSpaceById" visibility="OclUndefined">
+        <endpoints communicationType="SYNCHRONOUS" protocol="rest" dataFormat="application/json" technology="//@microservices.0/@technologies.1">
+          <addresses>/parkingSpace/id/{id}</addresses>
+        </endpoints>
+        <protocols communicationType="SYNCHRONOUS" protocol="rest" dataFormat="application/json"/>
+        <protocols communicationType="ASYNCHRONOUS" protocol="kafka" dataFormat="binary"/>
+        <aspects name="GetMapping" qualifiedName="Spring.GetMapping" import="//@imports.2">
+          <featureNames>SINGLE_VALUED</featureNames>
+        </aspects>
+        <parameters name="id" qualifiedName="de.fhdo.puls.chargingstationmanagementquery.ChargingStationManagementQuery.ParkingSpaceQueries.getParkingSpaceById.id" exchangePattern="IN" communicationType="SYNCHRONOUS">
+          <type xsi:type="intermediate_1:IntermediateImportedTechnologySpecificType" name="String" origin="TECHNOLOGY" kind="PRIMITIVE" qualifiedName="java._types.String" import="//@imports.3"/>
+          <originalType xsi:type="intermediate_1:IntermediatePrimitiveType" name="string" origin="BUILTIN" kind="PRIMITIVE"/>
+          <aspects name="PathVariable" qualifiedName="Spring.PathVariable" import="//@imports.2">
+            <featureNames>SINGLE_VALUED</featureNames>
+            <properties name="value" type="string"/>
+            <propertyValues value="id" property="//@microservices.0/@interfaces.0/@operations.0/@parameters.0/@aspects.0/@properties.0"/>
+          </aspects>
+        </parameters>
+        <parameters name="parkingSpace" qualifiedName="de.fhdo.puls.chargingstationmanagementquery.ChargingStationManagementQuery.ParkingSpaceQueries.getParkingSpaceById.parkingSpace" exchangePattern="OUT" communicationType="SYNCHRONOUS">
+          <type xsi:type="intermediate_1:IntermediateImportedComplexType" name="ParkingSpace" origin="DATA_MODEL" kind="STRUCTURE" qualifiedName="ChargingStationManagement.ParkingSpace" import="//@imports.0"/>
+          <originalType xsi:type="intermediate_1:IntermediateImportedComplexType" name="ParkingSpace" origin="DATA_MODEL" kind="STRUCTURE" qualifiedName="ChargingStationManagement.ParkingSpace" import="//@imports.0"/>
+          <aspects name="ResponseEntity" qualifiedName="Spring.ResponseEntity" import="//@imports.2">
+            <featureNames>SINGLE_VALUED</featureNames>
+          </aspects>
+        </parameters>
+      </operations>
+      <operations name="getParkingSpacesByIds" qualifiedName="de.fhdo.puls.chargingstationmanagementquery.ChargingStationManagementQuery.ParkingSpaceQueries.getParkingSpacesByIds" visibility="OclUndefined">
+        <endpoints communicationType="SYNCHRONOUS" protocol="rest" dataFormat="application/json" technology="//@microservices.0/@technologies.1">
+          <addresses>/parkingSpace/ids</addresses>
+        </endpoints>
+        <protocols communicationType="SYNCHRONOUS" protocol="rest" dataFormat="application/json"/>
+        <protocols communicationType="ASYNCHRONOUS" protocol="kafka" dataFormat="binary"/>
+        <aspects name="GetMapping" qualifiedName="Spring.GetMapping" import="//@imports.2">
+          <featureNames>SINGLE_VALUED</featureNames>
+        </aspects>
+        <parameters name="ids" qualifiedName="de.fhdo.puls.chargingstationmanagementquery.ChargingStationManagementQuery.ParkingSpaceQueries.getParkingSpacesByIds.ids" exchangePattern="IN" communicationType="SYNCHRONOUS">
+          <type xsi:type="intermediate_1:IntermediateImportedComplexType" name="IDs" origin="DATA_MODEL" kind="LIST" qualifiedName="ChargingStationManagement.IDs" import="//@imports.0"/>
+          <originalType xsi:type="intermediate_1:IntermediateImportedComplexType" name="IDs" origin="DATA_MODEL" kind="LIST" qualifiedName="ChargingStationManagement.IDs" import="//@imports.0"/>
+          <aspects name="RequestBody" qualifiedName="Spring.RequestBody" import="//@imports.2"/>
+        </parameters>
+        <parameters name="parkingSpaces" qualifiedName="de.fhdo.puls.chargingstationmanagementquery.ChargingStationManagementQuery.ParkingSpaceQueries.getParkingSpacesByIds.parkingSpaces" exchangePattern="OUT" communicationType="SYNCHRONOUS">
+          <type xsi:type="intermediate_1:IntermediateImportedComplexType" name="ParkingSpace" origin="DATA_MODEL" kind="STRUCTURE" qualifiedName="ChargingStationManagement.ParkingSpace" import="//@imports.0"/>
+          <originalType xsi:type="intermediate_1:IntermediateImportedComplexType" name="ParkingSpace" origin="DATA_MODEL" kind="STRUCTURE" qualifiedName="ChargingStationManagement.ParkingSpace" import="//@imports.0"/>
+          <aspects name="ResponseEntity" qualifiedName="Spring.ResponseEntity" import="//@imports.2">
+            <featureNames>SINGLE_VALUED</featureNames>
+          </aspects>
+        </parameters>
+      </operations>
+      <operations name="getAllParkingSpaces" qualifiedName="de.fhdo.puls.chargingstationmanagementquery.ChargingStationManagementQuery.ParkingSpaceQueries.getAllParkingSpaces" visibility="OclUndefined">
+        <endpoints communicationType="SYNCHRONOUS" protocol="rest" dataFormat="application/json" technology="//@microservices.0/@technologies.1">
+          <addresses>/parkingSpaces</addresses>
+        </endpoints>
+        <protocols communicationType="SYNCHRONOUS" protocol="rest" dataFormat="application/json"/>
+        <protocols communicationType="ASYNCHRONOUS" protocol="kafka" dataFormat="binary"/>
+        <aspects name="GetMapping" qualifiedName="Spring.GetMapping" import="//@imports.2">
+          <featureNames>SINGLE_VALUED</featureNames>
+        </aspects>
+        <parameters name="parkingSpaces" qualifiedName="de.fhdo.puls.chargingstationmanagementquery.ChargingStationManagementQuery.ParkingSpaceQueries.getAllParkingSpaces.parkingSpaces" exchangePattern="OUT" communicationType="SYNCHRONOUS">
+          <type xsi:type="intermediate_1:IntermediateImportedComplexType" name="ParkingSpace" origin="DATA_MODEL" kind="STRUCTURE" qualifiedName="ChargingStationManagement.ParkingSpace" import="//@imports.0"/>
+          <originalType xsi:type="intermediate_1:IntermediateImportedComplexType" name="ParkingSpace" origin="DATA_MODEL" kind="STRUCTURE" qualifiedName="ChargingStationManagement.ParkingSpace" import="//@imports.0"/>
+          <aspects name="ResponseEntity" qualifiedName="Spring.ResponseEntity" import="//@imports.2">
+            <featureNames>SINGLE_VALUED</featureNames>
+          </aspects>
+        </parameters>
+      </operations>
+      <operations name="receiveParkingSpaceCreatedEvents" qualifiedName="de.fhdo.puls.chargingstationmanagementquery.ChargingStationManagementQuery.ParkingSpaceQueries.receiveParkingSpaceCreatedEvents" visibility="ARCHITECTURE">
+        <protocols communicationType="SYNCHRONOUS" protocol="rest" dataFormat="application/json"/>
+        <protocols communicationType="ASYNCHRONOUS" protocol="kafka" dataFormat="binary"/>
+        <aspects name="Participant" qualifiedName="Kafka.Participant" import="//@imports.4">
+          <properties name="topic" type="string">
+            <featureNames>MANDATORY</featureNames>
+          </properties>
+          <properties name="consumerGroup" type="string"/>
+          <propertyValues value="parkingSpaceCreatedEvents" property="//@microservices.0/@interfaces.0/@operations.3/@aspects.0/@properties.0"/>
+          <propertyValues value="parkingSpaceCreatedEvents" property="//@microservices.0/@interfaces.0/@operations.3/@aspects.0/@properties.1"/>
+        </aspects>
+        <parameters name="event" qualifiedName="de.fhdo.puls.chargingstationmanagementquery.ChargingStationManagementQuery.ParkingSpaceQueries.receiveParkingSpaceCreatedEvents.event" exchangePattern="IN" communicationType="ASYNCHRONOUS">
+          <type xsi:type="intermediate_1:IntermediateImportedComplexType" name="ParkingSpaceCreated" origin="DATA_MODEL" kind="STRUCTURE" qualifiedName="ChargingStationManagement.ParkingSpaceCreated" import="//@imports.0"/>
+          <originalType xsi:type="intermediate_1:IntermediateImportedComplexType" name="ParkingSpaceCreated" origin="DATA_MODEL" kind="STRUCTURE" qualifiedName="ChargingStationManagement.ParkingSpaceCreated" import="//@imports.0"/>
+        </parameters>
+      </operations>
+    </interfaces>
+    <interfaces name="ElectrifiedParkingSpaceQueries" qualifiedName="de.fhdo.puls.chargingstationmanagementquery.ChargingStationManagementQuery.ElectrifiedParkingSpaceQueries" visibility="ARCHITECTURE" hasImplementedOperations="true">
+      <endpoints communicationType="SYNCHRONOUS" protocol="rest" dataFormat="application/json" technology="//@microservices.0/@technologies.1">
+        <addresses>/resources/v1</addresses>
+      </endpoints>
+      <protocols communicationType="SYNCHRONOUS" protocol="rest" dataFormat="application/json"/>
+      <protocols communicationType="ASYNCHRONOUS" protocol="kafka" dataFormat="binary"/>
+      <operations name="getElectrifiedParkingSpaceById" qualifiedName="de.fhdo.puls.chargingstationmanagementquery.ChargingStationManagementQuery.ElectrifiedParkingSpaceQueries.getElectrifiedParkingSpaceById" visibility="OclUndefined">
+        <endpoints communicationType="SYNCHRONOUS" protocol="rest" dataFormat="application/json" technology="//@microservices.0/@technologies.1">
+          <addresses>/electrifiedParkingSpace/id/{id}</addresses>
+        </endpoints>
+        <protocols communicationType="SYNCHRONOUS" protocol="rest" dataFormat="application/json"/>
+        <protocols communicationType="ASYNCHRONOUS" protocol="kafka" dataFormat="binary"/>
+        <aspects name="GetMapping" qualifiedName="Spring.GetMapping" import="//@imports.2">
+          <featureNames>SINGLE_VALUED</featureNames>
+        </aspects>
+        <parameters name="id" qualifiedName="de.fhdo.puls.chargingstationmanagementquery.ChargingStationManagementQuery.ElectrifiedParkingSpaceQueries.getElectrifiedParkingSpaceById.id" exchangePattern="IN" communicationType="SYNCHRONOUS">
+          <type xsi:type="intermediate_1:IntermediateImportedTechnologySpecificType" name="String" origin="TECHNOLOGY" kind="PRIMITIVE" qualifiedName="java._types.String" import="//@imports.3"/>
+          <originalType xsi:type="intermediate_1:IntermediatePrimitiveType" name="string" origin="BUILTIN" kind="PRIMITIVE"/>
+          <aspects name="PathVariable" qualifiedName="Spring.PathVariable" import="//@imports.2">
+            <featureNames>SINGLE_VALUED</featureNames>
+            <properties name="value" type="string"/>
+            <propertyValues value="id" property="//@microservices.0/@interfaces.1/@operations.0/@parameters.0/@aspects.0/@properties.0"/>
+          </aspects>
+        </parameters>
+        <parameters name="electrifiedParkingSpace" qualifiedName="de.fhdo.puls.chargingstationmanagementquery.ChargingStationManagementQuery.ElectrifiedParkingSpaceQueries.getElectrifiedParkingSpaceById.electrifiedParkingSpace" exchangePattern="OUT" communicationType="SYNCHRONOUS">
+          <type xsi:type="intermediate_1:IntermediateImportedComplexType" name="ElectrifiedParkingSpace" origin="DATA_MODEL" kind="STRUCTURE" qualifiedName="ChargingStationManagement.ElectrifiedParkingSpace" import="//@imports.0"/>
+          <originalType xsi:type="intermediate_1:IntermediateImportedComplexType" name="ElectrifiedParkingSpace" origin="DATA_MODEL" kind="STRUCTURE" qualifiedName="ChargingStationManagement.ElectrifiedParkingSpace" import="//@imports.0"/>
+          <aspects name="ResponseEntity" qualifiedName="Spring.ResponseEntity" import="//@imports.2">
+            <featureNames>SINGLE_VALUED</featureNames>
+          </aspects>
+        </parameters>
+      </operations>
+      <operations name="getElectrifiedParkingSpacesByIds" qualifiedName="de.fhdo.puls.chargingstationmanagementquery.ChargingStationManagementQuery.ElectrifiedParkingSpaceQueries.getElectrifiedParkingSpacesByIds" visibility="OclUndefined">
+        <endpoints communicationType="SYNCHRONOUS" protocol="rest" dataFormat="application/json" technology="//@microservices.0/@technologies.1">
+          <addresses>/electrifiedParkingSpace/ids</addresses>
+        </endpoints>
+        <protocols communicationType="SYNCHRONOUS" protocol="rest" dataFormat="application/json"/>
+        <protocols communicationType="ASYNCHRONOUS" protocol="kafka" dataFormat="binary"/>
+        <aspects name="GetMapping" qualifiedName="Spring.GetMapping" import="//@imports.2">
+          <featureNames>SINGLE_VALUED</featureNames>
+        </aspects>
+        <parameters name="ids" qualifiedName="de.fhdo.puls.chargingstationmanagementquery.ChargingStationManagementQuery.ElectrifiedParkingSpaceQueries.getElectrifiedParkingSpacesByIds.ids" exchangePattern="IN" communicationType="SYNCHRONOUS">
+          <type xsi:type="intermediate_1:IntermediateImportedComplexType" name="IDs" origin="DATA_MODEL" kind="LIST" qualifiedName="ChargingStationManagement.IDs" import="//@imports.0"/>
+          <originalType xsi:type="intermediate_1:IntermediateImportedComplexType" name="IDs" origin="DATA_MODEL" kind="LIST" qualifiedName="ChargingStationManagement.IDs" import="//@imports.0"/>
+          <aspects name="RequestBody" qualifiedName="Spring.RequestBody" import="//@imports.2"/>
+        </parameters>
+        <parameters name="electrifiedParkingSpaces" qualifiedName="de.fhdo.puls.chargingstationmanagementquery.ChargingStationManagementQuery.ElectrifiedParkingSpaceQueries.getElectrifiedParkingSpacesByIds.electrifiedParkingSpaces" exchangePattern="OUT" communicationType="SYNCHRONOUS">
+          <type xsi:type="intermediate_1:IntermediateImportedComplexType" name="ElectrifiedParkingSpace" origin="DATA_MODEL" kind="STRUCTURE" qualifiedName="ChargingStationManagement.ElectrifiedParkingSpace" import="//@imports.0"/>
+          <originalType xsi:type="intermediate_1:IntermediateImportedComplexType" name="ElectrifiedParkingSpace" origin="DATA_MODEL" kind="STRUCTURE" qualifiedName="ChargingStationManagement.ElectrifiedParkingSpace" import="//@imports.0"/>
+          <aspects name="ResponseEntity" qualifiedName="Spring.ResponseEntity" import="//@imports.2">
+            <featureNames>SINGLE_VALUED</featureNames>
+          </aspects>
+        </parameters>
+      </operations>
+      <operations name="getAllElectrifiedParkingSpaces" qualifiedName="de.fhdo.puls.chargingstationmanagementquery.ChargingStationManagementQuery.ElectrifiedParkingSpaceQueries.getAllElectrifiedParkingSpaces" visibility="OclUndefined">
+        <endpoints communicationType="SYNCHRONOUS" protocol="rest" dataFormat="application/json" technology="//@microservices.0/@technologies.1">
+          <addresses>/electrifiedParkingSpaces</addresses>
+        </endpoints>
+        <protocols communicationType="SYNCHRONOUS" protocol="rest" dataFormat="application/json"/>
+        <protocols communicationType="ASYNCHRONOUS" protocol="kafka" dataFormat="binary"/>
+        <aspects name="GetMapping" qualifiedName="Spring.GetMapping" import="//@imports.2">
+          <featureNames>SINGLE_VALUED</featureNames>
+        </aspects>
+        <parameters name="electrifiedParkingSpaces" qualifiedName="de.fhdo.puls.chargingstationmanagementquery.ChargingStationManagementQuery.ElectrifiedParkingSpaceQueries.getAllElectrifiedParkingSpaces.electrifiedParkingSpaces" exchangePattern="OUT" communicationType="SYNCHRONOUS">
+          <type xsi:type="intermediate_1:IntermediateImportedComplexType" name="ElectrifiedParkingSpace" origin="DATA_MODEL" kind="STRUCTURE" qualifiedName="ChargingStationManagement.ElectrifiedParkingSpace" import="//@imports.0"/>
+          <originalType xsi:type="intermediate_1:IntermediateImportedComplexType" name="ElectrifiedParkingSpace" origin="DATA_MODEL" kind="STRUCTURE" qualifiedName="ChargingStationManagement.ElectrifiedParkingSpace" import="//@imports.0"/>
+          <aspects name="ResponseEntity" qualifiedName="Spring.ResponseEntity" import="//@imports.2">
+            <featureNames>SINGLE_VALUED</featureNames>
+          </aspects>
+        </parameters>
+      </operations>
+      <operations name="receiveElectrifiedParkingSpaceCreatedEvents" qualifiedName="de.fhdo.puls.chargingstationmanagementquery.ChargingStationManagementQuery.ElectrifiedParkingSpaceQueries.receiveElectrifiedParkingSpaceCreatedEvents" visibility="ARCHITECTURE">
+        <protocols communicationType="SYNCHRONOUS" protocol="rest" dataFormat="application/json"/>
+        <protocols communicationType="ASYNCHRONOUS" protocol="kafka" dataFormat="binary"/>
+        <aspects name="Participant" qualifiedName="Kafka.Participant" import="//@imports.4">
+          <properties name="topic" type="string">
+            <featureNames>MANDATORY</featureNames>
+          </properties>
+          <properties name="consumerGroup" type="string"/>
+          <propertyValues value="ElectrifiedParkingSpaceCreatedEvents" property="//@microservices.0/@interfaces.1/@operations.3/@aspects.0/@properties.0"/>
+          <propertyValues value="ElectrifiedParkingSpaceCreatedEvents" property="//@microservices.0/@interfaces.1/@operations.3/@aspects.0/@properties.1"/>
+        </aspects>
+        <parameters name="event" qualifiedName="de.fhdo.puls.chargingstationmanagementquery.ChargingStationManagementQuery.ElectrifiedParkingSpaceQueries.receiveElectrifiedParkingSpaceCreatedEvents.event" exchangePattern="IN" communicationType="ASYNCHRONOUS">
+          <type xsi:type="intermediate_1:IntermediateImportedComplexType" name="ElectrifiedParkingSpaceCreated" origin="DATA_MODEL" kind="STRUCTURE" qualifiedName="ChargingStationManagement.ElectrifiedParkingSpaceCreated" import="//@imports.0"/>
+          <originalType xsi:type="intermediate_1:IntermediateImportedComplexType" name="ElectrifiedParkingSpaceCreated" origin="DATA_MODEL" kind="STRUCTURE" qualifiedName="ChargingStationManagement.ElectrifiedParkingSpaceCreated" import="//@imports.0"/>
+        </parameters>
+      </operations>
+    </interfaces>
+    <aspects name="BootstrapAddress" qualifiedName="Kafka.BootstrapAddress" import="//@imports.4">
+      <featureNames>SINGLE_VALUED</featureNames>
+      <properties name="address" type="string">
+        <featureNames>MANDATORY</featureNames>
+      </properties>
+      <propertyValues value="kafka-server1:9092" property="//@microservices.0/@aspects.0/@properties.0"/>
+    </aspects>
+    <aspects name="QuerySide" qualifiedName="CQRS.QuerySide" import="//@imports.5">
+      <properties name="logicalService" type="string"/>
+      <propertyValues value="ChargingStationManagementMicroservice" property="//@microservices.0/@aspects.1/@properties.0"/>
+    </aspects>
+    <aspects name="Application" qualifiedName="Spring.Application" import="//@imports.2">
+      <featureNames>SINGLE_VALUED</featureNames>
+      <properties name="name" type="string"/>
+      <properties name="port" type="int"/>
+      <propertyValues value="ChargingStationManagementMicroserviceQuery" property="//@microservices.0/@aspects.2/@properties.0"/>
+      <propertyValues value="8072" property="//@microservices.0/@aspects.2/@properties.1"/>
+    </aspects>
+    <aspects name="DatasourceConfiguration" qualifiedName="Spring.DatasourceConfiguration" import="//@imports.2">
+      <featureNames>SINGLE_VALUED</featureNames>
+      <properties name="url" type="string"/>
+      <properties name="username" type="string"/>
+      <properties name="password" type="string"/>
+      <properties name="databaseTechnology" type="string"/>
+      <propertyValues value="MongoDB" property="//@microservices.0/@aspects.3/@properties.3"/>
+    </aspects>
+    <aspects name="EnableServiceDiscovery" qualifiedName="Spring.EnableServiceDiscovery" import="//@imports.2">
+      <featureNames>SINGLE_VALUED</featureNames>
+      <properties name="discoveryTechnology" type="string">
+        <featureNames>MANDATORY</featureNames>
+      </properties>
+      <propertyValues value="Eureka" property="//@microservices.0/@aspects.4/@properties.0"/>
+    </aspects>
+  </microservices>
+</intermediate:IntermediateServiceModel>

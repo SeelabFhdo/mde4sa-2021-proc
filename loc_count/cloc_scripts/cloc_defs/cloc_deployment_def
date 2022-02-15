@@ -1,0 +1,8 @@
+DEPLOYMENT
+    filter call_regexp_common C++
+    extension sh
+    extension yaml
+    extension yml
+    extension file
+    extension properties    
+    3rd_gen_scale 5.00

@@ -1,0 +1,32 @@
+import technology from "../../Technology/technology/container_base.technology" as container_base
+import technology from "../../Technology/technology/mongodb.technology" as mongodb
+import nodes from "../../Charging-Station-Management-Microservice-Command/chargingStationCommandManagement.operation" as CSMMCommandSide
+import nodes from "../../Charging-Station-Management-Microservice-Query/chargingStationQueryManagement.operation" as CSMMQuerySide
+import nodes from "../../Charging-Station-Search-Microservice/chargingStationSearch.operation" as ChargingStationSearchService
+import nodes from "../../Charging-Station-Sharing-Microservice-Command/chargingStationSharingCommand.operation" as CSSMCommandSide
+import nodes from "../../Charging-Station-Sharing-Microservice-Query/chargingStationSharingQuery.operation" as CSSMQuerySide
+import nodes from "../../Environmental-Data-Analysis-Microservice-Command/environmentalDataCommandAnalysis.operation" as EDAMCommandSide
+import nodes from "../../Environmental-Data-Analysis-Microservice-Query/environmentalDataQueryAnalysis.operation" as EDAMQuerySide
+
+@technology(container_base)
+@technology(mongodb)
+MongoDB is mongodb::_infrastructure.MongoDB
+    with operation environment "docker/mongo:latest"
+    used by nodes
+    	CSMMCommandSide::ChargingStationManagementCommandContainer,
+		CSMMQuerySide::ChargingStationManagementQueryContainer,
+		ChargingStationSearchService::ChargingStationSearchContainer,
+		CSSMCommandSide::ChargingStationSharingCommandContainer,
+		CSSMQuerySide::ChargingStationSharingQueryContainer,
+		EDAMCommandSide::EnvironmentalDataAnalysisCommandContainer,
+		EDAMQuerySide::EnvironmentalDataAnalysisQueryContainer
+    {
+        default values {
+			userName="root"
+			password="password"
+            imageType="DockerHub"
+            port=27017
+            database="demo"
+        }
+        endpoints {mongodb::_protocols.MongoDB : "mongodb:27017";}
+	}

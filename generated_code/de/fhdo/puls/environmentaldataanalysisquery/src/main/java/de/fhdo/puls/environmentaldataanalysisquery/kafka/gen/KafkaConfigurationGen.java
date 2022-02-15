@@ -1,0 +1,25 @@
+package de.fhdo.puls.environmentaldataanalysisquery.kafka.gen;
+
+import de.fhdo.puls.environmentaldataanalysisquery.domain.EnvironmentalDataAnalysis.EnvironmentDataReceived;
+import de.fhdo.puls.environmentaldataanalysisquery.domain.EnvironmentalDataAnalysis.EnvironmentSensorUnitCreated;
+import de.fhdo.puls.environmentaldataanalysisquery.domain.EnvironmentalDataAnalysis.EnvironmentSensorUnitUpdated;
+import org.springframework.kafka.config.ConcurrentKafkaListenerContainerFactory;
+import org.springframework.kafka.core.ConsumerFactory;
+import org.springframework.kafka.core.KafkaAdmin;
+
+public interface KafkaConfigurationGen {
+
+    KafkaAdmin kafkaAdmin();
+
+    ConsumerFactory<String, EnvironmentDataReceived> environmentDataReceivedEventsEnvironmentDataReceivedEventsConsumerFactory();
+
+    ConcurrentKafkaListenerContainerFactory<String, EnvironmentDataReceived> environmentDataReceivedEventsEnvironmentDataReceivedEventsKafkaListenerContainerFactory();
+
+    ConsumerFactory<String, EnvironmentSensorUnitCreated> environmentSensorUnitCreatedEventsEnvironmentSensorUnitCreatedEventsConsumerFactory();
+
+    ConcurrentKafkaListenerContainerFactory<String, EnvironmentSensorUnitCreated> environmentSensorUnitCreatedEventsEnvironmentSensorUnitCreatedEventsKafkaListenerContainerFactory();
+
+    ConsumerFactory<String, EnvironmentSensorUnitUpdated> environmentSensorUnitUpdatedEventsEnvironmentSensorUnitUpdatedEventsConsumerFactory();
+
+    ConcurrentKafkaListenerContainerFactory<String, EnvironmentSensorUnitUpdated> environmentSensorUnitUpdatedEventsEnvironmentSensorUnitUpdatedEventsKafkaListenerContainerFactory();
+}

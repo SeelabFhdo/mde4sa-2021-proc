@@ -1,0 +1,20 @@
+technology MongoDB {
+	protocols {
+		sync MongoDB data formats "YAML" default with format "YAML";
+	}
+	infrastructure technologies {
+        MongoDB {
+            operation environments = "docker/mongo:latest";
+            service properties {
+                string userName;
+                string password;
+                int port<mandatory>;
+                string database<mandatory>;
+                string imageType<mandatory>;
+            }
+        }
+
+
+	}
+
+}

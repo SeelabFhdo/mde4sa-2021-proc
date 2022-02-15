@@ -1,0 +1,29 @@
+package de.fhdo.puls.chargingstationsearchmanagement.kafka.gen;
+
+import de.fhdo.puls.chargingstationsearchmanagement.domain.ChargingStationSearch.ElectrifiedParkingSpaceOffered;
+import de.fhdo.puls.chargingstationsearchmanagement.domain.ChargingStationSearch.OfferedElectrifiedParkingSpaceWithdrawed;
+import de.fhdo.puls.chargingstationsearchmanagement.domain.ChargingStationSearch.OfferedParkingSpaceWithdrawed;
+import de.fhdo.puls.chargingstationsearchmanagement.domain.ChargingStationSearch.ParkingSpaceOffered;
+import de.fhdo.puls.chargingstationsearchmanagement.domain.MapSearchControllerService;
+import org.springframework.kafka.listener.ConsumerAwareListenerErrorHandler;
+
+public interface ListenersGen {
+
+    void setMapSearchControllerService(MapSearchControllerService mapSearchControllerService);
+
+    void receiveParkingSpaceOfferedEventsListener(ParkingSpaceOffered parkingSpaceOffered);
+
+    ConsumerAwareListenerErrorHandler receiveParkingSpaceOfferedEventsErrorHandler();
+
+    void receiveParkingSpaceWithdrawedEventsListener(OfferedParkingSpaceWithdrawed offeredParkingSpaceWithdrawed);
+
+    ConsumerAwareListenerErrorHandler receiveParkingSpaceWithdrawedEventsErrorHandler();
+
+    void receiveElectrifiedParkingSpaceOfferedEventsListener(ElectrifiedParkingSpaceOffered electrifiedParkingSpaceOffered);
+
+    ConsumerAwareListenerErrorHandler receiveElectrifiedParkingSpaceOfferedEventsErrorHandler();
+
+    void receiveElectrifiedParkingSpaceWithdrawedEventsListener(OfferedElectrifiedParkingSpaceWithdrawed offeredElectrifiedParkingSpaceWithdrawed);
+
+    ConsumerAwareListenerErrorHandler receiveElectrifiedParkingSpaceWithdrawedEventsErrorHandler();
+}

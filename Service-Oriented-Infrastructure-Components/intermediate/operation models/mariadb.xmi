@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="ASCII"?>
+<intermediate:IntermediateOperationModel xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:intermediate="http://www.fhdo.de/lemma/operation/intermediate" sourceModelUri="file://../../infrastructure/mariadb.operation">
+  <imports name="container_base" importUri="file://../../../Technology/technology/container_base.technology" importTypeName="TECHNOLOGY"/>
+  <imports name="mariadb" importUri="file://../../../Technology/technology/mariadb.technology" importTypeName="TECHNOLOGY"/>
+  <imports name="BookingManagementCommandSide" importUri="file://../../../../runtime-EclipseApplication/Booking-Management-Microservice-Command/intermediate/operation models/bookingCommandManagement.xmi" importTypeName="OPERATION_NODES"/>
+  <imports name="BookingManagementQuerySide" importUri="file://../../../../runtime-EclipseApplication/Booking-Management-Microservice-Query/intermediate/operation models/bookingQueryManagement.xmi" importTypeName="OPERATION_NODES"/>
+  <infrastructureNodes name="MariaDB" imports="//@imports.0 //@imports.1" operationEnvironment="//@infrastructureNodes.0/@reference/@technology/@environment" qualifiedInfrastructureTechnologyName="MariaDB.MariaDB">
+    <defaultValues value="root" technologySpecificProperty="//@infrastructureNodes.0/@reference/@technology/@properties.0"/>
+    <defaultValues value="mariadb" technologySpecificProperty="//@infrastructureNodes.0/@reference/@technology/@properties.3"/>
+    <defaultValues value="admin" technologySpecificProperty="//@infrastructureNodes.0/@reference/@technology/@properties.2"/>
+    <defaultValues value="password" technologySpecificProperty="//@infrastructureNodes.0/@reference/@technology/@properties.1"/>
+    <defaultValues value="dockerhub" technologySpecificProperty="//@infrastructureNodes.0/@reference/@technology/@properties.5"/>
+    <defaultValues value="3306" technologySpecificProperty="//@infrastructureNodes.0/@reference/@technology/@properties.4"/>
+    <defaultValues value="booking_command" technologySpecificProperty="//@infrastructureNodes.0/@reference/@technology/@properties.6"/>
+    <usedByNodes imported="true" name="BookingManagementCommandContainer" qualifiedTechnologyName="container_base.Kubernetes" import="//@imports.2"/>
+    <usedByNodes imported="true" name="BookingManagementQueryContainer" qualifiedTechnologyName="container_base.Kubernetes" import="//@imports.3"/>
+    <reference import="//@imports.1">
+      <technology name="MariaDB">
+        <environment environmentName="docker/mariadb:latest"/>
+        <properties name="userName" type="string"/>
+        <properties name="rootPassword" type="string">
+          <featureNames>MANDATORY</featureNames>
+        </properties>
+        <properties name="userPassword" type="string"/>
+        <properties name="hostName" type="string">
+          <featureNames>MANDATORY</featureNames>
+        </properties>
+        <properties name="port" type="string">
+          <featureNames>MANDATORY</featureNames>
+        </properties>
+        <properties name="imageType" type="string">
+          <featureNames>MANDATORY</featureNames>
+        </properties>
+        <properties name="dataBase" type="string">
+          <featureNames>MANDATORY</featureNames>
+        </properties>
+      </technology>
+    </reference>
+  </infrastructureNodes>
+</intermediate:IntermediateOperationModel>

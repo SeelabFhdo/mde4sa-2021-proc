@@ -1,0 +1,4 @@
+package de.fhdo.puls.chargingstationsharingcommand.service.ChargingStationSharingCommand.gen;
+
+public abstract class ChargingStationSharingCommandGenImpl implements ChargingStationSharingCommandGen {
+}

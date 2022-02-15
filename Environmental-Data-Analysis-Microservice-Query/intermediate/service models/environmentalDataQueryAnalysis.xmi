@@ -1,0 +1,450 @@
+<?xml version="1.0" encoding="ASCII"?>
+<intermediate:IntermediateServiceModel xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:intermediate="http://www.fhdo.de/lemma/service/intermediate" xmlns:intermediate_1="http://www.fhdo.de/lemma/data/intermediate" sourceModelUri="file://../../environmentalDataQueryAnalysis.services">
+  <imports name="Domain" importUri="file://../data models/domain.xmi" importTypeName="DATATYPES"/>
+  <imports name="EnvironmentalDataAnalysisCommandSide" importUri="file://../../../Environmental-Data-Analysis-Microservice-Command/intermediate/service models/environmentalDataCommandAnalysis.xmi" importTypeName="MICROSERVICES"/>
+  <imports name="Spring" importUri="file://../../../Technology/technology/Spring.technology" importTypeName="TECHNOLOGY"/>
+  <imports name="Java" importUri="file://../../../Technology/technology/Java.technology" importTypeName="TECHNOLOGY"/>
+  <imports name="Kafka" importUri="file://../../../Technology/technology/Kafka.technology" importTypeName="TECHNOLOGY"/>
+  <imports name="CQRS" importUri="file://../../../Technology/technology/Cqrs.technology" importTypeName="TECHNOLOGY"/>
+  <microservices sourceModelUri="file://../../environmentalDataQueryAnalysis.services" name="de.fhdo.puls.environmentaldataanalysisquery.EnvironmentalDataAnalysisQuery" qualifiedName="de.fhdo.puls.environmentaldataanalysisquery.EnvironmentalDataAnalysisQuery" type="FUNCTIONAL" visibility="ARCHITECTURE" effectivelyImplemented="true">
+    <technologies name="Java" import="//@imports.3"/>
+    <technologies name="Spring" import="//@imports.2"/>
+    <technologies name="Kafka" import="//@imports.4"/>
+    <technologies name="CQRS" import="//@imports.5"/>
+    <endpoints communicationType="ASYNCHRONOUS" protocol="kafka" dataFormat="binary" technology="//@microservices.0/@technologies.2">
+      <addresses>kafka-server1:9092</addresses>
+    </endpoints>
+    <protocols communicationType="SYNCHRONOUS" protocol="rest" dataFormat="application/json"/>
+    <protocols communicationType="ASYNCHRONOUS" protocol="kafka" dataFormat="binary"/>
+    <requiredMicroservices name="de.fhdo.puls.environmentaldataanalysiscommand.EnvironmentalDataAnalysisCommand" qualifiedName="de.fhdo.puls.environmentaldataanalysiscommand.EnvironmentalDataAnalysisCommand" imported="true" import="//@imports.1"/>
+    <interfaces name="EnvironmentSensorUnitQueries" qualifiedName="de.fhdo.puls.environmentaldataanalysisquery.EnvironmentalDataAnalysisQuery.EnvironmentSensorUnitQueries" visibility="ARCHITECTURE" hasImplementedOperations="true">
+      <endpoints communicationType="SYNCHRONOUS" protocol="rest" dataFormat="application/json" technology="//@microservices.0/@technologies.1">
+        <addresses>/resources/v1</addresses>
+      </endpoints>
+      <protocols communicationType="SYNCHRONOUS" protocol="rest" dataFormat="application/json"/>
+      <protocols communicationType="ASYNCHRONOUS" protocol="kafka" dataFormat="binary"/>
+      <operations name="getEnvironmentSensorUnitByName" qualifiedName="de.fhdo.puls.environmentaldataanalysisquery.EnvironmentalDataAnalysisQuery.EnvironmentSensorUnitQueries.getEnvironmentSensorUnitByName" visibility="OclUndefined">
+        <endpoints communicationType="SYNCHRONOUS" protocol="rest" dataFormat="application/json" technology="//@microservices.0/@technologies.1">
+          <addresses>/environmentSensorUnit/name/{name}</addresses>
+        </endpoints>
+        <protocols communicationType="SYNCHRONOUS" protocol="rest" dataFormat="application/json"/>
+        <protocols communicationType="ASYNCHRONOUS" protocol="kafka" dataFormat="binary"/>
+        <aspects name="GetMapping" qualifiedName="Spring.GetMapping" import="//@imports.2">
+          <featureNames>SINGLE_VALUED</featureNames>
+        </aspects>
+        <parameters name="name" qualifiedName="de.fhdo.puls.environmentaldataanalysisquery.EnvironmentalDataAnalysisQuery.EnvironmentSensorUnitQueries.getEnvironmentSensorUnitByName.name" exchangePattern="IN" communicationType="SYNCHRONOUS">
+          <type xsi:type="intermediate_1:IntermediateImportedTechnologySpecificType" name="String" origin="TECHNOLOGY" kind="PRIMITIVE" qualifiedName="java._types.String" import="//@imports.3"/>
+          <originalType xsi:type="intermediate_1:IntermediatePrimitiveType" name="string" origin="BUILTIN" kind="PRIMITIVE"/>
+          <aspects name="PathVariable" qualifiedName="Spring.PathVariable" import="//@imports.2">
+            <featureNames>SINGLE_VALUED</featureNames>
+            <properties name="value" type="string"/>
+            <propertyValues value="name" property="//@microservices.0/@interfaces.0/@operations.0/@parameters.0/@aspects.0/@properties.0"/>
+          </aspects>
+        </parameters>
+        <parameters name="environmentSensorUnit" qualifiedName="de.fhdo.puls.environmentaldataanalysisquery.EnvironmentalDataAnalysisQuery.EnvironmentSensorUnitQueries.getEnvironmentSensorUnitByName.environmentSensorUnit" exchangePattern="OUT" communicationType="SYNCHRONOUS">
+          <type xsi:type="intermediate_1:IntermediateImportedComplexType" name="EnvironmentSensorUnitVO" origin="DATA_MODEL" kind="STRUCTURE" qualifiedName="EnvironmentalDataAnalysis.EnvironmentSensorUnitVO" import="//@imports.0"/>
+          <originalType xsi:type="intermediate_1:IntermediateImportedComplexType" name="EnvironmentSensorUnitVO" origin="DATA_MODEL" kind="STRUCTURE" qualifiedName="EnvironmentalDataAnalysis.EnvironmentSensorUnitVO" import="//@imports.0"/>
+          <aspects name="ResponseEntity" qualifiedName="Spring.ResponseEntity" import="//@imports.2">
+            <featureNames>SINGLE_VALUED</featureNames>
+          </aspects>
+        </parameters>
+      </operations>
+      <operations name="getEnvironmentSensorUnitBySensorBoxId" qualifiedName="de.fhdo.puls.environmentaldataanalysisquery.EnvironmentalDataAnalysisQuery.EnvironmentSensorUnitQueries.getEnvironmentSensorUnitBySensorBoxId" visibility="OclUndefined">
+        <endpoints communicationType="SYNCHRONOUS" protocol="rest" dataFormat="application/json" technology="//@microservices.0/@technologies.1">
+          <addresses>/environmentSensorUnit/sensorBoxId/{sensorBoxId}</addresses>
+        </endpoints>
+        <protocols communicationType="SYNCHRONOUS" protocol="rest" dataFormat="application/json"/>
+        <protocols communicationType="ASYNCHRONOUS" protocol="kafka" dataFormat="binary"/>
+        <aspects name="GetMapping" qualifiedName="Spring.GetMapping" import="//@imports.2">
+          <featureNames>SINGLE_VALUED</featureNames>
+        </aspects>
+        <parameters name="sensorBoxId" qualifiedName="de.fhdo.puls.environmentaldataanalysisquery.EnvironmentalDataAnalysisQuery.EnvironmentSensorUnitQueries.getEnvironmentSensorUnitBySensorBoxId.sensorBoxId" exchangePattern="IN" communicationType="SYNCHRONOUS">
+          <type xsi:type="intermediate_1:IntermediateImportedTechnologySpecificType" name="Long" origin="TECHNOLOGY" kind="PRIMITIVE" qualifiedName="java._types.Long" import="//@imports.3"/>
+          <originalType xsi:type="intermediate_1:IntermediatePrimitiveType" name="long" origin="BUILTIN" kind="PRIMITIVE" size="64"/>
+          <aspects name="PathVariable" qualifiedName="Spring.PathVariable" import="//@imports.2">
+            <featureNames>SINGLE_VALUED</featureNames>
+            <properties name="value" type="string"/>
+            <propertyValues value="sensorBoxId" property="//@microservices.0/@interfaces.0/@operations.1/@parameters.0/@aspects.0/@properties.0"/>
+          </aspects>
+        </parameters>
+        <parameters name="environmentSensorUnit" qualifiedName="de.fhdo.puls.environmentaldataanalysisquery.EnvironmentalDataAnalysisQuery.EnvironmentSensorUnitQueries.getEnvironmentSensorUnitBySensorBoxId.environmentSensorUnit" exchangePattern="OUT" communicationType="SYNCHRONOUS">
+          <type xsi:type="intermediate_1:IntermediateImportedComplexType" name="EnvironmentSensorUnitVO" origin="DATA_MODEL" kind="STRUCTURE" qualifiedName="EnvironmentalDataAnalysis.EnvironmentSensorUnitVO" import="//@imports.0"/>
+          <originalType xsi:type="intermediate_1:IntermediateImportedComplexType" name="EnvironmentSensorUnitVO" origin="DATA_MODEL" kind="STRUCTURE" qualifiedName="EnvironmentalDataAnalysis.EnvironmentSensorUnitVO" import="//@imports.0"/>
+          <aspects name="ResponseEntity" qualifiedName="Spring.ResponseEntity" import="//@imports.2">
+            <featureNames>SINGLE_VALUED</featureNames>
+          </aspects>
+        </parameters>
+      </operations>
+      <operations name="getEnvironmentSensorUnits" qualifiedName="de.fhdo.puls.environmentaldataanalysisquery.EnvironmentalDataAnalysisQuery.EnvironmentSensorUnitQueries.getEnvironmentSensorUnits" visibility="OclUndefined">
+        <endpoints communicationType="SYNCHRONOUS" protocol="rest" dataFormat="application/json" technology="//@microservices.0/@technologies.1">
+          <addresses>/environmentSensorUnits</addresses>
+        </endpoints>
+        <protocols communicationType="SYNCHRONOUS" protocol="rest" dataFormat="application/json"/>
+        <protocols communicationType="ASYNCHRONOUS" protocol="kafka" dataFormat="binary"/>
+        <aspects name="GetMapping" qualifiedName="Spring.GetMapping" import="//@imports.2">
+          <featureNames>SINGLE_VALUED</featureNames>
+        </aspects>
+        <parameters name="environmentSensorUnits" qualifiedName="de.fhdo.puls.environmentaldataanalysisquery.EnvironmentalDataAnalysisQuery.EnvironmentSensorUnitQueries.getEnvironmentSensorUnits.environmentSensorUnits" exchangePattern="OUT" communicationType="SYNCHRONOUS">
+          <type xsi:type="intermediate_1:IntermediateImportedComplexType" name="EnvironmentSensorUnitVO" origin="DATA_MODEL" kind="STRUCTURE" qualifiedName="EnvironmentalDataAnalysis.EnvironmentSensorUnitVO" import="//@imports.0"/>
+          <originalType xsi:type="intermediate_1:IntermediateImportedComplexType" name="EnvironmentSensorUnitVO" origin="DATA_MODEL" kind="STRUCTURE" qualifiedName="EnvironmentalDataAnalysis.EnvironmentSensorUnitVO" import="//@imports.0"/>
+          <aspects name="ResponseEntity" qualifiedName="Spring.ResponseEntity" import="//@imports.2">
+            <featureNames>SINGLE_VALUED</featureNames>
+          </aspects>
+        </parameters>
+      </operations>
+      <operations name="receiveEnvironmentDataReceivedEvents" qualifiedName="de.fhdo.puls.environmentaldataanalysisquery.EnvironmentalDataAnalysisQuery.EnvironmentSensorUnitQueries.receiveEnvironmentDataReceivedEvents" visibility="ARCHITECTURE">
+        <protocols communicationType="SYNCHRONOUS" protocol="rest" dataFormat="application/json"/>
+        <protocols communicationType="ASYNCHRONOUS" protocol="kafka" dataFormat="binary"/>
+        <aspects name="Participant" qualifiedName="Kafka.Participant" import="//@imports.4">
+          <properties name="topic" type="string">
+            <featureNames>MANDATORY</featureNames>
+          </properties>
+          <properties name="consumerGroup" type="string"/>
+          <propertyValues value="environmentDataReceivedEvents" property="//@microservices.0/@interfaces.0/@operations.3/@aspects.0/@properties.0"/>
+          <propertyValues value="environmentDataReceivedEvents" property="//@microservices.0/@interfaces.0/@operations.3/@aspects.0/@properties.1"/>
+        </aspects>
+        <parameters name="event" qualifiedName="de.fhdo.puls.environmentaldataanalysisquery.EnvironmentalDataAnalysisQuery.EnvironmentSensorUnitQueries.receiveEnvironmentDataReceivedEvents.event" exchangePattern="IN" communicationType="ASYNCHRONOUS">
+          <type xsi:type="intermediate_1:IntermediateImportedComplexType" name="EnvironmentDataReceived" origin="DATA_MODEL" kind="STRUCTURE" qualifiedName="EnvironmentalDataAnalysis.EnvironmentDataReceived" import="//@imports.0"/>
+          <originalType xsi:type="intermediate_1:IntermediateImportedComplexType" name="EnvironmentDataReceived" origin="DATA_MODEL" kind="STRUCTURE" qualifiedName="EnvironmentalDataAnalysis.EnvironmentDataReceived" import="//@imports.0"/>
+        </parameters>
+      </operations>
+      <operations name="receiveEnvironmentSensorUnitCreatedEvents" qualifiedName="de.fhdo.puls.environmentaldataanalysisquery.EnvironmentalDataAnalysisQuery.EnvironmentSensorUnitQueries.receiveEnvironmentSensorUnitCreatedEvents" visibility="ARCHITECTURE">
+        <protocols communicationType="SYNCHRONOUS" protocol="rest" dataFormat="application/json"/>
+        <protocols communicationType="ASYNCHRONOUS" protocol="kafka" dataFormat="binary"/>
+        <aspects name="Participant" qualifiedName="Kafka.Participant" import="//@imports.4">
+          <properties name="topic" type="string">
+            <featureNames>MANDATORY</featureNames>
+          </properties>
+          <properties name="consumerGroup" type="string"/>
+          <propertyValues value="environmentSensorUnitCreatedEvents" property="//@microservices.0/@interfaces.0/@operations.4/@aspects.0/@properties.0"/>
+          <propertyValues value="environmentSensorUnitCreatedEvents" property="//@microservices.0/@interfaces.0/@operations.4/@aspects.0/@properties.1"/>
+        </aspects>
+        <parameters name="event" qualifiedName="de.fhdo.puls.environmentaldataanalysisquery.EnvironmentalDataAnalysisQuery.EnvironmentSensorUnitQueries.receiveEnvironmentSensorUnitCreatedEvents.event" exchangePattern="IN" communicationType="ASYNCHRONOUS">
+          <type xsi:type="intermediate_1:IntermediateImportedComplexType" name="EnvironmentSensorUnitCreated" origin="DATA_MODEL" kind="STRUCTURE" qualifiedName="EnvironmentalDataAnalysis.EnvironmentSensorUnitCreated" import="//@imports.0"/>
+          <originalType xsi:type="intermediate_1:IntermediateImportedComplexType" name="EnvironmentSensorUnitCreated" origin="DATA_MODEL" kind="STRUCTURE" qualifiedName="EnvironmentalDataAnalysis.EnvironmentSensorUnitCreated" import="//@imports.0"/>
+        </parameters>
+      </operations>
+      <operations name="receiveEnvironmentSensorUnitUpdatedEvents" qualifiedName="de.fhdo.puls.environmentaldataanalysisquery.EnvironmentalDataAnalysisQuery.EnvironmentSensorUnitQueries.receiveEnvironmentSensorUnitUpdatedEvents" visibility="ARCHITECTURE">
+        <protocols communicationType="SYNCHRONOUS" protocol="rest" dataFormat="application/json"/>
+        <protocols communicationType="ASYNCHRONOUS" protocol="kafka" dataFormat="binary"/>
+        <aspects name="Participant" qualifiedName="Kafka.Participant" import="//@imports.4">
+          <properties name="topic" type="string">
+            <featureNames>MANDATORY</featureNames>
+          </properties>
+          <properties name="consumerGroup" type="string"/>
+          <propertyValues value="environmentSensorUnitUpdatedEvents" property="//@microservices.0/@interfaces.0/@operations.5/@aspects.0/@properties.0"/>
+          <propertyValues value="environmentSensorUnitUpdatedEvents" property="//@microservices.0/@interfaces.0/@operations.5/@aspects.0/@properties.1"/>
+        </aspects>
+        <parameters name="event" qualifiedName="de.fhdo.puls.environmentaldataanalysisquery.EnvironmentalDataAnalysisQuery.EnvironmentSensorUnitQueries.receiveEnvironmentSensorUnitUpdatedEvents.event" exchangePattern="IN" communicationType="ASYNCHRONOUS">
+          <type xsi:type="intermediate_1:IntermediateImportedComplexType" name="EnvironmentSensorUnitUpdated" origin="DATA_MODEL" kind="STRUCTURE" qualifiedName="EnvironmentalDataAnalysis.EnvironmentSensorUnitUpdated" import="//@imports.0"/>
+          <originalType xsi:type="intermediate_1:IntermediateImportedComplexType" name="EnvironmentSensorUnitUpdated" origin="DATA_MODEL" kind="STRUCTURE" qualifiedName="EnvironmentalDataAnalysis.EnvironmentSensorUnitUpdated" import="//@imports.0"/>
+        </parameters>
+      </operations>
+    </interfaces>
+    <interfaces name="EnvironmentSensorInformationQueries" qualifiedName="de.fhdo.puls.environmentaldataanalysisquery.EnvironmentalDataAnalysisQuery.EnvironmentSensorInformationQueries" visibility="ARCHITECTURE" hasImplementedOperations="true">
+      <endpoints communicationType="SYNCHRONOUS" protocol="rest" dataFormat="application/json" technology="//@microservices.0/@technologies.1">
+        <addresses>/resources/v1</addresses>
+      </endpoints>
+      <protocols communicationType="SYNCHRONOUS" protocol="rest" dataFormat="application/json"/>
+      <protocols communicationType="ASYNCHRONOUS" protocol="kafka" dataFormat="binary"/>
+      <operations name="getLatestSensorValue" qualifiedName="de.fhdo.puls.environmentaldataanalysisquery.EnvironmentalDataAnalysisQuery.EnvironmentSensorInformationQueries.getLatestSensorValue" visibility="OclUndefined">
+        <endpoints communicationType="SYNCHRONOUS" protocol="rest" dataFormat="application/json" technology="//@microservices.0/@technologies.1">
+          <addresses>/environmentInformation/{sensorBoxId}/{sensor}/latest</addresses>
+        </endpoints>
+        <protocols communicationType="SYNCHRONOUS" protocol="rest" dataFormat="application/json"/>
+        <protocols communicationType="ASYNCHRONOUS" protocol="kafka" dataFormat="binary"/>
+        <aspects name="GetMapping" qualifiedName="Spring.GetMapping" import="//@imports.2">
+          <featureNames>SINGLE_VALUED</featureNames>
+        </aspects>
+        <parameters name="sensorBoxId" qualifiedName="de.fhdo.puls.environmentaldataanalysisquery.EnvironmentalDataAnalysisQuery.EnvironmentSensorInformationQueries.getLatestSensorValue.sensorBoxId" exchangePattern="IN" communicationType="SYNCHRONOUS">
+          <type xsi:type="intermediate_1:IntermediateImportedTechnologySpecificType" name="Long" origin="TECHNOLOGY" kind="PRIMITIVE" qualifiedName="java._types.Long" import="//@imports.3"/>
+          <originalType xsi:type="intermediate_1:IntermediatePrimitiveType" name="long" origin="BUILTIN" kind="PRIMITIVE" size="64"/>
+          <aspects name="PathVariable" qualifiedName="Spring.PathVariable" import="//@imports.2">
+            <featureNames>SINGLE_VALUED</featureNames>
+            <properties name="value" type="string"/>
+            <propertyValues value="sensorBoxId" property="//@microservices.0/@interfaces.1/@operations.0/@parameters.0/@aspects.0/@properties.0"/>
+          </aspects>
+        </parameters>
+        <parameters name="sensor" qualifiedName="de.fhdo.puls.environmentaldataanalysisquery.EnvironmentalDataAnalysisQuery.EnvironmentSensorInformationQueries.getLatestSensorValue.sensor" exchangePattern="IN" communicationType="SYNCHRONOUS">
+          <type xsi:type="intermediate_1:IntermediateImportedTechnologySpecificType" name="String" origin="TECHNOLOGY" kind="PRIMITIVE" qualifiedName="java._types.String" import="//@imports.3"/>
+          <originalType xsi:type="intermediate_1:IntermediatePrimitiveType" name="string" origin="BUILTIN" kind="PRIMITIVE"/>
+          <aspects name="PathVariable" qualifiedName="Spring.PathVariable" import="//@imports.2">
+            <featureNames>SINGLE_VALUED</featureNames>
+            <properties name="value" type="string"/>
+            <propertyValues value="sensor" property="//@microservices.0/@interfaces.1/@operations.0/@parameters.1/@aspects.0/@properties.0"/>
+          </aspects>
+        </parameters>
+        <parameters name="latestSensorValue" qualifiedName="de.fhdo.puls.environmentaldataanalysisquery.EnvironmentalDataAnalysisQuery.EnvironmentSensorInformationQueries.getLatestSensorValue.latestSensorValue" exchangePattern="OUT" communicationType="SYNCHRONOUS">
+          <type xsi:type="intermediate_1:IntermediateImportedComplexType" name="SensorValue" origin="DATA_MODEL" kind="STRUCTURE" qualifiedName="EnvironmentalDataAnalysis.SensorValue" import="//@imports.0"/>
+          <originalType xsi:type="intermediate_1:IntermediateImportedComplexType" name="SensorValue" origin="DATA_MODEL" kind="STRUCTURE" qualifiedName="EnvironmentalDataAnalysis.SensorValue" import="//@imports.0"/>
+          <aspects name="ResponseEntity" qualifiedName="Spring.ResponseEntity" import="//@imports.2">
+            <featureNames>SINGLE_VALUED</featureNames>
+          </aspects>
+        </parameters>
+      </operations>
+      <operations name="getSensorValue" qualifiedName="de.fhdo.puls.environmentaldataanalysisquery.EnvironmentalDataAnalysisQuery.EnvironmentSensorInformationQueries.getSensorValue" visibility="OclUndefined">
+        <endpoints communicationType="SYNCHRONOUS" protocol="rest" dataFormat="application/json" technology="//@microservices.0/@technologies.1">
+          <addresses>/environmentInformation/{sensorBoxId}/{sensor}/{numberOfValues}</addresses>
+        </endpoints>
+        <protocols communicationType="SYNCHRONOUS" protocol="rest" dataFormat="application/json"/>
+        <protocols communicationType="ASYNCHRONOUS" protocol="kafka" dataFormat="binary"/>
+        <aspects name="GetMapping" qualifiedName="Spring.GetMapping" import="//@imports.2">
+          <featureNames>SINGLE_VALUED</featureNames>
+        </aspects>
+        <parameters name="sensorBoxId" qualifiedName="de.fhdo.puls.environmentaldataanalysisquery.EnvironmentalDataAnalysisQuery.EnvironmentSensorInformationQueries.getSensorValue.sensorBoxId" exchangePattern="IN" communicationType="SYNCHRONOUS">
+          <type xsi:type="intermediate_1:IntermediateImportedTechnologySpecificType" name="Long" origin="TECHNOLOGY" kind="PRIMITIVE" qualifiedName="java._types.Long" import="//@imports.3"/>
+          <originalType xsi:type="intermediate_1:IntermediatePrimitiveType" name="long" origin="BUILTIN" kind="PRIMITIVE" size="64"/>
+          <aspects name="PathVariable" qualifiedName="Spring.PathVariable" import="//@imports.2">
+            <featureNames>SINGLE_VALUED</featureNames>
+            <properties name="value" type="string"/>
+            <propertyValues value="sensorBoxId" property="//@microservices.0/@interfaces.1/@operations.1/@parameters.0/@aspects.0/@properties.0"/>
+          </aspects>
+        </parameters>
+        <parameters name="sensor" qualifiedName="de.fhdo.puls.environmentaldataanalysisquery.EnvironmentalDataAnalysisQuery.EnvironmentSensorInformationQueries.getSensorValue.sensor" exchangePattern="IN" communicationType="SYNCHRONOUS">
+          <type xsi:type="intermediate_1:IntermediateImportedTechnologySpecificType" name="String" origin="TECHNOLOGY" kind="PRIMITIVE" qualifiedName="java._types.String" import="//@imports.3"/>
+          <originalType xsi:type="intermediate_1:IntermediatePrimitiveType" name="string" origin="BUILTIN" kind="PRIMITIVE"/>
+          <aspects name="PathVariable" qualifiedName="Spring.PathVariable" import="//@imports.2">
+            <featureNames>SINGLE_VALUED</featureNames>
+            <properties name="value" type="string"/>
+            <propertyValues value="sensor" property="//@microservices.0/@interfaces.1/@operations.1/@parameters.1/@aspects.0/@properties.0"/>
+          </aspects>
+        </parameters>
+        <parameters name="numberOfValues" qualifiedName="de.fhdo.puls.environmentaldataanalysisquery.EnvironmentalDataAnalysisQuery.EnvironmentSensorInformationQueries.getSensorValue.numberOfValues" exchangePattern="IN" communicationType="SYNCHRONOUS">
+          <type xsi:type="intermediate_1:IntermediateImportedTechnologySpecificType" name="Integer" origin="TECHNOLOGY" kind="PRIMITIVE" qualifiedName="java._types.Integer" import="//@imports.3"/>
+          <originalType xsi:type="intermediate_1:IntermediatePrimitiveType" name="int" origin="BUILTIN" kind="PRIMITIVE" size="32"/>
+          <aspects name="PathVariable" qualifiedName="Spring.PathVariable" import="//@imports.2">
+            <featureNames>SINGLE_VALUED</featureNames>
+            <properties name="value" type="string"/>
+            <propertyValues value="numberOfValues" property="//@microservices.0/@interfaces.1/@operations.1/@parameters.2/@aspects.0/@properties.0"/>
+          </aspects>
+        </parameters>
+        <parameters name="sensorValue" qualifiedName="de.fhdo.puls.environmentaldataanalysisquery.EnvironmentalDataAnalysisQuery.EnvironmentSensorInformationQueries.getSensorValue.sensorValue" exchangePattern="OUT" communicationType="SYNCHRONOUS">
+          <type xsi:type="intermediate_1:IntermediateImportedComplexType" name="SensorValue" origin="DATA_MODEL" kind="STRUCTURE" qualifiedName="EnvironmentalDataAnalysis.SensorValue" import="//@imports.0"/>
+          <originalType xsi:type="intermediate_1:IntermediateImportedComplexType" name="SensorValue" origin="DATA_MODEL" kind="STRUCTURE" qualifiedName="EnvironmentalDataAnalysis.SensorValue" import="//@imports.0"/>
+          <aspects name="ResponseEntity" qualifiedName="Spring.ResponseEntity" import="//@imports.2">
+            <featureNames>SINGLE_VALUED</featureNames>
+          </aspects>
+        </parameters>
+      </operations>
+      <operations name="getSensorMeasurementTypes" qualifiedName="de.fhdo.puls.environmentaldataanalysisquery.EnvironmentalDataAnalysisQuery.EnvironmentSensorInformationQueries.getSensorMeasurementTypes" visibility="OclUndefined">
+        <endpoints communicationType="SYNCHRONOUS" protocol="rest" dataFormat="application/json" technology="//@microservices.0/@technologies.1">
+          <addresses>/environmentInformation/sensorBoxId/{sensorBoxId}/measurementTypes</addresses>
+        </endpoints>
+        <protocols communicationType="SYNCHRONOUS" protocol="rest" dataFormat="application/json"/>
+        <protocols communicationType="ASYNCHRONOUS" protocol="kafka" dataFormat="binary"/>
+        <aspects name="GetMapping" qualifiedName="Spring.GetMapping" import="//@imports.2">
+          <featureNames>SINGLE_VALUED</featureNames>
+        </aspects>
+        <parameters name="sensorBoxId" qualifiedName="de.fhdo.puls.environmentaldataanalysisquery.EnvironmentalDataAnalysisQuery.EnvironmentSensorInformationQueries.getSensorMeasurementTypes.sensorBoxId" exchangePattern="IN" communicationType="SYNCHRONOUS">
+          <type xsi:type="intermediate_1:IntermediateImportedTechnologySpecificType" name="Long" origin="TECHNOLOGY" kind="PRIMITIVE" qualifiedName="java._types.Long" import="//@imports.3"/>
+          <originalType xsi:type="intermediate_1:IntermediatePrimitiveType" name="long" origin="BUILTIN" kind="PRIMITIVE" size="64"/>
+          <aspects name="PathVariable" qualifiedName="Spring.PathVariable" import="//@imports.2">
+            <featureNames>SINGLE_VALUED</featureNames>
+            <properties name="value" type="string"/>
+            <propertyValues value="sensorBoxId" property="//@microservices.0/@interfaces.1/@operations.2/@parameters.0/@aspects.0/@properties.0"/>
+          </aspects>
+        </parameters>
+        <parameters name="sensorMeasurementTypes" qualifiedName="de.fhdo.puls.environmentaldataanalysisquery.EnvironmentalDataAnalysisQuery.EnvironmentSensorInformationQueries.getSensorMeasurementTypes.sensorMeasurementTypes" exchangePattern="OUT" communicationType="SYNCHRONOUS">
+          <type xsi:type="intermediate_1:IntermediateImportedTechnologySpecificType" name="String" origin="TECHNOLOGY" kind="PRIMITIVE" qualifiedName="java._types.String" import="//@imports.3"/>
+          <originalType xsi:type="intermediate_1:IntermediatePrimitiveType" name="string" origin="BUILTIN" kind="PRIMITIVE"/>
+        </parameters>
+      </operations>
+    </interfaces>
+    <interfaces name="EnvironmentInformationQueries" qualifiedName="de.fhdo.puls.environmentaldataanalysisquery.EnvironmentalDataAnalysisQuery.EnvironmentInformationQueries" visibility="ARCHITECTURE" hasImplementedOperations="true">
+      <endpoints communicationType="SYNCHRONOUS" protocol="rest" dataFormat="application/json" technology="//@microservices.0/@technologies.1">
+        <addresses>/resources/v1</addresses>
+      </endpoints>
+      <protocols communicationType="SYNCHRONOUS" protocol="rest" dataFormat="application/json"/>
+      <protocols communicationType="ASYNCHRONOUS" protocol="kafka" dataFormat="binary"/>
+      <operations name="getEnvironmentInformation" qualifiedName="de.fhdo.puls.environmentaldataanalysisquery.EnvironmentalDataAnalysisQuery.EnvironmentInformationQueries.getEnvironmentInformation" visibility="OclUndefined">
+        <endpoints communicationType="SYNCHRONOUS" protocol="rest" dataFormat="application/json" technology="//@microservices.0/@technologies.1">
+          <addresses>/environmentInformation/{id}</addresses>
+        </endpoints>
+        <protocols communicationType="SYNCHRONOUS" protocol="rest" dataFormat="application/json"/>
+        <protocols communicationType="ASYNCHRONOUS" protocol="kafka" dataFormat="binary"/>
+        <aspects name="GetMapping" qualifiedName="Spring.GetMapping" import="//@imports.2">
+          <featureNames>SINGLE_VALUED</featureNames>
+        </aspects>
+        <parameters name="id" qualifiedName="de.fhdo.puls.environmentaldataanalysisquery.EnvironmentalDataAnalysisQuery.EnvironmentInformationQueries.getEnvironmentInformation.id" exchangePattern="IN" communicationType="SYNCHRONOUS">
+          <type xsi:type="intermediate_1:IntermediateImportedTechnologySpecificType" name="Long" origin="TECHNOLOGY" kind="PRIMITIVE" qualifiedName="java._types.Long" import="//@imports.3"/>
+          <originalType xsi:type="intermediate_1:IntermediatePrimitiveType" name="long" origin="BUILTIN" kind="PRIMITIVE" size="64"/>
+          <aspects name="PathVariable" qualifiedName="Spring.PathVariable" import="//@imports.2">
+            <featureNames>SINGLE_VALUED</featureNames>
+            <properties name="value" type="string"/>
+            <propertyValues value="id" property="//@microservices.0/@interfaces.2/@operations.0/@parameters.0/@aspects.0/@properties.0"/>
+          </aspects>
+        </parameters>
+        <parameters name="environmentInformation" qualifiedName="de.fhdo.puls.environmentaldataanalysisquery.EnvironmentalDataAnalysisQuery.EnvironmentInformationQueries.getEnvironmentInformation.environmentInformation" exchangePattern="OUT" communicationType="SYNCHRONOUS">
+          <type xsi:type="intermediate_1:IntermediateImportedComplexType" name="EnvironmentInformationVO" origin="DATA_MODEL" kind="STRUCTURE" qualifiedName="EnvironmentalDataAnalysis.EnvironmentInformationVO" import="//@imports.0"/>
+          <originalType xsi:type="intermediate_1:IntermediateImportedComplexType" name="EnvironmentInformationVO" origin="DATA_MODEL" kind="STRUCTURE" qualifiedName="EnvironmentalDataAnalysis.EnvironmentInformationVO" import="//@imports.0"/>
+          <aspects name="ResponseEntity" qualifiedName="Spring.ResponseEntity" import="//@imports.2">
+            <featureNames>SINGLE_VALUED</featureNames>
+          </aspects>
+        </parameters>
+      </operations>
+      <operations name="getParticulate2Information" qualifiedName="de.fhdo.puls.environmentaldataanalysisquery.EnvironmentalDataAnalysisQuery.EnvironmentInformationQueries.getParticulate2Information" visibility="OclUndefined">
+        <endpoints communicationType="SYNCHRONOUS" protocol="rest" dataFormat="application/json" technology="//@microservices.0/@technologies.1">
+          <addresses>/environmentInformation/{id}/particulate2</addresses>
+        </endpoints>
+        <protocols communicationType="SYNCHRONOUS" protocol="rest" dataFormat="application/json"/>
+        <protocols communicationType="ASYNCHRONOUS" protocol="kafka" dataFormat="binary"/>
+        <aspects name="GetMapping" qualifiedName="Spring.GetMapping" import="//@imports.2">
+          <featureNames>SINGLE_VALUED</featureNames>
+        </aspects>
+        <parameters name="id" qualifiedName="de.fhdo.puls.environmentaldataanalysisquery.EnvironmentalDataAnalysisQuery.EnvironmentInformationQueries.getParticulate2Information.id" exchangePattern="IN" communicationType="SYNCHRONOUS">
+          <type xsi:type="intermediate_1:IntermediateImportedTechnologySpecificType" name="Long" origin="TECHNOLOGY" kind="PRIMITIVE" qualifiedName="java._types.Long" import="//@imports.3"/>
+          <originalType xsi:type="intermediate_1:IntermediatePrimitiveType" name="long" origin="BUILTIN" kind="PRIMITIVE" size="64"/>
+          <aspects name="PathVariable" qualifiedName="Spring.PathVariable" import="//@imports.2">
+            <featureNames>SINGLE_VALUED</featureNames>
+            <properties name="value" type="string"/>
+            <propertyValues value="id" property="//@microservices.0/@interfaces.2/@operations.1/@parameters.0/@aspects.0/@properties.0"/>
+          </aspects>
+        </parameters>
+        <parameters name="particulate2Information" qualifiedName="de.fhdo.puls.environmentaldataanalysisquery.EnvironmentalDataAnalysisQuery.EnvironmentInformationQueries.getParticulate2Information.particulate2Information" exchangePattern="OUT" communicationType="SYNCHRONOUS">
+          <type xsi:type="intermediate_1:IntermediateImportedComplexType" name="SensorValue" origin="DATA_MODEL" kind="STRUCTURE" qualifiedName="EnvironmentalDataAnalysis.SensorValue" import="//@imports.0"/>
+          <originalType xsi:type="intermediate_1:IntermediateImportedComplexType" name="SensorValue" origin="DATA_MODEL" kind="STRUCTURE" qualifiedName="EnvironmentalDataAnalysis.SensorValue" import="//@imports.0"/>
+          <aspects name="ResponseEntity" qualifiedName="Spring.ResponseEntity" import="//@imports.2">
+            <featureNames>SINGLE_VALUED</featureNames>
+          </aspects>
+        </parameters>
+      </operations>
+      <operations name="getParticulate10Information" qualifiedName="de.fhdo.puls.environmentaldataanalysisquery.EnvironmentalDataAnalysisQuery.EnvironmentInformationQueries.getParticulate10Information" visibility="OclUndefined">
+        <endpoints communicationType="SYNCHRONOUS" protocol="rest" dataFormat="application/json" technology="//@microservices.0/@technologies.1">
+          <addresses>/environmentInformation/{id}/particulate10</addresses>
+        </endpoints>
+        <protocols communicationType="SYNCHRONOUS" protocol="rest" dataFormat="application/json"/>
+        <protocols communicationType="ASYNCHRONOUS" protocol="kafka" dataFormat="binary"/>
+        <aspects name="GetMapping" qualifiedName="Spring.GetMapping" import="//@imports.2">
+          <featureNames>SINGLE_VALUED</featureNames>
+        </aspects>
+        <parameters name="id" qualifiedName="de.fhdo.puls.environmentaldataanalysisquery.EnvironmentalDataAnalysisQuery.EnvironmentInformationQueries.getParticulate10Information.id" exchangePattern="IN" communicationType="SYNCHRONOUS">
+          <type xsi:type="intermediate_1:IntermediateImportedTechnologySpecificType" name="Long" origin="TECHNOLOGY" kind="PRIMITIVE" qualifiedName="java._types.Long" import="//@imports.3"/>
+          <originalType xsi:type="intermediate_1:IntermediatePrimitiveType" name="long" origin="BUILTIN" kind="PRIMITIVE" size="64"/>
+          <aspects name="PathVariable" qualifiedName="Spring.PathVariable" import="//@imports.2">
+            <featureNames>SINGLE_VALUED</featureNames>
+            <properties name="value" type="string"/>
+            <propertyValues value="id" property="//@microservices.0/@interfaces.2/@operations.2/@parameters.0/@aspects.0/@properties.0"/>
+          </aspects>
+        </parameters>
+        <parameters name="particulate10Information" qualifiedName="de.fhdo.puls.environmentaldataanalysisquery.EnvironmentalDataAnalysisQuery.EnvironmentInformationQueries.getParticulate10Information.particulate10Information" exchangePattern="OUT" communicationType="SYNCHRONOUS">
+          <type xsi:type="intermediate_1:IntermediateImportedComplexType" name="SensorValue" origin="DATA_MODEL" kind="STRUCTURE" qualifiedName="EnvironmentalDataAnalysis.SensorValue" import="//@imports.0"/>
+          <originalType xsi:type="intermediate_1:IntermediateImportedComplexType" name="SensorValue" origin="DATA_MODEL" kind="STRUCTURE" qualifiedName="EnvironmentalDataAnalysis.SensorValue" import="//@imports.0"/>
+          <aspects name="ResponseEntity" qualifiedName="Spring.ResponseEntity" import="//@imports.2">
+            <featureNames>SINGLE_VALUED</featureNames>
+          </aspects>
+        </parameters>
+      </operations>
+      <operations name="getLightInformation" qualifiedName="de.fhdo.puls.environmentaldataanalysisquery.EnvironmentalDataAnalysisQuery.EnvironmentInformationQueries.getLightInformation" visibility="OclUndefined">
+        <endpoints communicationType="SYNCHRONOUS" protocol="rest" dataFormat="application/json" technology="//@microservices.0/@technologies.1">
+          <addresses>/environmentInformation/{id}/light</addresses>
+        </endpoints>
+        <protocols communicationType="SYNCHRONOUS" protocol="rest" dataFormat="application/json"/>
+        <protocols communicationType="ASYNCHRONOUS" protocol="kafka" dataFormat="binary"/>
+        <aspects name="GetMapping" qualifiedName="Spring.GetMapping" import="//@imports.2">
+          <featureNames>SINGLE_VALUED</featureNames>
+        </aspects>
+        <parameters name="id" qualifiedName="de.fhdo.puls.environmentaldataanalysisquery.EnvironmentalDataAnalysisQuery.EnvironmentInformationQueries.getLightInformation.id" exchangePattern="IN" communicationType="SYNCHRONOUS">
+          <type xsi:type="intermediate_1:IntermediateImportedTechnologySpecificType" name="Long" origin="TECHNOLOGY" kind="PRIMITIVE" qualifiedName="java._types.Long" import="//@imports.3"/>
+          <originalType xsi:type="intermediate_1:IntermediatePrimitiveType" name="long" origin="BUILTIN" kind="PRIMITIVE" size="64"/>
+          <aspects name="PathVariable" qualifiedName="Spring.PathVariable" import="//@imports.2">
+            <featureNames>SINGLE_VALUED</featureNames>
+            <properties name="value" type="string"/>
+            <propertyValues value="id" property="//@microservices.0/@interfaces.2/@operations.3/@parameters.0/@aspects.0/@properties.0"/>
+          </aspects>
+        </parameters>
+        <parameters name="lightInformation" qualifiedName="de.fhdo.puls.environmentaldataanalysisquery.EnvironmentalDataAnalysisQuery.EnvironmentInformationQueries.getLightInformation.lightInformation" exchangePattern="OUT" communicationType="SYNCHRONOUS">
+          <type xsi:type="intermediate_1:IntermediateImportedComplexType" name="SensorValue" origin="DATA_MODEL" kind="STRUCTURE" qualifiedName="EnvironmentalDataAnalysis.SensorValue" import="//@imports.0"/>
+          <originalType xsi:type="intermediate_1:IntermediateImportedComplexType" name="SensorValue" origin="DATA_MODEL" kind="STRUCTURE" qualifiedName="EnvironmentalDataAnalysis.SensorValue" import="//@imports.0"/>
+          <aspects name="ResponseEntity" qualifiedName="Spring.ResponseEntity" import="//@imports.2">
+            <featureNames>SINGLE_VALUED</featureNames>
+          </aspects>
+        </parameters>
+      </operations>
+      <operations name="getTemperatureInformation" qualifiedName="de.fhdo.puls.environmentaldataanalysisquery.EnvironmentalDataAnalysisQuery.EnvironmentInformationQueries.getTemperatureInformation" visibility="OclUndefined">
+        <endpoints communicationType="SYNCHRONOUS" protocol="rest" dataFormat="application/json" technology="//@microservices.0/@technologies.1">
+          <addresses>/environmentInformation/{id}/temperature</addresses>
+        </endpoints>
+        <protocols communicationType="SYNCHRONOUS" protocol="rest" dataFormat="application/json"/>
+        <protocols communicationType="ASYNCHRONOUS" protocol="kafka" dataFormat="binary"/>
+        <aspects name="GetMapping" qualifiedName="Spring.GetMapping" import="//@imports.2">
+          <featureNames>SINGLE_VALUED</featureNames>
+        </aspects>
+        <parameters name="id" qualifiedName="de.fhdo.puls.environmentaldataanalysisquery.EnvironmentalDataAnalysisQuery.EnvironmentInformationQueries.getTemperatureInformation.id" exchangePattern="IN" communicationType="SYNCHRONOUS">
+          <type xsi:type="intermediate_1:IntermediateImportedTechnologySpecificType" name="Long" origin="TECHNOLOGY" kind="PRIMITIVE" qualifiedName="java._types.Long" import="//@imports.3"/>
+          <originalType xsi:type="intermediate_1:IntermediatePrimitiveType" name="long" origin="BUILTIN" kind="PRIMITIVE" size="64"/>
+          <aspects name="PathVariable" qualifiedName="Spring.PathVariable" import="//@imports.2">
+            <featureNames>SINGLE_VALUED</featureNames>
+            <properties name="value" type="string"/>
+            <propertyValues value="id" property="//@microservices.0/@interfaces.2/@operations.4/@parameters.0/@aspects.0/@properties.0"/>
+          </aspects>
+        </parameters>
+        <parameters name="temperatoreInformation" qualifiedName="de.fhdo.puls.environmentaldataanalysisquery.EnvironmentalDataAnalysisQuery.EnvironmentInformationQueries.getTemperatureInformation.temperatoreInformation" exchangePattern="OUT" communicationType="SYNCHRONOUS">
+          <type xsi:type="intermediate_1:IntermediateImportedComplexType" name="SensorValue" origin="DATA_MODEL" kind="STRUCTURE" qualifiedName="EnvironmentalDataAnalysis.SensorValue" import="//@imports.0"/>
+          <originalType xsi:type="intermediate_1:IntermediateImportedComplexType" name="SensorValue" origin="DATA_MODEL" kind="STRUCTURE" qualifiedName="EnvironmentalDataAnalysis.SensorValue" import="//@imports.0"/>
+          <aspects name="ResponseEntity" qualifiedName="Spring.ResponseEntity" import="//@imports.2">
+            <featureNames>SINGLE_VALUED</featureNames>
+          </aspects>
+        </parameters>
+      </operations>
+      <operations name="getHumidityInformation" qualifiedName="de.fhdo.puls.environmentaldataanalysisquery.EnvironmentalDataAnalysisQuery.EnvironmentInformationQueries.getHumidityInformation" visibility="OclUndefined">
+        <endpoints communicationType="SYNCHRONOUS" protocol="rest" dataFormat="application/json" technology="//@microservices.0/@technologies.1">
+          <addresses>/environmentInformation/{id}/humidity</addresses>
+        </endpoints>
+        <protocols communicationType="SYNCHRONOUS" protocol="rest" dataFormat="application/json"/>
+        <protocols communicationType="ASYNCHRONOUS" protocol="kafka" dataFormat="binary"/>
+        <aspects name="GetMapping" qualifiedName="Spring.GetMapping" import="//@imports.2">
+          <featureNames>SINGLE_VALUED</featureNames>
+        </aspects>
+        <parameters name="id" qualifiedName="de.fhdo.puls.environmentaldataanalysisquery.EnvironmentalDataAnalysisQuery.EnvironmentInformationQueries.getHumidityInformation.id" exchangePattern="IN" communicationType="SYNCHRONOUS">
+          <type xsi:type="intermediate_1:IntermediateImportedTechnologySpecificType" name="Long" origin="TECHNOLOGY" kind="PRIMITIVE" qualifiedName="java._types.Long" import="//@imports.3"/>
+          <originalType xsi:type="intermediate_1:IntermediatePrimitiveType" name="long" origin="BUILTIN" kind="PRIMITIVE" size="64"/>
+          <aspects name="PathVariable" qualifiedName="Spring.PathVariable" import="//@imports.2">
+            <featureNames>SINGLE_VALUED</featureNames>
+            <properties name="value" type="string"/>
+            <propertyValues value="id" property="//@microservices.0/@interfaces.2/@operations.5/@parameters.0/@aspects.0/@properties.0"/>
+          </aspects>
+        </parameters>
+        <parameters name="humidityInformation" qualifiedName="de.fhdo.puls.environmentaldataanalysisquery.EnvironmentalDataAnalysisQuery.EnvironmentInformationQueries.getHumidityInformation.humidityInformation" exchangePattern="OUT" communicationType="SYNCHRONOUS">
+          <type xsi:type="intermediate_1:IntermediateImportedComplexType" name="SensorValue" origin="DATA_MODEL" kind="STRUCTURE" qualifiedName="EnvironmentalDataAnalysis.SensorValue" import="//@imports.0"/>
+          <originalType xsi:type="intermediate_1:IntermediateImportedComplexType" name="SensorValue" origin="DATA_MODEL" kind="STRUCTURE" qualifiedName="EnvironmentalDataAnalysis.SensorValue" import="//@imports.0"/>
+          <aspects name="ResponseEntity" qualifiedName="Spring.ResponseEntity" import="//@imports.2">
+            <featureNames>SINGLE_VALUED</featureNames>
+          </aspects>
+        </parameters>
+      </operations>
+    </interfaces>
+    <aspects name="BootstrapAddress" qualifiedName="Kafka.BootstrapAddress" import="//@imports.4">
+      <featureNames>SINGLE_VALUED</featureNames>
+      <properties name="address" type="string">
+        <featureNames>MANDATORY</featureNames>
+      </properties>
+      <propertyValues value="kafka-server1:9092" property="//@microservices.0/@aspects.0/@properties.0"/>
+    </aspects>
+    <aspects name="CommandSide" qualifiedName="CQRS.CommandSide" import="//@imports.5">
+      <properties name="logicalService" type="string"/>
+      <propertyValues value="EnvironmentalDataAnalysisMicroservice" property="//@microservices.0/@aspects.1/@properties.0"/>
+    </aspects>
+    <aspects name="Application" qualifiedName="Spring.Application" import="//@imports.2">
+      <featureNames>SINGLE_VALUED</featureNames>
+      <properties name="name" type="string"/>
+      <properties name="port" type="int"/>
+      <propertyValues value="EnvironmentalDataAnalysisMicroserviceQuery" property="//@microservices.0/@aspects.2/@properties.0"/>
+      <propertyValues value="8092" property="//@microservices.0/@aspects.2/@properties.1"/>
+    </aspects>
+    <aspects name="DatasourceConfiguration" qualifiedName="Spring.DatasourceConfiguration" import="//@imports.2">
+      <featureNames>SINGLE_VALUED</featureNames>
+      <properties name="url" type="string"/>
+      <properties name="username" type="string"/>
+      <properties name="password" type="string"/>
+      <properties name="databaseTechnology" type="string"/>
+      <propertyValues value="MongoDB" property="//@microservices.0/@aspects.3/@properties.3"/>
+    </aspects>
+    <aspects name="EnableServiceDiscovery" qualifiedName="Spring.EnableServiceDiscovery" import="//@imports.2">
+      <featureNames>SINGLE_VALUED</featureNames>
+      <properties name="discoveryTechnology" type="string">
+        <featureNames>MANDATORY</featureNames>
+      </properties>
+      <propertyValues value="Eureka" property="//@microservices.0/@aspects.4/@properties.0"/>
+    </aspects>
+  </microservices>
+</intermediate:IntermediateServiceModel>

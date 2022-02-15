@@ -1,0 +1,43 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  creationTimestamp: null
+  labels:
+    app: chargingstationmanagementcommandcontainer
+  name: chargingstationmanagementcommandcontainer
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: chargingstationmanagementcommandcontainer
+  strategy: {}
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        app: chargingstationmanagementcommandcontainer
+    spec:
+      containers:
+      - image: chargingstationmanagementcommandcontainer
+        imagePullPolicy: "Never"
+        name: chargingstationmanagementcommandcontainer
+        resources: {}
+status: {}
+---
+apiVersion: v1
+kind: Service
+metadata:
+  creationTimestamp: null
+  labels:
+    app: chargingstationmanagementcommandcontainer
+  name: chargingstationmanagementcommandcontainer
+spec:
+  ports:
+  - name: "8071"
+    port: 8071
+    targetPort: 8071
+  selector:
+    app: chargingstationmanagementcommandcontainer
+  type: ClusterIP
+status:
+  loadBalancer: {}

@@ -1,0 +1,456 @@
+<?xml version="1.0" encoding="ASCII"?>
+<intermediate:IntermediateDataModel xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:intermediate="http://www.fhdo.de/lemma/data/intermediate" sourceModelUri="file://../../domain.data">
+  <contexts name="BookingManagement" qualifiedName="BookingManagement">
+    <complexTypes xsi:type="intermediate:IntermediateDataStructure" name="ParkBooking" origin="DATA_MODEL" kind="STRUCTURE" qualifiedName="BookingManagement.ParkBooking">
+      <featureNames>ENTITY</featureNames>
+      <featureNames>AGGREGATE</featureNames>
+      <dataFields name="bookingId" qualifiedName="BookingManagement.ParkBooking.bookingId">
+        <featureNames>IDENTIFIER</featureNames>
+        <type xsi:type="intermediate:IntermediatePrimitiveType" name="long" origin="BUILTIN" kind="PRIMITIVE" size="64"/>
+        <originalType xsi:type="intermediate:IntermediatePrimitiveType" name="long" origin="BUILTIN" kind="PRIMITIVE" size="64"/>
+      </dataFields>
+      <dataFields name="booker" qualifiedName="BookingManagement.ParkBooking.booker">
+        <featureNames>PART</featureNames>
+        <type xsi:type="intermediate:IntermediateComplexType" name="Booker" origin="DATA_MODEL" kind="STRUCTURE" qualifiedName="BookingManagement.Booker"/>
+        <originalType xsi:type="intermediate:IntermediateComplexType" name="Booker" origin="DATA_MODEL" kind="STRUCTURE" qualifiedName="BookingManagement.Booker"/>
+      </dataFields>
+      <dataFields name="parkingSpace" qualifiedName="BookingManagement.ParkBooking.parkingSpace">
+        <featureNames>PART</featureNames>
+        <type xsi:type="intermediate:IntermediateComplexType" name="ParkingSpace" origin="DATA_MODEL" kind="STRUCTURE" qualifiedName="BookingManagement.ParkingSpace"/>
+        <originalType xsi:type="intermediate:IntermediateComplexType" name="ParkingSpace" origin="DATA_MODEL" kind="STRUCTURE" qualifiedName="BookingManagement.ParkingSpace"/>
+      </dataFields>
+      <dataFields name="bookinTimeSlot" qualifiedName="BookingManagement.ParkBooking.bookinTimeSlot">
+        <featureNames>PART</featureNames>
+        <type xsi:type="intermediate:IntermediateComplexType" name="TimeSlot" origin="DATA_MODEL" kind="STRUCTURE" qualifiedName="BookingManagement.TimeSlot"/>
+        <originalType xsi:type="intermediate:IntermediateComplexType" name="TimeSlot" origin="DATA_MODEL" kind="STRUCTURE" qualifiedName="BookingManagement.TimeSlot"/>
+      </dataFields>
+      <dataFields name="bookingPriceTotal" qualifiedName="BookingManagement.ParkBooking.bookingPriceTotal">
+        <type xsi:type="intermediate:IntermediatePrimitiveType" name="float" origin="BUILTIN" kind="PRIMITIVE" size="32"/>
+        <originalType xsi:type="intermediate:IntermediatePrimitiveType" name="float" origin="BUILTIN" kind="PRIMITIVE" size="32"/>
+      </dataFields>
+      <dataFields name="isCanceled" qualifiedName="BookingManagement.ParkBooking.isCanceled">
+        <type xsi:type="intermediate:IntermediatePrimitiveType" name="boolean" origin="BUILTIN" kind="PRIMITIVE" size="1"/>
+        <originalType xsi:type="intermediate:IntermediatePrimitiveType" name="boolean" origin="BUILTIN" kind="PRIMITIVE" size="1"/>
+      </dataFields>
+    </complexTypes>
+    <complexTypes xsi:type="intermediate:IntermediateDataStructure" name="ParkBookingRepository" origin="DATA_MODEL" kind="STRUCTURE" qualifiedName="BookingManagement.ParkBookingRepository">
+      <featureNames>REPOSITORY</featureNames>
+      <dataFields name="bookingId" qualifiedName="BookingManagement.ParkBookingRepository.bookingId">
+        <type xsi:type="intermediate:IntermediatePrimitiveType" name="long" origin="BUILTIN" kind="PRIMITIVE" size="64"/>
+        <originalType xsi:type="intermediate:IntermediatePrimitiveType" name="long" origin="BUILTIN" kind="PRIMITIVE" size="64"/>
+      </dataFields>
+      <dataFields name="parkBookingAggregate" qualifiedName="BookingManagement.ParkBookingRepository.parkBookingAggregate">
+        <type xsi:type="intermediate:IntermediateComplexType" name="ParkBooking" origin="DATA_MODEL" kind="STRUCTURE" qualifiedName="BookingManagement.ParkBooking"/>
+        <originalType xsi:type="intermediate:IntermediateComplexType" name="ParkBooking" origin="DATA_MODEL" kind="STRUCTURE" qualifiedName="BookingManagement.ParkBooking"/>
+      </dataFields>
+    </complexTypes>
+    <complexTypes xsi:type="intermediate:IntermediateDataStructure" name="ParkContract" origin="DATA_MODEL" kind="STRUCTURE" qualifiedName="BookingManagement.ParkContract">
+      <featureNames>ENTITY</featureNames>
+      <dataFields name="smartContractId" qualifiedName="BookingManagement.ParkContract.smartContractId">
+        <featureNames>IDENTIFIER</featureNames>
+        <type xsi:type="intermediate:IntermediatePrimitiveType" name="long" origin="BUILTIN" kind="PRIMITIVE" size="64"/>
+        <originalType xsi:type="intermediate:IntermediatePrimitiveType" name="long" origin="BUILTIN" kind="PRIMITIVE" size="64"/>
+      </dataFields>
+      <dataFields name="contractAddress" qualifiedName="BookingManagement.ParkContract.contractAddress">
+        <type xsi:type="intermediate:IntermediatePrimitiveType" name="string" origin="BUILTIN" kind="PRIMITIVE"/>
+        <originalType xsi:type="intermediate:IntermediatePrimitiveType" name="string" origin="BUILTIN" kind="PRIMITIVE"/>
+      </dataFields>
+    </complexTypes>
+    <complexTypes xsi:type="intermediate:IntermediateDataStructure" name="ParkContractRepository" origin="DATA_MODEL" kind="STRUCTURE" qualifiedName="BookingManagement.ParkContractRepository">
+      <featureNames>REPOSITORY</featureNames>
+      <dataFields name="smartContractAddress" qualifiedName="BookingManagement.ParkContractRepository.smartContractAddress">
+        <type xsi:type="intermediate:IntermediatePrimitiveType" name="string" origin="BUILTIN" kind="PRIMITIVE"/>
+        <originalType xsi:type="intermediate:IntermediatePrimitiveType" name="string" origin="BUILTIN" kind="PRIMITIVE"/>
+      </dataFields>
+      <dataFields name="parkContractAggregate" qualifiedName="BookingManagement.ParkContractRepository.parkContractAggregate">
+        <type xsi:type="intermediate:IntermediateComplexType" name="ParkContract" origin="DATA_MODEL" kind="STRUCTURE" qualifiedName="BookingManagement.ParkContract"/>
+        <originalType xsi:type="intermediate:IntermediateComplexType" name="ParkContract" origin="DATA_MODEL" kind="STRUCTURE" qualifiedName="BookingManagement.ParkContract"/>
+      </dataFields>
+    </complexTypes>
+    <complexTypes xsi:type="intermediate:IntermediateDataStructure" name="ParkAndChargeBooking" origin="DATA_MODEL" kind="STRUCTURE" qualifiedName="BookingManagement.ParkAndChargeBooking">
+      <featureNames>ENTITY</featureNames>
+      <featureNames>AGGREGATE</featureNames>
+      <dataFields name="bookingId" qualifiedName="BookingManagement.ParkAndChargeBooking.bookingId">
+        <featureNames>IDENTIFIER</featureNames>
+        <type xsi:type="intermediate:IntermediatePrimitiveType" name="long" origin="BUILTIN" kind="PRIMITIVE" size="64"/>
+        <originalType xsi:type="intermediate:IntermediatePrimitiveType" name="long" origin="BUILTIN" kind="PRIMITIVE" size="64"/>
+      </dataFields>
+      <dataFields name="booker" qualifiedName="BookingManagement.ParkAndChargeBooking.booker">
+        <featureNames>PART</featureNames>
+        <type xsi:type="intermediate:IntermediateComplexType" name="Booker" origin="DATA_MODEL" kind="STRUCTURE" qualifiedName="BookingManagement.Booker"/>
+        <originalType xsi:type="intermediate:IntermediateComplexType" name="Booker" origin="DATA_MODEL" kind="STRUCTURE" qualifiedName="BookingManagement.Booker"/>
+      </dataFields>
+      <dataFields name="electifiedParkingSpace" qualifiedName="BookingManagement.ParkAndChargeBooking.electifiedParkingSpace">
+        <featureNames>PART</featureNames>
+        <type xsi:type="intermediate:IntermediateComplexType" name="ElectrifiedParkingSpace" origin="DATA_MODEL" kind="STRUCTURE" qualifiedName="BookingManagement.ElectrifiedParkingSpace"/>
+        <originalType xsi:type="intermediate:IntermediateComplexType" name="ElectrifiedParkingSpace" origin="DATA_MODEL" kind="STRUCTURE" qualifiedName="BookingManagement.ElectrifiedParkingSpace"/>
+      </dataFields>
+      <dataFields name="bookingTimeSlot" qualifiedName="BookingManagement.ParkAndChargeBooking.bookingTimeSlot">
+        <featureNames>PART</featureNames>
+        <type xsi:type="intermediate:IntermediateComplexType" name="TimeSlot" origin="DATA_MODEL" kind="STRUCTURE" qualifiedName="BookingManagement.TimeSlot"/>
+        <originalType xsi:type="intermediate:IntermediateComplexType" name="TimeSlot" origin="DATA_MODEL" kind="STRUCTURE" qualifiedName="BookingManagement.TimeSlot"/>
+      </dataFields>
+      <dataFields name="bookingPriceTotal" qualifiedName="BookingManagement.ParkAndChargeBooking.bookingPriceTotal">
+        <type xsi:type="intermediate:IntermediatePrimitiveType" name="float" origin="BUILTIN" kind="PRIMITIVE" size="32"/>
+        <originalType xsi:type="intermediate:IntermediatePrimitiveType" name="float" origin="BUILTIN" kind="PRIMITIVE" size="32"/>
+      </dataFields>
+      <dataFields name="isCanceled" qualifiedName="BookingManagement.ParkAndChargeBooking.isCanceled">
+        <type xsi:type="intermediate:IntermediatePrimitiveType" name="boolean" origin="BUILTIN" kind="PRIMITIVE" size="1"/>
+        <originalType xsi:type="intermediate:IntermediatePrimitiveType" name="boolean" origin="BUILTIN" kind="PRIMITIVE" size="1"/>
+      </dataFields>
+      <dataFields name="verifyCode" qualifiedName="BookingManagement.ParkAndChargeBooking.verifyCode">
+        <type xsi:type="intermediate:IntermediatePrimitiveType" name="int" origin="BUILTIN" kind="PRIMITIVE" size="32"/>
+        <originalType xsi:type="intermediate:IntermediatePrimitiveType" name="int" origin="BUILTIN" kind="PRIMITIVE" size="32"/>
+      </dataFields>
+    </complexTypes>
+    <complexTypes xsi:type="intermediate:IntermediateDataStructure" name="ParkAndChargeBookingRepository" origin="DATA_MODEL" kind="STRUCTURE" qualifiedName="BookingManagement.ParkAndChargeBookingRepository">
+      <featureNames>REPOSITORY</featureNames>
+      <dataFields name="bookingId" qualifiedName="BookingManagement.ParkAndChargeBookingRepository.bookingId">
+        <type xsi:type="intermediate:IntermediatePrimitiveType" name="long" origin="BUILTIN" kind="PRIMITIVE" size="64"/>
+        <originalType xsi:type="intermediate:IntermediatePrimitiveType" name="long" origin="BUILTIN" kind="PRIMITIVE" size="64"/>
+      </dataFields>
+      <dataFields name="parkBookingAggregate" qualifiedName="BookingManagement.ParkAndChargeBookingRepository.parkBookingAggregate">
+        <type xsi:type="intermediate:IntermediateComplexType" name="ParkAndChargeBooking" origin="DATA_MODEL" kind="STRUCTURE" qualifiedName="BookingManagement.ParkAndChargeBooking"/>
+        <originalType xsi:type="intermediate:IntermediateComplexType" name="ParkAndChargeBooking" origin="DATA_MODEL" kind="STRUCTURE" qualifiedName="BookingManagement.ParkAndChargeBooking"/>
+      </dataFields>
+    </complexTypes>
+    <complexTypes xsi:type="intermediate:IntermediateDataStructure" name="ParkAndChargeContractAggregate" origin="DATA_MODEL" kind="STRUCTURE" qualifiedName="BookingManagement.ParkAndChargeContractAggregate">
+      <featureNames>ENTITY</featureNames>
+      <featureNames>AGGREGATE</featureNames>
+      <dataFields name="smartContractId" qualifiedName="BookingManagement.ParkAndChargeContractAggregate.smartContractId">
+        <featureNames>IDENTIFIER</featureNames>
+        <type xsi:type="intermediate:IntermediatePrimitiveType" name="long" origin="BUILTIN" kind="PRIMITIVE" size="64"/>
+        <originalType xsi:type="intermediate:IntermediatePrimitiveType" name="long" origin="BUILTIN" kind="PRIMITIVE" size="64"/>
+      </dataFields>
+      <dataFields name="contractAddress" qualifiedName="BookingManagement.ParkAndChargeContractAggregate.contractAddress">
+        <type xsi:type="intermediate:IntermediatePrimitiveType" name="string" origin="BUILTIN" kind="PRIMITIVE"/>
+        <originalType xsi:type="intermediate:IntermediatePrimitiveType" name="string" origin="BUILTIN" kind="PRIMITIVE"/>
+      </dataFields>
+    </complexTypes>
+    <complexTypes xsi:type="intermediate:IntermediateDataStructure" name="ParkAndChargeContractRepository" origin="DATA_MODEL" kind="STRUCTURE" qualifiedName="BookingManagement.ParkAndChargeContractRepository">
+      <featureNames>REPOSITORY</featureNames>
+      <dataFields name="parkAndChargeContractAggregate" qualifiedName="BookingManagement.ParkAndChargeContractRepository.parkAndChargeContractAggregate">
+        <type xsi:type="intermediate:IntermediateComplexType" name="ParkAndChargeContractAggregate" origin="DATA_MODEL" kind="STRUCTURE" qualifiedName="BookingManagement.ParkAndChargeContractAggregate"/>
+        <originalType xsi:type="intermediate:IntermediateComplexType" name="ParkAndChargeContractAggregate" origin="DATA_MODEL" kind="STRUCTURE" qualifiedName="BookingManagement.ParkAndChargeContractAggregate"/>
+      </dataFields>
+      <dataFields name="smartContractAddress" qualifiedName="BookingManagement.ParkAndChargeContractRepository.smartContractAddress">
+        <type xsi:type="intermediate:IntermediatePrimitiveType" name="string" origin="BUILTIN" kind="PRIMITIVE"/>
+        <originalType xsi:type="intermediate:IntermediatePrimitiveType" name="string" origin="BUILTIN" kind="PRIMITIVE"/>
+      </dataFields>
+    </complexTypes>
+    <complexTypes xsi:type="intermediate:IntermediateDataStructure" name="Booker" origin="DATA_MODEL" kind="STRUCTURE" qualifiedName="BookingManagement.Booker">
+      <featureNames>VALUE_OBJECT</featureNames>
+      <dataFields name="bookerId" qualifiedName="BookingManagement.Booker.bookerId">
+        <type xsi:type="intermediate:IntermediatePrimitiveType" name="long" origin="BUILTIN" kind="PRIMITIVE" size="64"/>
+        <originalType xsi:type="intermediate:IntermediatePrimitiveType" name="long" origin="BUILTIN" kind="PRIMITIVE" size="64"/>
+      </dataFields>
+      <dataFields name="firstName" qualifiedName="BookingManagement.Booker.firstName">
+        <type xsi:type="intermediate:IntermediatePrimitiveType" name="string" origin="BUILTIN" kind="PRIMITIVE"/>
+        <originalType xsi:type="intermediate:IntermediatePrimitiveType" name="string" origin="BUILTIN" kind="PRIMITIVE"/>
+      </dataFields>
+      <dataFields name="lastName" qualifiedName="BookingManagement.Booker.lastName">
+        <type xsi:type="intermediate:IntermediatePrimitiveType" name="string" origin="BUILTIN" kind="PRIMITIVE"/>
+        <originalType xsi:type="intermediate:IntermediatePrimitiveType" name="string" origin="BUILTIN" kind="PRIMITIVE"/>
+      </dataFields>
+    </complexTypes>
+    <complexTypes xsi:type="intermediate:IntermediateDataStructure" name="ParkingSpace" origin="DATA_MODEL" kind="STRUCTURE" qualifiedName="BookingManagement.ParkingSpace">
+      <featureNames>VALUE_OBJECT</featureNames>
+      <dataFields name="parkingSpaceId" qualifiedName="BookingManagement.ParkingSpace.parkingSpaceId">
+        <type xsi:type="intermediate:IntermediatePrimitiveType" name="string" origin="BUILTIN" kind="PRIMITIVE"/>
+        <originalType xsi:type="intermediate:IntermediatePrimitiveType" name="string" origin="BUILTIN" kind="PRIMITIVE"/>
+      </dataFields>
+      <dataFields name="city" qualifiedName="BookingManagement.ParkingSpace.city">
+        <type xsi:type="intermediate:IntermediatePrimitiveType" name="string" origin="BUILTIN" kind="PRIMITIVE"/>
+        <originalType xsi:type="intermediate:IntermediatePrimitiveType" name="string" origin="BUILTIN" kind="PRIMITIVE"/>
+      </dataFields>
+      <dataFields name="postcode" qualifiedName="BookingManagement.ParkingSpace.postcode">
+        <type xsi:type="intermediate:IntermediatePrimitiveType" name="int" origin="BUILTIN" kind="PRIMITIVE" size="32"/>
+        <originalType xsi:type="intermediate:IntermediatePrimitiveType" name="int" origin="BUILTIN" kind="PRIMITIVE" size="32"/>
+      </dataFields>
+      <dataFields name="street" qualifiedName="BookingManagement.ParkingSpace.street">
+        <type xsi:type="intermediate:IntermediatePrimitiveType" name="string" origin="BUILTIN" kind="PRIMITIVE"/>
+        <originalType xsi:type="intermediate:IntermediatePrimitiveType" name="string" origin="BUILTIN" kind="PRIMITIVE"/>
+      </dataFields>
+      <dataFields name="streetNumber" qualifiedName="BookingManagement.ParkingSpace.streetNumber">
+        <type xsi:type="intermediate:IntermediatePrimitiveType" name="string" origin="BUILTIN" kind="PRIMITIVE"/>
+        <originalType xsi:type="intermediate:IntermediatePrimitiveType" name="string" origin="BUILTIN" kind="PRIMITIVE"/>
+      </dataFields>
+      <dataFields name="bookingPricePerHour" qualifiedName="BookingManagement.ParkingSpace.bookingPricePerHour">
+        <type xsi:type="intermediate:IntermediatePrimitiveType" name="float" origin="BUILTIN" kind="PRIMITIVE" size="32"/>
+        <originalType xsi:type="intermediate:IntermediatePrimitiveType" name="float" origin="BUILTIN" kind="PRIMITIVE" size="32"/>
+      </dataFields>
+    </complexTypes>
+    <complexTypes xsi:type="intermediate:IntermediateDataStructure" name="ElectrifiedParkingSpace" origin="DATA_MODEL" kind="STRUCTURE" qualifiedName="BookingManagement.ElectrifiedParkingSpace">
+      <featureNames>VALUE_OBJECT</featureNames>
+      <dataFields name="parkingSpaceId" qualifiedName="BookingManagement.ElectrifiedParkingSpace.parkingSpaceId">
+        <type xsi:type="intermediate:IntermediatePrimitiveType" name="string" origin="BUILTIN" kind="PRIMITIVE"/>
+        <originalType xsi:type="intermediate:IntermediatePrimitiveType" name="string" origin="BUILTIN" kind="PRIMITIVE"/>
+      </dataFields>
+      <dataFields name="city" qualifiedName="BookingManagement.ElectrifiedParkingSpace.city">
+        <type xsi:type="intermediate:IntermediatePrimitiveType" name="string" origin="BUILTIN" kind="PRIMITIVE"/>
+        <originalType xsi:type="intermediate:IntermediatePrimitiveType" name="string" origin="BUILTIN" kind="PRIMITIVE"/>
+      </dataFields>
+      <dataFields name="postcode" qualifiedName="BookingManagement.ElectrifiedParkingSpace.postcode">
+        <type xsi:type="intermediate:IntermediatePrimitiveType" name="int" origin="BUILTIN" kind="PRIMITIVE" size="32"/>
+        <originalType xsi:type="intermediate:IntermediatePrimitiveType" name="int" origin="BUILTIN" kind="PRIMITIVE" size="32"/>
+      </dataFields>
+      <dataFields name="street" qualifiedName="BookingManagement.ElectrifiedParkingSpace.street">
+        <type xsi:type="intermediate:IntermediatePrimitiveType" name="string" origin="BUILTIN" kind="PRIMITIVE"/>
+        <originalType xsi:type="intermediate:IntermediatePrimitiveType" name="string" origin="BUILTIN" kind="PRIMITIVE"/>
+      </dataFields>
+      <dataFields name="streetNumber" qualifiedName="BookingManagement.ElectrifiedParkingSpace.streetNumber">
+        <type xsi:type="intermediate:IntermediatePrimitiveType" name="string" origin="BUILTIN" kind="PRIMITIVE"/>
+        <originalType xsi:type="intermediate:IntermediatePrimitiveType" name="string" origin="BUILTIN" kind="PRIMITIVE"/>
+      </dataFields>
+      <dataFields name="bookingPricePerHour" qualifiedName="BookingManagement.ElectrifiedParkingSpace.bookingPricePerHour">
+        <type xsi:type="intermediate:IntermediatePrimitiveType" name="float" origin="BUILTIN" kind="PRIMITIVE" size="32"/>
+        <originalType xsi:type="intermediate:IntermediatePrimitiveType" name="float" origin="BUILTIN" kind="PRIMITIVE" size="32"/>
+      </dataFields>
+      <dataFields name="chargingPricePerKwh" qualifiedName="BookingManagement.ElectrifiedParkingSpace.chargingPricePerKwh">
+        <type xsi:type="intermediate:IntermediatePrimitiveType" name="float" origin="BUILTIN" kind="PRIMITIVE" size="32"/>
+        <originalType xsi:type="intermediate:IntermediatePrimitiveType" name="float" origin="BUILTIN" kind="PRIMITIVE" size="32"/>
+      </dataFields>
+    </complexTypes>
+    <complexTypes xsi:type="intermediate:IntermediateDataStructure" name="TimeSlot" origin="DATA_MODEL" kind="STRUCTURE" qualifiedName="BookingManagement.TimeSlot">
+      <featureNames>VALUE_OBJECT</featureNames>
+      <dataFields name="startOfBooking" qualifiedName="BookingManagement.TimeSlot.startOfBooking">
+        <type xsi:type="intermediate:IntermediatePrimitiveType" name="date" origin="BUILTIN" kind="PRIMITIVE"/>
+        <originalType xsi:type="intermediate:IntermediatePrimitiveType" name="date" origin="BUILTIN" kind="PRIMITIVE"/>
+      </dataFields>
+      <dataFields name="endOfBooking" qualifiedName="BookingManagement.TimeSlot.endOfBooking">
+        <type xsi:type="intermediate:IntermediatePrimitiveType" name="date" origin="BUILTIN" kind="PRIMITIVE"/>
+        <originalType xsi:type="intermediate:IntermediatePrimitiveType" name="date" origin="BUILTIN" kind="PRIMITIVE"/>
+      </dataFields>
+    </complexTypes>
+    <complexTypes xsi:type="intermediate:IntermediateDataStructure" name="CreateParkBookingCommand" origin="DATA_MODEL" kind="STRUCTURE" qualifiedName="BookingManagement.CreateParkBookingCommand">
+      <featureNames>VALUE_OBJECT</featureNames>
+      <dataFields name="booker" qualifiedName="BookingManagement.CreateParkBookingCommand.booker" immutable="true">
+        <type xsi:type="intermediate:IntermediateComplexType" name="Booker" origin="DATA_MODEL" kind="STRUCTURE" qualifiedName="BookingManagement.Booker"/>
+        <originalType xsi:type="intermediate:IntermediateComplexType" name="Booker" origin="DATA_MODEL" kind="STRUCTURE" qualifiedName="BookingManagement.Booker"/>
+      </dataFields>
+      <dataFields name="parkingSpace" qualifiedName="BookingManagement.CreateParkBookingCommand.parkingSpace" immutable="true">
+        <type xsi:type="intermediate:IntermediateComplexType" name="ParkingSpace" origin="DATA_MODEL" kind="STRUCTURE" qualifiedName="BookingManagement.ParkingSpace"/>
+        <originalType xsi:type="intermediate:IntermediateComplexType" name="ParkingSpace" origin="DATA_MODEL" kind="STRUCTURE" qualifiedName="BookingManagement.ParkingSpace"/>
+      </dataFields>
+      <dataFields name="timeSlot" qualifiedName="BookingManagement.CreateParkBookingCommand.timeSlot" immutable="true">
+        <type xsi:type="intermediate:IntermediateComplexType" name="TimeSlot" origin="DATA_MODEL" kind="STRUCTURE" qualifiedName="BookingManagement.TimeSlot"/>
+        <originalType xsi:type="intermediate:IntermediateComplexType" name="TimeSlot" origin="DATA_MODEL" kind="STRUCTURE" qualifiedName="BookingManagement.TimeSlot"/>
+      </dataFields>
+      <dataFields name="bookingPriceTotal" qualifiedName="BookingManagement.CreateParkBookingCommand.bookingPriceTotal" immutable="true">
+        <type xsi:type="intermediate:IntermediatePrimitiveType" name="float" origin="BUILTIN" kind="PRIMITIVE" size="32"/>
+        <originalType xsi:type="intermediate:IntermediatePrimitiveType" name="float" origin="BUILTIN" kind="PRIMITIVE" size="32"/>
+      </dataFields>
+    </complexTypes>
+    <complexTypes xsi:type="intermediate:IntermediateDataStructure" name="UpdateParkBookingCommand" origin="DATA_MODEL" kind="STRUCTURE" qualifiedName="BookingManagement.UpdateParkBookingCommand">
+      <featureNames>VALUE_OBJECT</featureNames>
+      <dataFields name="bookingId" qualifiedName="BookingManagement.UpdateParkBookingCommand.bookingId" immutable="true">
+        <type xsi:type="intermediate:IntermediatePrimitiveType" name="long" origin="BUILTIN" kind="PRIMITIVE" size="64"/>
+        <originalType xsi:type="intermediate:IntermediatePrimitiveType" name="long" origin="BUILTIN" kind="PRIMITIVE" size="64"/>
+      </dataFields>
+      <dataFields name="timeSlot" qualifiedName="BookingManagement.UpdateParkBookingCommand.timeSlot" immutable="true">
+        <type xsi:type="intermediate:IntermediateComplexType" name="TimeSlot" origin="DATA_MODEL" kind="STRUCTURE" qualifiedName="BookingManagement.TimeSlot"/>
+        <originalType xsi:type="intermediate:IntermediateComplexType" name="TimeSlot" origin="DATA_MODEL" kind="STRUCTURE" qualifiedName="BookingManagement.TimeSlot"/>
+      </dataFields>
+      <dataFields name="bookingPriceTotal" qualifiedName="BookingManagement.UpdateParkBookingCommand.bookingPriceTotal" immutable="true">
+        <type xsi:type="intermediate:IntermediatePrimitiveType" name="float" origin="BUILTIN" kind="PRIMITIVE" size="32"/>
+        <originalType xsi:type="intermediate:IntermediatePrimitiveType" name="float" origin="BUILTIN" kind="PRIMITIVE" size="32"/>
+      </dataFields>
+    </complexTypes>
+    <complexTypes xsi:type="intermediate:IntermediateDataStructure" name="CancelParkBookingCommand" origin="DATA_MODEL" kind="STRUCTURE" qualifiedName="BookingManagement.CancelParkBookingCommand">
+      <featureNames>VALUE_OBJECT</featureNames>
+      <dataFields name="bookingId" qualifiedName="BookingManagement.CancelParkBookingCommand.bookingId" immutable="true">
+        <type xsi:type="intermediate:IntermediatePrimitiveType" name="long" origin="BUILTIN" kind="PRIMITIVE" size="64"/>
+        <originalType xsi:type="intermediate:IntermediatePrimitiveType" name="long" origin="BUILTIN" kind="PRIMITIVE" size="64"/>
+      </dataFields>
+    </complexTypes>
+    <complexTypes xsi:type="intermediate:IntermediateDataStructure" name="CreateParkAndChargeBookingCommand" origin="DATA_MODEL" kind="STRUCTURE" qualifiedName="BookingManagement.CreateParkAndChargeBookingCommand">
+      <featureNames>VALUE_OBJECT</featureNames>
+      <dataFields name="booker" qualifiedName="BookingManagement.CreateParkAndChargeBookingCommand.booker" immutable="true">
+        <type xsi:type="intermediate:IntermediateComplexType" name="Booker" origin="DATA_MODEL" kind="STRUCTURE" qualifiedName="BookingManagement.Booker"/>
+        <originalType xsi:type="intermediate:IntermediateComplexType" name="Booker" origin="DATA_MODEL" kind="STRUCTURE" qualifiedName="BookingManagement.Booker"/>
+      </dataFields>
+      <dataFields name="electrifiedParkingSpace" qualifiedName="BookingManagement.CreateParkAndChargeBookingCommand.electrifiedParkingSpace" immutable="true">
+        <type xsi:type="intermediate:IntermediateComplexType" name="ElectrifiedParkingSpace" origin="DATA_MODEL" kind="STRUCTURE" qualifiedName="BookingManagement.ElectrifiedParkingSpace"/>
+        <originalType xsi:type="intermediate:IntermediateComplexType" name="ElectrifiedParkingSpace" origin="DATA_MODEL" kind="STRUCTURE" qualifiedName="BookingManagement.ElectrifiedParkingSpace"/>
+      </dataFields>
+      <dataFields name="timeSlot" qualifiedName="BookingManagement.CreateParkAndChargeBookingCommand.timeSlot" immutable="true">
+        <type xsi:type="intermediate:IntermediateComplexType" name="TimeSlot" origin="DATA_MODEL" kind="STRUCTURE" qualifiedName="BookingManagement.TimeSlot"/>
+        <originalType xsi:type="intermediate:IntermediateComplexType" name="TimeSlot" origin="DATA_MODEL" kind="STRUCTURE" qualifiedName="BookingManagement.TimeSlot"/>
+      </dataFields>
+      <dataFields name="bookingPriceTotal" qualifiedName="BookingManagement.CreateParkAndChargeBookingCommand.bookingPriceTotal" immutable="true">
+        <type xsi:type="intermediate:IntermediatePrimitiveType" name="float" origin="BUILTIN" kind="PRIMITIVE" size="32"/>
+        <originalType xsi:type="intermediate:IntermediatePrimitiveType" name="float" origin="BUILTIN" kind="PRIMITIVE" size="32"/>
+      </dataFields>
+    </complexTypes>
+    <complexTypes xsi:type="intermediate:IntermediateDataStructure" name="UpdateParkAndChargeBookingCommand" origin="DATA_MODEL" kind="STRUCTURE" qualifiedName="BookingManagement.UpdateParkAndChargeBookingCommand">
+      <featureNames>VALUE_OBJECT</featureNames>
+      <dataFields name="bookingId" qualifiedName="BookingManagement.UpdateParkAndChargeBookingCommand.bookingId" immutable="true">
+        <type xsi:type="intermediate:IntermediatePrimitiveType" name="long" origin="BUILTIN" kind="PRIMITIVE" size="64"/>
+        <originalType xsi:type="intermediate:IntermediatePrimitiveType" name="long" origin="BUILTIN" kind="PRIMITIVE" size="64"/>
+      </dataFields>
+      <dataFields name="timeSlot" qualifiedName="BookingManagement.UpdateParkAndChargeBookingCommand.timeSlot" immutable="true">
+        <type xsi:type="intermediate:IntermediateComplexType" name="TimeSlot" origin="DATA_MODEL" kind="STRUCTURE" qualifiedName="BookingManagement.TimeSlot"/>
+        <originalType xsi:type="intermediate:IntermediateComplexType" name="TimeSlot" origin="DATA_MODEL" kind="STRUCTURE" qualifiedName="BookingManagement.TimeSlot"/>
+      </dataFields>
+      <dataFields name="bookingPriceTotal" qualifiedName="BookingManagement.UpdateParkAndChargeBookingCommand.bookingPriceTotal" immutable="true">
+        <type xsi:type="intermediate:IntermediatePrimitiveType" name="float" origin="BUILTIN" kind="PRIMITIVE" size="32"/>
+        <originalType xsi:type="intermediate:IntermediatePrimitiveType" name="float" origin="BUILTIN" kind="PRIMITIVE" size="32"/>
+      </dataFields>
+    </complexTypes>
+    <complexTypes xsi:type="intermediate:IntermediateDataStructure" name="CancelParkAndChargeBookingCommand" origin="DATA_MODEL" kind="STRUCTURE" qualifiedName="BookingManagement.CancelParkAndChargeBookingCommand">
+      <featureNames>VALUE_OBJECT</featureNames>
+      <dataFields name="bookingId" qualifiedName="BookingManagement.CancelParkAndChargeBookingCommand.bookingId" immutable="true">
+        <type xsi:type="intermediate:IntermediatePrimitiveType" name="long" origin="BUILTIN" kind="PRIMITIVE" size="64"/>
+        <originalType xsi:type="intermediate:IntermediatePrimitiveType" name="long" origin="BUILTIN" kind="PRIMITIVE" size="64"/>
+      </dataFields>
+    </complexTypes>
+    <complexTypes xsi:type="intermediate:IntermediateDataStructure" name="ParkBookingCreated" origin="DATA_MODEL" kind="STRUCTURE" qualifiedName="BookingManagement.ParkBookingCreated">
+      <featureNames>VALUE_OBJECT</featureNames>
+      <featureNames>DOMAIN_EVENT</featureNames>
+      <dataFields name="bookingId" qualifiedName="BookingManagement.ParkBookingCreated.bookingId" immutable="true">
+        <type xsi:type="intermediate:IntermediatePrimitiveType" name="long" origin="BUILTIN" kind="PRIMITIVE" size="64"/>
+        <originalType xsi:type="intermediate:IntermediatePrimitiveType" name="long" origin="BUILTIN" kind="PRIMITIVE" size="64"/>
+      </dataFields>
+      <dataFields name="booker" qualifiedName="BookingManagement.ParkBookingCreated.booker" immutable="true">
+        <type xsi:type="intermediate:IntermediateComplexType" name="Booker" origin="DATA_MODEL" kind="STRUCTURE" qualifiedName="BookingManagement.Booker"/>
+        <originalType xsi:type="intermediate:IntermediateComplexType" name="Booker" origin="DATA_MODEL" kind="STRUCTURE" qualifiedName="BookingManagement.Booker"/>
+      </dataFields>
+      <dataFields name="parkingSpace" qualifiedName="BookingManagement.ParkBookingCreated.parkingSpace" immutable="true">
+        <type xsi:type="intermediate:IntermediateComplexType" name="ParkingSpace" origin="DATA_MODEL" kind="STRUCTURE" qualifiedName="BookingManagement.ParkingSpace"/>
+        <originalType xsi:type="intermediate:IntermediateComplexType" name="ParkingSpace" origin="DATA_MODEL" kind="STRUCTURE" qualifiedName="BookingManagement.ParkingSpace"/>
+      </dataFields>
+      <dataFields name="timeSlot" qualifiedName="BookingManagement.ParkBookingCreated.timeSlot" immutable="true">
+        <type xsi:type="intermediate:IntermediateComplexType" name="TimeSlot" origin="DATA_MODEL" kind="STRUCTURE" qualifiedName="BookingManagement.TimeSlot"/>
+        <originalType xsi:type="intermediate:IntermediateComplexType" name="TimeSlot" origin="DATA_MODEL" kind="STRUCTURE" qualifiedName="BookingManagement.TimeSlot"/>
+      </dataFields>
+      <dataFields name="bookingCreatedDate" qualifiedName="BookingManagement.ParkBookingCreated.bookingCreatedDate" immutable="true">
+        <type xsi:type="intermediate:IntermediatePrimitiveType" name="date" origin="BUILTIN" kind="PRIMITIVE"/>
+        <originalType xsi:type="intermediate:IntermediatePrimitiveType" name="date" origin="BUILTIN" kind="PRIMITIVE"/>
+      </dataFields>
+      <dataFields name="lastModifiedDate" qualifiedName="BookingManagement.ParkBookingCreated.lastModifiedDate" immutable="true">
+        <type xsi:type="intermediate:IntermediatePrimitiveType" name="date" origin="BUILTIN" kind="PRIMITIVE"/>
+        <originalType xsi:type="intermediate:IntermediatePrimitiveType" name="date" origin="BUILTIN" kind="PRIMITIVE"/>
+      </dataFields>
+      <dataFields name="bookingPricePerHour" qualifiedName="BookingManagement.ParkBookingCreated.bookingPricePerHour" immutable="true">
+        <type xsi:type="intermediate:IntermediatePrimitiveType" name="float" origin="BUILTIN" kind="PRIMITIVE" size="32"/>
+        <originalType xsi:type="intermediate:IntermediatePrimitiveType" name="float" origin="BUILTIN" kind="PRIMITIVE" size="32"/>
+      </dataFields>
+      <dataFields name="bookingPriceTotal" qualifiedName="BookingManagement.ParkBookingCreated.bookingPriceTotal" immutable="true">
+        <type xsi:type="intermediate:IntermediatePrimitiveType" name="float" origin="BUILTIN" kind="PRIMITIVE" size="32"/>
+        <originalType xsi:type="intermediate:IntermediatePrimitiveType" name="float" origin="BUILTIN" kind="PRIMITIVE" size="32"/>
+      </dataFields>
+    </complexTypes>
+    <complexTypes xsi:type="intermediate:IntermediateDataStructure" name="ParkBookingUpdated" origin="DATA_MODEL" kind="STRUCTURE" qualifiedName="BookingManagement.ParkBookingUpdated">
+      <featureNames>VALUE_OBJECT</featureNames>
+      <featureNames>DOMAIN_EVENT</featureNames>
+      <dataFields name="bookingId" qualifiedName="BookingManagement.ParkBookingUpdated.bookingId" immutable="true">
+        <type xsi:type="intermediate:IntermediatePrimitiveType" name="long" origin="BUILTIN" kind="PRIMITIVE" size="64"/>
+        <originalType xsi:type="intermediate:IntermediatePrimitiveType" name="long" origin="BUILTIN" kind="PRIMITIVE" size="64"/>
+      </dataFields>
+      <dataFields name="bookingCreatedDate" qualifiedName="BookingManagement.ParkBookingUpdated.bookingCreatedDate" immutable="true">
+        <type xsi:type="intermediate:IntermediatePrimitiveType" name="date" origin="BUILTIN" kind="PRIMITIVE"/>
+        <originalType xsi:type="intermediate:IntermediatePrimitiveType" name="date" origin="BUILTIN" kind="PRIMITIVE"/>
+      </dataFields>
+      <dataFields name="lastModifiedDate" qualifiedName="BookingManagement.ParkBookingUpdated.lastModifiedDate" immutable="true">
+        <type xsi:type="intermediate:IntermediatePrimitiveType" name="date" origin="BUILTIN" kind="PRIMITIVE"/>
+        <originalType xsi:type="intermediate:IntermediatePrimitiveType" name="date" origin="BUILTIN" kind="PRIMITIVE"/>
+      </dataFields>
+      <dataFields name="timeSlot" qualifiedName="BookingManagement.ParkBookingUpdated.timeSlot" immutable="true">
+        <type xsi:type="intermediate:IntermediateComplexType" name="TimeSlot" origin="DATA_MODEL" kind="STRUCTURE" qualifiedName="BookingManagement.TimeSlot"/>
+        <originalType xsi:type="intermediate:IntermediateComplexType" name="TimeSlot" origin="DATA_MODEL" kind="STRUCTURE" qualifiedName="BookingManagement.TimeSlot"/>
+      </dataFields>
+      <dataFields name="bookingPriceTotal" qualifiedName="BookingManagement.ParkBookingUpdated.bookingPriceTotal" immutable="true">
+        <type xsi:type="intermediate:IntermediatePrimitiveType" name="float" origin="BUILTIN" kind="PRIMITIVE" size="32"/>
+        <originalType xsi:type="intermediate:IntermediatePrimitiveType" name="float" origin="BUILTIN" kind="PRIMITIVE" size="32"/>
+      </dataFields>
+    </complexTypes>
+    <complexTypes xsi:type="intermediate:IntermediateDataStructure" name="ParkBookingCanceled" origin="DATA_MODEL" kind="STRUCTURE" qualifiedName="BookingManagement.ParkBookingCanceled">
+      <featureNames>VALUE_OBJECT</featureNames>
+      <featureNames>DOMAIN_EVENT</featureNames>
+      <dataFields name="bookingId" qualifiedName="BookingManagement.ParkBookingCanceled.bookingId" immutable="true">
+        <type xsi:type="intermediate:IntermediatePrimitiveType" name="long" origin="BUILTIN" kind="PRIMITIVE" size="64"/>
+        <originalType xsi:type="intermediate:IntermediatePrimitiveType" name="long" origin="BUILTIN" kind="PRIMITIVE" size="64"/>
+      </dataFields>
+      <dataFields name="bookingCanceled" qualifiedName="BookingManagement.ParkBookingCanceled.bookingCanceled" immutable="true">
+        <type xsi:type="intermediate:IntermediatePrimitiveType" name="boolean" origin="BUILTIN" kind="PRIMITIVE" size="1"/>
+        <originalType xsi:type="intermediate:IntermediatePrimitiveType" name="boolean" origin="BUILTIN" kind="PRIMITIVE" size="1"/>
+      </dataFields>
+    </complexTypes>
+    <complexTypes xsi:type="intermediate:IntermediateDataStructure" name="ParkAndChargeBookingCreated" origin="DATA_MODEL" kind="STRUCTURE" qualifiedName="BookingManagement.ParkAndChargeBookingCreated">
+      <featureNames>VALUE_OBJECT</featureNames>
+      <featureNames>DOMAIN_EVENT</featureNames>
+      <dataFields name="bookingId" qualifiedName="BookingManagement.ParkAndChargeBookingCreated.bookingId" immutable="true">
+        <type xsi:type="intermediate:IntermediatePrimitiveType" name="long" origin="BUILTIN" kind="PRIMITIVE" size="64"/>
+        <originalType xsi:type="intermediate:IntermediatePrimitiveType" name="long" origin="BUILTIN" kind="PRIMITIVE" size="64"/>
+      </dataFields>
+      <dataFields name="booker" qualifiedName="BookingManagement.ParkAndChargeBookingCreated.booker" immutable="true">
+        <type xsi:type="intermediate:IntermediateComplexType" name="Booker" origin="DATA_MODEL" kind="STRUCTURE" qualifiedName="BookingManagement.Booker"/>
+        <originalType xsi:type="intermediate:IntermediateComplexType" name="Booker" origin="DATA_MODEL" kind="STRUCTURE" qualifiedName="BookingManagement.Booker"/>
+      </dataFields>
+      <dataFields name="parkingSpace" qualifiedName="BookingManagement.ParkAndChargeBookingCreated.parkingSpace" immutable="true">
+        <type xsi:type="intermediate:IntermediateComplexType" name="ParkingSpace" origin="DATA_MODEL" kind="STRUCTURE" qualifiedName="BookingManagement.ParkingSpace"/>
+        <originalType xsi:type="intermediate:IntermediateComplexType" name="ParkingSpace" origin="DATA_MODEL" kind="STRUCTURE" qualifiedName="BookingManagement.ParkingSpace"/>
+      </dataFields>
+      <dataFields name="timeSlot" qualifiedName="BookingManagement.ParkAndChargeBookingCreated.timeSlot" immutable="true">
+        <type xsi:type="intermediate:IntermediateComplexType" name="TimeSlot" origin="DATA_MODEL" kind="STRUCTURE" qualifiedName="BookingManagement.TimeSlot"/>
+        <originalType xsi:type="intermediate:IntermediateComplexType" name="TimeSlot" origin="DATA_MODEL" kind="STRUCTURE" qualifiedName="BookingManagement.TimeSlot"/>
+      </dataFields>
+      <dataFields name="bookingCreatedDate" qualifiedName="BookingManagement.ParkAndChargeBookingCreated.bookingCreatedDate" immutable="true">
+        <type xsi:type="intermediate:IntermediatePrimitiveType" name="date" origin="BUILTIN" kind="PRIMITIVE"/>
+        <originalType xsi:type="intermediate:IntermediatePrimitiveType" name="date" origin="BUILTIN" kind="PRIMITIVE"/>
+      </dataFields>
+      <dataFields name="lastModifiedDate" qualifiedName="BookingManagement.ParkAndChargeBookingCreated.lastModifiedDate" immutable="true">
+        <type xsi:type="intermediate:IntermediatePrimitiveType" name="date" origin="BUILTIN" kind="PRIMITIVE"/>
+        <originalType xsi:type="intermediate:IntermediatePrimitiveType" name="date" origin="BUILTIN" kind="PRIMITIVE"/>
+      </dataFields>
+      <dataFields name="bookingPricePerHour" qualifiedName="BookingManagement.ParkAndChargeBookingCreated.bookingPricePerHour" immutable="true">
+        <type xsi:type="intermediate:IntermediatePrimitiveType" name="float" origin="BUILTIN" kind="PRIMITIVE" size="32"/>
+        <originalType xsi:type="intermediate:IntermediatePrimitiveType" name="float" origin="BUILTIN" kind="PRIMITIVE" size="32"/>
+      </dataFields>
+      <dataFields name="bookingPriceTotal" qualifiedName="BookingManagement.ParkAndChargeBookingCreated.bookingPriceTotal" immutable="true">
+        <type xsi:type="intermediate:IntermediatePrimitiveType" name="float" origin="BUILTIN" kind="PRIMITIVE" size="32"/>
+        <originalType xsi:type="intermediate:IntermediatePrimitiveType" name="float" origin="BUILTIN" kind="PRIMITIVE" size="32"/>
+      </dataFields>
+      <dataFields name="verifycode" qualifiedName="BookingManagement.ParkAndChargeBookingCreated.verifycode" immutable="true">
+        <type xsi:type="intermediate:IntermediatePrimitiveType" name="int" origin="BUILTIN" kind="PRIMITIVE" size="32"/>
+        <originalType xsi:type="intermediate:IntermediatePrimitiveType" name="int" origin="BUILTIN" kind="PRIMITIVE" size="32"/>
+      </dataFields>
+    </complexTypes>
+    <complexTypes xsi:type="intermediate:IntermediateDataStructure" name="ParkAndChargeBookingUpdated" origin="DATA_MODEL" kind="STRUCTURE" qualifiedName="BookingManagement.ParkAndChargeBookingUpdated">
+      <featureNames>VALUE_OBJECT</featureNames>
+      <featureNames>DOMAIN_EVENT</featureNames>
+      <dataFields name="bookingId" qualifiedName="BookingManagement.ParkAndChargeBookingUpdated.bookingId" immutable="true">
+        <type xsi:type="intermediate:IntermediatePrimitiveType" name="long" origin="BUILTIN" kind="PRIMITIVE" size="64"/>
+        <originalType xsi:type="intermediate:IntermediatePrimitiveType" name="long" origin="BUILTIN" kind="PRIMITIVE" size="64"/>
+      </dataFields>
+      <dataFields name="bookingCreatedDate" qualifiedName="BookingManagement.ParkAndChargeBookingUpdated.bookingCreatedDate" immutable="true">
+        <type xsi:type="intermediate:IntermediatePrimitiveType" name="date" origin="BUILTIN" kind="PRIMITIVE"/>
+        <originalType xsi:type="intermediate:IntermediatePrimitiveType" name="date" origin="BUILTIN" kind="PRIMITIVE"/>
+      </dataFields>
+      <dataFields name="lastModifiedDate" qualifiedName="BookingManagement.ParkAndChargeBookingUpdated.lastModifiedDate" immutable="true">
+        <type xsi:type="intermediate:IntermediatePrimitiveType" name="date" origin="BUILTIN" kind="PRIMITIVE"/>
+        <originalType xsi:type="intermediate:IntermediatePrimitiveType" name="date" origin="BUILTIN" kind="PRIMITIVE"/>
+      </dataFields>
+      <dataFields name="timeSlot" qualifiedName="BookingManagement.ParkAndChargeBookingUpdated.timeSlot" immutable="true">
+        <type xsi:type="intermediate:IntermediateComplexType" name="TimeSlot" origin="DATA_MODEL" kind="STRUCTURE" qualifiedName="BookingManagement.TimeSlot"/>
+        <originalType xsi:type="intermediate:IntermediateComplexType" name="TimeSlot" origin="DATA_MODEL" kind="STRUCTURE" qualifiedName="BookingManagement.TimeSlot"/>
+      </dataFields>
+      <dataFields name="bookingPriceTotal" qualifiedName="BookingManagement.ParkAndChargeBookingUpdated.bookingPriceTotal" immutable="true">
+        <type xsi:type="intermediate:IntermediatePrimitiveType" name="float" origin="BUILTIN" kind="PRIMITIVE" size="32"/>
+        <originalType xsi:type="intermediate:IntermediatePrimitiveType" name="float" origin="BUILTIN" kind="PRIMITIVE" size="32"/>
+      </dataFields>
+    </complexTypes>
+    <complexTypes xsi:type="intermediate:IntermediateDataStructure" name="ParkAndChargeBookingCanceled" origin="DATA_MODEL" kind="STRUCTURE" qualifiedName="BookingManagement.ParkAndChargeBookingCanceled">
+      <featureNames>VALUE_OBJECT</featureNames>
+      <featureNames>DOMAIN_EVENT</featureNames>
+      <dataFields name="bookingId" qualifiedName="BookingManagement.ParkAndChargeBookingCanceled.bookingId" immutable="true">
+        <type xsi:type="intermediate:IntermediatePrimitiveType" name="long" origin="BUILTIN" kind="PRIMITIVE" size="64"/>
+        <originalType xsi:type="intermediate:IntermediatePrimitiveType" name="long" origin="BUILTIN" kind="PRIMITIVE" size="64"/>
+      </dataFields>
+      <dataFields name="bookingCanceled" qualifiedName="BookingManagement.ParkAndChargeBookingCanceled.bookingCanceled" immutable="true">
+        <type xsi:type="intermediate:IntermediatePrimitiveType" name="boolean" origin="BUILTIN" kind="PRIMITIVE" size="1"/>
+        <originalType xsi:type="intermediate:IntermediatePrimitiveType" name="boolean" origin="BUILTIN" kind="PRIMITIVE" size="1"/>
+      </dataFields>
+    </complexTypes>
+  </contexts>
+</intermediate:IntermediateDataModel>

@@ -1,0 +1,28 @@
+package de.fhdo.puls.chargingstationsharingcommand.kafka.gen;
+
+import de.fhdo.puls.chargingstationsharingcommand.domain.ChargingStationSharing.ElectrifiedParkingSpaceOffered;
+import de.fhdo.puls.chargingstationsharingcommand.domain.ChargingStationSharing.OfferedElectrifiedParkingSpaceWithdrawed;
+import de.fhdo.puls.chargingstationsharingcommand.domain.ChargingStationSharing.OfferedParkingSpaceWithdrawed;
+import de.fhdo.puls.chargingstationsharingcommand.domain.ChargingStationSharing.ParkingSpaceOffered;
+import org.springframework.kafka.core.KafkaTemplate;
+import org.springframework.kafka.support.SendResult;
+import org.springframework.util.concurrent.ListenableFuture;
+
+public interface ParkingSpaceSharingProducerServiceGen {
+
+    void setParkingSpaceOfferedEventsProducer(KafkaTemplate<String, ParkingSpaceOffered> parkingSpaceOfferedEventsProducer);
+
+    ListenableFuture<SendResult<String, ParkingSpaceOffered>> sendParkingSpaceOfferedEvent(ParkingSpaceOffered parkingSpaceOffered);
+
+    void setParkingSpaceWithdrawedEventsProducer(KafkaTemplate<String, OfferedParkingSpaceWithdrawed> parkingSpaceWithdrawedEventsProducer);
+
+    ListenableFuture<SendResult<String, OfferedParkingSpaceWithdrawed>> sendParkingSpaceWithdrawedEvent(OfferedParkingSpaceWithdrawed offeredParkingSpaceWithdrawed);
+
+    void setElectrifiedParkingSpaceOfferedEventsProducer(KafkaTemplate<String, ElectrifiedParkingSpaceOffered> electrifiedParkingSpaceOfferedEventsProducer);
+
+    ListenableFuture<SendResult<String, ElectrifiedParkingSpaceOffered>> sendElectrifiedParkingSpaceOfferedEvent(ElectrifiedParkingSpaceOffered electrifiedParkingSpaceOffered);
+
+    void setElectrifiedParkingSpaceWithdrawedEventsProducer(KafkaTemplate<String, OfferedElectrifiedParkingSpaceWithdrawed> electrifiedParkingSpaceWithdrawedEventsProducer);
+
+    ListenableFuture<SendResult<String, OfferedElectrifiedParkingSpaceWithdrawed>> sendElectrifiedParkingSpaceWithdrawedEvent(OfferedElectrifiedParkingSpaceWithdrawed offeredElectrifiedParkingSpaceWithdrawed);
+}

@@ -1,0 +1,418 @@
+<?xml version="1.0" encoding="ASCII"?>
+<intermediate:IntermediateDataModel xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:intermediate="http://www.fhdo.de/lemma/data/intermediate" sourceModelUri="file://../../domain.data">
+  <contexts name="EnvironmentalDataAnalysis" qualifiedName="EnvironmentalDataAnalysis">
+    <complexTypes xsi:type="intermediate:IntermediateDataStructure" name="EnvironmentSensorUnit" origin="DATA_MODEL" kind="STRUCTURE" qualifiedName="EnvironmentalDataAnalysis.EnvironmentSensorUnit">
+      <featureNames>ENTITY</featureNames>
+      <featureNames>AGGREGATE</featureNames>
+      <dataFields name="id" qualifiedName="EnvironmentalDataAnalysis.EnvironmentSensorUnit.id">
+        <featureNames>IDENTIFIER</featureNames>
+        <type xsi:type="intermediate:IntermediatePrimitiveType" name="string" origin="BUILTIN" kind="PRIMITIVE"/>
+        <originalType xsi:type="intermediate:IntermediatePrimitiveType" name="string" origin="BUILTIN" kind="PRIMITIVE"/>
+      </dataFields>
+      <dataFields name="name" qualifiedName="EnvironmentalDataAnalysis.EnvironmentSensorUnit.name">
+        <type xsi:type="intermediate:IntermediatePrimitiveType" name="string" origin="BUILTIN" kind="PRIMITIVE"/>
+        <originalType xsi:type="intermediate:IntermediatePrimitiveType" name="string" origin="BUILTIN" kind="PRIMITIVE"/>
+      </dataFields>
+      <dataFields name="sensorBoxId" qualifiedName="EnvironmentalDataAnalysis.EnvironmentSensorUnit.sensorBoxId">
+        <type xsi:type="intermediate:IntermediatePrimitiveType" name="long" origin="BUILTIN" kind="PRIMITIVE" size="64"/>
+        <originalType xsi:type="intermediate:IntermediatePrimitiveType" name="long" origin="BUILTIN" kind="PRIMITIVE" size="64"/>
+      </dataFields>
+      <dataFields name="description" qualifiedName="EnvironmentalDataAnalysis.EnvironmentSensorUnit.description">
+        <type xsi:type="intermediate:IntermediatePrimitiveType" name="string" origin="BUILTIN" kind="PRIMITIVE"/>
+        <originalType xsi:type="intermediate:IntermediatePrimitiveType" name="string" origin="BUILTIN" kind="PRIMITIVE"/>
+      </dataFields>
+      <dataFields name="status" qualifiedName="EnvironmentalDataAnalysis.EnvironmentSensorUnit.status">
+        <featureNames>PART</featureNames>
+        <type xsi:type="intermediate:IntermediateComplexType" name="SensorUnitStatus" origin="DATA_MODEL" kind="ENUMERATION" qualifiedName="EnvironmentalDataAnalysis.SensorUnitStatus"/>
+        <originalType xsi:type="intermediate:IntermediateComplexType" name="SensorUnitStatus" origin="DATA_MODEL" kind="ENUMERATION" qualifiedName="EnvironmentalDataAnalysis.SensorUnitStatus"/>
+      </dataFields>
+      <dataFields name="location" qualifiedName="EnvironmentalDataAnalysis.EnvironmentSensorUnit.location">
+        <featureNames>PART</featureNames>
+        <type xsi:type="intermediate:IntermediateComplexType" name="Location" origin="DATA_MODEL" kind="STRUCTURE" qualifiedName="EnvironmentalDataAnalysis.Location"/>
+        <originalType xsi:type="intermediate:IntermediateComplexType" name="Location" origin="DATA_MODEL" kind="STRUCTURE" qualifiedName="EnvironmentalDataAnalysis.Location"/>
+      </dataFields>
+      <dataFields name="createdDate" qualifiedName="EnvironmentalDataAnalysis.EnvironmentSensorUnit.createdDate">
+        <type xsi:type="intermediate:IntermediatePrimitiveType" name="date" origin="BUILTIN" kind="PRIMITIVE"/>
+        <originalType xsi:type="intermediate:IntermediatePrimitiveType" name="date" origin="BUILTIN" kind="PRIMITIVE"/>
+      </dataFields>
+      <dataFields name="lastModifiedDate" qualifiedName="EnvironmentalDataAnalysis.EnvironmentSensorUnit.lastModifiedDate">
+        <type xsi:type="intermediate:IntermediatePrimitiveType" name="date" origin="BUILTIN" kind="PRIMITIVE"/>
+        <originalType xsi:type="intermediate:IntermediatePrimitiveType" name="date" origin="BUILTIN" kind="PRIMITIVE"/>
+      </dataFields>
+      <dataFields name="sensorType" qualifiedName="EnvironmentalDataAnalysis.EnvironmentSensorUnit.sensorType">
+        <featureNames>PART</featureNames>
+        <type xsi:type="intermediate:IntermediateComplexType" name="SensorType" origin="DATA_MODEL" kind="ENUMERATION" qualifiedName="EnvironmentalDataAnalysis.SensorType"/>
+        <originalType xsi:type="intermediate:IntermediateComplexType" name="SensorType" origin="DATA_MODEL" kind="ENUMERATION" qualifiedName="EnvironmentalDataAnalysis.SensorType"/>
+      </dataFields>
+    </complexTypes>
+    <complexTypes xsi:type="intermediate:IntermediateDataStructure" name="EnvironmentSensorUnitRepository" origin="DATA_MODEL" kind="STRUCTURE" qualifiedName="EnvironmentalDataAnalysis.EnvironmentSensorUnitRepository">
+      <featureNames>REPOSITORY</featureNames>
+      <dataFields name="environmentSensorUnitAggregate" qualifiedName="EnvironmentalDataAnalysis.EnvironmentSensorUnitRepository.environmentSensorUnitAggregate">
+        <type xsi:type="intermediate:IntermediateComplexType" name="EnvironmentSensorUnit" origin="DATA_MODEL" kind="STRUCTURE" qualifiedName="EnvironmentalDataAnalysis.EnvironmentSensorUnit"/>
+        <originalType xsi:type="intermediate:IntermediateComplexType" name="EnvironmentSensorUnit" origin="DATA_MODEL" kind="STRUCTURE" qualifiedName="EnvironmentalDataAnalysis.EnvironmentSensorUnit"/>
+      </dataFields>
+      <dataFields name="id" qualifiedName="EnvironmentalDataAnalysis.EnvironmentSensorUnitRepository.id">
+        <type xsi:type="intermediate:IntermediatePrimitiveType" name="string" origin="BUILTIN" kind="PRIMITIVE"/>
+        <originalType xsi:type="intermediate:IntermediatePrimitiveType" name="string" origin="BUILTIN" kind="PRIMITIVE"/>
+      </dataFields>
+    </complexTypes>
+    <complexTypes xsi:type="intermediate:IntermediateDataStructure" name="Location" origin="DATA_MODEL" kind="STRUCTURE" qualifiedName="EnvironmentalDataAnalysis.Location">
+      <featureNames>VALUE_OBJECT</featureNames>
+      <dataFields name="longitude" qualifiedName="EnvironmentalDataAnalysis.Location.longitude">
+        <type xsi:type="intermediate:IntermediatePrimitiveType" name="float" origin="BUILTIN" kind="PRIMITIVE" size="32"/>
+        <originalType xsi:type="intermediate:IntermediatePrimitiveType" name="float" origin="BUILTIN" kind="PRIMITIVE" size="32"/>
+      </dataFields>
+      <dataFields name="latitude" qualifiedName="EnvironmentalDataAnalysis.Location.latitude">
+        <type xsi:type="intermediate:IntermediatePrimitiveType" name="float" origin="BUILTIN" kind="PRIMITIVE" size="32"/>
+        <originalType xsi:type="intermediate:IntermediatePrimitiveType" name="float" origin="BUILTIN" kind="PRIMITIVE" size="32"/>
+      </dataFields>
+    </complexTypes>
+    <complexTypes xsi:type="intermediate:IntermediateDataStructure" name="ReceivedDataSet" origin="DATA_MODEL" kind="STRUCTURE" qualifiedName="EnvironmentalDataAnalysis.ReceivedDataSet">
+      <featureNames>VALUE_OBJECT</featureNames>
+      <dataFields name="sensorId" qualifiedName="EnvironmentalDataAnalysis.ReceivedDataSet.sensorId">
+        <type xsi:type="intermediate:IntermediatePrimitiveType" name="string" origin="BUILTIN" kind="PRIMITIVE"/>
+        <originalType xsi:type="intermediate:IntermediatePrimitiveType" name="string" origin="BUILTIN" kind="PRIMITIVE"/>
+      </dataFields>
+      <dataFields name="receivedTimeStamp" qualifiedName="EnvironmentalDataAnalysis.ReceivedDataSet.receivedTimeStamp">
+        <type xsi:type="intermediate:IntermediatePrimitiveType" name="date" origin="BUILTIN" kind="PRIMITIVE"/>
+        <originalType xsi:type="intermediate:IntermediatePrimitiveType" name="date" origin="BUILTIN" kind="PRIMITIVE"/>
+      </dataFields>
+      <dataFields name="particulate2" qualifiedName="EnvironmentalDataAnalysis.ReceivedDataSet.particulate2">
+        <type xsi:type="intermediate:IntermediatePrimitiveType" name="float" origin="BUILTIN" kind="PRIMITIVE" size="32"/>
+        <originalType xsi:type="intermediate:IntermediatePrimitiveType" name="float" origin="BUILTIN" kind="PRIMITIVE" size="32"/>
+      </dataFields>
+      <dataFields name="particulate10" qualifiedName="EnvironmentalDataAnalysis.ReceivedDataSet.particulate10">
+        <type xsi:type="intermediate:IntermediatePrimitiveType" name="float" origin="BUILTIN" kind="PRIMITIVE" size="32"/>
+        <originalType xsi:type="intermediate:IntermediatePrimitiveType" name="float" origin="BUILTIN" kind="PRIMITIVE" size="32"/>
+      </dataFields>
+      <dataFields name="light" qualifiedName="EnvironmentalDataAnalysis.ReceivedDataSet.light">
+        <type xsi:type="intermediate:IntermediatePrimitiveType" name="int" origin="BUILTIN" kind="PRIMITIVE" size="32"/>
+        <originalType xsi:type="intermediate:IntermediatePrimitiveType" name="int" origin="BUILTIN" kind="PRIMITIVE" size="32"/>
+      </dataFields>
+      <dataFields name="temperature" qualifiedName="EnvironmentalDataAnalysis.ReceivedDataSet.temperature">
+        <type xsi:type="intermediate:IntermediatePrimitiveType" name="float" origin="BUILTIN" kind="PRIMITIVE" size="32"/>
+        <originalType xsi:type="intermediate:IntermediatePrimitiveType" name="float" origin="BUILTIN" kind="PRIMITIVE" size="32"/>
+      </dataFields>
+      <dataFields name="humidity" qualifiedName="EnvironmentalDataAnalysis.ReceivedDataSet.humidity">
+        <type xsi:type="intermediate:IntermediatePrimitiveType" name="float" origin="BUILTIN" kind="PRIMITIVE" size="32"/>
+        <originalType xsi:type="intermediate:IntermediatePrimitiveType" name="float" origin="BUILTIN" kind="PRIMITIVE" size="32"/>
+      </dataFields>
+    </complexTypes>
+    <complexTypes xsi:type="intermediate:IntermediateDataStructure" name="SensorInformationSet" origin="DATA_MODEL" kind="STRUCTURE" qualifiedName="EnvironmentalDataAnalysis.SensorInformationSet">
+      <featureNames>ENTITY</featureNames>
+      <dataFields name="id" qualifiedName="EnvironmentalDataAnalysis.SensorInformationSet.id">
+        <featureNames>IDENTIFIER</featureNames>
+        <type xsi:type="intermediate:IntermediatePrimitiveType" name="string" origin="BUILTIN" kind="PRIMITIVE"/>
+        <originalType xsi:type="intermediate:IntermediatePrimitiveType" name="string" origin="BUILTIN" kind="PRIMITIVE"/>
+      </dataFields>
+      <dataFields name="name" qualifiedName="EnvironmentalDataAnalysis.SensorInformationSet.name">
+        <type xsi:type="intermediate:IntermediatePrimitiveType" name="string" origin="BUILTIN" kind="PRIMITIVE"/>
+        <originalType xsi:type="intermediate:IntermediatePrimitiveType" name="string" origin="BUILTIN" kind="PRIMITIVE"/>
+      </dataFields>
+      <dataFields name="sensorBoxId" qualifiedName="EnvironmentalDataAnalysis.SensorInformationSet.sensorBoxId">
+        <type xsi:type="intermediate:IntermediatePrimitiveType" name="long" origin="BUILTIN" kind="PRIMITIVE" size="64"/>
+        <originalType xsi:type="intermediate:IntermediatePrimitiveType" name="long" origin="BUILTIN" kind="PRIMITIVE" size="64"/>
+      </dataFields>
+      <dataFields name="receivedDataSetList" qualifiedName="EnvironmentalDataAnalysis.SensorInformationSet.receivedDataSetList">
+        <type xsi:type="intermediate:IntermediateComplexType" name="RecivedDataSetList" origin="DATA_MODEL" kind="LIST" qualifiedName="EnvironmentalDataAnalysis.RecivedDataSetList"/>
+        <originalType xsi:type="intermediate:IntermediateComplexType" name="RecivedDataSetList" origin="DATA_MODEL" kind="LIST" qualifiedName="EnvironmentalDataAnalysis.RecivedDataSetList"/>
+      </dataFields>
+    </complexTypes>
+    <complexTypes xsi:type="intermediate:IntermediateDataStructure" name="SensorInformationSetRepository" origin="DATA_MODEL" kind="STRUCTURE" qualifiedName="EnvironmentalDataAnalysis.SensorInformationSetRepository">
+      <featureNames>REPOSITORY</featureNames>
+      <dataFields name="sensorInformationSet" qualifiedName="EnvironmentalDataAnalysis.SensorInformationSetRepository.sensorInformationSet">
+        <type xsi:type="intermediate:IntermediateComplexType" name="SensorInformationSet" origin="DATA_MODEL" kind="STRUCTURE" qualifiedName="EnvironmentalDataAnalysis.SensorInformationSet"/>
+        <originalType xsi:type="intermediate:IntermediateComplexType" name="SensorInformationSet" origin="DATA_MODEL" kind="STRUCTURE" qualifiedName="EnvironmentalDataAnalysis.SensorInformationSet"/>
+      </dataFields>
+      <dataFields name="id" qualifiedName="EnvironmentalDataAnalysis.SensorInformationSetRepository.id">
+        <type xsi:type="intermediate:IntermediatePrimitiveType" name="string" origin="BUILTIN" kind="PRIMITIVE"/>
+        <originalType xsi:type="intermediate:IntermediatePrimitiveType" name="string" origin="BUILTIN" kind="PRIMITIVE"/>
+      </dataFields>
+    </complexTypes>
+    <complexTypes xsi:type="intermediate:IntermediateDataStructure" name="SensorValue" origin="DATA_MODEL" kind="STRUCTURE" qualifiedName="EnvironmentalDataAnalysis.SensorValue">
+      <featureNames>VALUE_OBJECT</featureNames>
+      <dataFields name="value" qualifiedName="EnvironmentalDataAnalysis.SensorValue.value" immutable="true">
+        <type xsi:type="intermediate:IntermediatePrimitiveType" name="string" origin="BUILTIN" kind="PRIMITIVE"/>
+        <originalType xsi:type="intermediate:IntermediatePrimitiveType" name="string" origin="BUILTIN" kind="PRIMITIVE"/>
+      </dataFields>
+      <dataFields name="timestamp" qualifiedName="EnvironmentalDataAnalysis.SensorValue.timestamp" immutable="true">
+        <type xsi:type="intermediate:IntermediatePrimitiveType" name="date" origin="BUILTIN" kind="PRIMITIVE"/>
+        <originalType xsi:type="intermediate:IntermediatePrimitiveType" name="date" origin="BUILTIN" kind="PRIMITIVE"/>
+      </dataFields>
+    </complexTypes>
+    <complexTypes xsi:type="intermediate:IntermediateDataStructure" name="EnvironmentInformation" origin="DATA_MODEL" kind="STRUCTURE" qualifiedName="EnvironmentalDataAnalysis.EnvironmentInformation">
+      <featureNames>ENTITY</featureNames>
+      <featureNames>AGGREGATE</featureNames>
+      <dataFields name="id" qualifiedName="EnvironmentalDataAnalysis.EnvironmentInformation.id">
+        <featureNames>IDENTIFIER</featureNames>
+        <type xsi:type="intermediate:IntermediatePrimitiveType" name="string" origin="BUILTIN" kind="PRIMITIVE"/>
+        <originalType xsi:type="intermediate:IntermediatePrimitiveType" name="string" origin="BUILTIN" kind="PRIMITIVE"/>
+      </dataFields>
+      <dataFields name="sensorBoxId" qualifiedName="EnvironmentalDataAnalysis.EnvironmentInformation.sensorBoxId">
+        <type xsi:type="intermediate:IntermediatePrimitiveType" name="long" origin="BUILTIN" kind="PRIMITIVE" size="64"/>
+        <originalType xsi:type="intermediate:IntermediatePrimitiveType" name="long" origin="BUILTIN" kind="PRIMITIVE" size="64"/>
+      </dataFields>
+      <dataFields name="particulate2Data" qualifiedName="EnvironmentalDataAnalysis.EnvironmentInformation.particulate2Data">
+        <featureNames>PART</featureNames>
+        <type xsi:type="intermediate:IntermediateComplexType" name="SensorValueList" origin="DATA_MODEL" kind="LIST" qualifiedName="EnvironmentalDataAnalysis.SensorValueList"/>
+        <originalType xsi:type="intermediate:IntermediateComplexType" name="SensorValueList" origin="DATA_MODEL" kind="LIST" qualifiedName="EnvironmentalDataAnalysis.SensorValueList"/>
+      </dataFields>
+      <dataFields name="particulate10Data" qualifiedName="EnvironmentalDataAnalysis.EnvironmentInformation.particulate10Data">
+        <featureNames>PART</featureNames>
+        <type xsi:type="intermediate:IntermediateComplexType" name="SensorValueList" origin="DATA_MODEL" kind="LIST" qualifiedName="EnvironmentalDataAnalysis.SensorValueList"/>
+        <originalType xsi:type="intermediate:IntermediateComplexType" name="SensorValueList" origin="DATA_MODEL" kind="LIST" qualifiedName="EnvironmentalDataAnalysis.SensorValueList"/>
+      </dataFields>
+      <dataFields name="lightData" qualifiedName="EnvironmentalDataAnalysis.EnvironmentInformation.lightData">
+        <featureNames>PART</featureNames>
+        <type xsi:type="intermediate:IntermediateComplexType" name="SensorValueList" origin="DATA_MODEL" kind="LIST" qualifiedName="EnvironmentalDataAnalysis.SensorValueList"/>
+        <originalType xsi:type="intermediate:IntermediateComplexType" name="SensorValueList" origin="DATA_MODEL" kind="LIST" qualifiedName="EnvironmentalDataAnalysis.SensorValueList"/>
+      </dataFields>
+      <dataFields name="temperaturData" qualifiedName="EnvironmentalDataAnalysis.EnvironmentInformation.temperaturData">
+        <featureNames>PART</featureNames>
+        <type xsi:type="intermediate:IntermediateComplexType" name="SensorValueList" origin="DATA_MODEL" kind="LIST" qualifiedName="EnvironmentalDataAnalysis.SensorValueList"/>
+        <originalType xsi:type="intermediate:IntermediateComplexType" name="SensorValueList" origin="DATA_MODEL" kind="LIST" qualifiedName="EnvironmentalDataAnalysis.SensorValueList"/>
+      </dataFields>
+      <dataFields name="humidityData" qualifiedName="EnvironmentalDataAnalysis.EnvironmentInformation.humidityData">
+        <featureNames>PART</featureNames>
+        <type xsi:type="intermediate:IntermediateComplexType" name="SensorValueList" origin="DATA_MODEL" kind="LIST" qualifiedName="EnvironmentalDataAnalysis.SensorValueList"/>
+        <originalType xsi:type="intermediate:IntermediateComplexType" name="SensorValueList" origin="DATA_MODEL" kind="LIST" qualifiedName="EnvironmentalDataAnalysis.SensorValueList"/>
+      </dataFields>
+    </complexTypes>
+    <complexTypes xsi:type="intermediate:IntermediateDataStructure" name="EnvironmentInformationRepository" origin="DATA_MODEL" kind="STRUCTURE" qualifiedName="EnvironmentalDataAnalysis.EnvironmentInformationRepository">
+      <featureNames>REPOSITORY</featureNames>
+      <dataFields name="environmentInformationAggregate" qualifiedName="EnvironmentalDataAnalysis.EnvironmentInformationRepository.environmentInformationAggregate">
+        <type xsi:type="intermediate:IntermediateComplexType" name="EnvironmentInformation" origin="DATA_MODEL" kind="STRUCTURE" qualifiedName="EnvironmentalDataAnalysis.EnvironmentInformation"/>
+        <originalType xsi:type="intermediate:IntermediateComplexType" name="EnvironmentInformation" origin="DATA_MODEL" kind="STRUCTURE" qualifiedName="EnvironmentalDataAnalysis.EnvironmentInformation"/>
+      </dataFields>
+      <dataFields name="id" qualifiedName="EnvironmentalDataAnalysis.EnvironmentInformationRepository.id">
+        <type xsi:type="intermediate:IntermediatePrimitiveType" name="string" origin="BUILTIN" kind="PRIMITIVE"/>
+        <originalType xsi:type="intermediate:IntermediatePrimitiveType" name="string" origin="BUILTIN" kind="PRIMITIVE"/>
+      </dataFields>
+    </complexTypes>
+    <complexTypes xsi:type="intermediate:IntermediateDataStructure" name="CreateEnvironmentSensorUnitCommand" origin="DATA_MODEL" kind="STRUCTURE" qualifiedName="EnvironmentalDataAnalysis.CreateEnvironmentSensorUnitCommand">
+      <featureNames>VALUE_OBJECT</featureNames>
+      <dataFields name="name" qualifiedName="EnvironmentalDataAnalysis.CreateEnvironmentSensorUnitCommand.name" immutable="true">
+        <type xsi:type="intermediate:IntermediatePrimitiveType" name="string" origin="BUILTIN" kind="PRIMITIVE"/>
+        <originalType xsi:type="intermediate:IntermediatePrimitiveType" name="string" origin="BUILTIN" kind="PRIMITIVE"/>
+      </dataFields>
+      <dataFields name="sensorBoxId" qualifiedName="EnvironmentalDataAnalysis.CreateEnvironmentSensorUnitCommand.sensorBoxId" immutable="true">
+        <type xsi:type="intermediate:IntermediatePrimitiveType" name="long" origin="BUILTIN" kind="PRIMITIVE" size="64"/>
+        <originalType xsi:type="intermediate:IntermediatePrimitiveType" name="long" origin="BUILTIN" kind="PRIMITIVE" size="64"/>
+      </dataFields>
+      <dataFields name="description" qualifiedName="EnvironmentalDataAnalysis.CreateEnvironmentSensorUnitCommand.description" immutable="true">
+        <type xsi:type="intermediate:IntermediatePrimitiveType" name="string" origin="BUILTIN" kind="PRIMITIVE"/>
+        <originalType xsi:type="intermediate:IntermediatePrimitiveType" name="string" origin="BUILTIN" kind="PRIMITIVE"/>
+      </dataFields>
+      <dataFields name="status" qualifiedName="EnvironmentalDataAnalysis.CreateEnvironmentSensorUnitCommand.status" immutable="true">
+        <type xsi:type="intermediate:IntermediatePrimitiveType" name="string" origin="BUILTIN" kind="PRIMITIVE"/>
+        <originalType xsi:type="intermediate:IntermediatePrimitiveType" name="string" origin="BUILTIN" kind="PRIMITIVE"/>
+      </dataFields>
+      <dataFields name="longitude" qualifiedName="EnvironmentalDataAnalysis.CreateEnvironmentSensorUnitCommand.longitude" immutable="true">
+        <type xsi:type="intermediate:IntermediatePrimitiveType" name="float" origin="BUILTIN" kind="PRIMITIVE" size="32"/>
+        <originalType xsi:type="intermediate:IntermediatePrimitiveType" name="float" origin="BUILTIN" kind="PRIMITIVE" size="32"/>
+      </dataFields>
+      <dataFields name="latitude" qualifiedName="EnvironmentalDataAnalysis.CreateEnvironmentSensorUnitCommand.latitude" immutable="true">
+        <type xsi:type="intermediate:IntermediatePrimitiveType" name="float" origin="BUILTIN" kind="PRIMITIVE" size="32"/>
+        <originalType xsi:type="intermediate:IntermediatePrimitiveType" name="float" origin="BUILTIN" kind="PRIMITIVE" size="32"/>
+      </dataFields>
+      <dataFields name="sensorType" qualifiedName="EnvironmentalDataAnalysis.CreateEnvironmentSensorUnitCommand.sensorType" immutable="true">
+        <type xsi:type="intermediate:IntermediatePrimitiveType" name="string" origin="BUILTIN" kind="PRIMITIVE"/>
+        <originalType xsi:type="intermediate:IntermediatePrimitiveType" name="string" origin="BUILTIN" kind="PRIMITIVE"/>
+      </dataFields>
+    </complexTypes>
+    <complexTypes xsi:type="intermediate:IntermediateDataStructure" name="ReceiveEnvironmentDataCommand" origin="DATA_MODEL" kind="STRUCTURE" qualifiedName="EnvironmentalDataAnalysis.ReceiveEnvironmentDataCommand">
+      <featureNames>VALUE_OBJECT</featureNames>
+      <dataFields name="sensorUnitId" qualifiedName="EnvironmentalDataAnalysis.ReceiveEnvironmentDataCommand.sensorUnitId" immutable="true">
+        <type xsi:type="intermediate:IntermediatePrimitiveType" name="string" origin="BUILTIN" kind="PRIMITIVE"/>
+        <originalType xsi:type="intermediate:IntermediatePrimitiveType" name="string" origin="BUILTIN" kind="PRIMITIVE"/>
+      </dataFields>
+      <dataFields name="particulate2" qualifiedName="EnvironmentalDataAnalysis.ReceiveEnvironmentDataCommand.particulate2" immutable="true">
+        <type xsi:type="intermediate:IntermediatePrimitiveType" name="float" origin="BUILTIN" kind="PRIMITIVE" size="32"/>
+        <originalType xsi:type="intermediate:IntermediatePrimitiveType" name="float" origin="BUILTIN" kind="PRIMITIVE" size="32"/>
+      </dataFields>
+      <dataFields name="particulate10" qualifiedName="EnvironmentalDataAnalysis.ReceiveEnvironmentDataCommand.particulate10" immutable="true">
+        <type xsi:type="intermediate:IntermediatePrimitiveType" name="float" origin="BUILTIN" kind="PRIMITIVE" size="32"/>
+        <originalType xsi:type="intermediate:IntermediatePrimitiveType" name="float" origin="BUILTIN" kind="PRIMITIVE" size="32"/>
+      </dataFields>
+      <dataFields name="light" qualifiedName="EnvironmentalDataAnalysis.ReceiveEnvironmentDataCommand.light" immutable="true">
+        <type xsi:type="intermediate:IntermediatePrimitiveType" name="int" origin="BUILTIN" kind="PRIMITIVE" size="32"/>
+        <originalType xsi:type="intermediate:IntermediatePrimitiveType" name="int" origin="BUILTIN" kind="PRIMITIVE" size="32"/>
+      </dataFields>
+      <dataFields name="temperature" qualifiedName="EnvironmentalDataAnalysis.ReceiveEnvironmentDataCommand.temperature" immutable="true">
+        <type xsi:type="intermediate:IntermediatePrimitiveType" name="float" origin="BUILTIN" kind="PRIMITIVE" size="32"/>
+        <originalType xsi:type="intermediate:IntermediatePrimitiveType" name="float" origin="BUILTIN" kind="PRIMITIVE" size="32"/>
+      </dataFields>
+      <dataFields name="humidity" qualifiedName="EnvironmentalDataAnalysis.ReceiveEnvironmentDataCommand.humidity" immutable="true">
+        <type xsi:type="intermediate:IntermediatePrimitiveType" name="float" origin="BUILTIN" kind="PRIMITIVE" size="32"/>
+        <originalType xsi:type="intermediate:IntermediatePrimitiveType" name="float" origin="BUILTIN" kind="PRIMITIVE" size="32"/>
+      </dataFields>
+      <dataFields name="communicationType" qualifiedName="EnvironmentalDataAnalysis.ReceiveEnvironmentDataCommand.communicationType" immutable="true">
+        <type xsi:type="intermediate:IntermediatePrimitiveType" name="int" origin="BUILTIN" kind="PRIMITIVE" size="32"/>
+        <originalType xsi:type="intermediate:IntermediatePrimitiveType" name="int" origin="BUILTIN" kind="PRIMITIVE" size="32"/>
+      </dataFields>
+      <dataFields name="signalPower" qualifiedName="EnvironmentalDataAnalysis.ReceiveEnvironmentDataCommand.signalPower" immutable="true">
+        <type xsi:type="intermediate:IntermediatePrimitiveType" name="int" origin="BUILTIN" kind="PRIMITIVE" size="32"/>
+        <originalType xsi:type="intermediate:IntermediatePrimitiveType" name="int" origin="BUILTIN" kind="PRIMITIVE" size="32"/>
+      </dataFields>
+      <dataFields name="signalNoiseRang" qualifiedName="EnvironmentalDataAnalysis.ReceiveEnvironmentDataCommand.signalNoiseRang" immutable="true">
+        <type xsi:type="intermediate:IntermediatePrimitiveType" name="float" origin="BUILTIN" kind="PRIMITIVE" size="32"/>
+        <originalType xsi:type="intermediate:IntermediatePrimitiveType" name="float" origin="BUILTIN" kind="PRIMITIVE" size="32"/>
+      </dataFields>
+      <dataFields name="spreadingFaktorDownlink" qualifiedName="EnvironmentalDataAnalysis.ReceiveEnvironmentDataCommand.spreadingFaktorDownlink" immutable="true">
+        <type xsi:type="intermediate:IntermediatePrimitiveType" name="int" origin="BUILTIN" kind="PRIMITIVE" size="32"/>
+        <originalType xsi:type="intermediate:IntermediatePrimitiveType" name="int" origin="BUILTIN" kind="PRIMITIVE" size="32"/>
+      </dataFields>
+      <dataFields name="spreadingFaktorUplink" qualifiedName="EnvironmentalDataAnalysis.ReceiveEnvironmentDataCommand.spreadingFaktorUplink" immutable="true">
+        <type xsi:type="intermediate:IntermediatePrimitiveType" name="int" origin="BUILTIN" kind="PRIMITIVE" size="32"/>
+        <originalType xsi:type="intermediate:IntermediatePrimitiveType" name="int" origin="BUILTIN" kind="PRIMITIVE" size="32"/>
+      </dataFields>
+    </complexTypes>
+    <complexTypes xsi:type="intermediate:IntermediateDataStructure" name="UpdateEnvironmentSensorUnitCommand" origin="DATA_MODEL" kind="STRUCTURE" qualifiedName="EnvironmentalDataAnalysis.UpdateEnvironmentSensorUnitCommand">
+      <featureNames>VALUE_OBJECT</featureNames>
+      <dataFields name="id" qualifiedName="EnvironmentalDataAnalysis.UpdateEnvironmentSensorUnitCommand.id" immutable="true">
+        <type xsi:type="intermediate:IntermediatePrimitiveType" name="string" origin="BUILTIN" kind="PRIMITIVE"/>
+        <originalType xsi:type="intermediate:IntermediatePrimitiveType" name="string" origin="BUILTIN" kind="PRIMITIVE"/>
+      </dataFields>
+      <dataFields name="name" qualifiedName="EnvironmentalDataAnalysis.UpdateEnvironmentSensorUnitCommand.name" immutable="true">
+        <type xsi:type="intermediate:IntermediatePrimitiveType" name="string" origin="BUILTIN" kind="PRIMITIVE"/>
+        <originalType xsi:type="intermediate:IntermediatePrimitiveType" name="string" origin="BUILTIN" kind="PRIMITIVE"/>
+      </dataFields>
+      <dataFields name="description" qualifiedName="EnvironmentalDataAnalysis.UpdateEnvironmentSensorUnitCommand.description" immutable="true">
+        <type xsi:type="intermediate:IntermediatePrimitiveType" name="string" origin="BUILTIN" kind="PRIMITIVE"/>
+        <originalType xsi:type="intermediate:IntermediatePrimitiveType" name="string" origin="BUILTIN" kind="PRIMITIVE"/>
+      </dataFields>
+      <dataFields name="status" qualifiedName="EnvironmentalDataAnalysis.UpdateEnvironmentSensorUnitCommand.status" immutable="true">
+        <type xsi:type="intermediate:IntermediatePrimitiveType" name="string" origin="BUILTIN" kind="PRIMITIVE"/>
+        <originalType xsi:type="intermediate:IntermediatePrimitiveType" name="string" origin="BUILTIN" kind="PRIMITIVE"/>
+      </dataFields>
+      <dataFields name="longitude" qualifiedName="EnvironmentalDataAnalysis.UpdateEnvironmentSensorUnitCommand.longitude" immutable="true">
+        <type xsi:type="intermediate:IntermediatePrimitiveType" name="float" origin="BUILTIN" kind="PRIMITIVE" size="32"/>
+        <originalType xsi:type="intermediate:IntermediatePrimitiveType" name="float" origin="BUILTIN" kind="PRIMITIVE" size="32"/>
+      </dataFields>
+      <dataFields name="latitude" qualifiedName="EnvironmentalDataAnalysis.UpdateEnvironmentSensorUnitCommand.latitude" immutable="true">
+        <type xsi:type="intermediate:IntermediatePrimitiveType" name="float" origin="BUILTIN" kind="PRIMITIVE" size="32"/>
+        <originalType xsi:type="intermediate:IntermediatePrimitiveType" name="float" origin="BUILTIN" kind="PRIMITIVE" size="32"/>
+      </dataFields>
+    </complexTypes>
+    <complexTypes xsi:type="intermediate:IntermediateDataStructure" name="EnvironmentDataReceived" origin="DATA_MODEL" kind="STRUCTURE" qualifiedName="EnvironmentalDataAnalysis.EnvironmentDataReceived">
+      <featureNames>VALUE_OBJECT</featureNames>
+      <featureNames>DOMAIN_EVENT</featureNames>
+      <dataFields name="sensorUnitId" qualifiedName="EnvironmentalDataAnalysis.EnvironmentDataReceived.sensorUnitId" immutable="true">
+        <type xsi:type="intermediate:IntermediatePrimitiveType" name="string" origin="BUILTIN" kind="PRIMITIVE"/>
+        <originalType xsi:type="intermediate:IntermediatePrimitiveType" name="string" origin="BUILTIN" kind="PRIMITIVE"/>
+      </dataFields>
+      <dataFields name="particulates2" qualifiedName="EnvironmentalDataAnalysis.EnvironmentDataReceived.particulates2" immutable="true">
+        <type xsi:type="intermediate:IntermediateComplexType" name="SensorValue" origin="DATA_MODEL" kind="STRUCTURE" qualifiedName="EnvironmentalDataAnalysis.SensorValue"/>
+        <originalType xsi:type="intermediate:IntermediateComplexType" name="SensorValue" origin="DATA_MODEL" kind="STRUCTURE" qualifiedName="EnvironmentalDataAnalysis.SensorValue"/>
+      </dataFields>
+      <dataFields name="particulates10" qualifiedName="EnvironmentalDataAnalysis.EnvironmentDataReceived.particulates10" immutable="true">
+        <type xsi:type="intermediate:IntermediateComplexType" name="SensorValue" origin="DATA_MODEL" kind="STRUCTURE" qualifiedName="EnvironmentalDataAnalysis.SensorValue"/>
+        <originalType xsi:type="intermediate:IntermediateComplexType" name="SensorValue" origin="DATA_MODEL" kind="STRUCTURE" qualifiedName="EnvironmentalDataAnalysis.SensorValue"/>
+      </dataFields>
+      <dataFields name="light" qualifiedName="EnvironmentalDataAnalysis.EnvironmentDataReceived.light" immutable="true">
+        <type xsi:type="intermediate:IntermediateComplexType" name="SensorValue" origin="DATA_MODEL" kind="STRUCTURE" qualifiedName="EnvironmentalDataAnalysis.SensorValue"/>
+        <originalType xsi:type="intermediate:IntermediateComplexType" name="SensorValue" origin="DATA_MODEL" kind="STRUCTURE" qualifiedName="EnvironmentalDataAnalysis.SensorValue"/>
+      </dataFields>
+      <dataFields name="temperature" qualifiedName="EnvironmentalDataAnalysis.EnvironmentDataReceived.temperature" immutable="true">
+        <type xsi:type="intermediate:IntermediateComplexType" name="SensorValue" origin="DATA_MODEL" kind="STRUCTURE" qualifiedName="EnvironmentalDataAnalysis.SensorValue"/>
+        <originalType xsi:type="intermediate:IntermediateComplexType" name="SensorValue" origin="DATA_MODEL" kind="STRUCTURE" qualifiedName="EnvironmentalDataAnalysis.SensorValue"/>
+      </dataFields>
+      <dataFields name="humidity" qualifiedName="EnvironmentalDataAnalysis.EnvironmentDataReceived.humidity" immutable="true">
+        <type xsi:type="intermediate:IntermediateComplexType" name="SensorValue" origin="DATA_MODEL" kind="STRUCTURE" qualifiedName="EnvironmentalDataAnalysis.SensorValue"/>
+        <originalType xsi:type="intermediate:IntermediateComplexType" name="SensorValue" origin="DATA_MODEL" kind="STRUCTURE" qualifiedName="EnvironmentalDataAnalysis.SensorValue"/>
+      </dataFields>
+    </complexTypes>
+    <complexTypes xsi:type="intermediate:IntermediateDataStructure" name="EnvironmentSensorUnitCreated" origin="DATA_MODEL" kind="STRUCTURE" qualifiedName="EnvironmentalDataAnalysis.EnvironmentSensorUnitCreated">
+      <featureNames>VALUE_OBJECT</featureNames>
+      <featureNames>DOMAIN_EVENT</featureNames>
+      <dataFields name="sensorUnitId" qualifiedName="EnvironmentalDataAnalysis.EnvironmentSensorUnitCreated.sensorUnitId" immutable="true">
+        <type xsi:type="intermediate:IntermediatePrimitiveType" name="string" origin="BUILTIN" kind="PRIMITIVE"/>
+        <originalType xsi:type="intermediate:IntermediatePrimitiveType" name="string" origin="BUILTIN" kind="PRIMITIVE"/>
+      </dataFields>
+      <dataFields name="name" qualifiedName="EnvironmentalDataAnalysis.EnvironmentSensorUnitCreated.name" immutable="true">
+        <type xsi:type="intermediate:IntermediatePrimitiveType" name="string" origin="BUILTIN" kind="PRIMITIVE"/>
+        <originalType xsi:type="intermediate:IntermediatePrimitiveType" name="string" origin="BUILTIN" kind="PRIMITIVE"/>
+      </dataFields>
+      <dataFields name="sensorBoxId" qualifiedName="EnvironmentalDataAnalysis.EnvironmentSensorUnitCreated.sensorBoxId" immutable="true">
+        <type xsi:type="intermediate:IntermediatePrimitiveType" name="long" origin="BUILTIN" kind="PRIMITIVE" size="64"/>
+        <originalType xsi:type="intermediate:IntermediatePrimitiveType" name="long" origin="BUILTIN" kind="PRIMITIVE" size="64"/>
+      </dataFields>
+      <dataFields name="description" qualifiedName="EnvironmentalDataAnalysis.EnvironmentSensorUnitCreated.description" immutable="true">
+        <type xsi:type="intermediate:IntermediatePrimitiveType" name="string" origin="BUILTIN" kind="PRIMITIVE"/>
+        <originalType xsi:type="intermediate:IntermediatePrimitiveType" name="string" origin="BUILTIN" kind="PRIMITIVE"/>
+      </dataFields>
+      <dataFields name="status" qualifiedName="EnvironmentalDataAnalysis.EnvironmentSensorUnitCreated.status" immutable="true">
+        <type xsi:type="intermediate:IntermediatePrimitiveType" name="string" origin="BUILTIN" kind="PRIMITIVE"/>
+        <originalType xsi:type="intermediate:IntermediatePrimitiveType" name="string" origin="BUILTIN" kind="PRIMITIVE"/>
+      </dataFields>
+      <dataFields name="longitude" qualifiedName="EnvironmentalDataAnalysis.EnvironmentSensorUnitCreated.longitude" immutable="true">
+        <type xsi:type="intermediate:IntermediatePrimitiveType" name="float" origin="BUILTIN" kind="PRIMITIVE" size="32"/>
+        <originalType xsi:type="intermediate:IntermediatePrimitiveType" name="float" origin="BUILTIN" kind="PRIMITIVE" size="32"/>
+      </dataFields>
+      <dataFields name="latitude" qualifiedName="EnvironmentalDataAnalysis.EnvironmentSensorUnitCreated.latitude" immutable="true">
+        <type xsi:type="intermediate:IntermediatePrimitiveType" name="float" origin="BUILTIN" kind="PRIMITIVE" size="32"/>
+        <originalType xsi:type="intermediate:IntermediatePrimitiveType" name="float" origin="BUILTIN" kind="PRIMITIVE" size="32"/>
+      </dataFields>
+      <dataFields name="sensorTyp" qualifiedName="EnvironmentalDataAnalysis.EnvironmentSensorUnitCreated.sensorTyp" immutable="true">
+        <type xsi:type="intermediate:IntermediatePrimitiveType" name="string" origin="BUILTIN" kind="PRIMITIVE"/>
+        <originalType xsi:type="intermediate:IntermediatePrimitiveType" name="string" origin="BUILTIN" kind="PRIMITIVE"/>
+      </dataFields>
+    </complexTypes>
+    <complexTypes xsi:type="intermediate:IntermediateDataStructure" name="EnvironmentSensorUnitUpdated" origin="DATA_MODEL" kind="STRUCTURE" qualifiedName="EnvironmentalDataAnalysis.EnvironmentSensorUnitUpdated">
+      <featureNames>VALUE_OBJECT</featureNames>
+      <featureNames>DOMAIN_EVENT</featureNames>
+      <dataFields name="sensorUnitId" qualifiedName="EnvironmentalDataAnalysis.EnvironmentSensorUnitUpdated.sensorUnitId" immutable="true">
+        <type xsi:type="intermediate:IntermediatePrimitiveType" name="string" origin="BUILTIN" kind="PRIMITIVE"/>
+        <originalType xsi:type="intermediate:IntermediatePrimitiveType" name="string" origin="BUILTIN" kind="PRIMITIVE"/>
+      </dataFields>
+      <dataFields name="name" qualifiedName="EnvironmentalDataAnalysis.EnvironmentSensorUnitUpdated.name" immutable="true">
+        <type xsi:type="intermediate:IntermediatePrimitiveType" name="string" origin="BUILTIN" kind="PRIMITIVE"/>
+        <originalType xsi:type="intermediate:IntermediatePrimitiveType" name="string" origin="BUILTIN" kind="PRIMITIVE"/>
+      </dataFields>
+      <dataFields name="description" qualifiedName="EnvironmentalDataAnalysis.EnvironmentSensorUnitUpdated.description" immutable="true">
+        <type xsi:type="intermediate:IntermediatePrimitiveType" name="string" origin="BUILTIN" kind="PRIMITIVE"/>
+        <originalType xsi:type="intermediate:IntermediatePrimitiveType" name="string" origin="BUILTIN" kind="PRIMITIVE"/>
+      </dataFields>
+      <dataFields name="status" qualifiedName="EnvironmentalDataAnalysis.EnvironmentSensorUnitUpdated.status" immutable="true">
+        <type xsi:type="intermediate:IntermediatePrimitiveType" name="string" origin="BUILTIN" kind="PRIMITIVE"/>
+        <originalType xsi:type="intermediate:IntermediatePrimitiveType" name="string" origin="BUILTIN" kind="PRIMITIVE"/>
+      </dataFields>
+      <dataFields name="longitude" qualifiedName="EnvironmentalDataAnalysis.EnvironmentSensorUnitUpdated.longitude" immutable="true">
+        <type xsi:type="intermediate:IntermediatePrimitiveType" name="float" origin="BUILTIN" kind="PRIMITIVE" size="32"/>
+        <originalType xsi:type="intermediate:IntermediatePrimitiveType" name="float" origin="BUILTIN" kind="PRIMITIVE" size="32"/>
+      </dataFields>
+      <dataFields name="latitude" qualifiedName="EnvironmentalDataAnalysis.EnvironmentSensorUnitUpdated.latitude" immutable="true">
+        <type xsi:type="intermediate:IntermediatePrimitiveType" name="float" origin="BUILTIN" kind="PRIMITIVE" size="32"/>
+        <originalType xsi:type="intermediate:IntermediatePrimitiveType" name="float" origin="BUILTIN" kind="PRIMITIVE" size="32"/>
+      </dataFields>
+      <dataFields name="lastModifiedDate" qualifiedName="EnvironmentalDataAnalysis.EnvironmentSensorUnitUpdated.lastModifiedDate" immutable="true">
+        <type xsi:type="intermediate:IntermediatePrimitiveType" name="date" origin="BUILTIN" kind="PRIMITIVE"/>
+        <originalType xsi:type="intermediate:IntermediatePrimitiveType" name="date" origin="BUILTIN" kind="PRIMITIVE"/>
+      </dataFields>
+      <dataFields name="sensorTyp" qualifiedName="EnvironmentalDataAnalysis.EnvironmentSensorUnitUpdated.sensorTyp" immutable="true">
+        <type xsi:type="intermediate:IntermediatePrimitiveType" name="string" origin="BUILTIN" kind="PRIMITIVE"/>
+        <originalType xsi:type="intermediate:IntermediatePrimitiveType" name="string" origin="BUILTIN" kind="PRIMITIVE"/>
+      </dataFields>
+    </complexTypes>
+    <complexTypes xsi:type="intermediate:IntermediateListType" name="RecivedDataSetList" origin="DATA_MODEL" kind="LIST" qualifiedName="EnvironmentalDataAnalysis.RecivedDataSetList" structuredList="true">
+      <dataFields name="receivedDataSet" qualifiedName="EnvironmentalDataAnalysis.RecivedDataSetList.receivedDataSet">
+        <type xsi:type="intermediate:IntermediateComplexType" name="ReceivedDataSet" origin="DATA_MODEL" kind="STRUCTURE" qualifiedName="EnvironmentalDataAnalysis.ReceivedDataSet"/>
+        <originalType xsi:type="intermediate:IntermediateComplexType" name="ReceivedDataSet" origin="DATA_MODEL" kind="STRUCTURE" qualifiedName="EnvironmentalDataAnalysis.ReceivedDataSet"/>
+      </dataFields>
+    </complexTypes>
+    <complexTypes xsi:type="intermediate:IntermediateListType" name="SensorValueList" origin="DATA_MODEL" kind="LIST" qualifiedName="EnvironmentalDataAnalysis.SensorValueList" structuredList="true">
+      <dataFields name="v" qualifiedName="EnvironmentalDataAnalysis.SensorValueList.v">
+        <type xsi:type="intermediate:IntermediateComplexType" name="SensorValue" origin="DATA_MODEL" kind="STRUCTURE" qualifiedName="EnvironmentalDataAnalysis.SensorValue"/>
+        <originalType xsi:type="intermediate:IntermediateComplexType" name="SensorValue" origin="DATA_MODEL" kind="STRUCTURE" qualifiedName="EnvironmentalDataAnalysis.SensorValue"/>
+      </dataFields>
+    </complexTypes>
+    <complexTypes xsi:type="intermediate:IntermediateEnumeration" name="SensorType" origin="DATA_MODEL" kind="ENUMERATION" qualifiedName="EnvironmentalDataAnalysis.SensorType">
+      <fields name="PHYSICAL" qualifiedName="EnvironmentalDataAnalysis.SensorType.PHYSICAL"/>
+      <fields name="VIRTUAL" qualifiedName="EnvironmentalDataAnalysis.SensorType.VIRTUAL"/>
+    </complexTypes>
+    <complexTypes xsi:type="intermediate:IntermediateEnumeration" name="SensorUnitStatus" origin="DATA_MODEL" kind="ENUMERATION" qualifiedName="EnvironmentalDataAnalysis.SensorUnitStatus">
+      <fields name="ACTIVE" qualifiedName="EnvironmentalDataAnalysis.SensorUnitStatus.ACTIVE"/>
+      <fields name="DEACIVATED" qualifiedName="EnvironmentalDataAnalysis.SensorUnitStatus.DEACIVATED"/>
+    </complexTypes>
+  </contexts>
+</intermediate:IntermediateDataModel>

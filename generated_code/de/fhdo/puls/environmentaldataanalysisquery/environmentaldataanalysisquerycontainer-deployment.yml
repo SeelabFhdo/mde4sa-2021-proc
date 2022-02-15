@@ -1,0 +1,43 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  creationTimestamp: null
+  labels:
+    app: environmentaldataanalysisquerycontainer
+  name: environmentaldataanalysisquerycontainer
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: environmentaldataanalysisquerycontainer
+  strategy: {}
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        app: environmentaldataanalysisquerycontainer
+    spec:
+      containers:
+      - image: environmentaldataanalysisquerycontainer
+        imagePullPolicy: "Never"
+        name: environmentaldataanalysisquerycontainer
+        resources: {}
+status: {}
+---
+apiVersion: v1
+kind: Service
+metadata:
+  creationTimestamp: null
+  labels:
+    app: environmentaldataanalysisquerycontainer
+  name: environmentaldataanalysisquerycontainer
+spec:
+  ports:
+  - name: "8092"
+    port: 8092
+    targetPort: 8092
+  selector:
+    app: environmentaldataanalysisquerycontainer
+  type: ClusterIP
+status:
+  loadBalancer: {}

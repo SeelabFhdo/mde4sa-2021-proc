@@ -1,0 +1,30 @@
+package de.fhdo.puls.chargingstationsearchmanagement.kafka.gen;
+
+import de.fhdo.puls.chargingstationsearchmanagement.domain.ChargingStationSearch.ElectrifiedParkingSpaceOffered;
+import de.fhdo.puls.chargingstationsearchmanagement.domain.ChargingStationSearch.OfferedElectrifiedParkingSpaceWithdrawed;
+import de.fhdo.puls.chargingstationsearchmanagement.domain.ChargingStationSearch.OfferedParkingSpaceWithdrawed;
+import de.fhdo.puls.chargingstationsearchmanagement.domain.ChargingStationSearch.ParkingSpaceOffered;
+import org.springframework.kafka.config.ConcurrentKafkaListenerContainerFactory;
+import org.springframework.kafka.core.ConsumerFactory;
+import org.springframework.kafka.core.KafkaAdmin;
+
+public interface KafkaConfigurationGen {
+
+    KafkaAdmin kafkaAdmin();
+
+    ConsumerFactory<String, ParkingSpaceOffered> parkingSpaceOfferedEventsParkingSpaceOfferedEventsConsumerFactory();
+
+    ConcurrentKafkaListenerContainerFactory<String, ParkingSpaceOffered> parkingSpaceOfferedEventsParkingSpaceOfferedEventsKafkaListenerContainerFactory();
+
+    ConsumerFactory<String, OfferedParkingSpaceWithdrawed> parkingSpaceWithdrawedEventsParkingSpaceWithdrawedEventsConsumerFactory();
+
+    ConcurrentKafkaListenerContainerFactory<String, OfferedParkingSpaceWithdrawed> parkingSpaceWithdrawedEventsParkingSpaceWithdrawedEventsKafkaListenerContainerFactory();
+
+    ConsumerFactory<String, ElectrifiedParkingSpaceOffered> electrifiedParkingSpaceOfferedEventsElectrifiedParkingSpaceOfferedEventsConsumerFactory();
+
+    ConcurrentKafkaListenerContainerFactory<String, ElectrifiedParkingSpaceOffered> electrifiedParkingSpaceOfferedEventsElectrifiedParkingSpaceOfferedEventsKafkaListenerContainerFactory();
+
+    ConsumerFactory<String, OfferedElectrifiedParkingSpaceWithdrawed> electrifiedParkingSpaceWithdrawedEventsElectrifiedParkingSpaceWithdrawedEventsConsumerFactory();
+
+    ConcurrentKafkaListenerContainerFactory<String, OfferedElectrifiedParkingSpaceWithdrawed> electrifiedParkingSpaceWithdrawedEventsElectrifiedParkingSpaceWithdrawedEventsKafkaListenerContainerFactory();
+}

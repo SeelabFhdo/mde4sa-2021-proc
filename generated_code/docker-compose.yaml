@@ -1,0 +1,148 @@
+---
+version: "3.7"
+services:
+  BookingManagementCommandContainer:
+    build: "de/fhdo/puls/bookingmanagementcommand/"
+    image: "bookingmanagementcommandcontainer"
+    ports:
+    - "6061:6061"
+    networks:
+    - "default-network"
+    container_name: "bookingmanagementcommandcontainer"
+    depends_on:
+    - "Eureka"
+    - "MariaDBCommand"
+  BookingManagementQueryContainer:
+    build: "de/fhdo/puls/bookingmanagementquery/"
+    image: "bookingmanagementquerycontainer"
+    ports:
+    - "6062:6062"
+    networks:
+    - "default-network"
+    container_name: "bookingmanagementquerycontainer"
+    depends_on:
+    - "Eureka"
+    - "MariaDBQuery"
+  ChargingStationManagementCommandContainer:
+    build: "de/fhdo/puls/chargingstationmanagementcommand/"
+    image: "chargingstationmanagementcommandcontainer"
+    ports:
+    - "8071:8071"
+    networks:
+    - "default-network"
+    container_name: "chargingstationmanagementcommandcontainer"
+    depends_on:
+    - "Eureka"
+    - "MongoDB"
+  ChargingStationManagementQueryContainer:
+    build: "de/fhdo/puls/chargingstationmanagementquery/"
+    image: "chargingstationmanagementquerycontainer"
+    ports:
+    - "8072:8072"
+    networks:
+    - "default-network"
+    container_name: "chargingstationmanagementquerycontainer"
+    depends_on:
+    - "Eureka"
+    - "MongoDB"
+  EnvironmentalDataAnalysisQueryContainer:
+    build: "de/fhdo/puls/environmentaldataanalysisquery/"
+    image: "environmentaldataanalysisquerycontainer"
+    ports:
+    - "8092:8092"
+    networks:
+    - "default-network"
+    container_name: "environmentaldataanalysisquerycontainer"
+    depends_on:
+    - "Eureka"
+    - "MongoDB"
+  EnvironmentalDataAnalysisCommandContainer:
+    build: "de/fhdo/puls/environmentaldataanalysiscommand/"
+    image: "environmentaldataanalysiscommandcontainer"
+    ports:
+    - "8091:8091"
+    networks:
+    - "default-network"
+    container_name: "environmentaldataanalysiscommandcontainer"
+    depends_on:
+    - "Eureka"
+    - "MongoDB"
+  ChargingStationSharingCommandContainer:
+    build: "de/fhdo/puls/chargingstationsharingcommand/"
+    image: "chargingstationsharingcommandcontainer"
+    ports:
+    - "8041:8041"
+    networks:
+    - "default-network"
+    container_name: "chargingstationsharingcommandcontainer"
+    depends_on:
+    - "Eureka"
+    - "MongoDB"
+  ChargingStationSharingQueryContainer:
+    build: "de/fhdo/puls/chargingstationsharingquery/"
+    image: "chargingstationsharingquerycontainer"
+    ports:
+    - "8042:8042"
+    networks:
+    - "default-network"
+    container_name: "chargingstationsharingquerycontainer"
+    depends_on:
+    - "Eureka"
+    - "MongoDB"
+  MongoDB:
+    image: "mongo"
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: "root"
+      MONGO_INITDB_ROOT_PASSWORD: "password"
+      MONGO_INITDB_DATABASE: "admin"
+    ports:
+    - "27017:27017"
+    networks:
+    - "default-network"
+    container_name: "mongodb"
+  Eureka:
+    build: "eureka"
+    image: "eureka"
+    ports:
+    - "8761:8761"
+    networks:
+    - "default-network"
+    container_name: "eureka"
+  MariaDBCommand:
+    image: "mariadb"
+    environment:
+      MYSQL_DATABASE: "booking_command"
+      MYSQL_PASSWORD: "admin"
+      MYSQL_USER: "admin"
+      MYSQL_ROOT_PASSWORD: "password"
+    ports:
+    - "3306:3306"
+    networks:
+    - "default-network"
+    container_name: "mariadbcommand"
+  MariaDBQuery:
+    image: "mariadb"
+    environment:
+      MYSQL_DATABASE: "booking_query"
+      MYSQL_PASSWORD: "admin"
+      MYSQL_USER: "admin"
+      MYSQL_ROOT_PASSWORD: "password"
+    ports:
+    - "3307:3306"
+    networks:
+    - "default-network"
+    container_name: "mariadbquery"
+  ChargingStationSearchContainer:
+    build: "de/fhdo/puls/chargingstationsearchmanagement/"
+    image: "chargingstationsearchcontainer"
+    ports:
+    - "8071:8071"
+    networks:
+    - "default-network"
+    container_name: "chargingstationsearchcontainer"
+    depends_on:
+    - "Eureka"
+    - "MongoDB"
+networks:
+  default-network:
+    driver: "bridge"
